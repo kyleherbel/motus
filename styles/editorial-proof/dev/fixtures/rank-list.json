@@ -1,0 +1,21 @@
+{
+ "motus": 1, "style": "editorial-proof", "look": { "accent": "blue" },
+ "captions": { "emphasis": {}, "fixes": {} },
+ "scenes": [
+  { "id": "s01", "words": [0, 11], "role": "hook", "single": true, "options": [ { "id": "a", "label": "Lead-in", "why": "fixture: a light split before the cut, so dark focus settles as in the reference", "layout": "light-split",
+     "slots": { "card": { "type": "price-list", "key": "pl", "rows": [ { "name": "Ahrefs", "price": "$129", "per": "/mo" }, { "name": "Semrush", "price": "$139", "per": "/mo" } ] } } } ] },
+  { "id": "s02", "words": [12, 37], "role": "proof", "single": true, "options": [ { "id": "a", "label": "Rank list", "why": "fixture: the reference instance, clip38@1062 (climb 26 f in, strikes 152.5 f in)", "layout": "dark-focus",
+     "slots": { "card": { "type": "rank-list", "key": "rank", "title": "AI Search · Sources",
+        "rows": [ { "name": "competitor1.com" }, { "name": "competitor2.com" }, { "name": "competitor3.com" }, { "name": "yoursite.com", "mine": true } ],
+        "beats": [ { "at": { "rel": 0.8667 }, "do": "climb" }, { "at": { "rel": 5.0833 }, "do": "strike-others" } ] } } } ] },
+  { "id": "s03", "words": [38, 62], "role": "proof", "single": true, "options": [ { "id": "a", "label": "Three rows", "why": "fixture: dark focus, no title, climb on a word, one row struck", "layout": "dark-focus",
+     "slots": { "card": { "type": "rank-list", "key": "rank2",
+        "rows": [ { "name": "Premiere Pro" }, { "name": "CapCut" }, { "name": "ClipFrame", "mine": true } ],
+        "beats": [ { "at": 44, "do": "climb", "to": 1 }, { "at": 50, "do": "strike", "row": 2 } ] } } } ] },
+  { "id": "s04", "words": [63, 104], "role": "proof", "single": true, "options": [ { "id": "a", "label": "Five rows, light", "why": "fixture: light split, five rows compress, two climbs", "layout": "light-split",
+     "slots": { "card": { "type": "rank-list", "key": "rank3", "title": "Search results",
+        "rows": [ { "name": "bigagency.io" }, { "name": "templates.co" }, { "name": "stockclips.net" }, { "name": "editfast.app" }, { "name": "clipframe.ai", "mine": true } ],
+        "beats": [ { "at": 66, "do": "climb", "to": 3 }, { "at": 80, "do": "climb", "to": 1 }, { "at": 92, "do": "strike-others" } ] } } } ] },
+  { "id": "s05", "words": [105, 131], "role": "cta", "single": true, "options": [ { "id": "a", "label": "CTA", "why": "fixture", "layout": "presenter-full", "slots": { "cta": { "type": "comment-cta", "keyword": "Clip", "verbAt": 125, "keywordAt": 128 } } } ] }
+ ]
+}

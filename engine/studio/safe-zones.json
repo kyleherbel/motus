@@ -1,0 +1,27 @@
+{
+  "schema": "motus.safe-zones/1",
+  "platform": "instagram-reels",
+  "provenance": "Figures derived from Style Lab by Shaan Johari (numeric constants only, no code or artwork). That source measured them from one phone screenshot of the Reels tab in October 2026. The app's interface changes and differs between phones: re-measure before relying on these numbers.",
+  "frame": { "width": 1080, "height": 1920 },
+  "units": "Every number is a fraction of the frame: x and w of its width, y and h of its height. A box is [x, y, w, h].",
+  "cropped": [
+    { "id": "crop-left", "label": "cropped", "box": [0, 0, 0.05, 1] },
+    { "id": "crop-right", "label": "cropped", "box": [0.9509, 0, 0.0491, 1] }
+  ],
+  "covered": [
+    { "id": "status-bar", "label": "status bar", "box": [0.1514, 0.0225, 0.7211, 0.0236] },
+    { "id": "top-bar", "label": "top bar", "box": [0.0787, 0.0821, 0.8318, 0.0332] },
+    { "id": "buttons", "label": "buttons", "box": [0.8373, 0.5247, 0.0976, 0.4358] },
+    { "id": "liked-by", "label": "liked by", "box": [0.0821, 0.7832, 0.2342, 0.073] },
+    { "id": "profile", "label": "profile", "box": [0.0831, 0.8727, 0.6266, 0.0516] },
+    { "id": "caption", "label": "caption", "box": [0.085, 0.9374, 0.6947, 0.0209] },
+    { "id": "progress", "label": "progress", "box": [0.0841, 0.9813, 0.8323, 0.0016] }
+  ],
+  "safe": {
+    "label": "safe",
+    "polygon": [
+      [0.0843, 0.1234], [0.9167, 0.1234], [0.9167, 0.5193], [0.8324, 0.5193],
+      [0.8324, 0.8594], [0.3389, 0.8594], [0.3389, 0.7703], [0.0843, 0.7703]
+    ]
+  }
+}

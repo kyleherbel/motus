@@ -1,0 +1,14 @@
+{
+  "name": "motus-market",
+  "owner": { "name": "kyleherbel" },
+  "metadata": {
+    "description": "Motus: edit talking-head 9:16 video in measured editing styles, with a local review Studio and a frame-exact renderer."
+  },
+  "plugins": [
+    {
+      "name": "motus",
+      "source": "./",
+      "description": "Edit talking-head 9:16 video in a chosen editing style, with a local review Studio and a frame-exact renderer."
+    }
+  ]
+}

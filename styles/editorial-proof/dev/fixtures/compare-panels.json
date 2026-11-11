@@ -1,0 +1,24 @@
+{
+ "motus": 1, "style": "editorial-proof", "look": { "accent": "blue" },
+ "captions": { "emphasis": {}, "fixes": {} },
+ "scenes": [
+  { "id": "s01", "words": [0, 11], "role": "name", "single": true, "options": [ { "id": "a", "label": "Compare panels", "why": "fixture: the reference instance, clip37@264", "layout": "white",
+     "slots": { "card": { "type": "compare-panels", "key": "cmp", "title": "Elephant-Goldfish Model",
+        "left": { "title": "Elephant", "sub": "Remembers everything", "icon": "agent" },
+        "right": { "title": "Goldfish", "sub": "Remembers nothing", "icon": "spark" } } } } ] },
+  { "id": "s02", "words": [12, 37], "role": "what", "single": true, "options": [ { "id": "a", "label": "Light", "why": "fixture: inside the card on the light split, panels opened on their own words", "layout": "light-split",
+     "slots": { "card": { "type": "compare-panels", "key": "cmp2", "title": "Two ways to edit",
+        "left": { "title": "Raw drop", "sub": "Claude guesses", "icon": "empty", "at": 20 },
+        "right": { "title": "ClipFrame", "sub": "You pick every shot", "icon": "check", "at": 28 } } } } ] },
+  { "id": "s03", "words": [38, 62], "role": "what", "single": true, "options": [ { "id": "a", "label": "Dark", "why": "fixture: dark focus, no title, no sub-lines", "layout": "dark-focus",
+     "slots": { "card": { "type": "compare-panels", "key": "cmp3",
+        "left": { "title": "Before", "icon": "clock" },
+        "right": { "title": "After", "icon": "bolt" } } } } ] },
+  { "id": "s04", "words": [63, 104], "role": "item", "single": true, "options": [ { "id": "a", "label": "White + heading", "why": "fixture: under the interstitial heading, text only", "layout": "white",
+     "slots": { "heading": { "type": "section-heading", "line": "Two Agents", "block": "One Plan" },
+        "card": { "type": "compare-panels", "key": "cmp4",
+        "left": { "title": "Planner", "sub": "Knows the whole project" },
+        "right": { "title": "Reviewer", "sub": "Starts from zero" } } } } ] },
+  { "id": "s05", "words": [105, 131], "role": "cta", "single": true, "options": [ { "id": "a", "label": "CTA", "why": "fixture", "layout": "presenter-full", "slots": { "cta": { "type": "comment-cta", "keyword": "Clip", "verbAt": 125, "keywordAt": 128 } } } ] }
+ ]
+}

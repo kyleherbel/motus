@@ -1,0 +1,16 @@
+# Reference media and studies: rights unknown, never commit
+corpus/
+# Local test projects and renders
+projects/
+motus-projects/
+*.motus/
+# Machine-local
+.DS_Store
+node_modules/
+__pycache__/
+*.pyc
+.claude/launch.json
+.claude/settings.local.json
+# Compiled helpers (built on first use into ~/.cache/motus)
+engine/swift/build/
+*.tmp

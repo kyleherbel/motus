@@ -1,0 +1,95 @@
+{
+  "motus": 1, "style": "editorial-proof", "look": {"accent": "blue"},
+  "captions": {
+    "fixes": {"62": "Framewise", "63": "", "90": "Tonebox", "91": "", "117": "Reelgrid", "118": ""},
+    "emphasis": {"5": "accent+serif", "8": "accent", "10": "accent+serif", "13": "serif", "20": "accent", "30": "accent+serif", "34": "accent", "37": "accent+serif", "42": "accent+serif", "45": "accent+serif", "46": "serif", "58": "accent+serif", "73": "accent+serif", "82": "serif", "86": "accent", "96": "accent+serif", "99": "accent+serif", "109": "accent+serif", "112": "accent", "122": "serif", "127": "accent+serif", "132": "accent", "138": "serif", "144": "accent"},
+    "hide": [[24, 28], [59, 63], [87, 91], [115, 118]]
+  },
+  "scenes": [
+    { "id": "s01", "words": [0, 15], "role": "hook", "pick": "a",
+      "options": [
+        {"id": "a", "label": "Paid vs free", "why": "Puts the stake of the first sentence side by side: the apps you pay for against 4 free tools", "layout": "light-split", "slots": {"title": {"type": "hook-title", "key": "title", "line1": "4 Free Tools That", "strip": "Do The Same Job", "exit": "cut"}, "card": {"type": "compare-panels", "key": "stake", "title": "The exact same job", "titleAt": 13, "left": {"title": "Paid apps", "sub": "video editing apps", "icon": "cross", "at": 4}, "right": {"title": "Free tools", "sub": "these 4 free tools", "icon": "check", "at": 9}}}},
+        {"id": "b", "label": "Stop paying", "why": "Leads with the instruction itself and lets the four free tools land as a count", "layout": "light-split", "slots": {"title": {"type": "hook-title", "key": "title", "line1": "Stop Paying For", "strip": "Video Editing Apps", "exit": "cut"}, "card": {"type": "big-number", "key": "stake", "value": "4", "label": "free tools", "skin": "white", "at": 8}}}
+      ] },
+    { "id": "s02", "words": [16, 23], "role": "hook", "pick": "a",
+      "options": [
+        {"id": "a", "label": "Blurred teaser", "why": "Most people have never heard of them: the four names stay blurred until each item opens", "layout": "light-split", "slots": {"title": {"type": "hook-title", "key": "title", "line1": "4 Free Tools That", "strip": "Do The Same Job", "exit": "cut"}, "card": {"type": "price-list", "key": "teaser", "rows": [{"name": "Cutline", "price": "Free", "blur": true}, {"name": "Framewise", "price": "Free", "blur": true}, {"name": "Tonebox", "price": "Free", "blur": true}, {"name": "Reelgrid", "price": "Free", "blur": true}]}}},
+        {"id": "b", "label": "Punch-in", "why": "Says the curiosity line to camera, then cuts straight to tool one", "layout": "presenter-full", "slots": {}}
+      ] },
+    { "id": "s03", "words": [24, 28], "role": "item", "pick": "a",
+      "options": [
+        {"id": "a", "label": "Repo page", "why": "Opens item one on its repo, the page that carries the star count he is about to say", "layout": "white", "slots": {"heading": {"type": "section-heading", "line": "Tool Number", "block": "One"}, "card": {"type": "source-card", "key": "cutline", "src": "assets/cutline-about.png", "url": "github.com/example/cutline", "counter": "1/4"}, "name": {"type": "name-label", "text": "Cutline", "at": 28}}},
+        {"id": "b", "label": "Name card", "why": "A clean logo card with the line he says about it, when the repo page is too busy", "layout": "white", "slots": {"heading": {"type": "section-heading", "line": "Tool Number", "block": "One"}, "card": {"type": "logo-card", "key": "cutline-name", "name": "Cutline", "tagline": "An open-source editor", "skin": "white"}, "name": {"type": "name-label", "text": "Cutline", "at": 28}}}
+      ] },
+    { "id": "s04", "words": [29, 37], "role": "proof", "pick": "a",
+      "options": [
+        {"id": "a", "label": "Stars on the page", "why": "The repo card carries into dark focus; open-source is highlighted and the 18,000 stars land as the page's 18.2k", "layout": "dark-focus", "slots": {"card": {"type": "source-card", "key": "cutline", "src": "assets/cutline-about.png", "url": "github.com/example/cutline", "counter": "1/4", "beats": [{"at": 30, "do": "highlight", "find": "open-source video editor"}, {"at": 34, "do": "outline", "find": "18.2k stars"}, {"at": 35, "do": "number", "value": "18.2k", "label": "GitHub stars"}]}}},
+        {"id": "b", "label": "Star count alone", "why": "Keeps the presenter in view and gives the star count the whole card", "layout": "light-split", "slots": {"card": {"type": "big-number", "key": "cutline-stars", "value": "18.2k", "label": "stars on GitHub", "source": "github.com/example", "at": 34}}}
+      ] },
+    { "id": "s05", "words": [38, 51], "role": "how", "pick": "a",
+      "options": [
+        {"id": "a", "label": "Feature list", "why": "Reads the README line that says exactly what he says: silences and retakes, removed automatically", "layout": "dark-focus", "slots": {"card": {"type": "source-card", "key": "cutline-readme", "src": "assets/cutline-readme.png", "url": "github.com/example/cutline", "counter": "1/4", "beats": [{"at": 42, "do": "highlight", "find": "removes silences and retakes automatically"}]}}},
+        {"id": "b", "label": "Struck rows", "why": "Shows the two things it cuts out, each struck through as he names it", "layout": "dark-focus", "slots": {"card": {"type": "steps-card", "key": "cutline-steps", "title": "Cut out automatically", "rows": [{"text": "Silences", "marker": "none", "at": 42}, {"text": "Retakes", "marker": "none", "at": 45}], "beats": [{"at": 43, "do": "strike", "row": 1}, {"at": 46, "do": "strike", "row": 2}]}}}
+      ] },
+    { "id": "s06", "words": [52, 58], "role": "payoff", "pick": "a",
+      "options": [
+        {"id": "a", "label": "Punch-in", "why": "The payoff of item one, ready to post in about a minute, said straight to camera", "layout": "presenter-full", "slots": {}},
+        {"id": "b", "label": "Stay on README", "why": "Keeps reading the same page and marks its line about a ready-to-post cut", "layout": "dark-focus", "slots": {"card": {"type": "source-card", "key": "cutline-readme", "src": "assets/cutline-readme.png", "url": "github.com/example/cutline", "counter": "1/4", "beats": [{"at": 52, "do": "highlight", "find": "ready to post cut in about a minute"}]}}}
+      ] },
+    { "id": "s07", "words": [59, 63], "role": "item", "pick": "a",
+      "options": [
+        {"id": "a", "label": "Home page", "why": "Opens item two on its own home page, which carries over into the close reading", "layout": "white", "slots": {"heading": {"type": "section-heading", "line": "Tool Number", "block": "Two"}, "card": {"type": "source-card", "key": "framewise", "src": "assets/framewise-home.png", "url": "framewise.example.com", "counter": "2/4"}, "name": {"type": "name-label", "text": "Framewise", "at": 62}}},
+        {"id": "b", "label": "Name card", "why": "Introduces item two by name only; the page comes in the next sentence", "layout": "white", "slots": {"heading": {"type": "section-heading", "line": "Tool Number", "block": "Two"}, "card": {"type": "logo-card", "key": "framewise-name", "name": "Framewise", "skin": "white"}, "name": {"type": "name-label", "text": "Framewise", "at": 62}}}
+      ] },
+    { "id": "s08", "words": [64, 75], "role": "what", "pick": "a",
+      "options": [
+        {"id": "a", "label": "Its own words", "why": "The page says it writes your captions word by word; highlighted as he says writes the captions", "layout": "dark-focus", "slots": {"card": {"type": "source-card", "key": "framewise", "src": "assets/framewise-home.png", "url": "framewise.example.com", "counter": "2/4", "beats": [{"at": 71, "do": "highlight", "find": "writes your captions word by word"}]}}},
+        {"id": "b", "label": "Clip in, captions out", "why": "Two steps he names, drop in a clip and it writes the captions, landing on their words", "layout": "dark-focus", "slots": {"card": {"type": "steps-card", "key": "framewise-steps", "rows": [{"text": "Drop in any clip", "marker": "upload", "at": 65}, {"text": "It writes the captions", "marker": "doc", "at": 71}], "beats": [{"at": 73, "do": "check", "row": 2}]}}}
+      ] },
+    { "id": "s09", "words": [76, 82], "role": "demo", "pick": "a",
+      "options": [
+        {"id": "a", "label": "Captioned frame", "why": "Shows the output he describes: a frame captioned word by word in its own style", "layout": "light-split", "slots": {"card": {"type": "media-card", "key": "framewise-out", "items": [{"src": "assets/captions.png", "label": "Word by word", "at": 76}]}}},
+        {"id": "b", "label": "Page line", "why": "Stays on the source and lets the presenter back in while the same line reads word by word", "layout": "light-split", "slots": {"card": {"type": "source-card", "key": "framewise-l", "src": "assets/framewise-home.png", "url": "framewise.example.com", "counter": "2/4", "beats": [{"at": 76, "do": "highlight", "find": "writes your captions word by word"}]}}}
+      ] },
+    { "id": "s10", "words": [83, 86], "role": "payoff", "pick": "a",
+      "options": [
+        {"id": "a", "label": "Free forever", "why": "Completely free is backed by the page's own line, outlined on the word free", "layout": "light-split", "slots": {"card": {"type": "source-card", "key": "framewise-free", "src": "assets/framewise-home.png", "url": "framewise.example.com", "counter": "2/4", "beats": [{"at": 86, "do": "outline", "find": "free forever"}]}}},
+        {"id": "b", "label": "Punch-in", "why": "Completely free is the payoff of item two; said to camera before item three", "layout": "presenter-full", "slots": {}}
+      ] },
+    { "id": "s11", "words": [87, 91], "role": "item", "pick": "a",
+      "options": [
+        {"id": "a", "label": "Home page", "why": "Opens item three on its page; the presenter comes back with it in the next sentence", "layout": "white", "slots": {"heading": {"type": "section-heading", "line": "Tool Number", "block": "Three"}, "card": {"type": "source-card", "key": "tonebox", "src": "assets/tonebox-home.png", "url": "tonebox.example.com", "counter": "3/4"}, "name": {"type": "name-label", "text": "Tonebox", "at": 90}}},
+        {"id": "b", "label": "Name card", "why": "Introduces item three by name only, a quieter beat after the free payoff", "layout": "white", "slots": {"heading": {"type": "section-heading", "line": "Tool Number", "block": "Three"}, "card": {"type": "logo-card", "key": "tonebox-name", "name": "Tonebox", "skin": "white"}, "name": {"type": "name-label", "text": "Tonebox", "at": 90}}}
+      ] },
+    { "id": "s12", "words": [92, 102], "role": "what", "pick": "a",
+      "options": [
+        {"id": "a", "label": "Echo line", "why": "Back to the presenter with the page; removes room echo is highlighted as he says removes the echo", "layout": "light-split", "slots": {"card": {"type": "source-card", "key": "tonebox-l", "src": "assets/tonebox-home.png", "url": "tonebox.example.com", "counter": "3/4", "beats": [{"at": 97, "do": "highlight", "find": "removes room echo"}]}}},
+        {"id": "b", "label": "Close reading", "why": "Carries the page into dark focus for a closer read of the echo line", "layout": "dark-focus", "slots": {"card": {"type": "source-card", "key": "tonebox", "src": "assets/tonebox-home.png", "url": "tonebox.example.com", "counter": "3/4", "beats": [{"at": 97, "do": "highlight", "find": "removes room echo"}]}}}
+      ] },
+    { "id": "s13", "words": [103, 114], "role": "benefit", "pick": "a",
+      "options": [
+        {"id": "a", "label": "Browser, no install", "why": "The same page keeps going: runs in your browser outlined, nothing to install highlighted on their words", "layout": "light-split", "slots": {"card": {"type": "source-card", "key": "tonebox-l", "src": "assets/tonebox-home.png", "url": "tonebox.example.com", "counter": "3/4", "beats": [{"at": 105, "do": "outline", "find": "runs in your browser"}, {"at": 112, "do": "highlight", "find": "nothing to install"}]}}},
+        {"id": "b", "label": "Browser vs install", "why": "Contrasts the two halves of the sentence: runs in your browser, nothing to install", "layout": "dark-focus", "slots": {"card": {"type": "compare-panels", "key": "tonebox-compare", "left": {"title": "Browser", "sub": "runs right inside", "icon": "check", "at": 105}, "right": {"title": "Install", "sub": "nothing to install", "icon": "cross", "at": 112}}}}
+      ] },
+    { "id": "s14", "words": [115, 118], "role": "item", "pick": "a",
+      "options": [
+        {"id": "a", "label": "Home page", "why": "Opens the last item on its page, carried into the close reading", "layout": "white", "slots": {"heading": {"type": "section-heading", "line": "Tool Number", "block": "Four"}, "card": {"type": "source-card", "key": "reelgrid", "src": "assets/reelgrid-home.png", "url": "reelgrid.example.com", "counter": "4/4"}, "name": {"type": "name-label", "text": "Reelgrid", "at": 117}}},
+        {"id": "b", "label": "Name card", "why": "Names the last tool on its own before its page appears", "layout": "white", "slots": {"heading": {"type": "section-heading", "line": "Tool Number", "block": "Four"}, "card": {"type": "logo-card", "key": "reelgrid-name", "name": "Reelgrid", "skin": "white"}, "name": {"type": "name-label", "text": "Reelgrid", "at": 117}}}
+      ] },
+    { "id": "s15", "words": [119, 127], "role": "what", "pick": "a",
+      "options": [
+        {"id": "a", "label": "Best moments", "why": "Its page says it finds the best moments; highlighted as he says it", "layout": "dark-focus", "slots": {"card": {"type": "source-card", "key": "reelgrid", "src": "assets/reelgrid-home.png", "url": "reelgrid.example.com", "counter": "4/4", "beats": [{"at": 124, "do": "highlight", "find": "finds the best moments"}]}}},
+        {"id": "b", "label": "Three steps", "why": "His sentence is a process: one long video, best moments found, short clips out", "layout": "dark-focus", "slots": {"card": {"type": "steps-card", "key": "reelgrid-steps", "rows": [{"text": "One long video", "marker": "upload", "at": 121}, {"text": "Finds the best moments", "marker": "search", "at": 124}, {"text": "Ten short clips", "marker": "bolt", "at": 132}]}}}
+      ] },
+    { "id": "s16", "words": [128, 138], "role": "demo", "pick": "a",
+      "options": [
+        {"id": "a", "label": "Clip stack", "why": "Ten short clips, shown as three of them stacking in on ten, clips and all", "layout": "dark-focus", "slots": {"card": {"type": "media-card", "key": "reelgrid-out", "items": [{"src": "assets/clip1.png", "label": "Clip 1", "at": 132}, {"src": "assets/clip2.png", "label": "Clip 2", "at": 134}, {"src": "assets/clip3.png", "label": "Clip 3", "at": 135}]}}},
+        {"id": "b", "label": "One clip, presenter", "why": "Brings the presenter back for the payoff with one finished clip above", "layout": "light-split", "slots": {"card": {"type": "media-card", "key": "reelgrid-one", "items": [{"src": "assets/clip1.png", "label": "Short clip", "at": 132}]}}}
+      ] },
+    { "id": "s17", "words": [139, 156], "role": "cta", "single": true, "note": "The style's ending is fixed: he asks for a comment with the keyword tools, already spoken in the hook.", "pick": "a",
+      "options": [
+        {"id": "a", "label": "Comment Tools", "why": "Comment tools, as he says it, with the keyword he used in the first sentence", "layout": "presenter-full", "slots": {"cta": {"type": "comment-cta", "keyword": "Tools", "tone": "blue"}}}
+      ] }
+  ],
+  "audio": {"sfx": true, "bed": "a"}
+}

@@ -1,0 +1,18 @@
+{
+ "motus": 1, "style": "editorial-proof", "look": { "accent": "blue" },
+ "captions": { "emphasis": {}, "fixes": {} },
+ "scenes": [
+  { "id": "s01", "words": [0, 11], "role": "hook", "single": true, "options": [ { "id": "a", "label": "Lead-in", "why": "fixture: dark focus before the cut, so the grid swaps in hard as in the reference", "layout": "dark-focus",
+     "slots": { "card": { "type": "price-list", "key": "pl", "rows": [ { "name": "Unity Pro", "price": "$185", "per": "/mo" }, { "name": "Unreal", "price": "5%" } ] } } } ] },
+  { "id": "s02", "words": [12, 22], "role": "proof", "single": true, "options": [ { "id": "a", "label": "Logo grid", "why": "fixture: the reference instance, clip36@285 (2x2, monograms in place of the engine logos)", "layout": "dark-focus",
+     "slots": { "card": { "type": "logo-grid", "key": "grid",
+        "items": [ { "name": "Unreal Engine" }, { "name": "Unity", "at": 16 }, { "name": "Godot", "at": 17 }, { "name": "Web", "at": 21 } ] } } } ] },
+  { "id": "s03", "words": [23, 50], "role": "proof", "single": true, "options": [ { "id": "a", "label": "Grow, six", "why": "fixture: grow mode, six tiles re-flowing 1 -> 2 -> 2+1 -> 2x2 -> 2x2+1 -> 2x3, one image logo", "layout": "dark-focus",
+     "slots": { "card": { "type": "logo-grid", "key": "grid2", "build": "grow",
+        "items": [ { "name": "Claude" }, { "name": "Example", "logo": "assets/example.png", "at": 26 }, { "name": "Cursor", "at": 31 }, { "name": "Windsurf", "at": 35 }, { "name": "Zed", "at": 41 }, { "name": "Copilot", "at": 45 } ] } } } ] },
+  { "id": "s04", "words": [51, 104], "role": "proof", "single": true, "options": [ { "id": "a", "label": "Three, light", "why": "fixture: light split, three tiles, default timing", "layout": "light-split",
+     "slots": { "card": { "type": "logo-grid", "key": "grid3",
+        "items": [ { "name": "Figma" }, { "name": "Framer" }, { "name": "Webflow" } ] } } } ] },
+  { "id": "s05", "words": [105, 131], "role": "cta", "single": true, "options": [ { "id": "a", "label": "CTA", "why": "fixture", "layout": "presenter-full", "slots": { "cta": { "type": "comment-cta", "keyword": "Clip", "verbAt": 125, "keywordAt": 128 } } } ] }
+ ]
+}

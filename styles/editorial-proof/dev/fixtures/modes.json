@@ -1,0 +1,262 @@
+{
+ "motus": 1,
+ "style": "editorial-proof",
+ "look": {
+  "accent": "blue"
+ },
+ "captions": {
+  "emphasis": {
+   "7": "accent",
+   "8": "accent",
+   "13": "accent+serif"
+  },
+  "fixes": {}
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "words": [
+    0,
+    13
+   ],
+   "role": "hook",
+   "single": true,
+   "options": [
+    {
+     "id": "a",
+     "label": "Price list hook",
+     "why": "fixture",
+     "layout": "light-split",
+     "slots": {
+      "title": {
+       "type": "hook-title",
+       "key": "t",
+       "line1": "Stop Paying For",
+       "strip": "These AI Tools"
+      },
+      "card": {
+       "type": "price-list",
+       "key": "p",
+       "rows": [
+        {
+         "name": "Claude Code",
+         "plan": "Max",
+         "price": "$200",
+         "per": "/mo",
+         "blur": true
+        },
+        {
+         "name": "ElevenLabs",
+         "plan": "Pro",
+         "price": "$99",
+         "per": "/mo",
+         "blur": true
+        },
+        {
+         "name": "Ahrefs",
+         "plan": "Standard",
+         "price": "$249",
+         "per": "/mo",
+         "blur": true
+        },
+        {
+         "name": "Semrush",
+         "plan": "Guru",
+         "price": "$199",
+         "per": "/mo",
+         "blur": true
+        },
+        {
+         "name": "Grok Bot",
+         "plan": "SuperGrok",
+         "price": "$300",
+         "per": "/mo",
+         "blur": true
+        }
+       ],
+       "beats": [
+        {
+         "at": 8,
+         "do": "strike"
+        },
+        {
+         "at": 11,
+         "do": "total",
+         "value": "$1,000+",
+         "label": "a month"
+        }
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s02",
+   "words": [
+    14,
+    39
+   ],
+   "role": "what",
+   "single": true,
+   "options": [
+    {
+     "id": "a",
+     "label": "Dark",
+     "why": "fixture",
+     "layout": "dark-focus",
+     "slots": {
+      "card": {
+       "type": "price-list",
+       "rows": [
+        {
+         "name": "A",
+         "price": "$1"
+        },
+        {
+         "name": "B",
+         "price": "$2"
+        }
+       ]
+      },
+      "chips": {
+       "type": "logo-chips",
+       "items": [
+        {
+         "name": "Claude Code",
+         "fill": "#141414",
+         "strike": true
+        }
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s03",
+   "words": [
+    40,
+    65
+   ],
+   "role": "item",
+   "single": true,
+   "options": [
+    {
+     "id": "a",
+     "label": "White",
+     "why": "fixture",
+     "layout": "white",
+     "slots": {
+      "heading": {
+       "type": "section-heading",
+       "line": "Repo Number",
+       "block": "One"
+      },
+      "card": {
+       "type": "price-list",
+       "rows": [
+        {
+         "name": "A",
+         "price": "$1"
+        },
+        {
+         "name": "B",
+         "price": "$2"
+        },
+        {
+         "name": "C",
+         "price": "$3"
+        }
+       ]
+      },
+      "name": {
+       "type": "name-label",
+       "text": "OpenCode"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "words": [
+    66,
+    111
+   ],
+   "role": "payoff",
+   "single": true,
+   "options": [
+    {
+     "id": "a",
+     "label": "Split",
+     "why": "fixture",
+     "layout": "light-split",
+     "slots": {
+      "card": {
+       "type": "price-list",
+       "rows": [
+        {
+         "name": "A",
+         "price": "$1"
+        },
+        {
+         "name": "B",
+         "price": "$2"
+        },
+        {
+         "name": "C",
+         "price": "$3"
+        },
+        {
+         "name": "D",
+         "price": "$4"
+        }
+       ]
+      },
+      "chips": {
+       "type": "logo-chips",
+       "items": [
+        {
+         "name": "Grok Bot"
+        },
+        {
+         "name": "Muse"
+        },
+        {
+         "name": "Claude Duet",
+         "strike": true
+        }
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s05",
+   "words": [
+    112,
+    131
+   ],
+   "role": "cta",
+   "single": true,
+   "options": [
+    {
+     "id": "a",
+     "label": "CTA",
+     "why": "fixture",
+     "layout": "presenter-full",
+     "slots": {
+      "cta": {
+       "type": "comment-cta",
+       "keyword": "Repo",
+       "verbAt": 120,
+       "keywordAt": 124
+      }
+     }
+    }
+   ]
+  }
+ ]
+}

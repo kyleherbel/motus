@@ -1,0 +1,22 @@
+{
+ "motus": 1, "style": "editorial-proof", "look": { "accent": "blue" },
+ "captions": { "emphasis": { "11": "accent" }, "fixes": {} },
+ "scenes": [
+  { "id": "s01", "words": [0, 9], "role": "hook", "single": true, "options": [ { "id": "a", "label": "Presenter", "why": "fixture: lead-in so the logo card cuts in from the presenter", "layout": "presenter-full", "slots": {} } ] },
+  { "id": "s02", "words": [10, 12], "role": "name", "single": true, "options": [ { "id": "a", "label": "Name alone", "why": "fixture: clip29@117-162, no logo: the name types on, full dark slot", "layout": "dark-focus",
+     "slots": { "card": { "type": "logo-card", "key": "lg1", "name": "ClipFrame", "at": 11 } } } ] },
+  { "id": "s03", "words": [13, 27], "role": "what", "single": true, "options": [ { "id": "a", "label": "Split", "why": "fixture: back to the split", "layout": "light-split",
+     "slots": { "card": { "type": "media-card", "key": "m1", "items": [ { "src": "assets/test-still-wide.png" } ] } } } ] },
+  { "id": "s04", "words": [28, 40], "role": "name", "single": true, "options": [ { "id": "a", "label": "Icon + name", "why": "fixture: clip30@166-207, dark card, icon with the name fading up under it", "layout": "dark-focus",
+     "slots": { "card": { "type": "logo-card", "key": "lg2", "name": "Northwind", "logo": "assets/logo-icon-white.png", "skin": "dark", "at": 33 } } } ] },
+  { "id": "s05", "words": [41, 56], "role": "what", "single": true, "options": [ { "id": "a", "label": "Split", "why": "fixture: back to the split", "layout": "light-split",
+     "slots": { "card": { "type": "media-card", "key": "m2", "items": [ { "src": "assets/test-still-wide.png" } ] } } } ] },
+  { "id": "s06", "words": [57, 70], "role": "name", "single": true, "options": [ { "id": "a", "label": "Wordmark", "why": "fixture: clip22@132-160, white card, a wide logo wiping open", "layout": "dark-focus",
+     "slots": { "card": { "type": "logo-card", "key": "lg3", "name": "Northwind", "logo": "assets/logo-wide.png", "at": 59 } } } ] },
+  { "id": "s07", "words": [71, 90], "role": "what", "single": true, "options": [ { "id": "a", "label": "Split", "why": "fixture: back to the split", "layout": "light-split",
+     "slots": { "card": { "type": "media-card", "key": "m3", "items": [ { "src": "assets/test-still-wide.png" } ] } } } ] },
+  { "id": "s08", "words": [91, 131], "role": "name", "single": true, "options": [ { "id": "a", "label": "Name + tagline", "why": "fixture: the name typed on, with a tagline", "layout": "dark-focus",
+     "slots": { "card": { "type": "logo-card", "key": "lg4", "name": "ClipFrame", "tagline": "The editor that asks before it cuts", "skin": "dark" } } } ] }
+ ],
+ "audio": { "music": null, "musicGainDb": -24, "sfx": true }
+}

@@ -1,0 +1,85 @@
+{
+  "motus": 1, "style": "editorial-proof", "look": {"accent": "blue"},
+  "captions": {
+    "fixes": {"13": "2", "56": "2", "143": "Skool"},
+    "emphasis": {"5": "accent+serif", "8": "accent+serif", "11": "accent", "13": "accent", "17": "accent+serif", "25": "serif", "30": "accent+serif", "34": "accent+serif", "40": "serif", "48": "accent+serif", "55": "accent+serif", "56": "accent", "59": "accent+serif", "66": "accent+serif", "84": "accent", "89": "accent+serif", "92": "serif", "97": "accent", "99": "accent+serif", "105": "accent", "114": "accent", "124": "serif", "130": "accent+serif", "137": "accent+serif"}
+  },
+  "scenes": [
+    { "id": "s01", "words": [0, 11], "role": "hook", "pick": "a",
+      "options": [
+        {"id": "a", "label": "Daily vs views", "why": "Both halves of the first sentence side by side: stopped posting every day, views went up", "layout": "light-split", "slots": {"title": {"type": "hook-title", "key": "title", "line1": "I Stopped Posting", "strip": "Every Single Day", "exit": "cut"}, "card": {"type": "compare-panels", "key": "hook", "left": {"title": "Every day", "sub": "stopped posting", "icon": "cross", "at": 1}, "right": {"title": "Views", "sub": "actually went up", "icon": "up", "at": 10}}}},
+        {"id": "b", "label": "Result first", "why": "Leads with the result instead of the habit: daily posting struck, views went up checked", "layout": "light-split", "slots": {"title": {"type": "hook-title", "key": "title", "line1": "My Views Went Up", "strip": "When I Stopped", "exit": "cut"}, "card": {"type": "steps-card", "key": "hook-steps", "rows": [{"text": "Posting every single day", "marker": "none", "at": 2}, {"text": "Views went up", "marker": "chart", "at": 10}], "beats": [{"at": 5, "do": "strike", "row": 1}, {"at": 11, "do": "check", "row": 2}]}}}
+      ] },
+    { "id": "s02", "words": [12, 17], "role": "proof", "pick": "a",
+      "options": [
+        {"id": "a", "label": "Two years", "why": "The only number in the sentence, two years of posting daily, alone on the dark stage", "layout": "dark-focus", "slots": {"card": {"type": "big-number", "key": "years", "value": "2 years", "label": "posting daily", "at": 13}}},
+        {"id": "b", "label": "Number with presenter", "why": "The same two years, but he stays on screen while saying it", "layout": "light-split", "slots": {"card": {"type": "big-number", "key": "years-l", "value": "2 years", "label": "posting daily", "skin": "white", "at": 13}}}
+      ] },
+    { "id": "s03", "words": [18, 25], "role": "payoff", "pick": "a",
+      "options": [
+        {"id": "a", "label": "Punch-in", "why": "An honest admission, most of those videos were rushed, said straight to camera", "layout": "presenter-full", "slots": {}},
+        {"id": "b", "label": "Stay on the number", "why": "Holds the two years while he admits they were rushed, and lets the next shot bring him back", "layout": "dark-focus", "slots": {"card": {"type": "big-number", "key": "years", "value": "2 years", "label": "posting daily", "at": 13}}}
+      ] },
+    { "id": "s04", "words": [26, 40], "role": "what", "pick": "a",
+      "options": [
+        {"id": "a", "label": "The old routine", "why": "His three habits land as rows on their words: midnight writing, one take, hoping it sticks", "layout": "light-split", "slots": {"card": {"type": "steps-card", "key": "routine", "rows": [{"text": "Writing at midnight", "at": 28}, {"text": "Filming in one take", "at": 31}, {"text": "Hoping something sticks", "at": 37}], "beats": []}}},
+        {"id": "b", "label": "Routine, close up", "why": "The same three habits read on the dark stage, without the presenter", "layout": "dark-focus", "slots": {"card": {"type": "steps-card", "key": "routine-d", "rows": [{"text": "Writing at midnight", "at": 28}, {"text": "Filming in one take", "at": 31}, {"text": "Hoping something sticks", "at": 37}]}}}
+      ] },
+    { "id": "s05", "words": [41, 48], "role": "what", "pick": "a",
+      "options": [
+        {"id": "a", "label": "Struck as homework", "why": "Every single video felt like homework: the routine is struck out line by line as he says it", "layout": "light-split", "slots": {"card": {"type": "steps-card", "key": "routine", "rows": [{"text": "Writing at midnight", "at": 28}, {"text": "Filming in one take", "at": 31}, {"text": "Hoping something sticks", "at": 37}], "beats": [{"at": 41, "do": "strike", "row": 1}, {"at": 43, "do": "strike", "row": 2}, {"at": 48, "do": "strike", "row": 3}]}}},
+        {"id": "b", "label": "Homework, to camera", "why": "The feeling line said to camera instead of shown", "layout": "presenter-full", "slots": {}}
+      ] },
+    { "id": "s06", "words": [49, 55], "role": "how", "pick": "a",
+      "options": [
+        {"id": "a", "label": "The opposite", "why": "Sets up the switch: the old side appears now, the new side lands when he says two videos a week", "layout": "dark-focus", "slots": {"card": {"type": "compare-panels", "key": "switch", "title": "The opposite", "titleAt": 55, "left": {"title": "Every day", "sub": "for two years", "icon": "clock", "at": 49}, "right": {"title": "2 videos", "sub": "a week", "icon": "check", "at": 56}}}},
+        {"id": "b", "label": "Punch-in", "why": "The turning point, so last month I tried the opposite, said straight to camera", "layout": "presenter-full", "slots": {}}
+      ] },
+    { "id": "s07", "words": [56, 63], "role": "how", "pick": "a",
+      "options": [
+        {"id": "a", "label": "Twice a week", "why": "The new side of the switch lands on two videos a week", "layout": "dark-focus", "slots": {"card": {"type": "compare-panels", "key": "switch", "title": "The opposite", "titleAt": 55, "left": {"title": "Every day", "sub": "for two years", "icon": "clock", "at": 49}, "right": {"title": "2 videos", "sub": "a week", "icon": "check", "at": 56}}}},
+        {"id": "b", "label": "Two a week", "why": "Two videos a week as a number of its own", "layout": "dark-focus", "slots": {"card": {"type": "big-number", "key": "per-week", "value": "2", "label": "videos a week", "at": 56}}}
+      ] },
+    { "id": "s08", "words": [64, 68], "role": "how", "pick": "a",
+      "options": [
+        {"id": "a", "label": "A full day", "why": "Each one gets a full day of work: the day becomes the number", "layout": "dark-focus", "slots": {"card": {"type": "big-number", "key": "day", "value": "1 full day", "label": "of work per video", "at": 65}}},
+        {"id": "b", "label": "Back to camera", "why": "Brings the presenter back early with the rule he just set", "layout": "light-split", "slots": {"card": {"type": "big-number", "key": "day-l", "value": "1 full day", "label": "of work per video", "skin": "white", "at": 65}}}
+      ] },
+    { "id": "s09", "words": [69, 82], "role": "how", "pick": "a",
+      "options": [
+        {"id": "a", "label": "The new week", "why": "His two days as two rows on their words, write it, then film and edit it", "layout": "light-split", "slots": {"card": {"type": "steps-card", "key": "week", "rows": [{"text": "Day one: write it", "at": 72}, {"text": "Day two: film and edit", "at": 78}, {"text": "Nothing out until ready", "at": 84}]}}},
+        {"id": "b", "label": "Write vs film", "why": "The two days as two panels instead of a list", "layout": "light-split", "slots": {"card": {"type": "compare-panels", "key": "days", "left": {"title": "Day one", "sub": "write it", "icon": "doc", "at": 72}, "right": {"title": "Day two", "sub": "film and edit it", "icon": "eye", "at": 78}}}}
+      ] },
+    { "id": "s10", "words": [83, 89], "role": "payoff", "pick": "a",
+      "options": [
+        {"id": "a", "label": "Ready, checked", "why": "Nothing goes out until it's ready: the last row lands and is checked on ready", "layout": "light-split", "slots": {"card": {"type": "steps-card", "key": "week", "rows": [{"text": "Day one: write it", "at": 72}, {"text": "Day two: film and edit", "at": 78}, {"text": "Nothing out until ready", "at": 84}], "beats": [{"at": 89, "do": "check", "row": 3}]}}},
+        {"id": "b", "label": "Punch-in", "why": "The rule of the new routine, said to camera", "layout": "presenter-full", "slots": {}}
+      ] },
+    { "id": "s11", "words": [90, 93], "role": "payoff", "pick": "a",
+      "options": [
+        {"id": "a", "label": "Punch-in", "why": "The setup line, the result surprised me, said to camera just before the number", "layout": "presenter-full", "slots": {}},
+        {"id": "b", "label": "Stay on the week", "why": "Keeps the new routine on screen with the presenter until the result lands", "layout": "light-split", "slots": {"card": {"type": "steps-card", "key": "week", "rows": [{"text": "Day one: write it", "at": 72}, {"text": "Day two: film and edit", "at": 78}, {"text": "Nothing out until ready", "at": 84}], "beats": []}}}
+      ] },
+    { "id": "s12", "words": [94, 97], "role": "proof", "pick": "a",
+      "options": [
+        {"id": "a", "label": "Views tripled", "why": "The result, tripled, as 3x: it starts rolling on my and lands as he says tripled", "layout": "dark-focus", "slots": {"card": {"type": "big-number", "key": "views", "value": "3x", "label": "average views", "at": 94}}},
+        {"id": "b", "label": "Before and after", "why": "Shows the result as a before and after rather than a number", "layout": "dark-focus", "slots": {"card": {"type": "compare-panels", "key": "views-compare", "left": {"title": "Before", "sub": "posting daily", "icon": "down", "at": 94}, "right": {"title": "Views", "sub": "tripled", "icon": "up", "at": 97}}}}
+      ] },
+    { "id": "s13", "words": [98, 112], "role": "benefit", "pick": "a",
+      "options": [
+        {"id": "a", "label": "More and less", "why": "The two other results side by side: comments got longer, fewer hours than before", "layout": "light-split", "slots": {"card": {"type": "compare-panels", "key": "results", "left": {"title": "Comments", "sub": "got longer", "icon": "chat", "at": 99}, "right": {"title": "Hours", "sub": "fewer than before", "icon": "down", "at": 105}}}},
+        {"id": "b", "label": "Result list", "why": "All three results as one list he ticks through", "layout": "light-split", "slots": {"card": {"type": "steps-card", "key": "results-list", "rows": [{"text": "Views tripled", "marker": "chart", "at": 98}, {"text": "Longer comments", "marker": "chat", "at": 99}, {"text": "Fewer hours", "marker": "gear", "at": 105}]}}}
+      ] },
+    { "id": "s14", "words": [113, 130], "role": "payoff", "pick": "a",
+      "options": [
+        {"id": "a", "label": "Cause and effect", "why": "His closing argument as a chain: post less, only ideas he believes in, what people share", "layout": "dark-focus", "slots": {"card": {"type": "steps-card", "key": "why", "rows": [{"text": "Post less", "at": 113}, {"text": "Only ideas I believe in", "at": 121}, {"text": "What people share", "at": 127}], "beats": [{"at": 130, "do": "check", "row": 3}]}}},
+        {"id": "b", "label": "The line itself", "why": "The sentence he ends his argument on, set as a card, its two halves highlighted as he says them", "layout": "dark-focus", "slots": {"card": {"type": "text-card", "key": "why-text", "heading": "Posting less", "text": "Posting less forced me to only make the ideas I actually believe in, and that's what people share.", "beats": [{"at": 121, "do": "highlight", "text": "ideas I actually believe in"}, {"at": 127, "do": "highlight", "text": "what people share"}]}}}
+      ] },
+    { "id": "s15", "words": [131, 150], "role": "cta", "pick": "a",
+      "options": [
+        {"id": "a", "label": "Join Community", "why": "He asks people to join his free community: the ending block with his own verb and noun", "layout": "presenter-full", "slots": {"cta": {"type": "comment-cta", "verb": "join", "verbAt": 140, "keyword": "Community", "keywordAt": 144, "tone": "blue"}}},
+        {"id": "b", "label": "Captions only", "why": "Ends on him with captions only, since he is not asking for a comment", "layout": "presenter-full", "slots": {}}
+      ] }
+  ],
+  "audio": {"sfx": true, "bed": "b"}
+}

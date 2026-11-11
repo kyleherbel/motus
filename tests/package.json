@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "type": "module",
+  "main": "index.js",
+  "description": "Motus engine tests. Run: node --test tests/  (or node --test from the repository root). End-to-end: MOTUS_E2E=1 node --test tests/"
+}

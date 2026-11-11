@@ -1,0 +1,22 @@
+{
+ "motus": 1, "style": "editorial-proof", "look": { "accent": "blue" },
+ "captions": { "emphasis": {}, "fixes": {} },
+ "scenes": [
+  { "id": "s01", "words": [0, 11], "role": "hook", "single": true, "options": [ { "id": "a", "label": "Single image", "why": "fixture: one wide image on the light split, the card hugs its shape", "layout": "light-split",
+     "slots": { "card": { "type": "media-card", "key": "m1", "items": [ { "src": "assets/test-still-wide.png", "label": "Example output" } ] } } } ] },
+  { "id": "s02", "words": [12, 27], "role": "proof", "single": true, "options": [ { "id": "a", "label": "Three strips", "why": "fixture: clip36@612-717, three strips landing on their words; strip 1 is the frame-counter clip", "layout": "dark-focus",
+     "slots": { "card": { "type": "media-card", "key": "m2", "items": [
+        { "src": "assets/test-counter-30.mp4", "label": "Input" },
+        { "src": "assets/test-still-wide.png", "label": "Output", "accent": true, "at": 20 },
+        { "src": "assets/test-counter-24.mp4", "label": "24 fps, looped", "start": 2, "loop": true, "at": 24 } ] } } } ] },
+  { "id": "s03", "words": [28, 49], "role": "proof", "single": true, "options": [ { "id": "a", "label": "Two strips", "why": "fixture: clip31@615 / clip14@690, original against remake; replaces a card in the same layout so strip 1 slides too", "layout": "dark-focus",
+     "slots": { "card": { "type": "media-card", "key": "m3", "items": [
+        { "src": "assets/test-counter-24.mp4", "label": "Original" },
+        { "src": "assets/test-counter-30.mp4", "label": "Frame by Frame remake", "accent": true, "start": 3, "at": 41 } ] } } } ] },
+  { "id": "s04", "words": [50, 62], "role": "proof", "single": true, "options": [ { "id": "a", "label": "Tall image", "why": "fixture: clip33@140, one tall render filling the dark slot", "layout": "dark-focus",
+     "slots": { "card": { "type": "media-card", "key": "m4", "items": [ { "src": "assets/test-still-tall.png" } ] } } } ] },
+  { "id": "s05", "words": [63, 131], "role": "proof", "single": true, "options": [ { "id": "a", "label": "Clip, contained", "why": "fixture: a 16:9 clip on the light split, looped", "layout": "light-split",
+     "slots": { "card": { "type": "media-card", "key": "m5", "items": [ { "src": "assets/test-counter-30.mp4", "fit": "contain", "loop": true, "label": "Looped clip" } ] } } } ] }
+ ],
+ "audio": { "music": null, "musicGainDb": -24, "sfx": true }
+}

@@ -1,0 +1,24 @@
+{
+  "id": "minimal",
+  "name": "Minimal (engine test fixture)",
+  "version": "0.0.1",
+  "summary": "A bare style used to test the engine: presenter panel with head pop-out, one caption line, one title card.",
+  "bestFor": ["engine tests"],
+  "aspect": "9:16",
+  "look": { "accent": { "label": "Accent", "choices": ["blue", "lime"], "default": "blue" } },
+  "emphasis": ["accent"],
+  "roles": ["hook", "body", "cta"],
+  "timing": { "sceneLead": 0.066 },
+  "layouts": {
+    "split": { "label": "Split", "slots": { "card": ["note"] } },
+    "full": { "label": "Full frame", "slots": { "card": ["note"] } }
+  },
+  "elements": {
+    "note": {
+      "label": "Note card",
+      "params": { "text": { "type": "string", "maxChars": 40 } },
+      "beats": { "flash": {} }
+    }
+  },
+  "sfx": {}
+}

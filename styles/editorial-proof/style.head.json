@@ -1,0 +1,66 @@
+{
+  "id": "editorial-proof",
+  "name": "Editorial Proof",
+  "version": "0.1.0",
+  "status": "beta",
+  "summary": "Claim, then proof: a clean editorial split with the speaker below and real evidence above (pages, numbers, lists), word-by-word captions with accent keywords, dark focus shots for close reading, and a comment call to action.",
+  "bestFor": [
+    "tool and product breakdowns",
+    "numbered lists",
+    "news and explainer takes",
+    "anything with sources, numbers or screens to show"
+  ],
+  "aspect": "9:16",
+  "look": {
+    "accent": {
+      "label": "Accent",
+      "choices": [
+        "blue",
+        "lime"
+      ],
+      "default": "blue"
+    }
+  },
+  "emphasis": [
+    "accent",
+    "serif",
+    "accent+serif"
+  ],
+  "roles": [
+    "hook",
+    "name",
+    "what",
+    "proof",
+    "how",
+    "demo",
+    "item",
+    "benefit",
+    "payoff",
+    "cta"
+  ],
+  "sfx": {
+    "riser": "assets/sfx/riser.wav",
+    "cut": "assets/sfx/cut.wav",
+    "softswish": "assets/sfx/softswish.wav",
+    "swish": "assets/sfx/swish.wav",
+    "whoosh": "assets/sfx/whoosh.wav",
+    "swell": "assets/sfx/swell.wav",
+    "counter": "assets/sfx/counter.wav",
+    "click": "assets/sfx/click.wav",
+    "hit": "assets/sfx/hit.wav",
+    "pop": "assets/sfx/pop.wav",
+    "long": "assets/sfx/long.wav"
+  },
+  "beds": {
+    "a": {
+      "label": "Warm pad",
+      "src": "assets/music/bed-a.m4a",
+      "gainDb": -24
+    },
+    "b": {
+      "label": "Soft pulse",
+      "src": "assets/music/bed-b.m4a",
+      "gainDb": -22
+    }
+  }
+}

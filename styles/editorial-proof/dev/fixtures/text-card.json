@@ -1,0 +1,24 @@
+{
+ "motus": 1, "style": "editorial-proof", "look": { "accent": "blue" },
+ "captions": { "emphasis": {}, "fixes": {} },
+ "scenes": [
+  { "id": "s01", "words": [0, 11], "role": "hook", "single": true, "options": [ { "id": "a", "label": "About panel", "why": "fixture: clip39@1194 - chrome, heading, four lines", "layout": "light-split",
+     "slots": { "card": { "type": "text-card", "key": "x1", "heading": "About",
+        "text": "A custom AI video editor workflow: plan every scene, pick the shots you like, then render it frame by frame. Free, MIT.",
+        "beats": [ { "at": 7, "do": "highlight", "text": "AI video editor workflow" } ] } } } ] },
+  { "id": "s02", "words": [12, 37], "role": "proof", "single": true, "options": [ { "id": "a", "label": "Long paragraph", "why": "fixture: clip39@420 - no heading, 220 characters, highlight across a line break, outline", "layout": "light-split",
+     "slots": { "card": { "type": "text-card", "key": "x2", 
+        "text": "ClipFrame is the open-source, fully-local alternative to dropping a raw video into Claude and hoping: scene plans, caption styles, graphics, sound design and a frame-exact render, all picked by you, in 39 seconds.",
+        "beats": [ { "at": 20, "do": "highlight", "text": "dropping a raw video into Claude" }, { "at": 33, "do": "outline", "text": "frame-exact render" } ] } } } ] },
+  { "id": "s03", "words": [38, 62], "role": "hook", "single": true, "options": [ { "id": "a", "label": "Under the hook title", "why": "fixture: 892x485 under the title, no chrome, eyebrow + heading", "layout": "light-split",
+     "slots": { "title": { "type": "hook-title", "key": "h", "line1": "What You Get", "strip": "Every Single Visual" },
+        "card": { "type": "text-card", "key": "x3", "eyebrow": "README", "heading": "ClipFrame",
+        "text": "Every animation, every caption and every visual on screen, one by one.",
+        "beats": [ { "at": 49, "do": "highlight", "text": "every caption" } ] } } } ] },
+  { "id": "s04", "words": [63, 104], "role": "proof", "single": true, "options": [ { "id": "a", "label": "Dark, mono, number", "why": "fixture: dark focus, mono paragraph, number tile", "layout": "dark-focus",
+     "slots": { "card": { "type": "text-card", "key": "x4", "mono": true,
+        "text": "// pick which ones you like, which ones you don't, and keep control of how the final video turns out",
+        "beats": [ { "at": 68, "do": "highlight", "text": "which ones you like" }, { "at": 80, "do": "outline", "text": "control" }, { "at": 88, "do": "number", "value": "1,191", "label": "frames" } ] } } } ] },
+  { "id": "s05", "words": [105, 131], "role": "cta", "single": true, "options": [ { "id": "a", "label": "CTA", "why": "fixture", "layout": "presenter-full", "slots": { "cta": { "type": "comment-cta", "keyword": "Clip", "verbAt": 125, "keywordAt": 128 } } } ] }
+ ]
+}

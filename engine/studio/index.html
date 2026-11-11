@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Motus Studio</title>
+<link rel="icon" href="data:,">
+<link rel="preload" href="/assets/fonts/Inter.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="/studio/studio.css">
+<script type="module" src="/studio/studio.js"></script>
+</head>
+<body>
+<div class="app" id="app" data-zones="off">
+
+  <!-- MONITOR: the current cut, always in view -->
+  <aside class="monitor" id="monitor" aria-label="Monitor">
+    <div class="player" id="player">
+      <iframe class="stage-frame" id="monitor-frame" title="The current cut" allow="autoplay" tabindex="-1"></iframe>
+      <div id="monitor-zones"></div>
+      <p class="player-msg" id="player-msg">Loading the cut</p>
+      <button class="player-hit" id="player-hit" type="button" aria-label="Play or pause the cut"></button>
+    </div>
+
+    <div class="transport">
+      <button class="btn icon" id="play" type="button" aria-label="Play" disabled></button>
+      <span class="time mono" id="time">0:00.0 / 0:00.0</span>
+      <span class="grow"></span>
+      <button class="btn icon" id="mute" type="button" aria-label="Mute" aria-pressed="false"></button>
+      <button class="btn" id="loop" type="button" aria-pressed="false">Loop scene</button>
+      <button class="btn" id="zones" type="button" aria-pressed="false">Safe zones</button>
+    </div>
+
+    <div class="timeline" id="timeline" role="group" aria-label="Scenes on the timeline"></div>
+
+    <ul class="legend" aria-label="Timeline key">
+      <li><i class="key key-open"></i>open</li>
+      <li><i class="key key-picked"></i>picked</li>
+      <li><i class="key key-locked"></i>locked</li>
+      <li><i class="key key-note"></i>note</li>
+      <li><i class="key key-revised"></i>updated</li>
+    </ul>
+  </aside>
+
+  <!-- REVIEW: section by section -->
+  <main class="review" id="review">
+
+    <section class="banner" id="conn-banner" role="alert" hidden>
+      <h2>Studio lost its connection</h2>
+      <p>The local server stopped answering, so picks, locks and notes cannot be saved right now. Run <code class="mono">motus studio</code> again (or ask the agent to) and this page reconnects by itself. If it prints a different address, open that one. Notes you have typed stay here and are saved when the connection is back.</p>
+    </section>
+
+    <section class="banner" id="plan-banner" role="alert" hidden>
+      <h2>The plan cannot be read right now</h2>
+      <p id="plan-banner-text"></p>
+    </section>
+
+    <section class="banner" id="problems" hidden>
+      <h2 id="problems-title"></h2>
+      <p>The agent has to fix these before the video can render. You can still browse, pick and leave notes.</p>
+      <ul class="problem-list" id="problem-list"></ul>
+    </section>
+
+    <header class="head">
+      <div class="head-row">
+        <div class="head-title">
+          <p class="eyebrow">Motus Studio</p>
+          <h1 id="p-name">Loading the project</h1>
+        </div>
+        <div class="head-tools">
+          <span class="conn mono" id="conn">Connecting</span>
+          <button class="btn sm" id="help-btn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="help">Shortcuts <kbd>?</kbd></button>
+          <div class="help" id="help" role="dialog" aria-label="Keyboard shortcuts" hidden>
+            <dl>
+              <div><dt><kbd>J</kbd><kbd>K</kbd></dt><dd>Next or previous scene</dd></div>
+              <div><dt><kbd>1</kbd>&ndash;<kbd>4</kbd></dt><dd>Use that option in the current scene</dd></div>
+              <div><dt><kbd>L</kbd></dt><dd>Lock or unlock the current scene</dd></div>
+              <div><dt><kbd>N</kbd></dt><dd>Write a note on the current scene</dd></div>
+              <div><dt><kbd>Space</kbd></dt><dd>Play or pause the cut</dd></div>
+              <div><dt><kbd>S</kbd></dt><dd>Safe zones on or off</dd></div>
+              <div><dt><kbd>&#8984;</kbd>/<kbd>Ctrl</kbd><kbd>Enter</kbd></dt><dd>Send notes, or render once every scene is locked</dd></div>
+              <div><dt><kbd>Esc</kbd></dt><dd>Leave a note field</dd></div>
+              <div><dt><kbd>?</kbd></dt><dd>Show or hide this list</dd></div>
+            </dl>
+            <p>Letter keys do nothing while you type in a note.</p>
+          </div>
+        </div>
+      </div>
+
+      <dl class="facts">
+        <div><dt>Style</dt><dd><span id="p-style"></span> <span class="mono" id="p-style-v"></span></dd></div>
+        <div><dt>Source</dt><dd class="mono" id="p-source"></dd></div>
+        <div><dt>Length</dt><dd class="mono" id="p-length"></dd></div>
+      </dl>
+
+      <div class="progress">
+        <span class="mono" id="p-count">0 of 0 scenes locked</span>
+        <div class="track" id="p-track" role="progressbar" aria-label="Scenes locked" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0"><i id="p-fill"></i></div>
+      </div>
+    </header>
+
+    <section class="whole" aria-labelledby="whole-h">
+      <h2 id="whole-h">Whole video</h2>
+      <div class="whole-grid">
+        <div class="look" id="look"></div>
+        <div class="overall" id="overall"></div>
+      </div>
+    </section>
+
+    <div class="filters">
+      <h2 id="scenes-h">Scenes</h2>
+      <div class="seg" id="filters" role="group" aria-label="Show scenes">
+        <button type="button" data-filter="all" aria-pressed="true">All <span class="mono" data-count></span></button>
+        <button type="button" data-filter="open" aria-pressed="false">Not locked <span class="mono" data-count></span></button>
+        <button type="button" data-filter="notes" aria-pressed="false">With notes <span class="mono" data-count></span></button>
+      </div>
+    </div>
+
+    <div class="scenes" id="scenes" aria-labelledby="scenes-h"></div>
+    <p class="empty" id="empty" hidden></p>
+
+    <section class="final" id="final" aria-live="polite" hidden></section>
+
+    <footer class="bar" id="bar">
+      <div class="bar-status">
+        <p id="bar-text" role="status" aria-live="polite">Loading the plan.</p>
+        <div class="track" id="bar-track" role="progressbar" aria-label="Render progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" hidden><i id="bar-fill"></i></div>
+      </div>
+      <div class="bar-actions">
+        <button class="btn" id="lock-all" type="button" disabled>Lock all</button>
+        <button class="btn primary" id="primary" type="button" disabled>Render final video</button>
+      </div>
+    </footer>
+  </main>
+</div>
+</body>
+</html>

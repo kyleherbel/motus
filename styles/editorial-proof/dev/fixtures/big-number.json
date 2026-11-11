@@ -1,0 +1,18 @@
+{
+ "motus": 1, "style": "editorial-proof", "look": { "accent": "blue" },
+ "captions": { "emphasis": {}, "fixes": {} },
+ "scenes": [
+  { "id": "s01", "words": [0, 11], "role": "hook", "single": true, "options": [ { "id": "a", "label": "Presenter", "why": "fixture: lead-in", "layout": "presenter-full", "slots": {} } ] },
+  { "id": "s02", "words": [12, 27], "role": "proof", "single": true, "options": [ { "id": "a", "label": "Dark tile", "why": "fixture: clip39@63-108, dark tile with a label", "layout": "dark-focus",
+     "slots": { "card": { "type": "big-number", "key": "n1", "value": "$1,000+", "label": "a month", "at": 14 } } } ] },
+  { "id": "s03", "words": [28, 44], "role": "proof", "single": true, "options": [ { "id": "a", "label": "Bare", "why": "fixture: clip40@318, bare gradient digits", "layout": "dark-focus",
+     "slots": { "card": { "type": "big-number", "key": "n2", "value": "$500", "label": "in API credits every month", "skin": "bare" } } } ] },
+  { "id": "s04", "words": [45, 62], "role": "proof", "single": true, "options": [ { "id": "a", "label": "Bare + source", "why": "fixture: clip20@480, a source line over the figure", "layout": "dark-focus",
+     "slots": { "card": { "type": "big-number", "key": "n3", "value": "5,220,123", "label": "audio files, free to use", "source": "openverse", "skin": "bare" } } } ] },
+  { "id": "s05", "words": [63, 90], "role": "proof", "single": true, "options": [ { "id": "a", "label": "White tile", "why": "fixture: clip22@258, white tile on the light split", "layout": "light-split",
+     "slots": { "card": { "type": "big-number", "key": "n4", "value": "81.3k", "label": "stars on GitHub", "at": 66 } } } ] },
+  { "id": "s06", "words": [91, 131], "role": "proof", "single": true, "options": [ { "id": "a", "label": "Dark, no label", "why": "fixture: dark tile without a label", "layout": "dark-focus",
+     "slots": { "card": { "type": "big-number", "key": "n5", "value": "99%" } } } ] }
+ ],
+ "audio": { "music": null, "musicGainDb": -24, "sfx": true }
+}
