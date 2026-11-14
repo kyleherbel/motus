@@ -1,0 +1,58 @@
+{
+  "motus": 1,
+  "style": "ember-brief",
+  "look": {},
+  "captions": { "fixes": { "97": "Claude" } },
+  "scenes": [
+    { "id": "s01", "words": [0, 14], "role": "what", "single": true, "options": [
+      { "id": "a", "label": "Three things land", "why": "fixture: a cut-out, then a mark tile on its top-left corner, a badge on its top-right corner and a price on its bottom-left corner, each on a word", "layout": "split",
+        "slots": { "graphic": { "type": "picture", "key": "slab", "src": "assets/fx-an-slab.png", "beats": [
+          { "at": 3, "do": "chip", "image": "assets/fx-an-wordmark.png" },
+          { "at": 7, "do": "badge", "kind": "offline" },
+          { "at": 11, "do": "tag", "text": "$0" } ] } } } ], "pick": "a" },
+    { "id": "s02", "words": [15, 27], "role": "what", "single": true, "options": [
+      { "id": "a", "label": "Badge takes over", "why": "fixture: a shaded cut-out printed as a halftone; a lock lands on the corner of its upper part and an open lock replaces it", "layout": "split",
+        "slots": { "graphic": { "type": "picture", "key": "shaded", "src": "assets/fx-an-shaded.png", "beats": [
+          { "at": 18, "do": "badge", "kind": "lock" },
+          { "at": 23, "do": "badge", "kind": "unlock" } ] } } } ], "pick": "a" },
+    { "id": "s03", "words": [28, 40], "role": "proof", "single": true, "options": [
+      { "id": "a", "label": "Badge on a card", "why": "fixture: a light picture on a card; the check sits inside the card's corner; the name tile is on the same word and follows 6 frames later", "layout": "split",
+        "slots": { "graphic": { "type": "picture", "key": "paper", "src": "assets/fx-post.png", "beats": [
+          { "at": 31, "do": "badge", "kind": "check" },
+          { "at": 31, "do": "chip", "label": "Field Bot" } ] } } } ], "pick": "a" },
+    { "id": "s04", "words": [41, 50], "role": "item", "single": true, "options": [
+      { "id": "a", "label": "Cancel and stamp", "why": "fixture: full layout, a cut-out on the item card; a cross over its middle, then a one-word stamp", "layout": "full",
+        "slots": { "graphic": { "type": "picture", "key": "item", "src": "assets/fx-an-mound.png", "frame": "card", "beats": [
+          { "at": 43, "do": "badge", "kind": "cross", "place": "centre" },
+          { "at": 46, "do": "tag", "text": "Fixed.", "style": "stamp" } ] } } } ], "pick": "a" },
+    { "id": "s05", "words": [51, 62], "role": "how", "single": true, "options": [
+      { "id": "a", "label": "Waits, then answers", "why": "fixture: a narrow cut-out with the speech bubble beside it: waiting dots, then bars", "layout": "split",
+        "slots": { "graphic": { "type": "picture", "key": "tall", "src": "assets/fx-an-tall.png", "beats": [
+          { "at": 53, "do": "bubble" },
+          { "at": 58, "do": "bubble", "state": "talking" } ] } } } ], "pick": "a" },
+    { "id": "s06", "words": [63, 73], "role": "how", "single": true, "options": [
+      { "id": "a", "label": "Tile between two", "why": "fixture: the plain look; a name tile with a mark centred between two things, and the longest price the limits allow", "layout": "split",
+        "slots": { "graphic": { "type": "picture", "key": "plain", "src": "assets/fx-an-shaded.png", "look": "plain", "beats": [
+          { "at": 66, "do": "chip", "label": "Tidy Folder", "image": "assets/fx-an-mark-b.png", "place": "between" },
+          { "at": 70, "do": "tag", "text": "$12,000+" } ] } } } ], "pick": "a" },
+    { "id": "s07", "words": [74, 86], "role": "proof", "single": true, "options": [
+      { "id": "a", "label": "Figure that fills", "why": "fixture: the picture arrives dim, the figure arrives on its word and the picture fills as it counts", "layout": "split",
+        "slots": { "graphic": { "type": "big-figure", "key": "fill", "value": "40,000+", "image": "assets/fx-an-mound.png", "fill": true, "at": 78 } } } ], "pick": "a" },
+    { "id": "s08", "words": [87, 96], "role": "proof", "single": true, "options": [
+      { "id": "a", "label": "Figure over a picture", "why": "fixture: no fill and no word; figure, label and picture arrive together under a heading", "layout": "split",
+        "slots": { "heading": { "type": "section-heading", "key": "h1", "n": 1, "name": "Tidy Folder" },
+          "graphic": { "type": "big-figure", "key": "plainfig", "value": "300+", "label": "files sorted", "image": "assets/fx-an-mound.png" } } } ], "pick": "a" },
+    { "id": "s09", "words": [97, 110], "role": "item", "single": true, "options": [
+      { "id": "a", "label": "A tile per noun", "why": "fixture: three tiles, each on the word that names it, places kept from the start", "layout": "split",
+        "slots": { "graphic": { "type": "logo-tiles", "key": "nouns", "tiles": [
+          { "image": "assets/fx-an-mark-a.png", "at": 99 }, { "image": "assets/fx-mark.png", "at": 102 }, { "image": "assets/fx-an-mark-b.png", "at": 106 } ] } } } ], "pick": "a" },
+    { "id": "s10", "words": [111, 121], "role": "item", "single": true, "options": [
+      { "id": "a", "label": "Some on their nouns", "why": "fixture: five tiles; two arrive with the scene, one on its word, the two after it follow by the stagger and on a word", "layout": "split",
+        "slots": { "graphic": { "type": "logo-tiles", "key": "mixed", "tiles": [
+          { "image": "assets/fx-an-mark-a.png" }, { "name": "Tidy Folder" }, { "image": "assets/fx-an-mark-b.png", "at": 114 }, { "name": "notes" }, { "image": "assets/fx-mark.png", "at": 118 } ] } } } ], "pick": "a" },
+    { "id": "s11", "words": [122, 132], "role": "recap", "single": true, "options": [
+      { "id": "a", "label": "Fill with the scene", "why": "fixture: a figure that fills with no word of its own: figure and picture arrive together, counting and filling", "layout": "split",
+        "slots": { "graphic": { "type": "big-figure", "key": "fill2", "value": "78", "unit": "files", "image": "assets/fx-an-shaded.png", "fill": true } } } ], "pick": "a" }
+  ],
+  "audio": { "sfx": false }
+}

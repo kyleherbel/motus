@@ -32,9 +32,8 @@ const M = {
   open: { at: F(37), lead: F(5), shrink: F(26), wordLead: F(1.4), circle: F(5), sideLag: F(2), textLag: F(3) },
   text: { label: F(7.62), sub: F(12.62), rise: 21.2, riseDur: F(11.5), fadePre: F(0.3), fade: F(2.4) },
 };
-// side A takes the look's accent family, side B the one warm contrast colour of the reference
+// side A takes the look's accent family (tintOf the outline), side B the one warm contrast colour of the reference
 const TINTS = {
-  blue: { icon: '#0F6BF7', fill: '#E5EEFB', edge: '#D5DFF2' },
   warm: { icon: '#F37100', fill: '#FCEFDF', edge: '#F3DECA' },
 };
 
@@ -117,7 +116,7 @@ export default {
     const cx0 = rect.w / 2;
     const sides = [params.left, params.right].map((p, i) => ({ p, i, x: inset + i * (tw + G.tile.gap), img: data?.imgs?.[i] || null }));
 
-    const tintA = C.accentName === 'blue' ? TINTS.blue : tintOf(C.outline);
+    const tintA = tintOf(C.outline);
     const tints = [tintA, TINTS.warm];
 
     // ---- title: one centred line, opened from its centre

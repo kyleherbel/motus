@@ -22,10 +22,10 @@ const G = {
   pad: 25,                                   // pill at card + 25, 25 px from the top
   pill: { h: 83, padL: 28, icon: 44, gap: 16, size: 40, weight: 700, tracking: -0.03, fill: '#131313', text: '#FFFFFF', gapBelow: 32, max: 560 },
   tree: { x: 66, w: 4, grey: '#E5E5E5' },    // x 161-165 on the reference; stubs reach the tile at row centre
-  tile: { left: 116, leftBare: 28, right: 26, h: 105, pitch: 128, radius: 16, border: 3, fill: '#F3F3F3', lit: '#E1F0FC' },   // x 213-957, y 757-862, pitch 128
+  tile: { left: 116, leftBare: 28, right: 26, h: 105, pitch: 128, radius: 16, border: 3, fill: '#F3F3F3' },   // x 213-957, y 757-862, pitch 128; lit: C.tint (colour CR07)
   disc: { d: 51, cx: 50, ring: '#E5E5E5', digit: '#86827C', digitSize: 26 },   // check circle 238-288; pending: white disc, grey digit 9x19 px
   title: { x: 98, size: 36, min: 24, weight: 700, tracking: -0.02, capTop: 26, ink: '#131419' },   // cap 783-809 on a tile at 757
-  sub: { size: 21, baseline: 81, drop: 7, ink: '#747D88' },            // mono, ink 823-843 (descender bottom 86 px under the tile top)
+  sub: { size: 21, baseline: 81, drop: 7, ink: '#7C7C7C' },            // mono, ink 823-843 (descender bottom 86 px under the tile top)
   chip: { h: 47, right: 25, padX: 20, size: 23, weight: 700, gap: 8 },   // "✓ QA PASS" 772-932 x 786-833: filled accent when done, outlined while running
   bottom: 26,
   minScale: 0.6,
@@ -55,7 +55,7 @@ const ICON = {
   upload: '<path d="M12 16V4M6.5 9.5L12 4l5.5 5.5M4 20h16"/>',
 };
 const svgIcon = (name, size, colour, w = 2.2) => `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="${colour}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" style="display:block">${ICON[name]}</svg>`;
-const GRID = (size) => `<svg width="${size}" height="${size}" viewBox="0 0 44 44" style="display:block"><rect width="44" height="44" rx="9" fill="#E9E6F4"/><g fill="#7F8FC8"><rect x="8" y="8" width="11" height="11" rx="3"/><rect x="25" y="8" width="11" height="11" rx="3"/><rect x="8" y="25" width="11" height="11" rx="3"/><rect x="25" y="25" width="11" height="11" rx="3"/></g></svg>`;
+const GRID = (size, tile, ink) => `<svg width="${size}" height="${size}" viewBox="0 0 44 44" style="display:block"><rect width="44" height="44" rx="9" fill="${tile}"/><g fill="${ink}"><rect x="8" y="8" width="11" height="11" rx="3"/><rect x="25" y="8" width="11" height="11" rx="3"/><rect x="8" y="25" width="11" height="11" rx="3"/><rect x="25" y="25" width="11" height="11" rx="3"/></g></svg>`;
 
 const approach = (t, t0, tau, cap) => (t <= t0 ? 0 : Math.min(1, (1 - Math.exp(-(t - t0) / tau)) / (1 - Math.exp(-cap / tau))));
 
@@ -113,7 +113,7 @@ export default {
       const textW = kit.measure(params.title, font(size), G.pill.tracking * size);
       const pw = G.pill.padL + G.pill.icon + G.pill.gap + textW + 30;
       pill = h('div', { style: { position: 'absolute', left: `${G.pad}px`, top: `${G.pad}px`, width: `${pw}px`, height: `${G.pill.h}px`, borderRadius: `${G.pill.h / 2}px`, background: G.pill.fill } },
-        h('div', { html: GRID(G.pill.icon), style: { position: 'absolute', left: `${G.pill.padL}px`, top: `${(G.pill.h - G.pill.icon) / 2}px`, lineHeight: '0' } }),
+        h('div', { html: GRID(G.pill.icon, C.tint, C.iconInk), style: { position: 'absolute', left: `${G.pill.padL}px`, top: `${(G.pill.h - G.pill.icon) / 2}px`, lineHeight: '0' } }),
         h('div', { text: params.title, style: { position: 'absolute', left: `${G.pill.padL + G.pill.icon + G.pill.gap}px`, top: `${G.pill.h / 2 + (size * type.capRatio.sans) / 2 - size * type.ascent.sans}px`, font: `${font(size)}`, lineHeight: '1', letterSpacing: `${G.pill.tracking}em`, color: G.pill.text, whiteSpace: 'nowrap' } }));
     }
 
@@ -121,8 +121,8 @@ export default {
     const treeX = G.tree.x - G.tree.w / 2;
     const treeTop = G.pad + G.pill.h;
     const greyLine = tree ? h('div', { style: { position: 'absolute', left: `${treeX}px`, top: `${treeTop}px`, width: `${G.tree.w}px`, height: '0', background: G.tree.grey } }) : null;
-    const blueLine = tree ? h('div', { style: { position: 'absolute', left: `${treeX}px`, top: '0', width: `${G.tree.w}px`, height: '0', background: C.accent, display: 'none' } }) : null;
-    if (tree) root.append(greyLine, blueLine);
+    const accentLine = tree ? h('div', { style: { position: 'absolute', left: `${treeX}px`, top: '0', width: `${G.tree.w}px`, height: '0', background: C.accent, display: 'none' } }) : null;
+    if (tree) root.append(greyLine, accentLine);
     if (pill) root.append(pill);
 
     // ---- rows
@@ -199,8 +199,8 @@ export default {
       if (row.actLabel && row.act !== null) row.actChip = makeChip(row, row.actLabel, false);
     }
     const checkedAt = rows.map((r) => r.check).filter((x) => x !== null);
-    // the lit tile: the measured #E1F0FC on the blue look, the same 12 % of the accent over white otherwise
-    const litFill = C.accentName === 'blue' ? G.tile.lit : `#${[16, 8, 0].map((sh) => Math.round(255 + (((parseInt(C.accent.slice(1), 16) >> sh) & 255) - 255) * 0.12).toString(16).padStart(2, '0')).join('')}`;
+    // the lit tile: 12 % of the accent over white (colour CR07)
+    const litFill = C.tint;
 
     return {
       el: card.el,
@@ -246,15 +246,15 @@ export default {
           let target = null;
           for (const row of rows) if (row.check !== null && t >= row.check) target = target === null ? row : (row.k > target.k ? row : target);
           if (target && checkedAt.length) {
-            blueLine.style.display = '';
+            accentLine.style.display = '';
             // grow towards each newly checked row
             const prevRows = rows.filter((r) => r.check !== null && r.check < target.check && r.k < target.k);
             const from = prevRows.length ? Math.max(...prevRows.map((r) => r.cy)) : firstC;
             const q = kit.prog(t, target.check, M.tree, S.E.emph);
             const end = from + (target.cy - from) * q;
-            blueLine.style.top = `${firstC - G.tree.w / 2}px`;
-            blueLine.style.height = `${Math.max(G.tree.w, end - firstC + G.tree.w)}px`;
-          } else blueLine.style.display = 'none';
+            accentLine.style.top = `${firstC - G.tree.w / 2}px`;
+            accentLine.style.height = `${Math.max(G.tree.w, end - firstC + G.tree.w)}px`;
+          } else accentLine.style.display = 'none';
           for (const row of rows) if (row.stub) row.stub.style.background = row.check !== null && t >= row.check ? C.accent : G.tree.grey;
         }
         void lastChecked;

@@ -8,6 +8,7 @@ import { createMonitor } from './monitor.js';
 import { createScenes } from './scenes.js';
 import { createNoteField } from './notes.js';
 import { buildOverlay } from './zones.js';
+import { createBoard } from './board.js';
 
 const OVERALL_NOTE_MAX = 8000;        // the server keeps this many characters of the overall note
 const LOST_AFTER_MS = 6000;           // how long the event stream may be down before Studio says so
@@ -24,6 +25,10 @@ const app = {
   sent: null,                         // signature of the notes last sent to the agent
   renderSig: null,                    // pickSignature() of the plan the last finished render drew
   flash: null,                        // a short-lived status line
+  agent: null,                        // the AI session (from GET /api/agent): connected, working here, its name
+  appUrl: null,                       // the Motus app this project came from, when it is running
+  view: prefs.get('view', 'grid') === 'list' ? 'list' : 'grid',   // scenes as a grid of loops, or as the full list
+  open: null,                         // the scene shown in the scene dialog
 };
 
 const el = {
@@ -34,9 +39,13 @@ const el = {
   look: $('#look'), overall: $('#overall'), filters: $('#filters'), final: $('#final'),
   barText: $('#bar-text'), barTrack: $('#bar-track'), barFill: $('#bar-fill'), lockAll: $('#lock-all'), primary: $('#primary'),
   zonesBtn: $('#zones'), help: $('#help'), helpBtn: $('#help-btn'),
+  back: $('#back'), agent: $('#agent'), agentText: $('#agent-text'),
+  views: $('#views'), viewGrid: $('#view-grid'), viewList: $('#view-list'),
+  dlg: $('#scene-dialog'), dlgBody: $('#dlg-body'), dlgTitle: $('#dlg-title'),
 };
 
-let monitor, scenes, overall;
+let monitor, scenes, overall, board;
+const visibleIds = () => (app.view === 'grid' && !app.open ? board.visibleIds() : scenes.visibleIds());
 const sceneOf = (id) => app.model?.scenes.find((s) => s.id === id) || null;
 const numberOf = (sc) => sc.index + 1;
 
@@ -182,8 +191,49 @@ function retryNotes() { scenes.flushNotes(); overall.flush(); }
 function select(id, { scroll = false, seek = false } = {}) {
   if (!sceneOf(id)) return;
   if (app.current !== id) { app.current = id; paintSelection(); }
-  if (scroll) scenes.reveal(id);
+  if (scroll) { if (app.view === 'grid') board.reveal(id); else scenes.reveal(id); }
   if (seek) monitor.showScene(id);
+}
+
+// ------------------------------------------------------------------ grid and scene dialog
+
+function setView(name) {
+  app.view = name === 'list' ? 'list' : 'grid';
+  prefs.set('view', app.view);
+  for (const b of el.views.querySelectorAll('button')) setAttr(b, 'aria-pressed', b.dataset.view === app.view);
+  setHidden(el.viewGrid, app.view !== 'grid');
+  setHidden(el.viewList, app.view !== 'list');
+  board?.refreshPlayback();
+  paintScenes();
+}
+
+/** Open one scene in the dialog: its options, note and lock, the same section the list shows. */
+function openScene(id) {
+  const sc = sceneOf(id);
+  if (!sc) return;
+  if (app.open && app.open !== id) scenes.release();
+  app.open = id;
+  select(id, { seek: true });
+  scenes.hold(id, el.dlgBody);
+  setText(el.dlgTitle, `Scene ${numberOf(sc)} of ${app.model.total}`);
+  if (!el.dlg.open) el.dlg.showModal();
+  el.dlgBody.scrollTop = 0;
+}
+
+function closeScene() {
+  if (!app.open) return;
+  const id = app.open;
+  app.open = null;
+  scenes.release();
+  if (el.dlg.open) el.dlg.close();
+  board.reveal(id);
+}
+
+function stepScene(dir) {
+  const order = app.model.scenes.map((s) => s.id);
+  const i = order.indexOf(app.open);
+  const next = order[Math.max(0, Math.min(order.length - 1, i + dir))];
+  if (next && next !== app.open) openScene(next);
 }
 
 async function pick(sceneId, optionId) {
@@ -282,7 +332,7 @@ function primaryState() {
   const revised = m.scenes.filter((s) => s.revised).length;
   const allLocked = m.total > 0 && m.locked === m.total;
 
-  if (!app.online) return { label: notes.count ? 'Send notes to the agent' : 'Render final video', enabled: false, text: 'Studio lost its connection. Run "motus studio" again to restore it; nothing is lost.' };
+  if (!app.online) return { label: notes.count ? `Send notes to ${who()}` : 'Render final video', enabled: false, text: 'Studio lost its connection. Open this video again from the Motus app, or say "go" to your AI session; nothing is lost.' };
   if (r.status === 'running') {
     const pct = Math.round((r.progress || 0) * 100);
     return { label: 'Rendering', enabled: false, progress: pct, text: `Rendering: ${r.phase || 'starting'}, ${pct}%. The finished video appears on this page.` };
@@ -290,10 +340,15 @@ function primaryState() {
   if (notes.count) {
     const n = notes.count;
     // Sent and unchanged since: nothing new to send, so the button rests until a note changes.
-    if (app.sent === notes.text) return { label: 'Notes sent', enabled: false, text: 'Your notes went to the agent. This page updates by itself when revised options arrive.' };
+    if (app.sent === notes.text) {
+      const a = app.agent;
+      if (a && !a.connected) return { label: 'Notes sent', enabled: false, text: 'Your notes are saved, but no AI session is connected to act on them. In Claude Code or Codex, open the Motus folder and say "go".' };
+      if (a?.here) return { label: 'Notes sent', enabled: false, text: `${a.activity ? `${who()}: ${a.activity}` : `${who()} is revising your notes`}. This page updates by itself.` };
+      return { label: 'Notes sent', enabled: false, text: `Your notes went to ${who()}. This page updates by itself when revised options arrive.` };
+    }
     return {
-      label: 'Send notes to the agent', enabled: true, action: sendNotes,
-      text: `${n} ${plural(n, 'note')} ready. Send ${n === 1 ? 'it' : 'them'} and the agent revises the plan; this page then updates by itself.`,
+      label: `Send notes to ${who()}`, enabled: true, action: sendNotes,
+      text: `${n} ${plural(n, 'note')} ready. Send ${n === 1 ? 'it' : 'them'} and ${who()} revises the plan; this page then updates by itself.`,
     };
   }
   if (revised) return { label: 'Render final video', enabled: allLocked, action: renderFinal, text: `The agent updated ${revised} ${plural(revised, 'scene')}. Review ${revised === 1 ? 'it' : 'them'} again, then lock ${revised === 1 ? 'it' : 'them'}.` };
@@ -341,6 +396,30 @@ function setRender(r) {
 }
 
 // ------------------------------------------------------------------ painting
+
+/** The AI session's name as the person knows it ("Claude", "Codex"), or "the agent". */
+function who() { const n = app.agent?.name; return n && n !== 'the agent' ? n : 'the agent'; }
+
+function paintAgent() {
+  const url = app.appUrl;
+  setHidden(el.back, !url);
+  if (url && el.back.getAttribute('href') !== url) el.back.setAttribute('href', url);
+  const a = app.agent;
+  setHidden(el.agent, !a);
+  if (!a) return;
+  setAttr(el.agent, 'data-on', !!a.connected);
+  const name = who() === 'the agent' ? 'AI session' : who();
+  setText(el.agentText, !a.connected ? 'No AI session' : a.here ? `${name} is working` : `${name} connected`);
+}
+
+async function pollAgent() {
+  try {
+    const r = await fetch('/api/agent', { cache: 'no-store' }).then((x) => x.json());
+    const before = JSON.stringify([app.agent, app.appUrl]);
+    app.agent = r.agent || null; app.appUrl = r.app?.url || null;
+    if (JSON.stringify([app.agent, app.appUrl]) !== before) { paintAgent(); paintBar(); }
+  } catch { /* the connection banner covers this */ }
+}
 
 function paintHeader(m) {
   setText(el.name, m.project.name);
@@ -412,12 +491,13 @@ function paintOverall(m) {
 /** The keyboard never acts on a scene the filter is hiding: move on to the next one still shown. */
 function keepCurrentVisible() {
   if (!app.model || !scenes) return;
-  const ids = scenes.visibleIds();
+  const ids = visibleIds();
   if (!ids.length || ids.includes(app.current)) return;
   const order = app.model.scenes.map((s) => s.id);
   const at = order.indexOf(app.current);
   app.current = ids.find((id) => order.indexOf(id) > at) ?? ids[ids.length - 1];
   scenes.setCurrent(app.current);
+  board.setCurrent(app.current);
   monitor.update(app.model, app.current);
 }
 
@@ -425,6 +505,8 @@ function paintScenes() {
   const m = app.model;
   if (!m) return;
   scenes.update(m, { filter: app.filter, current: app.current });
+  board.update(m, { filter: app.filter, current: app.current });
+  if (app.open && !sceneOf(app.open)) closeScene();
   keepCurrentVisible();
   const c = scenes.counts();
   for (const b of el.filters.querySelectorAll('button')) setText(b.querySelector('[data-count]'), c[b.dataset.filter]);
@@ -433,6 +515,7 @@ function paintScenes() {
 function paintSelection() {
   if (!app.model) return;
   scenes.setCurrent(app.current);
+  board.setCurrent(app.current);
   monitor.update(app.model, app.current);
 }
 
@@ -478,6 +561,8 @@ function paintFinal() {
 
 function finalVideo(url, file, info, seconds, draft, earlier = false) {
   const video = h('video', { controls: true, playsinline: true, preload: 'metadata', src: `${url}?v=${Date.now()}` });
+  const finder = h('button', { class: 'btn sm', type: 'button' }, 'Show in Finder');
+  finder.addEventListener('click', () => { fetch('/api/reveal', { method: 'POST', headers: { 'content-type': 'application/json' }, body: '{}' }).catch(() => {}); });
   const copy = h('button', { class: 'btn sm', type: 'button' }, 'Copy path');
   copy.addEventListener('click', async () => {
     const ok = await copyText(file);
@@ -491,7 +576,7 @@ function finalVideo(url, file, info, seconds, draft, earlier = false) {
       earlier ? h('h2', null, 'Your last render') : h('h2', { class: 'final-done' }, icon('check'), draft ? 'Your draft is ready' : 'Your video is ready'),
       h('p', { class: 'final-next' }, earlier ? 'Rendered in an earlier session. If you changed anything since, render again to include it.' : 'This is the finished file. To change anything, unlock that scene, adjust it and render again.'),
       h('p', { class: 'path mono' }, file),
-      h('div', { class: 'final-actions' }, copy, facts ? h('span', { class: 'mono final-facts' }, facts) : null)),
+      h('div', { class: 'final-actions' }, finder, copy, facts ? h('span', { class: 'mono final-facts' }, facts) : null)),
   ];
 }
 
@@ -500,6 +585,9 @@ function paint() {
   if (!m) return;
   if (app.sent === null) app.sent = prefs.get(`sent:${m.project.dir}`, null);
   if (app.renderSig === 'pending') app.renderSig = pickSignature(m);
+  if (m.agent !== undefined) app.agent = m.agent;
+  if (m.app !== undefined) app.appUrl = m.app?.url || null;
+  paintAgent();
   if (!sceneOf(app.current)) app.current = (m.scenes.find((s) => !s.locked) || m.scenes[0])?.id ?? null;
   paintHeader(m);
   paintProblems(m);
@@ -514,7 +602,8 @@ function paint() {
 // ------------------------------------------------------------------ keyboard and help
 
 function step(dir) {
-  const ids = scenes.visibleIds();
+  if (app.open) { stepScene(dir); return; }
+  const ids = visibleIds();
   if (!ids.length) return;
   const i = Math.max(0, ids.indexOf(app.current));
   select(ids[Math.max(0, Math.min(ids.length - 1, i + dir))], { scroll: true, seek: true });
@@ -553,6 +642,7 @@ function onKey(e) {
   else if (key === 'n') {
     if (!sc) return;
     e.preventDefault();               // or the "n" lands in the note
+    if (app.view === 'grid' && app.open !== sc.id && !sc.locked) openScene(sc.id);
     if (!scenes.focusNote(sc.id)) flash(`Scene ${numberOf(sc)} is locked. Press L to unlock it, then write your note.`);
   } else if (key === 's') setZones(!app.zones);
   else if (key === '?') toggleHelp();
@@ -577,6 +667,18 @@ async function start() {
     onNoteInput: () => paintBar(),
     onFiltered: () => keepCurrentVisible(),
   });
+
+  board = createBoard({
+    root: $('#board'), empty: $('#empty-grid'),
+    actions: { open: openScene, pick, lock, select: (id) => select(id) },
+  });
+  el.views.addEventListener('click', (e) => { const b = e.target.closest('button[data-view]'); if (b) setView(b.dataset.view); });
+  $('#dlg-close').addEventListener('click', closeScene);
+  $('#dlg-prev').addEventListener('click', () => stepScene(-1));
+  $('#dlg-next').addEventListener('click', () => stepScene(1));
+  el.dlg.addEventListener('close', () => { if (app.open) { const id = app.open; app.open = null; scenes.release(); board.reveal(id); } });
+  el.dlg.addEventListener('click', (e) => { if (e.target === el.dlg) closeScene(); });   // a click on the backdrop
+  setView(app.view);
 
   const overallField = createNoteField({
     label: 'Overall note',
@@ -614,6 +716,7 @@ async function start() {
   measure();
 
   connect();
+  setInterval(pollAgent, 4000);
   api.render().then((r) => { if (app.render.status === 'idle') setRender(r); }, () => {});
   await refresh();
 }

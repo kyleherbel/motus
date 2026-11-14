@@ -9,9 +9,9 @@
 //   transcript    on enter the command leaves the input box and lands as a filled prompt row;
 //                 result lines follow one by one (5 frames apart, or on their words), rising 7 px;
 //                 when the card is full the transcript scrolls up
-//   lit row       a dark-blue bar with a bright left edge travels from line to line (8 frames,
+//   lit row       a dark accent-tinted bar with a bright left edge travels from line to line (8 frames,
 //                 exponential approach); the lit line turns bold white and gets a check; a line it
-//                 leaves keeps the check and turns blue
+//                 leaves keeps the check and its head turns the pale accent
 // The reference draws a product mascot in the splash and title; this skin draws an original
 // pixel ">_" tile instead.
 import { cardFrame } from '../card.js';
@@ -30,7 +30,7 @@ const G = {
   caret: { w: 0.9, h: 1.1, colour: '#EFEFEF', period: 16, on: 8 },   // 13-16 x 27-31 px; on 8 / off 8 frames
   splash: { top: 16, glyph: [108, 72], name: 38, sub: 15, nameBase: 141, subTop: 152, h: 196, large: 2 },   // compact (from the separator): glyph 328-399, name ink 426-453, dir 465-482, next row at 508
   ink: { text: '#EEEEEE', dim: '#9A9A9E', prompt: '#9E9EA3', name: '#F1F1F1' },     // #EEEDF2, #8F8E8C-#9E9FA1, '>' #9E9EA3
-  lit: { fill: '#0E2942', edge: 5, radius: 10, text: '#F7FFFF', check: '#71BDFC', doneHead: '#77B9F4', doneText: '#D1D9E5' },   // Dfclm@450-537
+  lit: { edge: 5, radius: 10, text: '#FDFDFD', doneText: '#D8D8D8' },   // Dfclm@450-537; fill, check and done head follow the accent (colour CR07, CR08)
 };
 const M = {
   cps: 1.79 * 30,                   // 50 characters in 28 frames (Dfclm@94-122), 2-2-1 rhythm
@@ -217,12 +217,11 @@ export default {
 
     // ---- lit row
     const litBeats = beats.filter((b) => b.do === 'highlight' && lineEls[b.line - 1]);
-    // the lit bar is the accent at 20 % over the body (measured #0E2942 for blue); its check a pale accent
-    const blue = C.accentName === 'blue';
+    // the lit bar is the accent at 20 % over the body (as measured on the reference); its check a pale accent
     const acc = [16, 8, 0].map((sh) => (parseInt(C.accent.slice(1), 16) >> sh) & 255);
-    const litRGB = blue ? [14, 41, 66] : acc.map((v) => Math.round(19 + (v - 19) * 0.2));
-    const litCheck = blue ? G.lit.check : C.accentSerifDark, doneHead = blue ? G.lit.doneHead : C.accentSerifDark;
-    const lit = h('div', { style: { position: 'absolute', left: `${G.inset - 3}px`, top: '0', width: `${W - 2 * G.inset + 5}px`, height: '0', borderRadius: `${G.lit.radius}px`, background: G.lit.fill, overflow: 'hidden', display: 'none' } },
+    const litRGB = acc.map((v) => Math.round(19 + (v - 19) * 0.2));
+    const litCheck = C.accentSerifDark, doneHead = C.accentSerifDark;
+    const lit = h('div', { style: { position: 'absolute', left: `${G.inset - 3}px`, top: '0', width: `${W - 2 * G.inset + 5}px`, height: '0', borderRadius: `${G.lit.radius}px`, background: `rgb(${litRGB.join(',')})`, overflow: 'hidden', display: 'none' } },
       h('div', { style: { position: 'absolute', left: '0', top: '0', bottom: '0', width: `${G.lit.edge}px`, background: C.accent } }));
     const litEdge = lit.firstChild;
     track.insertBefore(lit, track.firstChild);
@@ -312,7 +311,7 @@ export default {
             const p = kit.prog(t, c.b.t + M.lit.check, F(4), S.E.emph);
             c.el.style.opacity = String(kit.clamp(p * 2));
             c.el.style.transform = `scale(${(0.6 + 0.4 * p).toFixed(3)})`;
-            c.svg.setAttribute('stroke', done ? (blue ? '#75B8F3' : litCheck) : litCheck);
+            c.svg.setAttribute('stroke', litCheck);
           }
         }
       },

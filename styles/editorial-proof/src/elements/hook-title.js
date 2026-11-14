@@ -38,7 +38,7 @@ export default {
     const words2 = params.strip.trim().split(/\s+/);
     const onAccent = C.onAccent || '#FCFBFC';
     const strip = h('div', { style: { position: 'absolute', left: `${stripX}px`, top: `${T.strip.y}px`, width: `${stripW}px`, height: `${T.strip.h}px`, borderRadius: `${T.strip.radius}px`, background: C.accent, overflow: 'hidden' } });
-    const shadow = h('div', { style: { position: 'absolute', left: `${stripX}px`, top: `${T.strip.y}px`, width: `${stripW}px`, height: `${T.strip.h}px`, borderRadius: `${T.strip.radius}px`, boxShadow: '0 12px 22px rgba(0,60,160,0.20)' } });
+    const shadow = h('div', { style: { position: 'absolute', left: `${stripX}px`, top: `${T.strip.y}px`, width: `${stripW}px`, height: `${T.strip.h}px`, borderRadius: `${T.strip.radius}px`, boxShadow: `0 12px 22px rgba(${C.shade},0.20)` } });
     const baselineY = T.strip.h - T.strip.baselineFromBottom;
     const inner = h('div', { style: { position: 'absolute', left: `${T.strip.padX}px`, top: `${baselineY - size2 * type.ascent.serif}px`, whiteSpace: 'nowrap', font: `italic ${type.strip.weight} ${size2}px/1 ${fonts.serif}`, letterSpacing: `${type.strip.tracking}em`, color: onAccent } });
     const spans2 = words2.map((w, k) => { const s = h('span', { text: w, style: { display: 'inline-block', marginRight: k < words2.length - 1 ? '0.22em' : '0', willChange: 'transform, opacity, filter' } }); inner.append(s); return s; });

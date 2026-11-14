@@ -1,7 +1,7 @@
 // A ranked list where the viewer's row climbs ("yoursite.com" from 4 to 1) and the rows it
 // passes are then struck. Measured frame by frame on clip38@1062-1257 (dark focus):
 //   cut (1062)      every row is already there; the viewer's row sits muted (pale box, grey name)
-//   +13 f (1075)    it switches on in one frame: accent number and disc, ink name, blue box
+//   +13 f (1075)    it switches on in one frame: accent number and disc, ink name, accent box
 //   +26 f (1088)    climb: every row moves at once on cubic-bezier(0.2,0,0,1) over 24 f, the
 //                   active row 3 rows up (517 px at a 172 px pitch), the others one row down;
 //                   each row's number shows the slot it is nearest to. The active row lifts:
@@ -29,8 +29,8 @@ const G = {
   number: { cx: 42, size: 52, weight: 600, colour: '#A0A0A5' },      // digits 38 px tall, centred at x 160
   disc: { cx: 121.5, d: 76, fill: '#ECECEE', letter: '#737277', size: 36, weight: 600 }, // x 202-277, 'C' 27 px tall
   name: { x: 185.5, size: 43, weight: 700, tracking: -0.01, min: 28 },   // 'competitor1.com' ink 304-627 x 827-868
-  mutedName: '#A0A2A6', mutedFill: '#F3F9FB', mutedEdge: '#D4E0EC',          // f1070
-  activeFill: '#E1F0FB', activeEdgeAlpha: 0.72,                              // f1120: edge #409BEC on the fill
+  mutedName: '#A0A2A6',                     // f1070; the muted box is C.tintMuted with a C.tintEdge line (colour CR07)
+  activeEdgeAlpha: 0.72,                    // f1120: the active box is C.tint, its edge the accent at 72 % over it
   strike: { over: [22, 20], rise: 6.0, mid: 13.5, end: 8, dy: 2 },           // f1236: x 282-647, 8-14 px thick, 6 deg
 };
 const M = {
@@ -118,8 +118,8 @@ export default {
       const content = h('div', { style: { position: 'absolute', left: '0', top: '0', width: `${boxW}px`, height: `${L.box}px` } });
       let boxMuted = null, boxActive = null;
       if (mine) {
-        boxMuted = h('div', { style: { position: 'absolute', left: '0', top: '0', width: `${boxW}px`, height: `${L.box}px`, boxSizing: 'border-box', borderRadius: `${G.radius}px`, background: G.mutedFill, border: `1.5px solid ${G.mutedEdge}` } });
-        boxActive = h('div', { style: { position: 'absolute', left: '0', top: '0', width: `${boxW}px`, height: `${L.box}px`, boxSizing: 'border-box', borderRadius: `${G.radius}px`, background: G.activeFill, border: `${G.stroke}px solid ${mix(G.activeFill, C.accent, G.activeEdgeAlpha)}`, opacity: '0' } });
+        boxMuted = h('div', { style: { position: 'absolute', left: '0', top: '0', width: `${boxW}px`, height: `${L.box}px`, boxSizing: 'border-box', borderRadius: `${G.radius}px`, background: C.tintMuted, border: `1.5px solid ${C.tintEdge}` } });
+        boxActive = h('div', { style: { position: 'absolute', left: '0', top: '0', width: `${boxW}px`, height: `${L.box}px`, boxSizing: 'border-box', borderRadius: `${G.radius}px`, background: C.tint, border: `${G.stroke}px solid ${mix(C.tint, C.accent, G.activeEdgeAlpha)}`, opacity: '0' } });
         wrap.append(boxMuted, boxActive);
       }
       const nz = G.number.size * k;

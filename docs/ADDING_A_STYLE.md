@@ -76,6 +76,7 @@ Nine analysts each measure one dimension on the whole corpus. They work independ
 | colour | The palette as calibrated hex values, the background plates, shadows, gradients, per-video variation. |
 | audio | Loudness, pauses, the music bed and its level under the voice, sound-effect classes, what triggers each one and at what offset. |
 | presenter | Face size and eye line per layout, the panel, how the matte is stacked, scale changes, jump cuts, what the raw footage must have looked like. |
+| explanation | Added after the third study. For every illustration and diagram: the idea it explains, the events that act the sentence out, the word each lands on, and which devices recur. Run it once the graphics inventory exists. |
 
 Each analyst writes into `corpus/_study/<source>/<dimension>/`:
 
@@ -122,6 +123,7 @@ Things the first study learned the hard way:
 - **Use voice-free bands for sound effects.** The voice ended at about 15.4 kHz and was high-passed near 50 to 70 Hz, so effects could be timed from the bands above and below it.
 - **Low bitrate limits precision.** At 1.1 to 2.1 Mbps, flat patches carry about 2 levels of noise and lines under 4 px carry about 8. Say so beside the number.
 - **Agents cannot hear and cannot watch playback.** Anything that depends on listening or on continuous motion goes into `needs_human_check`.
+- **Illustrations are rarely stills.** The third study inventoried 51 illustration and diagram units (252 of 427 seconds) and the build first treated them as pictures a user would supply. Watched at every frame, they act the sentence out: a line draws between two things, a badge lands, a figure counts while a picture fills. A 1 fps contact sheet hides all of it. The explanation pass exists so this is measured from the start.
 
 If your environment has sub-agents, run the nine dimensions in parallel, one sub-agent per dimension, each with its own folder. Otherwise run them one after another. The brief for each dimension is in `skills/new-style/references/dimensions.md`.
 
@@ -167,7 +169,7 @@ How to decide:
 
 ## 5. Write the research notes and the tokens
 
-**Research notes** (`styles/<id>/research/<dimension>.md`) are the public, text-only distillation of the study. One note per dimension. Each rule keeps its id, its values, its count and its confidence. Evidence is described in words and by clip id and frame, not by image. Use neutral clip ids (`clip01`, `clip02`, ... by publication date) and keep the map to the source posts in `corpus/_study/clip-ids.json`; never publish a platform's post ids, URLs or the creator's handle, because they identify whose work was measured. No reference pixels, no audio, no transcript passages beyond the few words needed to describe a pattern. Include the verification verdicts and the generation decision.
+**Research notes** (`styles/<id>/research/<dimension>.md`) are the public, text-only distillation of the study. One note per dimension. Each rule keeps its id, its values, its count and its confidence. Evidence is described in words and by clip id and frame, not by image. Use neutral clip ids (`clip01`, `clip02`, ... by publication date) and keep the map to the source posts in `corpus/_study/<source>/clip-ids.json`. The ids are scoped to one style: `clip07` in one style's notes and `clip07` in another's are different videos; never publish a platform's post ids, URLs or the creator's handle, because they identify whose work was measured. No reference pixels, no audio, no transcript passages beyond the few words needed to describe a pattern. Include the verification verdicts and the generation decision.
 
 **Tokens** (`styles/<id>/src/tokens.js`) hold every number of the style in one file. Nothing else in the style contains a measured constant.
 

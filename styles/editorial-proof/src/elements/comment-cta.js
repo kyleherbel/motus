@@ -17,7 +17,7 @@ export default {
     verb: { type: 'string', optional: true, maxChars: 10, maxWords: 1 },   // default "comment"
     verbAt: 'word?',                                                        // default: the word in the scene that matches the verb
     keywordAt: 'word?',                                                     // default: 14 frames after the verb, as the reference does
-    tone: 'enum?:blue|yellow|orange|green|cyan|lime',                       // keyword glow; blue unless the keyword is a brand with its own colour
+    tone: 'enum?:emerald|violet|blue|yellow|orange|green|cyan|lime',        // keyword glow; the look's accent unless the keyword is a brand with its own colour
   },
   beats: {},
 
@@ -30,7 +30,7 @@ export default {
     const spoken = params.verbAt !== undefined ? S.wordTime(params.verbAt) : (words.find((w) => same(w, verbText))?.start ?? tIn + (tOut - tIn) * 0.38);
     const vAt = Math.max(tIn, spoken - M.verbLead);                       // hard on, two frames before the word
     const kAt = params.keywordAt !== undefined ? S.wordTime(params.keywordAt) : vAt + M.keywordAfter;
-    const [toneTop, toneBottom] = ctaTones[params.tone || (C.accentName === 'lime' ? 'lime' : 'blue')];
+    const [toneTop, toneBottom] = ctaTones[params.tone || C.accentName];
     const glow = `${toneBottom}B0`;
 
     const Fl = layout.full;
@@ -48,7 +48,7 @@ export default {
     const D = Fl.dot;
     const dot = h('div', { style: { position: 'absolute', left: `${D.x}px`, top: `${D.y}px`, width: '0', height: '0' } });
     const halo = h('div', { style: { position: 'absolute', left: `${-D.halo}px`, top: `${-D.halo}px`, width: `${D.halo * 2}px`, height: `${D.halo * 2}px`, borderRadius: '50%', background: `radial-gradient(circle, ${C.ctaDot}99 0%, ${C.ctaDot}33 45%, rgba(0,0,0,0) 70%)` } });
-    const core = h('div', { style: { position: 'absolute', left: `${-D.r}px`, top: `${-D.r}px`, width: `${D.r * 2}px`, height: `${D.r * 2}px`, borderRadius: '50%', background: C.ctaDot, boxShadow: 'inset 0 0 0 3px rgba(39,124,241,0.9)' } });
+    const core = h('div', { style: { position: 'absolute', left: `${-D.r}px`, top: `${-D.r}px`, width: `${D.r * 2}px`, height: `${D.r * 2}px`, borderRadius: '50%', background: C.ctaDot, boxShadow: `inset 0 0 0 3px ${C.ctaRim}` } });
     const rings = [0, 1].map(() => { const r = h('div', { style: { position: 'absolute', left: `${-D.r}px`, top: `${-D.r}px`, width: `${D.r * 2}px`, height: `${D.r * 2}px`, borderRadius: '50%', border: `2.5px solid ${C.ctaDot}`, boxSizing: 'border-box' } }); dot.append(r); return r; });
     dot.prepend(halo); dot.append(core);
     el.append(dot, verb, keyword);

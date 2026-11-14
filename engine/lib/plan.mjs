@@ -305,7 +305,7 @@ export function resolveDoc({ edit, state, words, timeline, style, project }, for
     motus: 1, style: manifest.id, styleVersion: manifest.version,
     width: project.json.output.width, height: project.json.output.height,
     fps: timeline.fps[0] / timeline.fps[1], fpsRational: timeline.fps, frames: timeline.frames, duration: timeline.duration,
-    hasMatte: !!timeline.hasMatte, framing: timeline.framing || null,
+    hasMatte: !!timeline.hasMatte, framing: timeline.framing || null, wide: timeline.wide || null,
     look, words: outWords, captions: { breaks: cap.breaks || [], hide: cap.hide || [] },
     scenes, audio: resolveAudio(edit, manifest),
     sfx: manifest.sfx || {},
@@ -315,7 +315,7 @@ export function resolveDoc({ edit, state, words, timeline, style, project }, for
 /**
  * The sound of an edit: effects on or off, and one music source under the voice.
  * A file the user supplied (audio.music) wins; otherwise the style's own bed (audio.bed, default its first); "none" for no music.
- * Returns { sfx, music: {url, file, gainDb, bed} | null }: url for the stage, file relative to the style or project for the renderer.
+ * Returns { sfx, music: {url, file, gainDb, bed, fadeOut?} | null }: url for the stage, file relative to the style or project for the renderer.
  */
 export function resolveAudio(edit, manifest) {
   const au = edit.audio || {};
@@ -324,7 +324,11 @@ export function resolveAudio(edit, manifest) {
   if (au.music) music = { from: 'project', file: String(au.music).replace(/^\.?\//, ''), url: `/project/${String(au.music).replace(/^\.?\//, '')}`, gainDb: au.musicGainDb ?? -24, bed: null };
   else if (au.bed !== 'none') {
     const id = au.bed && beds[au.bed] ? au.bed : Object.keys(beds)[0];
-    if (id) music = { from: 'style', file: beds[id].src, url: `/styles/${manifest.id}/${beds[id].src}`, gainDb: au.musicGainDb ?? beds[id].gainDb ?? -24, bed: id };
+    if (id) {
+      music = { from: 'style', file: beds[id].src, url: `/styles/${manifest.id}/${beds[id].src}`, gainDb: au.musicGainDb ?? beds[id].gainDb ?? -24, bed: id };
+      // a bed may ask for a linear fade over the last seconds of the video (only the music fades)
+      if (beds[id].fadeOut > 0) music.fadeOut = beds[id].fadeOut;
+    }
   }
   return { sfx: au.sfx !== false, music };
 }

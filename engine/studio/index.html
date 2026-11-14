@@ -47,7 +47,7 @@
 
     <section class="banner" id="conn-banner" role="alert" hidden>
       <h2>Studio lost its connection</h2>
-      <p>The local server stopped answering, so picks, locks and notes cannot be saved right now. Run <code class="mono">motus studio</code> again (or ask the agent to) and this page reconnects by itself. If it prints a different address, open that one. Notes you have typed stay here and are saved when the connection is back.</p>
+      <p>The local server stopped answering, so picks, locks and notes cannot be saved right now. Open this video again from the Motus app, or say "go" to your AI session to start Motus again (from a terminal: <code class="mono">motus studio</code>). This page reconnects by itself; if Motus prints a different address, open that one. Notes you have typed stay here and are saved when the connection is back.</p>
     </section>
 
     <section class="banner" id="plan-banner" role="alert" hidden>
@@ -64,10 +64,12 @@
     <header class="head">
       <div class="head-row">
         <div class="head-title">
+          <a class="back" id="back" href="/" hidden>&larr; All videos</a>
           <p class="eyebrow">Motus Studio</p>
           <h1 id="p-name">Loading the project</h1>
         </div>
         <div class="head-tools">
+          <span class="agent-chip" id="agent" data-on="false" hidden><i aria-hidden="true"></i><span id="agent-text"></span></span>
           <span class="conn mono" id="conn">Connecting</span>
           <button class="btn sm" id="help-btn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="help">Shortcuts <kbd>?</kbd></button>
           <div class="help" id="help" role="dialog" aria-label="Keyboard shortcuts" hidden>
@@ -109,15 +111,27 @@
 
     <div class="filters">
       <h2 id="scenes-h">Scenes</h2>
-      <div class="seg" id="filters" role="group" aria-label="Show scenes">
-        <button type="button" data-filter="all" aria-pressed="true">All <span class="mono" data-count></span></button>
-        <button type="button" data-filter="open" aria-pressed="false">Not locked <span class="mono" data-count></span></button>
-        <button type="button" data-filter="notes" aria-pressed="false">With notes <span class="mono" data-count></span></button>
+      <div class="filters-tools">
+        <div class="seg" id="views" role="group" aria-label="Show scenes as">
+          <button type="button" data-view="grid" aria-pressed="true">Grid</button>
+          <button type="button" data-view="list" aria-pressed="false">List</button>
+        </div>
+        <div class="seg" id="filters" role="group" aria-label="Show scenes">
+          <button type="button" data-filter="all" aria-pressed="true">All <span class="mono" data-count></span></button>
+          <button type="button" data-filter="open" aria-pressed="false">Not locked <span class="mono" data-count></span></button>
+          <button type="button" data-filter="notes" aria-pressed="false">With notes <span class="mono" data-count></span></button>
+        </div>
       </div>
     </div>
 
-    <div class="scenes" id="scenes" aria-labelledby="scenes-h"></div>
-    <p class="empty" id="empty" hidden></p>
+    <div class="view-grid" id="view-grid">
+      <div class="board" id="board" aria-labelledby="scenes-h"></div>
+      <p class="empty" id="empty-grid" hidden></p>
+    </div>
+    <div class="view-list" id="view-list" hidden>
+      <div class="scenes" id="scenes" aria-labelledby="scenes-h"></div>
+      <p class="empty" id="empty" hidden></p>
+    </div>
 
     <section class="final" id="final" aria-live="polite" hidden></section>
 
@@ -133,5 +147,16 @@
     </footer>
   </main>
 </div>
+
+<dialog class="scene-dialog" id="scene-dialog" aria-labelledby="dlg-title">
+  <header class="dlg-head">
+    <button class="btn sm" id="dlg-prev" type="button" aria-label="Previous scene">&larr;</button>
+    <button class="btn sm" id="dlg-next" type="button" aria-label="Next scene">&rarr;</button>
+    <h2 class="dlg-title" id="dlg-title">Scene</h2>
+    <span class="grow"></span>
+    <button class="btn sm" id="dlg-close" type="button">Back to the grid</button>
+  </header>
+  <div class="dlg-body" id="dlg-body"></div>
+</dialog>
 </body>
 </html>

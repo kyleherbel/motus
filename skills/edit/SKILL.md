@@ -7,6 +7,8 @@ description: Edit a talking-head video (Reels, TikTok, Shorts; raw take or pictu
 
 You are the editor. The engine does the mechanical work (transcription, frames, matte, preview, rendering); you do the judgement (what the video is about, what to cut, what to show when, which options to offer). The user decides in Studio.
 
+If you got here from a `motus next` job (the user started in the Motus app, see `skills/start/SKILL.md`), the job's instructions say which steps below to do. The project already exists and is ingested. Report progress with `motus say` and finish with `motus done` instead of talking to the user in the chat or opening Studio.
+
 ## The engine
 
 The CLI is `engine/bin/motus.mjs` at the plugin root. In Claude Code that is `${CLAUDE_PLUGIN_ROOT}/engine/bin/motus.mjs`; anywhere else it is two folders above this skill (`<this skill>/../../engine/bin/motus.mjs`). Below, `motus …` means `node <that path> …`. Add `--json` when you want to parse the result. Errors come with a `fix:` line: do what it says.
@@ -27,6 +29,8 @@ Work through these in order. Tell the user in one line what you are doing at eac
 
 Then: `motus init "<video>" --style <id> --mode raw|locked`.
 
+Some styles frame the presenter panel from a shot wider than 9:16 (their `style.json` has `"footage": {"wide": true}`; Night Class and Ember Brief do). For those, start from the horizontal recording of the take when one exists. A recorder that writes a horizontal file and a 9:16 file of the same take (for example `<name>.mp4` and `<name> vertical.mp4`) gives you both; use the horizontal one. `motus init` says so in its notes.
+
 ### 3. Ingest
 `motus ingest <project>` (pass `--prompt "Name, Product, Term"` with any names the user mentioned so they are spelled right; pass `--transcript <file>` if the user supplied a transcript). It takes one to a few minutes: run it in the background if your environment allows and keep the user posted.
 
@@ -35,6 +39,7 @@ Read **all** of this:
 - `analysis/transcript.json`: every word with its time and confidence `p`. Words with `p` below about 0.6 are suspects: decide what was really said from context and from the frames.
 - Every contact sheet in `analysis/sheets/` (open each image; cells carry their time). Look at the person, the setting, the light, what is in frame (microphone, desk, screens), where the face sits, gestures, any moment they look away or restart. For a closer look at a stretch: `motus sheet <project> --from 12 --to 18 --fps 6`, or full-size stills with `--at 3.2,7.5`.
 - `analysis/framing.json` (where the face is), `analysis/silences.json`, `analysis/retakes.json`.
+- Repeated takes the transcript hid. The recogniser sometimes drops a line said twice and stretches the word next to it over the gap. The sign is a single word several seconds long with no silence inside it. Re-transcribe that stretch (`faster-whisper` on the slice of `analysis/audio.wav`, with `condition_on_previous_text` off). Splice its words into `analysis/transcript.json` and keep the last take in the cuts.
 
 Write `analysis/understanding.json`:
 

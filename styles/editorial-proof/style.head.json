@@ -15,10 +15,10 @@
     "accent": {
       "label": "Accent",
       "choices": [
-        "blue",
-        "lime"
+        "emerald",
+        "violet"
       ],
-      "default": "blue"
+      "default": "emerald"
     }
   },
   "emphasis": [

@@ -1,6 +1,6 @@
 // A number as the card's subject, when there is no page to put it on (graphics G16-G18, colour
 // C26, motion "big number"). Three skins, as measured:
-//   dark   slate tile, 1-2 px #3A6077 edge, radius 27, hugging the digits (clip39@108: 706x278
+//   dark   slate tile, 1-2 px edge, radius 27, hugging the digits (clip39@108: 706x278
 //          at 188,596; digit cap 114 px 50 px under the tile top, label ascender 41 px under the
 //          digit baseline, label baseline 37 px above the tile bottom, 48 px sides)
 //   white  white tile, radius 34, 1 px #E4E4E6 edge, flat accent digits, grey label (clip22@258)
@@ -23,8 +23,8 @@ const T = {
   bare: { maxDigitsW: 710, size: 236, min: 110, pad: 24 },        // "$500" cap 172 (size 236); "5,220,123" 707 px wide
   label: { size: 48, weight: 700, tracking: -0.02, ascent: 0.757, maxW: 760 },   // "a month", "in API credits every month": 47-48 px
   source: { size: 44, weight: 700, tracking: -0.02, gap: 65 },   // "openverse" line: its baseline 65 px over the digits' cap top
-  dark: { fill: '#343842', edge: '#3A6077', edgeW: 1.5, radius: 27, shadow: '0 24px 60px rgba(0,0,0,0.45)' },
-  white: { fill: '#FDFDFD', edge: '#E4E4E6', edgeW: 1, radius: 34, shadow: '0 8px 24px rgba(0,0,0,0.14)', digits: '#0083FC', label: '#76767A', roll: '#131416' },
+  dark: { fill: '#383838', edge: '#5A5A5A', edgeW: 1.5, radius: 27, shadow: '0 24px 60px rgba(0,0,0,0.45)' },   // measured slate and blue edge, neutralised (colour CR08)
+  white: { fill: '#FDFDFD', edge: '#E4E4E6', edgeW: 1, radius: 34, shadow: '0 8px 24px rgba(0,0,0,0.14)', label: '#76767A', roll: '#131416' },
 };
 
 function geometry(params, S, mode) {
@@ -104,7 +104,7 @@ export default {
     const plain = h('div', { text: g.fig.text, style: { ...dStyle, color: dark ? '#FFFFFF' : T.white.roll, textShadow: dark ? '0 2px 18px rgba(0,0,0,0.45)' : 'none' } });
     const tinted = h('div', { text: g.fig.text, style: { ...dStyle, ...(dark
       ? { background: `linear-gradient(180deg, ${stops})`, WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent', filter: `drop-shadow(0 0 18px ${C.digitGlow})` }
-      : { color: C.accentName === 'blue' ? T.white.digits : C.accent }) } });
+      : { color: C.accent }) } });
     block.append(plain, tinted);
     let lab = null, src = null;
     if (params.label) {
@@ -119,7 +119,7 @@ export default {
     return {
       el: root,
       // no page under it: the dark ground takes a mid slate, the level the reference's backdrops sit at (40-70)
-      tone: g.skin === 'white' ? 'light' : [110, 115, 125],
+      tone: g.skin === 'white' ? 'light' : [115, 115, 115],   // the slate tile's echo, neutralised with it (colour CR08)
       seek(t) {
         const on = t >= t0;
         block.style.display = on ? '' : 'none';

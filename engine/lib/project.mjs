@@ -30,7 +30,7 @@ export async function probe(video) {
 export async function initProject({ video, style, mode = 'raw', dir, root = process.cwd(), force = false }) {
   video = path.resolve(video);
   const info = await probe(video);
-  if (style) await loadStyle(style);                                  // fail early on a bad id
+  const styleInfo = style ? await loadStyle(style) : null;            // fail early on a bad id
   if (!['raw', 'locked'].includes(mode)) throw new MotusError(`Unknown mode "${mode}".`, 'Use --mode raw (cut silences and retakes) or --mode locked (keep every frame).');
   const name = slug(path.basename(video, path.extname(video)));
   const pdir = path.resolve(dir || path.join(root, 'motus-projects', name));
@@ -39,7 +39,9 @@ export async function initProject({ video, style, mode = 'raw', dir, root = proc
   }
   for (const d of ['analysis', 'plan', 'conform', 'assets', 'review', 'renders']) await mkdirp(path.join(pdir, d));
   const notes = [];
-  if (Math.abs(info.aspect - 9 / 16) > 0.02) notes.push(`Source is ${info.width}x${info.height}, not 9:16; it will be centre-cropped to 9:16 at conform.`);
+  const wantsWide = !!styleInfo?.manifest?.footage?.wide;
+  if (Math.abs(info.aspect - 9 / 16) > 0.02) notes.push(`Source is ${info.width}x${info.height}, not 9:16; the 9:16 picture is cropped around the speaker at conform${wantsWide && info.aspect >= 1 ? ', and the whole frame is kept as the wide view this style frames its panel from' : ''}.`);
+  else if (wantsWide) notes.push(`This style frames its presenter panel from a shot wider than 9:16. With a 9:16 source the panel shows a closer crop than the style was measured with; if a horizontal recording of the same take exists, start the project from it instead.`);
   if (!info.hasAudio) notes.push('Source has no audio stream: there is nothing to transcribe.');
   // a variable-frame-rate source reports an odd average rate; deliver at the nearest standard rate
   const outFps = standardRate(info.fps);

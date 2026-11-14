@@ -1,5 +1,5 @@
 {
- "motus": 1, "style": "editorial-proof", "look": { "accent": "blue" },
+ "motus": 1, "style": "editorial-proof", "look": { "accent": "emerald" },
  "captions": { "emphasis": {}, "fixes": {} },
  "scenes": [
   { "id": "s01", "words": [0, 11], "role": "hook", "single": true, "options": [ { "id": "a", "label": "About panel", "why": "fixture: clip39@1194 - chrome, heading, four lines", "layout": "light-split",

@@ -1,0 +1,797 @@
+{
+ "motus": 1,
+ "style": "ember-brief",
+ "captions": {
+  "fixes": {
+   "79": "ManyChat",
+   "80": "does.",
+   "81": "However,",
+   "135": "amazing.",
+   "136": "And"
+  },
+  "breaks": [
+   164
+  ]
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "words": [
+    0,
+    13
+   ],
+   "role": "hook",
+   "single": true,
+   "options": [
+    {
+     "id": "a",
+     "label": "Stacked title",
+     "why": "Compresses 'a brand new free-to-download GitHub repo that pretty much kills ManyChat' into six words; no picture was supplied",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "hook-title",
+       "light1": "This free",
+       "light2": "GitHub repo",
+       "heavy1": "kills",
+       "heavy2": "ManyChat"
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s02",
+   "words": [
+    14,
+    20
+   ],
+   "role": "source",
+   "options": [
+    {
+     "id": "a",
+     "label": "Path pills",
+     "why": "'It's called OpenReply': where it lives, GitHub then OpenReply, with the bar wiping across the name while he says it",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "chips",
+       "kind": "path",
+       "chips": [
+        {
+         "label": "GitHub"
+        },
+        {
+         "label": "OpenReply"
+        }
+       ],
+       "beats": [
+        {
+         "at": 16,
+         "do": "highlight",
+         "chip": 2,
+         "until": 16
+        }
+       ]
+      }
+     }
+    },
+    {
+     "id": "b",
+     "label": "Name tiles",
+     "why": "The repo's name lands as a tile on the word 'OpenReply', beside the GitHub tile from the hook",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "logo-tiles",
+       "tiles": [
+        {
+         "name": "GitHub"
+        },
+        {
+         "name": "OpenReply",
+         "at": 16
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s03",
+   "words": [
+    21,
+    45
+   ],
+   "role": "how",
+   "options": [
+    {
+     "id": "a",
+     "label": "Keyword to resource",
+     "why": "'Pick whatever keyword ... to represent ... a resource': the line draws on 'represent' and the resource lands on its word",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "link",
+       "nodes": [
+        {
+         "name": "Keyword"
+        },
+        {
+         "name": "Resource",
+         "glyph": "document",
+         "at": 33
+        }
+       ],
+       "line": "solid",
+       "check": false,
+       "beats": [
+        {
+         "at": 31,
+         "do": "connect"
+        }
+       ]
+      }
+     }
+    },
+    {
+     "id": "b",
+     "label": "Setup card",
+     "why": "The step acted out on a card: the Keyword row is raised on 'keyword', then the Resource row on 'resource'",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "ui-card",
+       "title": "OpenReply",
+       "rows": [
+        {
+         "label": "Keyword"
+        },
+        {
+         "label": "Resource"
+        }
+       ],
+       "beats": [
+        {
+         "at": 25,
+         "do": "select",
+         "row": 1
+        },
+        {
+         "at": 36,
+         "do": "select",
+         "row": 2
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s04",
+   "words": [
+    46,
+    62
+   ],
+   "role": "how",
+   "options": [
+    {
+     "id": "a",
+     "label": "Comment goes in",
+     "why": "'I say comment the word blank': the comment is fed into the tool on 'comment'. Same element as s05 a (key flow): pick a in both",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "process",
+       "key": "flow",
+       "input": "Comment",
+       "glyph": "code",
+       "output": "Resource",
+       "beats": [
+        {
+         "at": 59,
+         "do": "run"
+        }
+       ]
+      }
+     }
+    },
+    {
+     "id": "b",
+     "label": "Viewer asks",
+     "why": "The comment as a request: a dot travels from the viewer to OpenReply on 'comment'. Same element as s05 b (key ask): pick b in both",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "link",
+       "key": "ask",
+       "nodes": [
+        {
+         "name": "Viewer",
+         "glyph": "person"
+        },
+        {
+         "name": "OpenReply",
+         "glyph": "code"
+        }
+       ],
+       "check": false,
+       "beats": [
+        {
+         "at": 59,
+         "do": "send",
+         "from": "a"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s05",
+   "words": [
+    63,
+    70
+   ],
+   "role": "how",
+   "options": [
+    {
+     "id": "a",
+     "label": "Resource comes out",
+     "why": "'Then obviously you can get that resource': the result comes out of the tool on 'get'. Continues s04 a (key flow)",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "process",
+       "key": "flow",
+       "input": "Comment",
+       "glyph": "code",
+       "output": "Resource",
+       "beats": [
+        {
+         "at": 68,
+         "do": "out"
+        }
+       ]
+      }
+     }
+    },
+    {
+     "id": "b",
+     "label": "OpenReply answers",
+     "why": "The resource as the reply: a dot travels back to the viewer on 'get'. Continues s04 b (key ask)",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "link",
+       "key": "ask",
+       "nodes": [
+        {
+         "name": "Viewer",
+         "glyph": "person"
+        },
+        {
+         "name": "OpenReply",
+         "glyph": "code"
+        }
+       ],
+       "check": false,
+       "beats": [
+        {
+         "at": 68,
+         "do": "send",
+         "from": "b"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s06",
+   "words": [
+    71,
+    80
+   ],
+   "role": "benefit",
+   "options": [
+    {
+     "id": "a",
+     "label": "Both work",
+     "why": "'Works the same exact way that ManyChat does': a check lands on both cards on 'same'",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "item-cards",
+       "mode": "row",
+       "items": [
+        {
+         "glyph": "code",
+         "label": "OpenReply"
+        },
+        {
+         "glyph": "mail",
+         "label": "ManyChat"
+        }
+       ],
+       "beats": [
+        {
+         "at": 75,
+         "do": "badge",
+         "kind": "check"
+        }
+       ]
+      }
+     }
+    },
+    {
+     "id": "b",
+     "label": "Two name tiles",
+     "why": "Only names the tool he compares with: the ManyChat tile lands on its word",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "logo-tiles",
+       "tiles": [
+        {
+         "name": "OpenReply"
+        },
+        {
+         "name": "ManyChat",
+         "at": 79
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s07",
+   "words": [
+    81,
+    92
+   ],
+   "role": "benefit",
+   "options": [
+    {
+     "id": "a",
+     "label": "Per-contact off",
+     "why": "'You don't have to pay every single time somebody contacts you': the Pay per contact switch flips off on 'pay'",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "ui-card",
+       "title": "OpenReply",
+       "rows": [
+        {
+         "label": "Pay per contact",
+         "toggle": "on"
+        }
+       ],
+       "beats": [
+        {
+         "at": 86,
+         "do": "toggle",
+         "row": 1
+        }
+       ]
+      }
+     }
+    },
+    {
+     "id": "b",
+     "label": "Contact, no payment",
+     "why": "A contact goes into the tool on 'somebody', 'Pay' comes out on 'contacts' and is crossed out",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "process",
+       "input": "Contact",
+       "glyph": "code",
+       "output": "Pay",
+       "badge": "cross",
+       "beats": [
+        {
+         "at": 90,
+         "do": "run"
+        },
+        {
+         "at": 91,
+         "do": "out"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s08",
+   "words": [
+    93,
+    105
+   ],
+   "role": "benefit",
+   "options": [
+    {
+     "id": "a",
+     "label": "Cheaper wins",
+     "why": "'A much cheaper alternative version to the actual official subscription fee': OpenReply is outlined on 'cheaper' and the subscription dims. He gives no figures, so the values are his words 'free' and 'pay'",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "versus",
+       "a": {
+        "name": "OpenReply",
+        "glyph": "code",
+        "value": "Free",
+        "second": "download"
+       },
+       "b": {
+        "name": "ManyChat subscription",
+        "glyph": "mail",
+        "value": "Pay"
+       },
+       "beats": [
+        {
+         "at": 98,
+         "do": "win",
+         "side": "a"
+        }
+       ]
+      }
+     }
+    },
+    {
+     "id": "b",
+     "label": "What ManyChat charges",
+     "why": "The two charges he names for the official tool on one card; the Subscription fee row is boxed on 'subscription'",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "ui-card",
+       "title": "ManyChat",
+       "rows": [
+        {
+         "label": "Pay per contact"
+        },
+        {
+         "label": "Subscription fee"
+        }
+       ],
+       "beats": [
+        {
+         "at": 104,
+         "do": "outline",
+         "row": 2
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s09",
+   "words": [
+    106,
+    113
+   ],
+   "role": "what",
+   "single": true,
+   "options": [
+    {
+     "id": "a",
+     "label": "Settings card",
+     "why": "'The ability to have specific requirements': the Requirements switch goes on at 'requirements'. The only honest graphic tall enough for the full run; one card over s09 to s11 (key settings)",
+     "layout": "full",
+     "slots": {
+      "graphic": {
+       "type": "ui-card",
+       "key": "settings",
+       "title": "OpenReply",
+       "rows": [
+        {
+         "label": "Keyword",
+         "value": "reply"
+        },
+        {
+         "label": "Resource",
+         "value": "link"
+        },
+        {
+         "label": "Requirements",
+         "toggle": "off"
+        },
+        {
+         "label": "Follow first",
+         "toggle": "off"
+        },
+        {
+         "label": "DM flow",
+         "toggle": "off"
+        },
+        {}
+       ],
+       "beats": [
+        {
+         "at": 113,
+         "do": "toggle",
+         "row": 3
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s10",
+   "words": [
+    114,
+    124
+   ],
+   "role": "what",
+   "single": true,
+   "options": [
+    {
+     "id": "a",
+     "label": "Follow first on",
+     "why": "'First you have to follow that person': the Follow first switch goes on at 'follow'. Same card as s09 (key settings)",
+     "layout": "full",
+     "slots": {
+      "graphic": {
+       "type": "ui-card",
+       "key": "settings",
+       "title": "OpenReply",
+       "rows": [
+        {
+         "label": "Keyword",
+         "value": "reply"
+        },
+        {
+         "label": "Resource",
+         "value": "link"
+        },
+        {
+         "label": "Requirements",
+         "toggle": "off"
+        },
+        {
+         "label": "Follow first",
+         "toggle": "off"
+        },
+        {
+         "label": "DM flow",
+         "toggle": "off"
+        },
+        {}
+       ],
+       "beats": [
+        {
+         "at": 122,
+         "do": "toggle",
+         "row": 4
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s11",
+   "words": [
+    125,
+    135
+   ],
+   "role": "what",
+   "single": true,
+   "options": [
+    {
+     "id": "a",
+     "label": "DM flow on",
+     "why": "'Or potentially having a complicated DM flow': the DM flow switch goes on at 'DM'; the finished card holds under 'This is pretty amazing'. Same card as s09 (key settings)",
+     "layout": "full",
+     "slots": {
+      "graphic": {
+       "type": "ui-card",
+       "key": "settings",
+       "title": "OpenReply",
+       "rows": [
+        {
+         "label": "Keyword",
+         "value": "reply"
+        },
+        {
+         "label": "Resource",
+         "value": "link"
+        },
+        {
+         "label": "Requirements",
+         "toggle": "off"
+        },
+        {
+         "label": "Follow first",
+         "toggle": "off"
+        },
+        {
+         "label": "DM flow",
+         "toggle": "off"
+        },
+        {}
+       ],
+       "beats": [
+        {
+         "at": 130,
+         "do": "toggle",
+         "row": 5
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s12",
+   "words": [
+    136,
+    152
+   ],
+   "role": "recap",
+   "options": [
+    {
+     "id": "a",
+     "label": "Summary chips",
+     "why": "The recap line over a summary of his own words: free, cheaper, and 'Open source' lands as he says it",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "chips",
+       "kind": "name",
+       "chips": [
+        {
+         "label": "Free"
+        },
+        {
+         "label": "Cheaper"
+        },
+        {
+         "label": "Open source",
+         "at": 148
+        }
+       ]
+      }
+     }
+    },
+    {
+     "id": "b",
+     "label": "Open padlock card",
+     "why": "The repo's card, then an open padlock card that lands on 'open source'",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "item-cards",
+       "mode": "row",
+       "items": [
+        {
+         "glyph": "code",
+         "label": "OpenReply"
+        },
+        {
+         "glyph": "unlock",
+         "label": "Open source",
+         "at": 148
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s13",
+   "words": [
+    153,
+    163
+   ],
+   "role": "cta",
+   "options": [
+    {
+     "id": "a",
+     "label": "You to OpenReply",
+     "why": "'If you guys want to get started with this for yourself': the line from You to the repo draws on 'started'",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "link",
+       "nodes": [
+        {
+         "name": "You",
+         "glyph": "person"
+        },
+        {
+         "name": "OpenReply",
+         "glyph": "code"
+        }
+       ],
+       "check": false,
+       "beats": [
+        {
+         "at": 159,
+         "do": "connect"
+        }
+       ]
+      }
+     }
+    },
+    {
+     "id": "b",
+     "label": "Where it lives",
+     "why": "Where to get it for yourself: GitHub, then OpenReply, as path pills",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "chips",
+       "kind": "path",
+       "chips": [
+        {
+         "label": "GitHub"
+        },
+        {
+         "label": "OpenReply"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s14",
+   "words": [
+    164,
+    178
+   ],
+   "role": "cta",
+   "single": true,
+   "options": [
+    {
+     "id": "a",
+     "label": "Comment reply",
+     "why": "He says 'comment the word reply ... and I'll send you the link'",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "comment-cta",
+       "keyword": "reply"
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  }
+ ],
+ "audio": {
+  "bed": "a"
+ }
+}

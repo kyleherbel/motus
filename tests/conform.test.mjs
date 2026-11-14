@@ -1,8 +1,44 @@
 import './helpers.mjs';
 import test, { describe } from 'node:test';
 import assert from 'node:assert/strict';
-import { frameRanges, outputMap, retimeWords, sourceFrames } from '../engine/lib/conform.mjs';
+import { frameRanges, outputMap, retimeWords, sourceFrames, wideBand, packGraph } from '../engine/lib/conform.mjs';
+import { packedLayout } from '../engine/runtime/kit/footage.js';
 import { MotusError } from '../engine/lib/util.mjs';
+
+describe('wide view', () => {
+  const uhd = { width: 3840, height: 2160 };
+  test('a 16:9 source becomes a 1706x960 band; the 9:16 window and the face map into it', () => {
+    const b = wideBand(uhd, { x: 1312, y: 0, w: 1216, h: 2160 }, { cx: 0.5, eyeY: 0.3, faceW: 0.1, eyeDist: 0.04, headTopY: 0.12, chinY: 0.5 });
+    assert.equal(b.width, 1706); assert.equal(b.height, 960);
+    assert.match(b.filter, /^scale=1706:960:flags=lanczos,crop=1706:960:0:0$/);
+    assert.deepEqual(b.window, { x: 582.9, y: 0, w: 540.2, h: 960 });
+    assert.equal(b.framing.eyeX, 853); assert.equal(b.framing.eyeY, 288); assert.equal(b.framing.eyeDist, 68);
+  });
+  test('wider than 16:9 is centre-cropped; portrait has no wide view', () => {
+    const b = wideBand({ width: 2560, height: 1080 }, null, null);
+    assert.equal(b.width, 1706);
+    assert.match(b.filter, /scale=2276:960.*crop=1706:960:286:0/);
+    assert.equal(b.window.x, -286);
+    assert.equal(wideBand({ width: 1080, height: 1920 }, null, null), null);
+  });
+  test('the packed layout and the filter graph agree on the order', () => {
+    const L = packedLayout({ width: 1080, height: 1920, hasMatte: true, wide: { width: 1706, height: 960 } });
+    assert.deepEqual([L.width, L.height], [3866, 1920]);
+    assert.deepEqual(L.wide, { x: 2160, y: 0, w: 1706, h: 960 });
+    assert.deepEqual(L.wideMatte, { x: 2160, y: 960, w: 1706, h: 960 });
+    assert.equal(packGraph({ hasMatte: true, wide: true, height: 1920 }, { out: 'format=yuv420p' }),
+      '[2:v][3:v]vstack=inputs=2,pad=iw:1920:0:0:black[wc];[0:v][1:v][wc]hstack=inputs=3,format=yuv420p[v]');
+    const noMatte = packedLayout({ width: 1080, height: 1920, hasMatte: false, wide: { width: 1706, height: 960 } });
+    assert.deepEqual([noMatte.wide.x, noMatte.wideMatte, noMatte.width], [1080, null, 2786]);
+    assert.equal(packGraph({ hasMatte: false, wide: true, height: 1920 }), '[1:v]pad=iw:1920:0:0:black[wc];[0:v][wc]hstack=inputs=2[v]');
+  });
+  test('without the wide view nothing changes', () => {
+    assert.equal(packGraph({ hasMatte: false, wide: false, height: 1920 }), null);
+    assert.equal(packGraph({ hasMatte: true, wide: false, height: 1920 }, { out: 'format=yuv420p' }), '[0:v][1:v]hstack=inputs=2,format=yuv420p[v]');
+    assert.equal(packGraph({ hasMatte: true, wide: false, height: 1920 }, { colour: 'C', matte: 'M', out: 'O' }), '[0:v]C[p0];[1:v]M[p1];[p0][p1]hstack=inputs=2,O[v]');
+    assert.deepEqual(packedLayout({ width: 1080, height: 1920, hasMatte: true }).width, 2160);
+  });
+});
 
 const NTSC = 30000 / 1001;
 

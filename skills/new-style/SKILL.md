@@ -29,7 +29,7 @@ Build `corpus/<source>/` as `docs/ADDING_A_STYLE.md` step 1 describes: original 
 
 ## 2. The nine-dimension study
 
-One analyst per dimension: layout, type, hook, graphics, motion, structure, colour, audio, presenter. The briefs, the common rules and the output format are in `references/dimensions.md`. Each analyst writes `corpus/_study/<source>/<dimension>/result.json`, `numbers.json` and `evidence/`.
+One analyst per dimension: layout, type, hook, graphics, motion, structure, colour, audio, presenter. The briefs, the common rules and the output format are in `references/dimensions.md`. Then run the explanation pass described there on every illustration and diagram the graphics analyst inventoried: watch each one at every frame and record the idea it explains and the word each event lands on. They are rarely stills, and a style that treats them as stills can label a sentence but not explain it. Each analyst writes `corpus/_study/<source>/<dimension>/result.json`, `numbers.json` and `evidence/`.
 
 - If your environment can run sub-agents in parallel, give each dimension its own agent with the common brief plus its dimension brief. Otherwise run them one after another. Either way each analyst works without reading the others.
 - Every rule is a number with evidence (`<clip>@<frame>`) and a confidence. "Looks snappy" is not a rule; "settles over 36 frames on cubic-bezier(0.3,0,0,1), fit error 0.5 %" is.

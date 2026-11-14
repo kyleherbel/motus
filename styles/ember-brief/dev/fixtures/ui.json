@@ -1,0 +1,44 @@
+{
+  "motus": 1,
+  "style": "ember-brief",
+  "look": {},
+  "captions": {},
+  "scenes": [
+    { "id": "s01", "words": [0, 12], "role": "how", "single": true, "options": [
+      { "id": "a", "label": "One setting", "why": "fixture: title and one toggle row, selected from the start, flipped on a word", "layout": "split",
+        "slots": { "graphic": { "type": "ui-card", "key": "one", "title": "Display settings", "rows": [ { "label": "Night reading", "toggle": "off" } ],
+          "beats": [ { "at": 0, "do": "select", "row": 1 }, { "at": 6, "do": "toggle", "row": 1 } ] } } } ], "pick": "a" },
+    { "id": "s02", "words": [13, 38], "role": "how", "single": true, "options": [
+      { "id": "a", "label": "Three settings", "why": "fixture: placeholder rows with toggles round the named one; select, toggle, outline", "layout": "split",
+        "slots": { "graphic": { "type": "ui-card", "key": "three", "title": "Permissions", "rows": [ { "toggle": "on" }, { "label": "Camera access", "toggle": "off" }, { "toggle": "on" } ],
+          "beats": [ { "at": 18, "do": "select", "row": 2 }, { "at": 24, "do": "toggle", "row": 2 }, { "at": 32, "do": "outline", "row": 2 } ] } } } ], "pick": "a" },
+    { "id": "s03", "words": [39, 63], "role": "how", "single": true, "options": [
+      { "id": "a", "label": "List with a toggle", "why": "fixture: five list rows, values, a placeholder, outline then toggle", "layout": "split",
+        "slots": { "graphic": { "type": "ui-card", "key": "list", "rows": [ { "label": "This laptop", "value": "Edit" }, { "label": "Shared folder" }, { "label": "Remote access", "toggle": "off" }, { "label": "Backups", "value": "Weekly" }, {} ],
+          "beats": [ { "at": 44, "do": "outline", "row": 3 }, { "at": 50, "do": "toggle", "row": 3 } ] } } } ], "pick": "a" },
+    { "id": "s04", "words": [64, 80], "role": "what", "single": true, "options": [
+      { "id": "a", "label": "Six rows, full", "why": "fixture: the tallest card in the full layout; select, outline, every toggle in order", "layout": "full",
+        "slots": { "graphic": { "type": "ui-card", "key": "six", "title": "Workspace", "rows": [ { "label": "Weekly summary" }, { "label": "Draft replies", "toggle": "off" }, { "label": "Sort the inbox", "toggle": "off" }, { "label": "File receipts", "toggle": "off" }, {}, { "toggle": "off" } ],
+          "beats": [ { "at": 64, "do": "select", "row": 1 }, { "at": 67, "do": "outline", "row": 1 }, { "at": 72, "do": "toggle" }, { "at": 77, "do": "outline" } ] } } } ], "pick": "a" },
+    { "id": "s05", "words": [81, 92], "role": "how", "single": true, "options": [
+      { "id": "a", "label": "Prompt", "why": "fixture: a four-line prompt that arrives with the card, then an outline", "layout": "split",
+        "slots": { "graphic": { "type": "prompt-box", "key": "p1", "text": "Read every file in this folder, sort them by what is inside, and tell me which ones nobody has opened this year.",
+          "beats": [ { "at": 88, "do": "outline" } ] } } } ], "pick": "a" },
+    { "id": "s06", "words": [93, 105], "role": "how", "single": true, "options": [
+      { "id": "a", "label": "Prompt, late text", "why": "fixture: the card arrives empty and the text comes at a word", "layout": "split",
+        "slots": { "graphic": { "type": "prompt-box", "key": "p2", "text": "Now move the old ones to an archive folder.", "at": 97 } } } ], "pick": "a" },
+    { "id": "s07", "words": [106, 120], "role": "how", "single": true, "options": [
+      { "id": "a", "label": "Chat, timed", "why": "fixture: header, three messages, the second and third on words", "layout": "split",
+        "slots": { "graphic": { "type": "chat-card", "key": "c1", "title": "Folder clean-up", "messages": [
+          { "from": "user", "text": "Which files can go?" },
+          { "from": "assistant", "text": "Forty-one have not been opened since last spring." },
+          { "from": "user", "text": "Archive them and keep a list for me." } ],
+          "beats": [ { "at": 110, "do": "next" }, { "at": 115, "do": "next" } ] } } } ], "pick": "a" },
+    { "id": "s08", "words": [121, 132], "role": "benefit", "single": true, "options": [
+      { "id": "a", "label": "Chat, cascade", "why": "fixture: no header, two messages five frames apart, held to the end", "layout": "split",
+        "slots": { "graphic": { "type": "chat-card", "key": "c2", "messages": [
+          { "from": "user", "text": "How long did that take you, start to finish?" },
+          { "from": "assistant", "text": "Under two minutes. The list is in your notes." } ] } } } ], "pick": "a" }
+  ],
+  "audio": { "sfx": false }
+}

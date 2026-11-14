@@ -1,0 +1,55 @@
+{
+  "motus": 1,
+  "style": "ember-brief",
+  "look": {},
+  "captions": { "fixes": { "97": "Claude" } },
+  "scenes": [
+    { "id": "s01", "words": [0, 10], "role": "item", "single": true, "options": [
+      { "id": "a", "label": "Card row, cut-outs", "why": "fixture: three cut-outs printed in the house look, two arrive on their nouns, then the mark badges and the outline", "layout": "split",
+        "slots": { "graphic": { "type": "item-cards", "key": "row", "mark": "assets/fx-mark-cut.png",
+          "items": [ { "image": "assets/fx-cut-ball.png" }, { "image": "assets/fx-cut-sheet.png", "at": 3 }, { "image": "assets/fx-cut-stack.png", "at": 5 } ],
+          "beats": [ { "at": 8, "do": "badge" }, { "at": 8, "do": "outline" } ] } } } ], "pick": "a" },
+    { "id": "s02", "words": [11, 16], "role": "item", "single": true, "options": [
+      { "id": "a", "label": "Card row, glyphs", "why": "fixture: four narrower cards with line glyphs and labels, 2 frames apart, then a check on each", "layout": "split",
+        "slots": { "graphic": { "type": "item-cards", "key": "glyphs", "mode": "row",
+          "items": [ { "glyph": "picture", "label": "Photo" }, { "glyph": "document", "label": "Invoice" }, { "glyph": "mail", "label": "Letter" }, { "glyph": "chart", "label": "Meter reading" } ],
+          "beats": [ { "at": 14, "do": "badge", "kind": "check" } ] } } } ], "pick": "a" },
+    { "id": "s03", "words": [17, 35], "role": "item", "single": true, "options": [
+      { "id": "a", "label": "Swap card", "why": "fixture: one large card, the picture cross-fades on each noun", "layout": "split",
+        "slots": { "graphic": { "type": "item-cards", "key": "swap", "mode": "swap",
+          "items": [ { "glyph": "picture" }, { "glyph": "document", "at": 21 }, { "image": "assets/fx-cut-ball.png", "at": 24 }, { "glyph": "folder", "at": 27 } ] } } } ], "pick": "a" },
+    { "id": "s04", "words": [36, 56], "role": "proof", "single": true, "options": [
+      { "id": "a", "label": "Race with mosaics", "why": "fixture: the count, the race, the winner's outline, the loser's fast-forward, the second values", "layout": "full",
+        "slots": { "graphic": { "type": "versus", "key": "race", "progress": "mosaic", "count": "40",
+          "a": { "name": "Field Bot", "glyph": "star", "value": "14.6s", "second": "$0.0130" },
+          "b": { "name": "Old Method", "image": "assets/fx-mark.png", "value": "96.5s", "second": "$0.7450" },
+          "beats": [ { "at": 39, "do": "count" }, { "at": 45, "do": "race" }, { "at": 47, "do": "win" }, { "at": 49, "do": "second" } ] } } } ], "pick": "a" },
+    { "id": "s05", "words": [57, 64], "role": "proof", "single": true, "options": [
+      { "id": "a", "label": "Plain pair", "why": "fixture: two values as written, the second card wins and the first dims", "layout": "split",
+        "slots": { "graphic": { "type": "versus", "key": "plain",
+          "a": { "name": "By hand", "glyph": "clock", "value": "2 hr", "second": "$90" },
+          "b": { "name": "Tidy Folder", "initials": true, "value": "4 min", "second": "$12" },
+          "beats": [ { "at": 60, "do": "win", "side": "b" }, { "at": 62, "do": "second" } ] } } } ], "pick": "a" },
+    { "id": "s06", "words": [65, 78], "role": "proof", "single": true, "options": [
+      { "id": "a", "label": "Race with bars", "why": "fixture: the compact race for the split layout, a bar per card", "layout": "split",
+        "slots": { "graphic": { "type": "versus", "key": "bars", "progress": "bar",
+          "a": { "name": "Batch upload", "value": "31.0s" },
+          "b": { "name": "Field Bot", "glyph": "star", "value": "9.4s" },
+          "beats": [ { "at": 68, "do": "race" }, { "at": 72, "do": "win" } ] } } } ], "pick": "a" },
+    { "id": "s07", "words": [79, 96], "role": "proof", "single": true, "options": [
+      { "id": "a", "label": "Player, looping clip", "why": "fixture: a 2 second clip loops, the bar follows it, four chips land on the strip", "layout": "split",
+        "slots": { "graphic": { "type": "player", "key": "loop", "src": "assets/fx-loop.mp4",
+          "beats": [ { "at": 86, "do": "clip" }, { "at": 87, "do": "clip" }, { "at": 88, "do": "clip" }, { "at": 89, "do": "clip" } ] } } } ], "pick": "a" },
+    { "id": "s08", "words": [97, 106], "role": "proof", "single": true, "options": [
+      { "id": "a", "label": "Player, one pass", "why": "fixture: a clip longer than the scene, one pass of the bar, no strip", "layout": "split",
+        "slots": { "graphic": { "type": "player", "key": "pass", "src": "assets/test-counter-30.mp4" } } } ], "pick": "a" },
+    { "id": "s09", "words": [107, 124], "role": "proof", "single": true, "options": [
+      { "id": "a", "label": "Two voices", "why": "fixture: two waveform tracks, the turn passes three times", "layout": "full",
+        "slots": { "graphic": { "type": "player", "key": "voices", "tracks": [ { "glyph": "person" }, { "image": "assets/fx-mark.png" } ],
+          "beats": [ { "at": 112, "do": "speak", "track": 2 }, { "at": 115, "do": "speak", "track": 1 }, { "at": 118, "do": "speak", "track": 2 } ] } } } ], "pick": "a" },
+    { "id": "s10", "words": [125, 132], "role": "proof", "single": true, "options": [
+      { "id": "a", "label": "One voice", "why": "fixture: a single waveform track", "layout": "split",
+        "slots": { "graphic": { "type": "player", "key": "voice" } } } ], "pick": "a" }
+  ],
+  "audio": { "sfx": false }
+}

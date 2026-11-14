@@ -12,22 +12,39 @@ First version. Not yet published.
 - Node 22 or newer, built-in modules only. No npm dependencies.
 - Ingest: 48 kHz audio extraction, transcription with word timings through `faster-whisper` (`large-v3-turbo` by default), silence detection, retake, filler and stutter candidates, suggested cuts, contact sheets with burnt-in timestamps.
 - Conform: output timeline from `plan/cuts.json` at 1080x1920 and the source frame rate, 9:16 crop around the speaker, voice track with 8 ms fades at each join, words re-timed to the output timeline, preview proxy.
+- Wide view: a style can ask for it in its manifest (`"footage": {"wide": true}`). Conform then also keeps the whole source frame, at 960 px high and at most 1706 wide, with its own person matte. It is packed beside the footage, so preview and renders stay in sync. The resolved document says where the 9:16 window and the speaker sit inside it, and `env.footage.view({ wide: true })` shows it. Styles that do not ask are unchanged.
 - Person matte and face tracking through Apple Vision on macOS, compiled from `engine/swift/motus-vision.swift` on first use. Other systems skip both.
 - Page capture: `motus capture <url>` screenshots a page in headless Chrome and records where given phrases sit, so a style can mark the real text.
 - Edit plan (`plan/edit.json`): scenes that tile the transcript by word index, 2 to 4 options per scene, layouts, slots, elements and beats declared by the style. `motus validate` rejects unknown fields and reports a fix for each error.
 - Renderer: headless Chrome over the DevTools Protocol draws each frame, in parallel pages. ffmpeg encodes H.264 high profile with AAC 192 kb/s at 48 kHz. The mix (voice, sound effects, optional music) is normalised to -14 LUFS with a -2 dBTP ceiling.
+- Music beds: a style's bed can ask for an end fade (`"fadeOut": seconds` in its `beds` entry). Only the music fades, linearly, over the end of the video, in the render mix and in the preview.
 - Stills: option posters, contact sheets of the planned cut, strips through one option, and single frames. Posters are redrawn when the style's files, the captions or the look change (`review/posters/.stamp`), or with `--force`.
+
+### App
+
+- `motus app` starts the Motus app: a local home page where a person drops or chooses a video, picks how to cut it, a style and names to spell, and follows every project from listening to the finished file. Projects live in one workspace (`~/Movies/Motus` by default, `MOTUS_HOME` to change it).
+- The AI session that starts the app works for it in the background: `motus next` hands it one job at a time (plan a new video, revise after notes), `motus say` shows its progress in the app, `motus done` finishes the job. The app and Studio show whether a session is connected and what it is doing.
+- New skill `start`: what an agent does when the user hands it the Motus folder and says "go". `CLAUDE.md` and `AGENTS.md` point to it.
+
+### Style packs: release palettes
+
+- Each style keeps its measured layout, type, timing and motion, with its own palette for release. Editorial Proof: emerald (default) and violet looks over a white grid; the palm-frond canvas is gone. Night Class: cobalt where it had red, ice cyan where it had yellow. Ember Brief: magenta where it had orange, on neutral greys. Every measured value sits next to its replacement in the style's `research/colour.md`.
+- Renamed ids: Editorial Proof `look.accent` `blue` -> `emerald` and `lime` -> `violet` (and `comment-cta` tones `emerald`, `violet`); Night Class `capture.frame` and `tier-bars` tone `red` -> `cobalt`. Plans that use the old ids fail validation with the new choices listed.
 
 ### Studio
 
 - Local review page served by `motus studio` on `localhost`: a player for the current cut, one section per scene with its options playing over the footage, pick, note and lock per scene, global look choices, a safe-zone overlay for Instagram Reels, keyboard shortcuts.
 - "Send notes to the agent" and "Render final video" write a submission that `motus wait` returns to the agent. `motus ack` files notes as addressed.
 - Rendering from Studio runs on the local server with live progress.
+- Scene grid: every scene as a tile looping its picked option (drawn in the background by `motus stills --loops`, into `review/loops/`), with option pills, lock and a scene dialog. The list view is one click away.
+- Studio grows with the window: the player up to 760 px wide, option cards up to 360 px, the scene list up to 1680 px. It links back to the app, names the AI session ("Send notes to Claude"), says when no session is connected, and has Show in Finder on the finished video.
 
 ### Style packs
 
 - Editorial Proof 0.1.0 (`styles/editorial-proof/`), beta. Measured from 33 public short videos by one creator, published 12 October to 9 November 2026. Layouts: light split, dark focus, white, full-frame presenter. Accent colours: blue and lime.
 - The style manifest is generated from the element modules by `styles/editorial-proof/build-manifest.mjs`.
+- Night Class 0.1.0 (`styles/night-class/`), beta. Measured from 32 teaching reels by one creator, published 10 October to 11 November 2026, with an independent verification pass over 74 quantities. Layouts: panel on a dark field, panel on a light field, full-height presenter. 17 elements: title lockup, comment call to action, steps (rows, chips, or a numbered list with a moving highlight), document card (typed lines, glowing highlights), capture and phone (with spotlights), stat card (rolling figure), benchmark tiers, table, before and after, script line, line chart, icon nodes, statement, closing pages, push-in, closing keyword. A second graphic can sit beside the first (side slot), and held graphics creep larger as in the reference. Look choices: sound kit, music bed, dark-field texture. Fonts Inter (optical size 14) and Instrument Serif Italic; original synthesised sounds and bed.
+- Ember Brief 0.1.0 (`styles/ember-brief/`), beta. Measured from 11 reels by one creator, published 2 to 7 November 2026, with an independent verification pass over 107 quantities (11 corrected). Layouts: split (a dotted field over the speaker in the bottom half) and full graphic, with an animated change between them. 19 elements. Evidence and structure: opening title with an illustration slot, comment call to action, numbered section heading, page capture with highlight and outline marks, redrawn app card (rows, toggles, placeholder bars), prompt box, chat card, chips, logo tiles, series grid, before and after, phone. Explanation, from a second study of the reference's 51 illustration and diagram units (92 more rules): a picture with word-timed badges, tags, chips and a speech bubble, with still cut-outs printed in a measured halftone look; a counting figure whose picture fills as it counts; a link between two things (a line that draws, a token that travels, a check that lands); a process (something goes into a tool and comes out changed); a two-way comparison that can race; one card per listed noun, or one card that swaps; a demo player. Two-word captions with the spoken word in the accent colour. No sound effects; one original synthesised music bed. Font Outfit, which is the reference typeface (overlay score 0.97 to 0.99). No look choices.
 - `text-card`: a paragraph of 3 lines or fewer is set at the 94 px line pitch, the top of the measured range (research/graphics.md G07), so short claims fill the card instead of sitting small in it.
 
 ### Skills

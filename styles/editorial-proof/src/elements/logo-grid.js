@@ -21,8 +21,8 @@ const G = {
   fill: '#E8EBEE',                      // the card (f340, clear of shadows)
   place: { fill: '#E9ECEE', dash: [5, 3.5], stroke: 2, colour: '#C2C5C9', inset: 1.5 },   // dashed empty place
   face: '#FDFDFD', radius: 15,
-  outline: { w: 4, relaxed: 0.62 },     // core #0581FE ~4 px (x 548-552) with a soft halo; older tiles at 62 % (#62AEF2)
-  shadow: '0 3px 24px rgba(10,50,110,0.25)',   // fitted to the darkening under and beside the tiles (gaps #C4CFDB on #E7EBEE)
+  outline: { w: 4, relaxed: 0.62 },     // core: the accent, ~4 px (x 548-552) with a soft halo; older tiles at 62 %
+  shadow: '0 3px 24px rgba(46,46,46,0.25)',    // fitted to the darkening under and beside the tiles; colour neutralised (colour CR08)
   logo: { w: 336, h: 294 },             // the largest logo box seen (Unity 336 wide, Unreal 294 tall)
   mono: { tile: 150, radius: 34, letter: 84, name: 52, nameMin: 30, gap: 26 },
   growMax: 1.6,                         // how far a tile's content may enlarge while the grid has room

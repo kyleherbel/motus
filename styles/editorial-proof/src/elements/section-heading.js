@@ -35,7 +35,7 @@ export default {
     const bx = Math.round(CX - bw / 2);
     const text = h('div', { text: params.block, style: { position: 'absolute', left: '0', width: `${bw}px`, textAlign: 'center', top: `${hh - 28 - size2 * type.ascent.serif}px`, font: `italic ${type.block.weight} ${size2}px/1 ${fonts.serif}`, letterSpacing: `${type.block.tracking}em`, color: C.onAccent || '#FCFBFC', whiteSpace: 'nowrap' } });
     const block = h('div', { style: { position: 'absolute', left: `${bx}px`, top: `${y}px`, width: `${bw}px`, height: `${hh}px`, borderRadius: `${Wt.block.radius}px`, background: C.accent, overflow: 'hidden' } }, text);
-    const shadow = h('div', { style: { position: 'absolute', left: `${bx}px`, top: `${y}px`, width: `${bw}px`, height: `${hh}px`, borderRadius: `${Wt.block.radius}px`, boxShadow: '0 14px 24px rgba(0,70,190,0.24)' } });
+    const shadow = h('div', { style: { position: 'absolute', left: `${bx}px`, top: `${y}px`, width: `${bw}px`, height: `${hh}px`, borderRadius: `${Wt.block.radius}px`, boxShadow: `0 14px 24px rgba(${C.shade},0.24)` } });
     el.append(shadow, block);
     const w1 = (k) => tIn + M.word1 + k * M.stagger;
     const blockAt = tIn + M.stripAt, wordAt = tIn + M.stripWord;

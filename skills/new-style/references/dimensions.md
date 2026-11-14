@@ -8,7 +8,7 @@ You measure one dimension of an editing style on a corpus of finished videos. Yo
 
 - Measure on **every in-style clip**, not on a sample you like. State n for every number.
 - A rule is a **number**: pixels on the 1080x1920 frame, frames at the source frame rate, seconds, hex values, dB, counts, percentages. Give the median and the range.
-- Every rule cites **evidence**: clip id and frame (`<clip>@<frame>` or `<clip>@<first>-<last>`) and a file you saved in `evidence/`. Inside `corpus/` you may use the platform's post ids; when the study is distilled into `styles/<id>/research/`, they become neutral ids (`clip01`, ... by publication date) mapped in `corpus/_study/clip-ids.json`.
+- Every rule cites **evidence**: clip id and frame (`<clip>@<frame>` or `<clip>@<first>-<last>`) and a file you saved in `evidence/`. Inside `corpus/` you may use the platform's post ids; when the study is distilled into `styles/<id>/research/`, they become neutral ids (`clip01`, ... by publication date) mapped in `corpus/_study/<source>/clip-ids.json`. It is simplest to make that map before the study starts and have analysts cite neutral ids from the beginning.
 - Every rule has a **confidence**: `high`, `medium` or `low`. Seen once is `low`.
 - Separate **constants** (identical in every clip, to the frame or the pixel) from **variation** (a range, and what drives it).
 - Record what **never happens** when that is informative (no overshoot, no rotation, no ducking).
@@ -49,7 +49,7 @@ Do not write a prose report file. Some environments stop sub-agents from writing
 }
 ```
 
-Rule id letters: L layout, T type, H hook, G graphics, M motion, S structure, C colour, A audio, P presenter. Aim for 20 to 30 rules per dimension. The first study produced between 24 and 30 each.
+Rule id letters: L layout, T type, H hook, G graphics, M motion, S structure, C colour, A audio, P presenter, X explanation. Aim for 20 to 30 rules per dimension. The first study produced between 24 and 30 each.
 
 ## Dimension briefs
 
@@ -137,6 +137,17 @@ Rule id letters: L layout, T type, H hook, G graphics, M motion, S structure, C 
 - Jump cuts and how often the presenter is off screen.
 - What the raw footage must have been (framing, resolution, headroom) for the edit to work.
 - Rules for fitting a different speaker and framing into the same layouts, with limits (the largest enlargement before the footage looks soft).
+
+### explanation (X)
+
+Run this after the graphics analyst's inventory exists, on every unit it filed as an illustration, a diagram or a picture. These are rarely stills. In the third study 51 such units (252 of 427 seconds) were first treated as pictures a user would supply; watched at every frame, 38 of the 45 scenes they make turned out to act the spoken sentence out.
+
+- Watch every unit at every frame, with the words spoken over it. Never judge one from a 1 fps thumbnail.
+- For each unit: the idea being explained in one plain phrase and its kind (quantity, process, comparison, connection, change of state, repetition, route, enumeration, steps, demonstration, a thing named); the anchor (what is drawn first); every event after it (what happens, the frame it starts and completes, the word it lands on and the offset); the device used; whether it is a literal picture, a metaphor or a diagram; whether it could be drawn from parameters or is bespoke art.
+- The device vocabulary ranked by reach, and the idea-to-device map. This becomes the planning guide's decision table.
+- Anatomy and sync: events per unit, the time the anchor is alone, the spacing of events, the hold after the last one, and which word of the clause an event lands on.
+- What makes them read as explanations (testable properties with counts), and what never happens.
+- Then two follow-up measurements on the same units: how each device moves inside the picture (lines drawing, tokens travelling, badges landing, fills tied to a count), and how the pictures are rendered (a recipe a program can apply to a user's own picture).
 
 ## Checking a result when it comes back
 

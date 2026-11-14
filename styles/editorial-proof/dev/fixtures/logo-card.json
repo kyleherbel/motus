@@ -1,5 +1,5 @@
 {
- "motus": 1, "style": "editorial-proof", "look": { "accent": "blue" },
+ "motus": 1, "style": "editorial-proof", "look": { "accent": "emerald" },
  "captions": { "emphasis": { "11": "accent" }, "fixes": {} },
  "scenes": [
   { "id": "s01", "words": [0, 9], "role": "hook", "single": true, "options": [ { "id": "a", "label": "Presenter", "why": "fixture: lead-in so the logo card cuts in from the presenter", "layout": "presenter-full", "slots": {} } ] },

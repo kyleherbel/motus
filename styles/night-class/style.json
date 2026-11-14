@@ -1,0 +1,721 @@
+{
+  "id": "night-class",
+  "name": "Night Class",
+  "version": "0.1.0",
+  "status": "beta",
+  "summary": "A teaching explainer: a black graphic field over a small rounded presenter panel, a centred title with a cobalt bar, one-word captions, hard cuts to the full-height speaker about every ten seconds, and a comment call to action.",
+  "bestFor": [
+    "frameworks and playbooks",
+    "numbered steps and lists",
+    "how-tos and strategy explainers",
+    "solo talking-head teaching"
+  ],
+  "aspect": "9:16",
+  "footage": {
+    "wide": true
+  },
+  "look": {
+    "kit": {
+      "label": "Sound kit",
+      "choices": [
+        "k1",
+        "k2",
+        "k3"
+      ],
+      "default": "k1"
+    },
+    "bed": {
+      "label": "Music bed",
+      "choices": [
+        "on",
+        "off"
+      ],
+      "default": "on"
+    },
+    "plate": {
+      "label": "Dark field",
+      "choices": [
+        "dots",
+        "grid",
+        "plain",
+        "lifted"
+      ],
+      "default": "dots"
+    }
+  },
+  "emphasis": [
+    "concept",
+    "cta"
+  ],
+  "roles": [
+    "hook",
+    "name",
+    "proof",
+    "item",
+    "example",
+    "explain",
+    "rehook",
+    "payoff",
+    "pitch",
+    "cta"
+  ],
+  "sfx": {
+    "swell": "assets/sfx/swell.wav",
+    "swoop": "assets/sfx/swoop.wav",
+    "thump": "assets/sfx/thump.wav",
+    "riser": "assets/sfx/riser.wav",
+    "subdrop": "assets/sfx/subdrop.wav",
+    "tone": "assets/sfx/tone.wav",
+    "midwhoosh": "assets/sfx/midwhoosh.wav",
+    "lowwhoosh": "assets/sfx/lowwhoosh.wav",
+    "bedA": "assets/music/bed-a.m4a",
+    "bedA2": "assets/music/bed-a2.m4a"
+  },
+  "beds": {},
+  "timing": {
+    "sceneLead": 0
+  },
+  "layouts": {
+    "dark": {
+      "label": "Panel",
+      "presenter": "panel",
+      "slots": {
+        "title": [
+          "title-lockup",
+          "cta-lockup"
+        ],
+        "graphic": [
+          "step-rows",
+          "doc-card",
+          "capture",
+          "phone",
+          "metric-card",
+          "tier-bars",
+          "data-table",
+          "quote-card",
+          "compare",
+          "line-chart",
+          "icon-nodes",
+          "statement",
+          "cta-pages"
+        ],
+        "side": [
+          "doc-card",
+          "capture",
+          "phone",
+          "metric-card"
+        ]
+      }
+    },
+    "light": {
+      "label": "Panel, light",
+      "presenter": "panel",
+      "slots": {
+        "title": [
+          "title-lockup",
+          "cta-lockup"
+        ],
+        "graphic": [
+          "step-rows",
+          "doc-card",
+          "capture",
+          "phone",
+          "metric-card",
+          "tier-bars",
+          "data-table",
+          "quote-card",
+          "compare",
+          "line-chart",
+          "icon-nodes",
+          "statement",
+          "cta-pages"
+        ],
+        "side": [
+          "doc-card",
+          "capture",
+          "phone",
+          "metric-card"
+        ]
+      }
+    },
+    "full": {
+      "label": "Presenter",
+      "presenter": "full",
+      "slots": {
+        "camera": [
+          "push-in"
+        ],
+        "keyword": [
+          "keyword-caption"
+        ]
+      }
+    }
+  },
+  "elements": {
+    "title-lockup": {
+      "label": "Title",
+      "slots": [
+        "title"
+      ],
+      "params": {
+        "line1": {
+          "type": "string",
+          "maxChars": 34,
+          "maxWords": 7
+        },
+        "line2": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 34,
+          "maxWords": 7
+        },
+        "deco": "enum?:bar|underline|none",
+        "decoLine": "enum?:1|2",
+        "build": "enum?:word|type|none",
+        "kind": "enum?:title|header"
+      },
+      "beats": {}
+    },
+    "cta-lockup": {
+      "label": "Comment call to action",
+      "slots": [
+        "title"
+      ],
+      "params": {
+        "keyword": {
+          "type": "string",
+          "maxChars": 16,
+          "maxWords": 1
+        },
+        "reward": {
+          "type": "string",
+          "maxChars": 26,
+          "maxWords": 6
+        },
+        "at": "word?",
+        "deco": "enum?:bar|underline|none"
+      },
+      "beats": {}
+    },
+    "step-rows": {
+      "label": "Steps",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "rows": {
+          "type": "array",
+          "min": 2,
+          "max": 6,
+          "of": {
+            "label": {
+              "type": "string",
+              "maxChars": 34,
+              "maxWords": 6
+            },
+            "at": "word?"
+          }
+        },
+        "variant": "enum?:rows|chips|list",
+        "reveal": "enum?:stack|blur",
+        "numbered": "boolean?",
+        "enter": "enum?:push|zoom|own|cut",
+        "hold": "enum?:drift|still"
+      },
+      "beats": {
+        "focus": {
+          "x": "number",
+          "y": "number",
+          "scale": "number?"
+        },
+        "unfocus": {}
+      }
+    },
+    "doc-card": {
+      "label": "Document",
+      "slots": [
+        "graphic",
+        "side"
+      ],
+      "params": {
+        "title": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 24,
+          "maxWords": 3
+        },
+        "sections": {
+          "type": "array",
+          "min": 1,
+          "max": 4,
+          "of": {
+            "label": {
+              "type": "string",
+              "maxChars": 14,
+              "maxWords": 2
+            },
+            "lines": {
+              "type": "number",
+              "min": 0,
+              "max": 14
+            },
+            "say": {
+              "type": "array",
+              "optional": true,
+              "min": 2,
+              "max": 2,
+              "of": "word"
+            }
+          }
+        },
+        "frame": "enum?:plain|glow",
+        "enter": "enum?:push|zoom|own|cut",
+        "hold": "enum?:drift|still"
+      },
+      "beats": {
+        "highlight": {
+          "section": "number"
+        },
+        "clear": {},
+        "focus": {
+          "x": "number",
+          "y": "number",
+          "scale": "number?"
+        },
+        "unfocus": {}
+      }
+    },
+    "capture": {
+      "label": "Capture",
+      "slots": [
+        "graphic",
+        "side"
+      ],
+      "params": {
+        "items": {
+          "type": "array",
+          "min": 1,
+          "max": 4,
+          "of": {
+            "src": "asset",
+            "fit": "enum?:cover|contain",
+            "start": {
+              "type": "number",
+              "optional": true,
+              "min": 0
+            },
+            "loop": "boolean?"
+          }
+        },
+        "frame": "enum?:card|cobalt|blue|none",
+        "blur": "boolean?",
+        "width": {
+          "type": "number",
+          "optional": true,
+          "min": 400,
+          "max": 1000
+        },
+        "enter": "enum?:push|zoom|own|cut",
+        "hold": "enum?:drift|still"
+      },
+      "beats": {
+        "spot": {
+          "x": "number",
+          "y": "number",
+          "r": "number?"
+        },
+        "focus": {
+          "x": "number",
+          "y": "number",
+          "scale": "number?"
+        },
+        "unfocus": {}
+      }
+    },
+    "phone": {
+      "label": "Phone",
+      "slots": [
+        "graphic",
+        "side"
+      ],
+      "params": {
+        "src": "asset",
+        "fit": "enum?:cover|contain",
+        "start": {
+          "type": "number",
+          "optional": true,
+          "min": 0
+        },
+        "loop": "boolean?",
+        "enter": "enum?:push|zoom|own|cut",
+        "hold": "enum?:drift|still"
+      },
+      "beats": {
+        "zoom": {
+          "x": "number?",
+          "y": "number?",
+          "scale": "number?"
+        },
+        "spot": {
+          "x": "number",
+          "y": "number",
+          "r": "number?"
+        },
+        "focus": {
+          "x": "number",
+          "y": "number",
+          "scale": "number?"
+        },
+        "unfocus": {}
+      }
+    },
+    "metric-card": {
+      "label": "Stat card",
+      "slots": [
+        "graphic",
+        "side"
+      ],
+      "params": {
+        "label": {
+          "type": "string",
+          "maxChars": 22,
+          "maxWords": 4
+        },
+        "value": {
+          "type": "string",
+          "maxChars": 14
+        },
+        "from": {
+          "type": "number",
+          "optional": true
+        },
+        "trend": "enum?:up|down|none",
+        "at": "word?",
+        "enter": "enum?:push|zoom|own|cut",
+        "hold": "enum?:drift|still"
+      },
+      "beats": {
+        "focus": {
+          "x": "number",
+          "y": "number",
+          "scale": "number?"
+        },
+        "unfocus": {}
+      }
+    },
+    "tier-bars": {
+      "label": "Benchmark tiers",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "tiers": {
+          "type": "array",
+          "min": 2,
+          "max": 4,
+          "of": {
+            "label": {
+              "type": "string",
+              "maxChars": 16,
+              "maxWords": 3
+            },
+            "value": {
+              "type": "string",
+              "maxChars": 18,
+              "maxWords": 4
+            },
+            "tone": "enum?:white|grey|cobalt|green",
+            "at": "word?"
+          }
+        },
+        "enter": "enum?:push|zoom|own|cut",
+        "hold": "enum?:drift|still"
+      },
+      "beats": {
+        "focus": {
+          "x": "number",
+          "y": "number",
+          "scale": "number?"
+        },
+        "unfocus": {}
+      }
+    },
+    "data-table": {
+      "label": "Table",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "title": {
+          "type": "string",
+          "maxChars": 28,
+          "maxWords": 5
+        },
+        "rows": {
+          "type": "array",
+          "min": 1,
+          "max": 6,
+          "of": {
+            "head": {
+              "type": "string",
+              "maxChars": 18,
+              "maxWords": 3
+            },
+            "cell": {
+              "type": "string",
+              "optional": true,
+              "maxChars": 30,
+              "maxWords": 6
+            },
+            "at": "word?"
+          }
+        },
+        "blank": {
+          "type": "number",
+          "optional": true,
+          "min": 0,
+          "max": 4
+        },
+        "enter": "enum?:push|zoom|own|cut",
+        "hold": "enum?:drift|still"
+      },
+      "beats": {
+        "focus": {
+          "x": "number",
+          "y": "number",
+          "scale": "number?"
+        },
+        "unfocus": {}
+      }
+    },
+    "quote-card": {
+      "label": "Script line",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "say": {
+          "type": "array",
+          "min": 2,
+          "max": 2,
+          "of": "word"
+        },
+        "typed": "boolean?",
+        "place": "enum?:middle|top",
+        "enter": "enum?:push|zoom|own|cut",
+        "hold": "enum?:drift|still"
+      },
+      "beats": {
+        "focus": {
+          "x": "number",
+          "y": "number",
+          "scale": "number?"
+        },
+        "unfocus": {}
+      }
+    },
+    "compare": {
+      "label": "Before and after",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "left": {
+          "label": {
+            "type": "string",
+            "maxChars": 14,
+            "maxWords": 2
+          },
+          "text": {
+            "type": "string",
+            "maxChars": 60,
+            "maxWords": 10
+          },
+          "at": "word?"
+        },
+        "right": {
+          "label": {
+            "type": "string",
+            "maxChars": 14,
+            "maxWords": 2
+          },
+          "text": {
+            "type": "string",
+            "maxChars": 60,
+            "maxWords": 10
+          },
+          "at": "word?"
+        },
+        "enter": "enum?:push|zoom|own|cut",
+        "hold": "enum?:drift|still"
+      },
+      "beats": {
+        "focus": {
+          "x": "number",
+          "y": "number",
+          "scale": "number?"
+        },
+        "unfocus": {}
+      }
+    },
+    "line-chart": {
+      "label": "Line chart",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "points": {
+          "type": "array",
+          "min": 3,
+          "max": 12,
+          "of": "number"
+        },
+        "xLabel": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 24
+        },
+        "yLabel": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 24
+        },
+        "enter": "enum?:push|zoom|own|cut",
+        "hold": "enum?:drift|still"
+      },
+      "beats": {
+        "highlight": {
+          "from": "number",
+          "to": "number"
+        },
+        "clear": {},
+        "focus": {
+          "x": "number",
+          "y": "number",
+          "scale": "number?"
+        },
+        "unfocus": {}
+      }
+    },
+    "icon-nodes": {
+      "label": "Icon nodes",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "nodes": {
+          "type": "array",
+          "min": 1,
+          "max": 8,
+          "of": {
+            "label": {
+              "type": "string",
+              "maxChars": 26,
+              "maxWords": 4
+            },
+            "icon": "asset?",
+            "at": "word?"
+          }
+        },
+        "hub": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 16,
+          "maxWords": 3
+        },
+        "enter": "enum?:push|zoom|own|cut",
+        "hold": "enum?:drift|still"
+      },
+      "beats": {
+        "focus": {
+          "x": "number",
+          "y": "number",
+          "scale": "number?"
+        },
+        "unfocus": {}
+      }
+    },
+    "statement": {
+      "label": "Statement",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "text": {
+          "type": "string",
+          "maxChars": 30,
+          "maxWords": 6
+        },
+        "underline": "boolean?",
+        "enter": "enum?:push|zoom|own|cut",
+        "hold": "enum?:drift|still"
+      },
+      "beats": {
+        "focus": {
+          "x": "number",
+          "y": "number",
+          "scale": "number?"
+        },
+        "unfocus": {}
+      }
+    },
+    "cta-pages": {
+      "label": "Document pages",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "count": {
+          "type": "number",
+          "optional": true,
+          "min": 3,
+          "max": 9
+        },
+        "pages": {
+          "type": "array",
+          "optional": true,
+          "min": 1,
+          "max": 9,
+          "of": "asset"
+        },
+        "panel": "boolean?",
+        "enter": "enum?:push|zoom|own|cut",
+        "hold": "enum?:drift|still"
+      },
+      "beats": {
+        "focus": {
+          "x": "number",
+          "y": "number",
+          "scale": "number?"
+        },
+        "unfocus": {}
+      }
+    },
+    "push-in": {
+      "label": "Push-in",
+      "slots": [
+        "camera"
+      ],
+      "params": {
+        "level": "enum?:small|large",
+        "at": "word?"
+      },
+      "beats": {}
+    },
+    "keyword-caption": {
+      "label": "Closing keyword",
+      "slots": [
+        "keyword"
+      ],
+      "params": {
+        "keyword": {
+          "type": "string",
+          "maxChars": 14,
+          "maxWords": 1
+        },
+        "at": "word?"
+      },
+      "beats": {}
+    }
+  }
+}

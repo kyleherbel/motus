@@ -9,7 +9,7 @@ import { parseArgs, MotusError, readJson, writeJson, exists, mkdirp, clock, ROOT
 
 const [cmd, ...rest] = process.argv.slice(2);
 // flags that never take a value: `motus validate --json ./project` must keep ./project as the positional
-const BOOLEANS = ['json', 'quiet', 'force', 'draft', 'open', 'stop', 'posters', 'sheet', 'dark', 'full', 'all', 'global', 'matte'];
+const BOOLEANS = ['json', 'quiet', 'force', 'draft', 'open', 'stop', 'posters', 'loops', 'sheet', 'dark', 'full', 'all', 'global', 'matte'];
 const { pos, flags } = parseArgs(rest, { booleans: BOOLEANS });
 const asJson = !!flags.json;
 const SELF = fileURLToPath(import.meta.url);
@@ -21,15 +21,22 @@ const num = (v, d) => (v === undefined || v === true ? d : Number(v));
 
 const HELP = `Motus: edit talking-head video in a chosen style.
 
+The app (what a person uses):
+  motus app [--open] [--workspace dir] [--port n] [--stop]   start the Motus app: drop a video, review, render
+  motus next [--agent name] [--timeout seconds]  agent: wait for the app's next job (plan a video, revise after notes)
+  motus say <project> "what you are doing"        agent: show a progress line in the app
+  motus done <project> [--summary text] [--error text]   agent: finish the current job
+
+The engine, step by step:
   motus doctor                                   check this machine
   motus styles                                   list installed style packs
   motus init <video> [--style id] [--mode raw|locked] [--project dir] [--force]
   motus ingest <project> [--transcript file] [--language en] [--prompt "names, terms"]
   motus sheet <project> [--from s --to s --fps n] | [--at t1,t2,...]
   motus conform <project> [--no-matte]
-  motus capture <url> --out <project>/assets/name.png [--find "text"] [--width 1200] [--dark] [--clip x,y,w,h] [--full]
+  motus capture <url> --out <project>/assets/name.png [--find "text"] [--width 1200] [--scale 2] [--selector css] [--dark] [--clip x,y,w,h] [--full]
   motus validate <project>
-  motus stills <project> [--posters [--force]] [--scene id --option id] [--at t1,t2] [--sheet] [--every s]
+  motus stills <project> [--posters] [--loops] [--force] [--scene id --option id] [--at t1,t2] [--sheet] [--every s]
   motus studio <project> [--port n] [--open] [--stop]
   motus wait <project> [--timeout seconds]
   motus ack <project> [scene ...] [--reply "what changed"]     mark the user's notes as addressed after revising
@@ -82,7 +89,7 @@ const commands = {
     const p = await project(pos[0]);
     const { conform } = await import('../lib/conform.mjs');
     const r = await conform(p, { matte: flags.matte !== false, log });
-    print(r, (x) => `Output timeline: ${clock(x.duration)} · ${x.frames} frames @ ${x.fps.toFixed(2)} fps · ${x.ranges} kept range(s), ${x.removed.toFixed(2)} s removed\nMatte: ${x.hasMatte ? 'yes' : `no (${x.matteReason})`}\nWords: ${x.words} (${x.wordsFile})\nNext: write plan/edit.json, then: motus validate ${JSON.stringify(p.dir)}`);
+    print(r, (x) => `Output timeline: ${clock(x.duration)} · ${x.frames} frames @ ${x.fps.toFixed(2)} fps · ${x.ranges} kept range(s), ${x.removed.toFixed(2)} s removed\nMatte: ${x.hasMatte ? 'yes' : `no (${x.matteReason})`}${x.wide ? `\nWide view: ${x.wide}` : ''}\nWords: ${x.words} (${x.wordsFile})\nNext: write plan/edit.json, then: motus validate ${JSON.stringify(p.dir)}`);
   },
 
   async capture() {
@@ -111,7 +118,7 @@ const commands = {
   async stills() {
     const p = await project(pos[0]);
     const { renderStills } = await import('../lib/render.mjs');
-    const r = await renderStills(p, { posters: !!flags.posters, force: !!flags.force, scene: flags.scene, option: flags.option, at: flags.at ? String(flags.at).split(',').map(Number) : undefined, sheet: !!flags.sheet, every: flags.every ? Number(flags.every) : undefined, log });
+    const r = await renderStills(p, { posters: !!flags.posters, loops: !!flags.loops, force: !!flags.force, scene: flags.scene, option: flags.option, at: flags.at ? String(flags.at).split(',').map(Number) : undefined, sheet: !!flags.sheet, every: flags.every ? Number(flags.every) : undefined, log });
     print(r, (x) => (x.sheets?.length ? `Sheets:\n  ${x.sheets.join('\n  ')}\n` : '') + `Stills: ${x.stills.length} in ${x.dir}`);
   },
 
@@ -130,13 +137,8 @@ const commands = {
       return print({ stopped: !!s });
     }
     if (!s) {
-      await mkdirp(p.path('review'));
-      await fs.rm(info, { force: true });
-      const logFile = fss.openSync(p.path('review', 'server.log'), 'a');
-      const child = spawn(process.execPath, [SELF, '_serve', p.dir, '--port', String(num(flags.port, 0))], { detached: true, stdio: ['ignore', logFile, logFile] });
-      child.unref();
-      for (let i = 0; i < 60 && !s; i++) { await new Promise((r) => setTimeout(r, 150)); s = await alive(); }
-      if (!s) throw new MotusError('Studio did not start.', `See ${p.path('review', 'server.log')}`);
+      const { ensureStudio } = await import('../lib/server.mjs');
+      s = await ensureStudio(p, { port: num(flags.port, 0) });
     }
     if (flags.open) spawn(process.platform === 'darwin' ? 'open' : process.platform === 'win32' ? 'cmd' : 'xdg-open', process.platform === 'win32' ? ['/c', 'start', '', s.url] : [s.url], { detached: true, stdio: 'ignore' }).unref();
     print({ url: s.url, pid: s.pid, project: p.dir, next: `motus wait ${JSON.stringify(p.dir)}` }, (x) => `Studio is running: ${x.url}\nWait for the user's decisions with: ${x.next}`);
@@ -145,12 +147,75 @@ const commands = {
   async _serve() {
     const { createStudioServer } = await import('../lib/server.mjs');
     const p = await project(pos[0]);
-    const s = await createStudioServer(p.dir, { port: num(flags.port, 0) });
+    const s = await createStudioServer(p.dir, { port: num(flags.port, 0), loops: true });
     await writeJson(p.path('review', 'server.json'), { url: s.url, port: s.port, pid: process.pid, started: new Date().toISOString() });
     process.stdout.write(`studio ${s.url}\n`);
     const idleLimit = num(flags.idle, 6 * 3600) * 1000;          // stop after six quiet hours
     setInterval(() => { if (s.idleFor() > idleLimit && s.clients.size === 0) process.exit(0); }, 60000).unref();
     process.on('SIGTERM', () => s.close().then(() => process.exit(0)));
+  },
+
+  async app() {
+    const { defaultWorkspace, APP_FILE, openUrl } = await import('../lib/workspace.mjs');
+    const ws = path.resolve(flags.workspace && flags.workspace !== true ? flags.workspace : defaultWorkspace());
+    const info = path.join(ws, APP_FILE);
+    const alive = async () => {
+      const s = await readJson(info, null).catch(() => null);
+      if (!s) return null;
+      try { const r = await fetch(`${s.url}api/ping`, { signal: AbortSignal.timeout(800) }); const j = await r.json(); return j.ok && j.app && j.workspace === ws ? s : null; } catch { return null; }
+    };
+    let s = await alive();
+    if (flags.stop) {
+      if (s) { try { process.kill(s.pid); } catch { /* already gone */ } }
+      await fs.rm(info, { force: true });
+      return print({ stopped: !!s });
+    }
+    const { doctor } = await import('../lib/doctor.mjs');
+    const check = await doctor();
+    const failing = check.checks.filter((c) => c.required && !c.ok).map((c) => ({ name: c.name, detail: c.detail, fix: c.fix }));
+    if (!s) {
+      await mkdirp(ws);
+      await fs.rm(info, { force: true });
+      const logFile = fss.openSync(path.join(ws, '.motus-app.log'), 'a');
+      const child = spawn(process.execPath, [SELF, '_app', ws, '--port', String(num(flags.port, 4700))], { detached: true, stdio: ['ignore', logFile, logFile] });
+      child.unref();
+      for (let i = 0; i < 60 && !s; i++) { await new Promise((r) => setTimeout(r, 150)); s = await alive(); }
+      if (!s) throw new MotusError('The Motus app did not start.', `See ${path.join(ws, '.motus-app.log')}`);
+    }
+    if (flags.open) openUrl(s.url);
+    const next = `node ${JSON.stringify(SELF)} next --agent "<your name>"`;
+    print({ url: s.url, workspace: ws, ready: check.ready, failing, next, tell: `Motus is open at ${s.url}. Drop a video there. Keep this chat open: the planning work happens here in the background.` },
+      (x) => `Motus is open: ${x.url}\nVideos are kept in: ${x.workspace}${x.failing.length ? `\n\nThis machine is missing ${x.failing.length} thing(s) Motus needs:\n${x.failing.map((f) => `  ${f.name}: ${f.fix}`).join('\n')}` : ''}\n\nNext, and again after every job: ${x.next}`);
+  },
+
+  async _app() {
+    const { createAppServer, writeAppInfo } = await import('../lib/app.mjs');
+    const ws = path.resolve(need(pos[0], 'the workspace folder', '_app <workspace>'));
+    const s = await createAppServer(ws, { port: num(flags.port, 4700) });
+    await writeAppInfo(ws, s);
+    process.stdout.write(`app ${s.url}\n`);
+    const idleLimit = num(flags.idle, 12 * 3600) * 1000;           // stop after twelve quiet hours (an open page keeps it busy)
+    setInterval(() => { if (s.idleFor() > idleLimit) process.exit(0); }, 60000).unref();
+    process.on('SIGTERM', () => s.close().then(() => process.exit(0)));
+  },
+
+  async next() {
+    const { defaultWorkspace, nextJob } = await import('../lib/workspace.mjs');
+    const ws = path.resolve(flags.workspace && flags.workspace !== true ? flags.workspace : defaultWorkspace());
+    const r = await nextJob(ws, { name: flags.agent && flags.agent !== true ? String(flags.agent) : 'the agent', timeout: num(flags.timeout, 300) });
+    print(r);
+  },
+
+  async say() {
+    const { say } = await import('../lib/workspace.mjs');
+    need(pos[0], 'the project folder', 'say <project> "what you are doing"');
+    print(await say(pos[0], need(pos.slice(1).join(' '), 'what you are doing', 'say <project> "what you are doing"')));
+  },
+
+  async done() {
+    const { done } = await import('../lib/workspace.mjs');
+    need(pos[0], 'the project folder', 'done <project> [--summary text] [--error text]');
+    print(await done(pos[0], { summary: flags.summary === true ? '' : flags.summary, error: flags.error === true ? '' : flags.error }));
   },
 
   async wait() {

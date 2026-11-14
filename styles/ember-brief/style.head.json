@@ -1,0 +1,40 @@
+{
+  "id": "ember-brief",
+  "name": "Ember Brief",
+  "version": "0.1.0",
+  "status": "beta",
+  "summary": "A fast tool briefing: a dark dotted field over the speaker in the bottom half, an illustrated title, graphics that act each idea out on its words (a link that connects, a race, a figure that fills) beside real page captures, two-word captions with the spoken word in magenta, and a comment call to action.",
+  "bestFor": [
+    "new tool and feature explainers",
+    "news takes with a source to show",
+    "short numbered tool lists",
+    "solo talking-head briefings of 30 to 45 seconds"
+  ],
+  "aspect": "9:16",
+  "footage": {
+    "wide": true
+  },
+  "look": {},
+  "emphasis": [],
+  "roles": [
+    "hook",
+    "source",
+    "what",
+    "proof",
+    "how",
+    "item",
+    "benefit",
+    "limits",
+    "recap",
+    "cta"
+  ],
+  "sfx": {},
+  "beds": {
+    "a": {
+      "label": "Low pulse",
+      "src": "assets/music/bed-a.m4a",
+      "gainDb": -16.7,
+      "fadeOut": 1
+    }
+  }
+}

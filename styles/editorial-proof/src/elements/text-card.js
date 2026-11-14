@@ -25,7 +25,7 @@ const G = {
   asc: 0.75,                                // baseline under the line's ascender top (em)
   capTop: 31,                               // heading cap top under the chrome (354 - 323)
   headToBody: 1.52, chromeToBody: 1.2, noChromeTop: 40, bottom: 0.7,   // in pitches; bottom: 49 px after the last baseline
-  eyebrow: { size: 24, weight: 700, tracking: 0.07, ink: '#8A8F98', gap: 22 },   // the grey caps label of designed docs (clip37@740 "DELIVERY")
+  eyebrow: { size: 24, weight: 700, tracking: 0.07, ink: '#8F8F8F', gap: 22 },   // the grey caps label of designed docs (clip37@740 "DELIVERY")
   hl: { above: 0.97, below: 0.19 },
   mono: 0.9,                                // mono is set 10 % smaller for the same measure
 };

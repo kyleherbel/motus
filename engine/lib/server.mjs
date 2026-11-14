@@ -4,9 +4,40 @@ import http from 'node:http';
 import path from 'node:path';
 import fs from 'node:fs/promises';
 import fss from 'node:fs';
+import { spawn } from 'node:child_process';
 import { ENGINE, STYLES, readJson, writeJson, exists, mkdirp, MotusError } from './util.mjs';
 import { loadProject, listFiles } from './project.mjs';
 import { loadPlan, validateEdit, resolveDoc, reviewModel, hashOf } from './plan.mjs';
+import { agentStatus, APP_FILE, pidAlive, reveal } from './workspace.mjs';
+
+const BIN = path.join(ENGINE, 'bin', 'motus.mjs');
+
+/** The Studio server for a project: the running one, or a new detached one. Returns { url, pid }. */
+export async function ensureStudio(p, { port = 0 } = {}) {
+  const info = p.path('review', 'server.json');
+  const alive = async () => {
+    const s = await readJson(info, null).catch(() => null);
+    if (!s) return null;
+    try { const r = await fetch(`${s.url}api/ping`, { signal: AbortSignal.timeout(800) }); const j = await r.json(); return j.ok && j.project === p.dir ? s : null; } catch { return null; }
+  };
+  let s = await alive();
+  if (s) return s;
+  await mkdirp(p.path('review'));
+  await fs.rm(info, { force: true });
+  const logFile = fss.openSync(p.path('review', 'server.log'), 'a');
+  const child = spawn(process.execPath, [BIN, '_serve', p.dir, '--port', String(port)], { detached: true, stdio: ['ignore', logFile, logFile] });
+  child.unref();
+  fss.closeSync(logFile);
+  for (let i = 0; i < 60 && !s; i++) { await new Promise((r) => setTimeout(r, 150)); s = await alive(); }
+  if (!s) throw new MotusError('Studio did not start.', `See ${p.path('review', 'server.log')}`);
+  return s;
+}
+
+/** The Motus app that made this project, if it is running: Studio links back to it. */
+async function appOf(projectDir) {
+  const a = await readJson(path.join(path.dirname(projectDir), APP_FILE), null).catch(() => null);
+  return a && pidAlive(a.pid) ? { url: a.url } : null;
+}
 
 const TYPES = {
   '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.mjs': 'text/javascript; charset=utf-8',
@@ -51,7 +82,8 @@ const readBody = (req) => new Promise((resolve, reject) => {
   req.on('error', reject);
 });
 
-export async function createStudioServer(projectDir, { port = 0, host = '127.0.0.1' } = {}) {
+export async function createStudioServer(projectDir, { port = 0, host = '127.0.0.1', loops: drawLoops = false } = {}) {
+  drawLoops = drawLoops && !process.env.MOTUS_NO_LOOPS;     // only the user-facing Studio draws loops, never the render stage
   const ownOrigins = (p) => {
     const names = new Set(['localhost', '127.0.0.1', '[::1]', String(host).toLowerCase()]);
     const hosts = new Set([...names].map((n) => `${n}:${p}`));
@@ -70,9 +102,21 @@ export async function createStudioServer(projectDir, { port = 0, host = '127.0.0
     const check = validateEdit(plan.edit, { words: plan.words, manifest: plan.style.manifest, projectDir: project.dir, timeline: plan.timeline });
     const m = reviewModel(plan);
     const posters = new Set(await listFiles(project.path('review', 'posters'), /\.jpg$/));
-    for (const sc of m.scenes) for (const o of sc.options) { const f = `${sc.id}-${o.id}-${sc.hash}.jpg`; o.poster = posters.has(f) ? `/project/review/posters/${f}` : null; }
+    const loops = new Set(await listFiles(project.path('review', 'loops'), /^[^.]+-[^.]+-[0-9a-f]+\.mp4$/));
+    for (const sc of m.scenes) for (const o of sc.options) {
+      const f = `${sc.id}-${o.id}-${sc.hash}`;
+      o.poster = posters.has(`${f}.jpg`) ? `/project/review/posters/${f}.jpg` : null;
+      o.loop = loops.has(`${f}.mp4`) ? `/project/review/loops/${f}.mp4` : null;
+    }
     const final = (await exists(project.path('renders', 'final.mp4'))) ? '/project/renders/final.mp4' : null;
-    return { ...m, problems: check.errors, warnings: check.warnings, render, final, hasMatte: !!plan.timeline.hasMatte };
+    return { ...m, problems: check.errors, warnings: check.warnings, render, final, hasMatte: !!plan.timeline.hasMatte, app: await appOf(project.dir), agent: await agentNow(), loopsBusy: !!loopRun };
+  }
+
+  /** The agent session as this project sees it: connected or not, and whether it is working here. */
+  async function agentNow() {
+    const a = await agentStatus(path.dirname(project.dir));
+    const job = (await readJson(project.path('review', 'app.json'), {}).catch(() => ({}))).job || null;
+    return { connected: a.connected, name: a.name, here: a.connected && a.state === 'working' && a.project === project.dir, activity: a.project === project.dir ? a.activity : '', job: job ? { kind: job.kind, state: job.state, summary: job.summary || '', error: job.error || '' } : null };
   }
 
   // state.json is read-modify-written: run one mutation at a time so concurrent requests cannot lose updates
@@ -168,6 +212,7 @@ export async function createStudioServer(projectDir, { port = 0, host = '127.0.0
         draft: !!opt.draft,
         onProgress: (p) => { render = { ...render, ...p }; emit('render', render); },
       });
+      if (drawLoops && loopAgain) loopsSoon();
       render = { status: 'done', progress: 1, phase: 'done', file: out.file, url: `/project/${path.relative(project.dir, out.file).split(path.sep).join('/')}`, seconds: (Date.now() - render.started) / 1000, draft: !!opt.draft, info: out };
       emit('render', render);
     }).catch((e) => {
@@ -176,13 +221,35 @@ export async function createStudioServer(projectDir, { port = 0, host = '127.0.0
     });
   }
 
+  // Scene loops for the grid: drawn in the background by `motus stills --loops`, one run at a time,
+  // again whenever the plan changes, never during a final render.
+  let loopRun = null, loopAgain = false, loopTimer = null;
+  function ensureLoops() {
+    if (loopRun || render.status === 'running') { loopAgain = true; return; }
+    loopAgain = false;
+    const logFile = fss.openSync(project.path('review', 'loops.log'), 'a');
+    loopRun = spawn(process.execPath, [BIN, 'stills', project.dir, '--loops', '--quiet'], { stdio: ['ignore', logFile, logFile] });
+    fss.closeSync(logFile);
+    emit('state');
+    const finish = () => { loopRun = null; emit('plan'); if (loopAgain) loopTimer = setTimeout(ensureLoops, 500); };
+    loopRun.on('exit', finish);
+    loopRun.on('error', finish);
+  }
+  const loopsSoon = () => { clearTimeout(loopTimer); loopTimer = setTimeout(ensureLoops, 1500); };
+
   // Tell open pages when the agent rewrites the plan.
   let debounce = null;
   const watchers = [];
-  for (const dir of [project.path('plan'), project.path('review', 'posters')]) {
+  for (const dir of [project.path('plan'), project.path('review', 'posters'), project.path('review', 'loops')]) {
     await mkdirp(dir);
-    try { watchers.push(fss.watch(dir, () => { clearTimeout(debounce); debounce = setTimeout(() => emit('plan'), 250); })); } catch { /* watching is a nicety */ }
+    try {
+      watchers.push(fss.watch(dir, () => {
+        clearTimeout(debounce); debounce = setTimeout(() => emit('plan'), 250);
+        if (drawLoops && dir === project.path('plan')) loopsSoon();
+      }));
+    } catch { /* watching is a nicety */ }
   }
+  if (drawLoops) loopsSoon();
 
   const server = http.createServer(async (req, res) => {
     lastActivity = Date.now();
@@ -215,6 +282,12 @@ export async function createStudioServer(projectDir, { port = 0, host = '127.0.0
       if (p === '/api/submit' && req.method === 'POST') return send(res, 200, await submitSerial(await readBody(req)));
       if (p === '/api/ack' && req.method === 'POST') return send(res, 200, await ackSerial(await readBody(req)));
       if (p === '/api/render' && req.method === 'GET') return send(res, 200, render);
+      if (p === '/api/agent' && req.method === 'GET') return send(res, 200, { agent: await agentNow(), app: await appOf(project.dir) });
+      if (p === '/api/reveal' && req.method === 'POST') {
+        const file = project.path('renders', 'final.mp4');
+        reveal((await exists(file)) ? file : project.dir);
+        return send(res, 200, { ok: true });
+      }
       if (p === '/api/ping') return send(res, 200, { ok: true, project: project.dir });
       if (p === '/' || p === '/index.html') return sendFile(req, res, path.join(ENGINE, 'studio'), 'index.html');
       if (p.startsWith('/studio/')) return sendFile(req, res, path.join(ENGINE, 'studio'), p.slice(8));
@@ -235,6 +308,6 @@ export async function createStudioServer(projectDir, { port = 0, host = '127.0.0
   return {
     server, port: actual, url: `http://${host === '127.0.0.1' ? 'localhost' : host}:${actual}/`,
     emit, idleFor: () => Date.now() - lastActivity, clients,
-    close: () => new Promise((r) => { watchers.forEach((w) => w.close()); for (const c of clients) c.end(); server.close(r); }),
+    close: () => new Promise((r) => { clearTimeout(loopTimer); try { loopRun?.kill(); } catch { /* gone */ } watchers.forEach((w) => w.close()); for (const c of clients) c.end(); server.close(r); }),
   };
 }

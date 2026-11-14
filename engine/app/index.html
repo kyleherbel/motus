@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Motus</title>
+<link rel="icon" href="data:,">
+<link rel="preload" href="/assets/fonts/Inter.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="/app/app.css">
+<script type="module" src="/app/app.js"></script>
+</head>
+<body>
+<header class="top">
+  <div class="brand">Motus</div>
+  <div class="agent" id="agent" role="status" aria-live="polite">
+    <i class="dot" aria-hidden="true"></i>
+    <span class="agent-text" id="agent-text">Looking for your AI session</span>
+  </div>
+</header>
+
+<main class="main">
+  <section class="banner" id="conn" role="alert" hidden>
+    <h2>The Motus app stopped answering</h2>
+    <p>Ask your AI session to start Motus again (say "go"). This page reconnects by itself.</p>
+  </section>
+
+  <section class="banner" id="no-agent" hidden>
+    <h2>Motus needs your AI session to plan the edit</h2>
+    <p>Go back to Claude Code or Codex, open the Motus folder and say <b>go</b>. Keep that chat open while you edit: the planning happens there, in the background.</p>
+  </section>
+
+  <section class="drop hero" id="hero" hidden>
+    <div class="drop-inner">
+      <p class="eyebrow">New edit</p>
+      <h1>Drop a video here</h1>
+      <p class="sub">A take of you talking to the camera, with its sound. MP4, MOV, MKV or WebM.</p>
+      <button class="btn primary big" type="button" data-choose>Choose a video</button>
+    </div>
+  </section>
+
+  <section class="library" id="library" hidden>
+    <div class="library-head">
+      <h2>Your videos</h2>
+      <div class="drop strip" id="strip">
+        <span>Drop a video anywhere on this page, or</span>
+        <button class="btn primary" type="button" data-choose>Choose a video</button>
+      </div>
+    </div>
+    <div class="grid" id="projects"></div>
+  </section>
+</main>
+
+<input type="file" id="file" accept="video/*,.mp4,.mov,.m4v,.mkv,.webm" hidden>
+<div class="overlay" id="overlay" hidden><div class="overlay-inner">Drop to start a new edit</div></div>
+
+<dialog class="setup" id="setup" aria-labelledby="setup-title">
+  <form method="dialog" id="setup-form">
+    <header class="setup-head">
+      <div class="setup-file">
+        <p class="eyebrow">New edit</p>
+        <h2 id="setup-title">Video</h2>
+        <p class="mono facts" id="setup-facts"></p>
+      </div>
+      <div class="upload">
+        <span class="mono" id="upload-text">Uploading</span>
+        <div class="track"><i id="upload-fill"></i></div>
+      </div>
+    </header>
+
+    <div class="setup-body">
+      <fieldset class="q">
+        <legend>How should Motus cut it?</legend>
+        <div class="choices two">
+          <label class="choice"><input type="radio" name="mode" value="raw" checked>
+            <b>Cut out pauses and mistakes</b>
+            <span>For a raw take. Motus removes dead air, false starts and lines you said twice.</span></label>
+          <label class="choice"><input type="radio" name="mode" value="locked">
+            <b>Keep every frame</b>
+            <span>Your video is already trimmed. Motus only adds captions and graphics.</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="q">
+        <legend>Pick a look</legend>
+        <div class="choices styles" id="styles"></div>
+      </fieldset>
+
+      <div class="q">
+        <label class="field-label" for="prompt">Names to spell right <span class="muted">(optional)</span></label>
+        <input class="text" id="prompt" name="prompt" type="text" placeholder="Product names, people, places. For example: OpenReply, ManyChat" autocomplete="off">
+      </div>
+      <p class="error" id="setup-error" role="alert" hidden></p>
+    </div>
+
+    <footer class="setup-foot">
+      <p class="muted" id="setup-hint">Choose a look to continue.</p>
+      <div class="setup-actions">
+        <button class="btn" type="button" id="cancel">Cancel</button>
+        <button class="btn primary" type="button" id="start" disabled>Start editing</button>
+      </div>
+    </footer>
+  </form>
+</dialog>
+</body>
+</html>

@@ -1,8 +1,16 @@
 # Motus
 
+## Start here
+
+1. Open Claude Code or Codex on your computer.
+2. Give it this folder (open the folder, or drag it into the chat) and say **go**.
+3. The Motus app opens in your browser. Drop a video in it, pick a look, review the edit scene by scene, and render.
+
+Keep the chat open while you edit: the AI session does the planning in the background, and the app shows what it is doing. Your videos are kept in `~/Movies/Motus` (set `MOTUS_HOME` to change that).
+
 Motus is a plugin for AI coding agents that edits talking-head 9:16 video (Reels, TikTok, Shorts) in a chosen editing style. You give it a raw take or a picture-locked cut, pick a style, choose between options for each scene on a local review page, and get a 1080x1920 MP4.
 
-Version 0.1.0. One style pack, in beta. Built and tested on macOS only. Claude Code is the first target. OpenAI Codex support is experimental.
+Version 0.1.0. Three style packs, in beta. Built and tested on macOS only. Claude Code is the first target. OpenAI Codex support is experimental.
 
 ## How it works
 
@@ -127,8 +135,14 @@ node engine/bin/motus.mjs render motus-projects/take
 | Style | Id | Version | Status | Best for |
 |---|---|---|---|---|
 | Editorial Proof | `editorial-proof` | 0.1.0 | beta | Tool and product breakdowns, numbered lists, news and explainer takes, anything with sources, numbers or screens to show. |
+| Night Class | `night-class` | 0.1.0 | beta | Solo teaching videos: frameworks and playbooks, numbered steps and lists, how-tos and strategy explainers. |
+| Ember Brief | `ember-brief` | 0.1.0 | beta | Solo briefings of 30 to 45 seconds: new tool and feature explainers, news takes with a source to show, short numbered tool lists. |
 
-Editorial Proof: claim, then proof. The speaker sits in a panel at the bottom with real evidence above (captured pages, numbers, lists), word-by-word captions with accent keywords, dark focus shots for close reading, and a comment call to action at the end. It has two accent colours, blue and lime. Its layouts, elements and their parameters are listed in `styles/editorial-proof/style.json`.
+Editorial Proof: claim, then proof. The speaker sits in a panel at the bottom with real evidence above (captured pages, numbers, lists), word-by-word captions with accent keywords, dark focus shots for close reading, and a comment call to action at the end. It has two accent colours, emerald and violet, over a white grid. Its layouts, elements and their parameters are listed in `styles/editorial-proof/style.json`.
+
+Night Class: a teaching explainer. A black graphic field with a faint dot grid sits over a small rounded presenter panel. A centred title with a cobalt bar or underline sits at the top, and one-word captions sit between them. About every ten seconds the edit cuts hard to the full-height speaker, then cuts back to a changed graphic. It ends on a "Comment <keyword>" call to action. Its look choices are the sound kit, the music bed and the dark field's texture; it also has a light-field layout. It frames its presenter panel from a shot wider than 9:16: start the project from the horizontal recording when you have one. Its layouts, elements and their parameters are listed in `styles/night-class/style.json`.
+
+Ember Brief: a fast tool briefing. A dark dotted field fills the top half of the frame and the speaker fills the bottom half. It opens on an illustration with a stacked title and shows a new graphic about every three seconds. About half of them explain the sentence in motion, each event on the word that names it: a line draws between two things and a check lands, a figure counts while a picture fills, two cards race. The rest show evidence: real page captures with magenta highlights, app screens redrawn as dark cards. It carries two-word captions with the spoken word in magenta. For a tall graphic the speaker slides away and the field takes the frame. It ends on a "Comment <keyword>" call to action. It has no sound effects and one music bed, and no look choices. Like Night Class it frames the speaker from a shot wider than 9:16. Its layouts, elements and their parameters are listed in `styles/ember-brief/style.json`.
 
 Run `/motus:styles` or `node engine/bin/motus.mjs styles` to see what is installed.
 
@@ -136,7 +150,7 @@ Run `/motus:styles` or `node engine/bin/motus.mjs styles` to see what is install
 
 A style pack is not designed from taste. It is measured from a corpus of reference videos.
 
-Editorial Proof was built from 33 public short videos by one creator, published between 12 October and 9 November 2026. Nine analysts each measured one dimension (layout, type, hook, graphics, motion, structure, colour, audio, presenter). Every rule is a number with evidence: a count, a frame range, a fit error. A second pass re-measured the disputed and critical numbers. The numbers then became one tokens file, the elements were built against it, and each was compared side by side with reference frames.
+Editorial Proof was built from 33 public short videos by one creator, published between 12 October and 9 November 2026. Night Class was built the same way from 32 teaching reels by another creator, published between 10 October and 11 November 2026; its second pass re-measured 74 quantities and corrected 15 of them (`styles/night-class/research/verification.md`). Ember Brief was built from 11 reels by a third creator, published between 2 and 7 November 2026; its second pass re-measured 107 quantities and corrected 11 (`styles/ember-brief/research/verification.md`), and a second study measured how its illustrations and diagrams explain what is being said (`styles/ember-brief/research/explain.md`). Nine analysts each measured one dimension (layout, type, hook, graphics, motion, structure, colour, audio, presenter). Every rule is a number with evidence: a count, a frame range, a fit error. A second pass re-measured the disputed and critical numbers. The numbers then became one tokens file, the elements were built against it, and each was compared side by side with reference frames.
 
 The reference videos themselves are never part of this repository. Rights to them are unknown, so they stay on the machine of whoever does the study. Sound effects, music beds and background plates in a style pack are synthesised from the measurements, not copied.
 
@@ -147,9 +161,10 @@ The full method, a folder template and a definition-of-done checklist are in [do
 Studio is a web page served from your own machine by `motus studio <project>`. The server listens on `localhost` only, on a free port, and stops by itself after six hours with no page open and no requests.
 
 - A player on the left shows the current cut with a scene timeline under it.
+- The scenes open as a grid: each scene is a tile playing a short loop of the option in the cut, about six to eight in view on a laptop. Hover a tile's A/B/C to see another option, click it to use that option, lock from the tile, or click the tile for the full scene. Studio draws the loops in the background (`motus stills --loops`). A switch shows the scenes as a list instead.
 - Each scene has its own section: the time range, what is said, and the option cards playing over your real footage.
 - Per scene you can pick an option, write a note, and lock it.
-- "Whole video" holds the style's global choices (for Editorial Proof, the accent colour) and an overall note.
+- "Whole video" holds the style's global choices (for Editorial Proof, the accent colour; for Night Class, the sound kit, the bed and the dark field) and an overall note.
 - A safe-zone overlay shows where the Instagram Reels interface covers the frame. Its numbers come from one phone screenshot, so treat them as a guide.
 - "Send notes to the agent" is the main button while any scene has a note. "Render final video" is enabled when every scene is locked. Rendering shows live progress and ends with the finished file.
 - Keyboard: `J`/`K` next and previous scene, `1` to `4` pick an option, `L` lock, `N` note, `Space` play, `S` safe zones, `Cmd`/`Ctrl`+`Enter` send or render, `?` shows the list.
@@ -197,15 +212,15 @@ Your source video is treated as read-only. Everything Motus writes goes into the
 
 Code: MIT, see [LICENSE](LICENSE).
 
-Bundled fonts (Inter, EB Garamond, JetBrains Mono) are under the SIL Open Font License 1.1: see `OFL.txt` beside them. The style's sound effects and music beds are original, synthesised by `styles/editorial-proof/dev/make-audio.mjs`, and MIT like the code: see `LICENSE.md` beside them.
+Bundled fonts (Inter, EB Garamond, JetBrains Mono, Instrument Serif, Outfit) are under the SIL Open Font License 1.1: see `OFL.txt` beside them. The styles' sound effects and music beds are original, synthesised by each style's `dev/make-audio.mjs`, and MIT like the code: see `LICENSE.md` beside them.
 
 Reference corpora are never included. A style pack contains measurements and original assets only.
 
 ## Status and known limits
 
 - macOS first. The person matte and face tracking use Apple Vision through a small Swift helper. Without them (no Swift toolchain, or Linux or Windows) the engine falls back to un-matted framing: no head rising above the presenter panel, and a centre crop for sources that are not 9:16. Linux and Windows have code paths for finding Chrome and opening the browser, but nothing has been run there.
-- One style pack, in beta. Expect its elements and rules to change before 1.0.
-- Output is always 1080x1920 at the source frame rate. Draft renders are 540x960.
+- Three style packs, all in beta. Expect their elements and rules to change before 1.0.
+- Output is always 1080x1920 at the source frame rate. Draft renders are 540x960. A style can also ask conform to keep the whole source frame as a wide view (Night Class and Ember Brief do); then the preview proxy is about 3870 px wide.
 - The source must contain the speech. A file with no audio stream cannot be planned.
 - Transcription is automatic and makes mistakes, mostly on names. The agent repairs captions from context. Pass names up front to help it.
 - The style was measured on English-language videos. Other languages transcribe, but the caption rules have not been tested on them.

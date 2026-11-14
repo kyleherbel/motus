@@ -39,10 +39,10 @@ export default {
         r.logo ? h('img', { src: S.env.projectUrl(r.logo), style: { width: '100%', height: '100%', objectFit: 'contain' } }) : h('span', { text: (r.name.trim()[0] || '?').toUpperCase() }));
       const name = h('div', { style: { position: 'absolute', left: '120px', top: `${y}px`, height: `${pitch}px`, display: 'flex', alignItems: 'center', gap: '14px', whiteSpace: 'nowrap', color: C.ink } },
         h('span', { text: r.name, style: { font: `700 36px/1 ${fonts.sans}`, letterSpacing: '-0.02em' } }),
-        r.plan ? h('span', { text: r.plan, style: { font: `500 26px/1 ${fonts.sans}`, color: '#8A8E96' } }) : null);
+        r.plan ? h('span', { text: r.plan, style: { font: `500 26px/1 ${fonts.sans}`, color: '#8E8E8E' } }) : null);
       const priceText = h('span', { text: r.price, style: { font: `700 44px/1 ${fonts.sans}`, letterSpacing: '-0.02em', color: C.ink } });
       const price = h('div', { style: { position: 'absolute', right: '30px', top: `${y}px`, height: `${pitch}px`, display: 'flex', alignItems: 'baseline', gap: '4px', paddingTop: `${(pitch - 44) / 2}px`, boxSizing: 'border-box', whiteSpace: 'nowrap' } },
-        priceText, r.per ? h('span', { text: r.per, style: { font: `500 26px/1 ${fonts.sans}`, color: '#8A8E96' } }) : null);
+        priceText, r.per ? h('span', { text: r.per, style: { font: `500 26px/1 ${fonts.sans}`, color: '#8E8E8E' } }) : null);
       const line = k < n - 1 ? h('div', { style: { position: 'absolute', left: '34px', right: '30px', top: `${y + pitch}px`, height: '1px', background: '#E9ECEF' } }) : null;
       const group = h('div', { style: { position: 'absolute', left: '0', top: '0', width: `${rect.w}px`, height: `${rect.h}px` } }, icon, name, price, line);
       card.body.append(group);

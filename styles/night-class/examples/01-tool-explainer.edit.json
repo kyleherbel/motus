@@ -1,0 +1,504 @@
+{
+ "motus": 1,
+ "style": "night-class",
+ "look": {
+  "kit": "k1",
+  "bed": "on",
+  "plate": "dots"
+ },
+ "captions": {
+  "fixes": {
+   "4": "free-to-download",
+   "5": "",
+   "6": "",
+   "21": "You",
+   "105": "There's"
+  },
+  "emphasis": {
+   "16": "concept",
+   "166": "cta"
+  }
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "words": [
+    0,
+    13
+   ],
+   "role": "hook",
+   "single": true,
+   "options": [
+    {
+     "id": "a",
+     "label": "Title + chips",
+     "why": "the hook's three claims arrive as chips on their words, from frame 0",
+     "layout": "dark",
+     "slots": {
+      "title": {
+       "type": "title-lockup",
+       "key": "t1",
+       "line1": "The Free GitHub Repo",
+       "line2": "That Kills *ManyChat*",
+       "deco": "bar"
+      },
+      "graphic": {
+       "type": "step-rows",
+       "key": "g1",
+       "variant": "chips",
+       "rows": [
+        {
+         "label": "Free To Download",
+         "at": 4
+        },
+        {
+         "label": "GitHub Repo",
+         "at": 7
+        },
+        {
+         "label": "Kills ManyChat",
+         "at": 12
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s02",
+   "words": [
+    14,
+    16
+   ],
+   "role": "name",
+   "single": true,
+   "options": [
+    {
+     "id": "a",
+     "label": "Presenter, the name",
+     "why": "first cut-in at sentence 2; the name lands as the serif concept caption",
+     "layout": "full",
+     "slots": {}
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s03",
+   "words": [
+    17,
+    45
+   ],
+   "role": "item",
+   "options": [
+    {
+     "id": "a",
+     "label": "Steps, highlighted list",
+     "why": "the whole list from the start; the highlight steps down as each step is said",
+     "layout": "dark",
+     "slots": {
+      "title": {
+       "type": "title-lockup",
+       "key": "t2",
+       "line1": "How *OpenReply* Works",
+       "deco": "underline"
+      },
+      "graphic": {
+       "type": "step-rows",
+       "key": "g2",
+       "variant": "list",
+       "rows": [
+        {
+         "label": "Pick A Keyword",
+         "at": 23
+        },
+        {
+         "label": "Represent An Asset",
+         "at": 31
+        },
+        {
+         "label": "Give It Away",
+         "at": 41
+        }
+       ]
+      }
+     }
+    },
+    {
+     "id": "b",
+     "label": "Steps, rows joining",
+     "why": "each step joins the stack as it is said",
+     "layout": "dark",
+     "slots": {
+      "title": {
+       "type": "title-lockup",
+       "key": "t2",
+       "line1": "How *OpenReply* Works",
+       "deco": "underline"
+      },
+      "graphic": {
+       "type": "step-rows",
+       "key": "g2",
+       "rows": [
+        {
+         "label": "Pick A Keyword",
+         "at": 23
+        },
+        {
+         "label": "Represent An Asset",
+         "at": 31
+        },
+        {
+         "label": "Give It Away",
+         "at": 41
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s04",
+   "words": [
+    46,
+    55
+   ],
+   "role": "example",
+   "single": true,
+   "options": [
+    {
+     "id": "a",
+     "label": "Presenter",
+     "why": "his own habit, said to camera",
+     "layout": "full",
+     "slots": {}
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s05",
+   "words": [
+    56,
+    69
+   ],
+   "role": "example",
+   "single": true,
+   "options": [
+    {
+     "id": "a",
+     "label": "Script, CTA typed",
+     "why": "his comment CTA typed into a script card as he says it; the title is back complete",
+     "layout": "dark",
+     "slots": {
+      "title": {
+       "type": "title-lockup",
+       "key": "t2",
+       "line1": "How *OpenReply* Works",
+       "deco": "underline"
+      },
+      "graphic": {
+       "type": "doc-card",
+       "key": "g3",
+       "frame": "glow",
+       "title": "Video Script",
+       "sections": [
+        {
+         "label": "Hook",
+         "lines": 2
+        },
+        {
+         "label": "Body",
+         "lines": 8
+        },
+        {
+         "label": "CTA",
+         "lines": 2,
+         "say": [
+          58,
+          61
+         ]
+        }
+       ],
+       "beats": [
+        {
+         "at": 58,
+         "do": "highlight",
+         "section": 3
+        },
+        {
+         "at": 59,
+         "do": "focus",
+         "x": 0.5,
+         "y": 0.8,
+         "scale": 1.55
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s06",
+   "words": [
+    70,
+    79
+   ],
+   "role": "explain",
+   "single": true,
+   "options": [
+    {
+     "id": "a",
+     "label": "Statement",
+     "why": "the comparison, pushed in after the script",
+     "layout": "dark",
+     "slots": {
+      "title": {
+       "type": "title-lockup",
+       "key": "t2",
+       "line1": "How *OpenReply* Works",
+       "deco": "underline"
+      },
+      "graphic": {
+       "type": "statement",
+       "key": "g4",
+       "text": "Works Like *ManyChat*",
+       "enter": "zoom"
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s07",
+   "words": [
+    80,
+    91
+   ],
+   "role": "rehook",
+   "single": true,
+   "options": [
+    {
+     "id": "a",
+     "label": "Presenter, push-in",
+     "why": "the contrast goes full height",
+     "layout": "full",
+     "slots": {
+      "camera": {
+       "type": "push-in",
+       "key": "c1",
+       "level": "small"
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s08",
+   "words": [
+    92,
+    104
+   ],
+   "role": "payoff",
+   "single": true,
+   "options": [
+    {
+     "id": "a",
+     "label": "Before and after",
+     "why": "the two sides of the price, each on its words",
+     "layout": "dark",
+     "slots": {
+      "title": {
+       "type": "title-lockup",
+       "key": "t3",
+       "line1": "A Much *Cheaper*",
+       "line2": "Alternative",
+       "deco": "bar"
+      },
+      "graphic": {
+       "type": "compare",
+       "key": "g5",
+       "left": {
+        "label": "OpenReply",
+        "text": "Much Cheaper Alternative",
+        "at": 95
+       },
+       "right": {
+        "label": "ManyChat",
+        "text": "Official Subscription Fee",
+        "at": 102
+       }
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s09",
+   "words": [
+    105,
+    130
+   ],
+   "role": "item",
+   "options": [
+    {
+     "id": "a",
+     "label": "Requirements, table",
+     "why": "a table filling row by row as each requirement is said",
+     "layout": "dark",
+     "slots": {
+      "graphic": {
+       "type": "data-table",
+       "key": "g6",
+       "title": "Specific Requirements",
+       "rows": [
+        {
+         "head": "Lock",
+         "cell": "Something Behind",
+         "at": 114
+        },
+        {
+         "head": "Follow",
+         "cell": "That Person First",
+         "at": 121
+        },
+        {
+         "head": "DM Flow",
+         "cell": "Complicated",
+         "at": 128
+        }
+       ],
+       "beats": [
+        {
+         "at": 121,
+         "do": "focus",
+         "x": 0.5,
+         "y": 0.6,
+         "scale": 1.12
+        },
+        {
+         "at": 128,
+         "do": "unfocus"
+        }
+       ]
+      }
+     }
+    },
+    {
+     "id": "b",
+     "label": "Requirements, highlighted list",
+     "why": "the three as a list, the highlight stepping down",
+     "layout": "dark",
+     "slots": {
+      "title": {
+       "type": "title-lockup",
+       "key": "t4",
+       "line1": "Specific *Requirements*",
+       "kind": "header"
+      },
+      "graphic": {
+       "type": "step-rows",
+       "key": "g6b",
+       "variant": "list",
+       "rows": [
+        {
+         "label": "Lock Something Behind",
+         "at": 114
+        },
+        {
+         "label": "Follow That Person",
+         "at": 121
+        },
+        {
+         "label": "Complicated DM Flow",
+         "at": 128
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s10",
+   "words": [
+    131,
+    162
+   ],
+   "role": "pitch",
+   "single": true,
+   "options": [
+    {
+     "id": "a",
+     "label": "Presenter, push-in",
+     "why": "the verdict and the lead-in to the call to action, full height",
+     "layout": "full",
+     "slots": {
+      "camera": {
+       "type": "push-in",
+       "key": "c2",
+       "level": "large",
+       "at": 133
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s11",
+   "words": [
+    163,
+    177
+   ],
+   "role": "cta",
+   "options": [
+    {
+     "id": "a",
+     "label": "Comment, light",
+     "why": "cut to the light field on 'comment'; the lockup holds to the end",
+     "layout": "light",
+     "slots": {
+      "title": {
+       "type": "cta-lockup",
+       "key": "cta",
+       "keyword": "Reply",
+       "reward": "To Get The Link",
+       "at": 163
+      }
+     }
+    },
+    {
+     "id": "b",
+     "label": "Comment, dark",
+     "why": "the same on the dark field",
+     "layout": "dark",
+     "slots": {
+      "title": {
+       "type": "cta-lockup",
+       "key": "cta",
+       "keyword": "Reply",
+       "reward": "To Get The Link",
+       "at": 163
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  }
+ ],
+ "audio": {
+  "music": null,
+  "sfx": true
+ }
+}

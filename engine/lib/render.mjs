@@ -115,7 +115,15 @@ async function buildMix(project, plan, events, { from = 0, to, dir = project.pat
       const g = dbToGain(audio.music.gainDb);
       // beds are normalised to -20 dBFS RMS; gainDb is relative to the voice reference
       // (an empty decode would make i % 0 = NaN and silence the whole mix)
-      if (m.length >= CH) for (let i = 0; i < total; i++) mix[i] += m[i % m.length] * g * dbToGain(-14.5 + 20 - 3);
+      if (m.length >= CH) {
+        const k = g * dbToGain(-14.5 + 20 - 3);
+        // a style bed may fade out over the last seconds: a linear ramp on the music only, zero on the last sample
+        const frames = total / CH, fo = Math.round(Math.min(duration, audio.music.fadeOut || 0) * RATE);
+        for (let i = 0; i < total; i++) {
+          const left = frames - Math.floor(i / CH);
+          mix[i] += m[i % m.length] * (left < fo ? k * (left / fo) : k);
+        }
+      }
     }
   }
   // a few milliseconds of fade at the very end so the file does not click (interleaved: fade whole sample frames)
@@ -267,6 +275,55 @@ export async function renderStills(project, opt = {}) {
         }
       }
       for (const f of await fs.readdir(dir)) if (!keep.has(f)) await fs.rm(path.join(dir, f));
+      await fs.writeFile(stampFile, stamp);
+      await force(null, null);
+    }
+
+    // Loops: a short silent clip of every scene option, for Studio's scene grid. Same names and
+    // freshness rule as the posters; the current picks are drawn first so the grid fills in order.
+    if (opt.loops) {
+      const dir = project.path('review', 'loops');
+      await mkdirp(dir);
+      const stampFile = path.join(dir, '.stamp');
+      const stamp = hashOf({ style: await styleFingerprint(plan.style.dir), captions: plan.edit.captions || null, look: plan.edit.look || null, v: 1 });
+      const fresh = !opt.force && (await fs.readFile(stampFile, 'utf8').catch(() => '')) === stamp;
+      const keep = new Set(['.stamp']);
+      const jobs = [];
+      for (const sc of plan.edit.scenes) {
+        const h = hashOf(sc.options);
+        const picked = plan.state?.scenes?.[sc.id]?.pick || sc.pick || sc.options[0].id;
+        for (const op of sc.options) {
+          const file = path.join(dir, `${sc.id}-${op.id}-${h}.mp4`);
+          keep.add(path.basename(file));
+          jobs.push({ sc, op, file, first: op.id === picked });
+        }
+      }
+      jobs.sort((a, b) => Number(b.first) - Number(a.first));
+      for (const f of await fs.readdir(dir)) if (!keep.has(f)) await fs.rm(path.join(dir, f), { force: true });
+      if (!fresh) await fs.writeFile(stampFile, '');            // half-redrawn: a crash leaves the set stale, not fresh
+      const LOOP_FPS = 15;
+      for (const { sc, op, file } of jobs) {
+        if (fresh && await exists(file)) continue;
+        const s = scenes.find((x) => x.id === sc.id);
+        await force(sc.id, op.id);
+        const tmp = await fs.mkdtemp(path.join(os.tmpdir(), 'motus-loop-'));
+        const offTmp = onExit(() => fss.rmSync(tmp, { recursive: true, force: true }));
+        try {
+          const n = Math.max(2, Math.round((s.end - s.start) * LOOP_FPS));
+          for (let i = 0; i < n; i++) {
+            await page.eval(`window.__motus.seekFrame(${frameOf(s.start + i / LOOP_FPS)})`);
+            await fs.writeFile(path.join(tmp, `${pad(i + 1)}.jpg`), await page.screenshot({ format: 'jpeg', quality: 82, clip: third }));
+          }
+          const part = `${file}.part.mp4`;
+          await run('ffmpeg', ['-v', 'error', '-y', '-framerate', String(LOOP_FPS), '-start_number', '1', '-i', path.join(tmp, '%06d.jpg'),
+            '-vf', 'scale=360:640:flags=bicubic,format=yuv420p', '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '27', '-movflags', '+faststart', '-an', part]);
+          await fs.rename(part, file);                              // Studio never sees a half-written clip
+          log(`loop ${sc.id}-${op.id}`);
+        } finally {
+          offTmp();
+          await fs.rm(tmp, { recursive: true, force: true });
+        }
+      }
       await fs.writeFile(stampFile, stamp);
       await force(null, null);
     }

@@ -1,0 +1,75 @@
+{
+  "id": "night-class",
+  "name": "Night Class",
+  "version": "0.1.0",
+  "status": "beta",
+  "summary": "A teaching explainer: a black graphic field over a small rounded presenter panel, a centred title with a cobalt bar, one-word captions, hard cuts to the full-height speaker about every ten seconds, and a comment call to action.",
+  "bestFor": [
+    "frameworks and playbooks",
+    "numbered steps and lists",
+    "how-tos and strategy explainers",
+    "solo talking-head teaching"
+  ],
+  "aspect": "9:16",
+  "footage": {
+    "wide": true
+  },
+  "look": {
+    "kit": {
+      "label": "Sound kit",
+      "choices": [
+        "k1",
+        "k2",
+        "k3"
+      ],
+      "default": "k1"
+    },
+    "bed": {
+      "label": "Music bed",
+      "choices": [
+        "on",
+        "off"
+      ],
+      "default": "on"
+    },
+    "plate": {
+      "label": "Dark field",
+      "choices": [
+        "dots",
+        "grid",
+        "plain",
+        "lifted"
+      ],
+      "default": "dots"
+    }
+  },
+  "emphasis": [
+    "concept",
+    "cta"
+  ],
+  "roles": [
+    "hook",
+    "name",
+    "proof",
+    "item",
+    "example",
+    "explain",
+    "rehook",
+    "payoff",
+    "pitch",
+    "cta"
+  ],
+  "sfx": {
+    "swell": "assets/sfx/swell.wav",
+    "swoop": "assets/sfx/swoop.wav",
+    "thump": "assets/sfx/thump.wav",
+    "riser": "assets/sfx/riser.wav",
+    "subdrop": "assets/sfx/subdrop.wav",
+    "tone": "assets/sfx/tone.wav",
+    "midwhoosh": "assets/sfx/midwhoosh.wav",
+    "lowwhoosh": "assets/sfx/lowwhoosh.wav",
+    "bedA": "assets/music/bed-a.m4a",
+    "bedA2": "assets/music/bed-a2.m4a"
+  },
+  "beds": {}
+}

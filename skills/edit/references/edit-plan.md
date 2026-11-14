@@ -41,7 +41,7 @@ The plan says, for every stretch of the video, what could be on screen. It refer
     }
   ],
 
-  "audio": { "sfx": true, "music": null, "musicGainDb": -24 }   // music: a file under assets/, only if the user supplied one
+  "audio": { "sfx": true, "music": null, "musicGainDb": -24 }   // music: a file under assets/, only if the user supplied one; "bed": a bed id from the style manifest, or "none" (default: the style's first bed)
 }
 ```
 

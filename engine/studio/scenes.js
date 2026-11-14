@@ -25,6 +25,8 @@ export function createScenes({ root, empty, zones, actions, onNoteInput, onFilte
   const ghosts = new Set();           // sections of scenes that left the plan while their note was still being written
   let filter = 'all';
   let current = null;
+  let held = null;                    // the scene shown in the scene dialog: it keeps its section, out of the list
+  let lastModel = null;
 
   // Scenes are never hidden while a pointer is down: the page must not move under a click.
   let pointerDown = false, filterWaiting = false;
@@ -106,16 +108,29 @@ export function createScenes({ root, empty, zones, actions, onNoteInput, onFilte
 
   // ---------------------------------------------------------------- cards
 
+  const cardSeen = new IntersectionObserver((entries) => {
+    for (const e of entries) { const c = e.target.__card; if (c) { c.onScreen = e.isIntersecting; playCard(c); } }
+  }, { threshold: 0.2 });
+  function playCard(c) {
+    if (c.onScreen && c.loopUrl && c.el.isConnected) { const p = c.vid.play(); if (p) p.catch(() => {}); }
+    else if (!c.vid.paused) c.vid.pause();
+  }
+
   function buildCard(view, optionId) {
     const c = { id: optionId, view, letter: '', posterUrl: undefined, useState: null, tagSig: null };
     c.phLetter = h('span', { class: 'ph-letter mono' });
     c.ph = h('div', { class: 'ph' }, c.phLetter, h('span', { class: 'ph-text' }, 'No still yet.'), h('span', { class: 'ph-text' }, 'Hover or tap to play it.'));
     c.img = h('img', { class: 'poster', alt: '', draggable: 'false', decoding: 'async', hidden: true });
+    // the option's loop plays under the live preview whenever the card is on screen
+    c.vid = h('video', { class: 'poster', muted: true, loop: true, playsinline: true, preload: 'none', 'aria-hidden': 'true', hidden: true });
+    c.vid.muted = true;
     c.img.addEventListener('error', () => { setHidden(c.img, true); setHidden(c.ph, false); });
     c.slot = h('div', { class: 'live-slot' });
     c.tag = h('span', { class: 'live-tag mono', hidden: true });
     c.hit = h('button', { class: 'thumb-hit', type: 'button' });
-    c.thumb = h('div', { class: 'thumb' }, c.ph, c.img, c.slot, buildOverlay(zones), c.tag, c.hit);
+    c.thumb = h('div', { class: 'thumb' }, c.ph, c.img, c.vid, c.slot, buildOverlay(zones), c.tag, c.hit);
+    c.thumb.__card = c;
+    cardSeen.observe(c.thumb);
 
     c.badge = h('span', { class: 'badge mono' });
     c.rec = h('span', { class: 'rec', hidden: true }, 'Recommended');
@@ -165,6 +180,13 @@ export function createScenes({ root, empty, zones, actions, onNoteInput, onFilte
     setAttr(c.use, 'aria-label', picked ? `Option ${c.letter}, ${o.label}, is picked` : `Use option ${c.letter}, ${o.label}`);
     setAttr(c.hit, 'aria-label', `Play option ${c.letter}, ${o.label}, over this scene`);
 
+    const loop = o.loop || null;
+    if (c.loopUrl !== loop) {
+      c.loopUrl = loop;
+      if (loop) c.vid.src = loop; else c.vid.removeAttribute('src');
+      setHidden(c.vid, !loop);
+      playCard(c);
+    }
     const poster = o.poster || null;
     if (c.posterUrl !== poster) {
       c.posterUrl = poster;
@@ -294,6 +316,7 @@ export function createScenes({ root, empty, zones, actions, onNoteInput, onFilte
     }
   }
 
+  const forgetAll = (v) => { for (const c of v.cards.values()) forget(c); };
   const hasNote = (v) => !!v.note.value().trim();
   const matches = (v) => filter === 'all' || (filter === 'open' && !v.sc.locked) || (filter === 'notes' && hasNote(v));
 
@@ -306,7 +329,7 @@ export function createScenes({ root, empty, zones, actions, onNoteInput, onFilte
     const list = [...views.values()];
     for (const v of list) {
       // A scene whose note is being written stays put even if it stops matching.
-      const show = matches(v) || v.note.dirty() || document.activeElement === v.note.area;
+      const show = matches(v) || v.note.dirty() || document.activeElement === v.note.area || held === v.id;
       if (!show && !v.el.hidden && v.el.contains(document.activeElement)) orphan = v;   // about to hide the focused control
       setHidden(v.el, !show);
       if (show) shown++;
@@ -328,6 +351,7 @@ export function createScenes({ root, empty, zones, actions, onNoteInput, onFilte
 
   return {
     update(model, view) {
+      lastModel = model;
       filter = view.filter; current = view.current;
       const seen = new Set();
       let prev = null;
@@ -336,6 +360,7 @@ export function createScenes({ root, empty, zones, actions, onNoteInput, onFilte
         if (!v) { v = buildScene(sc.id); views.set(sc.id, v); }
         seen.add(sc.id);
         patchScene(v, sc);
+        if (held === sc.id) continue;
         const want = prev ? prev.nextElementSibling : root.firstElementChild;
         if (want !== v.el) root.insertBefore(v.el, want);
         prev = v.el;
@@ -388,5 +413,24 @@ export function createScenes({ root, empty, zones, actions, onNoteInput, onFilte
     show(view) { filter = view.filter; current = view.current; applyFilter(); },
     setCurrent(id) { current = id; paintCurrent(); },
     liveCount: () => root.querySelectorAll('.live-slot iframe').length,
+    /** Show one scene's section somewhere else (the scene dialog). */
+    hold(id, container) {
+      const v = views.get(id);
+      if (!v) return false;
+      held = id;
+      container.replaceChildren(v.el);
+      setHidden(v.el, false);
+      if (!v.sc.locked) v.note.fit();
+      for (const c of v.cards.values()) { c.onScreen = true; playCard(c); }   // the dialog shows every card: play them all
+      return true;
+    },
+    /** Put the held section back in its place in the list. */
+    release() {
+      if (!held) return;
+      const v = views.get(held);
+      held = null;
+      if (v) { forgetAll(v); for (const c of v.cards.values()) { c.onScreen = false; playCard(c); } root.append(v.el); }
+      if (lastModel) this.update(lastModel, { filter, current });
+    },
   };
 }

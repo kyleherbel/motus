@@ -359,4 +359,10 @@ describe('resolveAudio', () => {
     assert.deepEqual(resolveAudio({ audio: { music: './assets/song.mp3', bed: 'drive' } }, m).music, { from: 'project', file: 'assets/song.mp3', url: '/project/assets/song.mp3', gainDb: -24, bed: null });
     assert.equal(resolveAudio({}, { id: 'y' }).music, null);
   });
+  test('a bed with fadeOut carries it; a bed without has no such field', () => {
+    const f = { id: 'z', beds: { a: { src: 'assets/a.m4a', gainDb: -17, fadeOut: 1 }, b: { src: 'assets/b.m4a' } } };
+    assert.equal(resolveAudio({}, f).music.fadeOut, 1);
+    assert.equal('fadeOut' in resolveAudio({ audio: { bed: 'b' } }, f).music, false);
+    assert.equal('fadeOut' in resolveAudio({ audio: { music: 'assets/song.mp3' } }, f).music, false);
+  });
 });

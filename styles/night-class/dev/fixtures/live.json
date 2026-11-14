@@ -1,0 +1,364 @@
+{
+ "motus": 1,
+ "style": "night-class",
+ "look": {
+  "kit": "k1",
+  "bed": "on",
+  "plate": "dots"
+ },
+ "captions": {
+  "fixes": {
+   "97": "Claude"
+  },
+  "emphasis": {
+   "12": "concept"
+  }
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "words": [
+    0,
+    12
+   ],
+   "role": "hook",
+   "single": true,
+   "options": [
+    {
+     "id": "a",
+     "label": "List",
+     "why": "fixture: index list, highlight steps down on each word",
+     "layout": "dark",
+     "slots": {
+      "title": {
+       "type": "title-lockup",
+       "key": "t1",
+       "line1": "3 Parts Of *ClipFrame*",
+       "deco": "bar"
+      },
+      "graphic": {
+       "type": "step-rows",
+       "key": "g1",
+       "variant": "list",
+       "rows": [
+        {
+         "label": "Custom AI",
+         "at": 6
+        },
+        {
+         "label": "Video Editor",
+         "at": 8
+        },
+        {
+         "label": "Workflow",
+         "at": 10
+        },
+        {
+         "label": "ClipFrame",
+         "at": 12
+        }
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s02",
+   "words": [
+    13,
+    28
+   ],
+   "role": "explain",
+   "single": true,
+   "options": [
+    {
+     "id": "a",
+     "label": "Doc typing",
+     "why": "fixture: glowing script card, the words typed as said, CTA highlighted",
+     "layout": "dark",
+     "slots": {
+      "title": {
+       "type": "title-lockup",
+       "key": "t1",
+       "line1": "3 Parts Of *ClipFrame*",
+       "deco": "bar"
+      },
+      "graphic": {
+       "type": "doc-card",
+       "key": "g2",
+       "frame": "glow",
+       "title": "Video Script",
+       "sections": [
+        {
+         "label": "Hook",
+         "lines": 2,
+         "say": [
+          13,
+          24
+         ]
+        },
+        {
+         "label": "Body",
+         "lines": 9
+        },
+        {
+         "label": "CTA",
+         "lines": 3
+        }
+       ],
+       "beats": [
+        {
+         "at": 25,
+         "do": "highlight",
+         "section": 3
+        }
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s03",
+   "words": [
+    29,
+    45
+   ],
+   "role": "proof",
+   "single": true,
+   "options": [
+    {
+     "id": "a",
+     "label": "Phone + stat",
+     "why": "fixture: phone, stat card arriving beside it (the phone moves left), spotlight",
+     "layout": "dark",
+     "slots": {
+      "title": {
+       "type": "title-lockup",
+       "key": "t2",
+       "line1": "Every *Single* Animation",
+       "deco": "underline"
+      },
+      "graphic": {
+       "type": "phone",
+       "key": "g3",
+       "src": "assets/test-still-tall.png",
+       "beats": [
+        {
+         "at": 35,
+         "do": "spot",
+         "x": 0.55,
+         "y": 0.45,
+         "r": 90
+        },
+        {
+         "at": 41,
+         "do": "zoom"
+        }
+       ]
+      },
+      "side": {
+       "type": "metric-card",
+       "key": "m1",
+       "label": "Animations",
+       "value": "1,600",
+       "trend": "up",
+       "at": 37
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "words": [
+    46,
+    63
+   ],
+   "role": "item",
+   "single": true,
+   "options": [
+    {
+     "id": "a",
+     "label": "Tiers",
+     "why": "fixture: benchmark tiers on their words",
+     "layout": "dark",
+     "slots": {
+      "title": {
+       "type": "title-lockup",
+       "key": "t3",
+       "line1": "Every *Single* Visual",
+       "kind": "header"
+      },
+      "graphic": {
+       "type": "tier-bars",
+       "key": "g4",
+       "tiers": [
+        {
+         "label": "Great",
+         "value": "Every Animation",
+         "at": 50
+        },
+        {
+         "label": "Average",
+         "value": "Every Caption",
+         "at": 53
+        },
+        {
+         "label": "Bad",
+         "value": "Every Visual",
+         "at": 58
+        }
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s05",
+   "words": [
+    64,
+    76
+   ],
+   "role": "explain",
+   "single": true,
+   "options": [
+    {
+     "id": "a",
+     "label": "Table",
+     "why": "fixture: table filling row by row",
+     "layout": "dark",
+     "slots": {
+      "graphic": {
+       "type": "data-table",
+       "key": "g5",
+       "title": "What You Pick",
+       "rows": [
+        {
+         "head": "Ones You Like",
+         "cell": "Keep",
+         "at": 69
+        },
+        {
+         "head": "Ones You Don't",
+         "cell": "Drop",
+         "at": 75
+        }
+       ],
+       "blank": 2
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s06",
+   "words": [
+    77,
+    92
+   ],
+   "role": "payoff",
+   "single": true,
+   "options": [
+    {
+     "id": "a",
+     "label": "Quote",
+     "why": "fixture: the sentence typed in a box",
+     "layout": "dark",
+     "slots": {
+      "graphic": {
+       "type": "quote-card",
+       "key": "g6",
+       "say": [
+        77,
+        92
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s07",
+   "words": [
+    93,
+    105
+   ],
+   "role": "rehook",
+   "single": true,
+   "options": [
+    {
+     "id": "a",
+     "label": "Compare",
+     "why": "fixture: before and after",
+     "layout": "dark",
+     "slots": {
+      "graphic": {
+       "type": "compare",
+       "key": "g7",
+       "left": {
+        "label": "Before",
+        "text": "Claude Runs Rampant",
+        "at": 99
+       },
+       "right": {
+        "label": "After",
+        "text": "You Pick Every Visual",
+        "at": 102
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s08",
+   "words": [
+    106,
+    132
+   ],
+   "role": "cta",
+   "single": true,
+   "options": [
+    {
+     "id": "a",
+     "label": "Capture + spot",
+     "why": "fixture: capture with a spotlight",
+     "layout": "dark",
+     "slots": {
+      "title": {
+       "type": "title-lockup",
+       "key": "t4",
+       "line1": "Download The *Infrastructure*",
+       "deco": "none"
+      },
+      "graphic": {
+       "type": "capture",
+       "key": "g8",
+       "items": [
+        {
+         "src": "assets/example.png"
+        }
+       ],
+       "frame": "card",
+       "beats": [
+        {
+         "at": 115,
+         "do": "spot",
+         "x": 0.3,
+         "y": 0.4
+        }
+       ]
+      }
+     }
+    }
+   ]
+  }
+ ],
+ "audio": {
+  "music": null,
+  "sfx": true
+ }
+}

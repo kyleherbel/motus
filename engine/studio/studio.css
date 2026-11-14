@@ -31,7 +31,8 @@
   --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
   --r: 4px;
   --gutter: 32px;
-  --card-w: clamp(168px, 14.5vw, 224px);
+  /* option cards grow with the window, but never so tall that a card's picture leaves the screen */
+  --card-w: clamp(168px, min(14.5vw, (100vh - 330px) * 9 / 16), 360px);
   --sticky-top: 0px;        /* height of the sticky monitor in a narrow window (set by studio.js) */
   --sticky-bottom: 61px;    /* height of the sticky action bar (set by studio.js) */
 }
@@ -117,7 +118,7 @@ textarea:focus-visible { outline-offset: 0; border-color: #fff; }
 /* ------------------------------------------------------------------ monitor */
 
 .monitor {
-  --pw: clamp(180px, min(calc((100vh - 160px) * 9 / 16), 38vw), 520px);
+  --pw: clamp(180px, min(calc((100vh - 160px) * 9 / 16), 38vw), 760px);
   position: sticky; top: 0; align-self: start; height: 100vh; padding: 20px;
   display: flex; flex-direction: column; gap: 10px; overflow: hidden auto; scrollbar-width: thin; scrollbar-color: var(--s4) transparent;
   background: var(--bg-deep); border-right: 1px solid var(--line);
@@ -189,7 +190,7 @@ textarea:focus-visible { outline-offset: 0; border-color: #fff; }
 /* ------------------------------------------------------------------ review column */
 
 .review { display: flex; flex-direction: column; min-width: 0; min-height: 100vh; padding: 24px var(--gutter) 0; }
-.review > * { width: 100%; max-width: 1040px; }
+.review > * { width: 100%; max-width: 1680px; }
 
 .banner { margin-bottom: 16px; padding: 12px 14px; border: 1px solid var(--line-2); border-left: 3px solid var(--ink); border-radius: var(--r); background: var(--s2); }
 .banner h2 { margin-bottom: 4px; font-size: 14px; font-weight: 600; }
@@ -208,6 +209,11 @@ textarea:focus-visible { outline-offset: 0; border-color: #fff; }
 h1 { margin-top: 2px; font-size: 20px; font-weight: 600; line-height: 1.25; letter-spacing: -.005em; overflow-wrap: anywhere; }
 .head-tools { position: relative; flex: none; display: flex; align-items: center; gap: 12px; }
 .conn { color: var(--ink-3); font-size: 11px; white-space: nowrap; }
+.agent-chip { display: inline-flex; align-items: center; gap: 6px; color: var(--ink-2); font-size: 12px; white-space: nowrap; }
+.agent-chip i { width: 7px; height: 7px; border-radius: 50%; border: 1.5px solid var(--ink-3); }
+.agent-chip[data-on="true"] i { background: var(--accent); border-color: var(--accent); }
+.back { display: inline-block; margin-bottom: 8px; color: var(--ink-2); font-size: 13px; text-decoration: none; }
+.back:hover { color: var(--ink); }
 .btn kbd { min-width: 16px; padding: 1px 4px; font-size: 10.5px; }
 
 .facts { display: flex; flex-wrap: wrap; gap: 4px 24px; margin-top: 12px; font-size: 13px; }
@@ -297,7 +303,7 @@ h1 { margin-top: 2px; font-size: 20px; font-weight: 600; line-height: 1.25; lett
 /* The note sits beside the cards when there is room for it, and under them when there is not. */
 .work { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 6px 24px; }
 .work .options { flex: 0 1 auto; min-width: 0; max-width: 100%; }
-.notes { flex: 1 1 300px; min-width: min(300px, 100%); max-width: 560px; padding-top: 3px; }
+.notes { flex: 1 1 300px; min-width: min(300px, 100%); max-width: 720px; padding-top: 3px; }
 .work .notes textarea { min-height: 112px; }
 .note-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 6px; }
 .save { flex: none; color: var(--ink-3); font-size: 11px; }
@@ -402,4 +408,58 @@ h1 { margin-top: 2px; font-size: 20px; font-weight: 600; line-height: 1.25; lett
   .review > .bar { flex-direction: column; align-items: stretch; gap: 10px; padding: 10px var(--gutter); }
   .bar-actions .primary { flex: 1 1 0; }
   .help { position: fixed; top: auto; bottom: 16px; left: 16px; right: 16px; width: auto; }
+}
+
+/* ------------------------------------------------------------------ scene grid: every scene as a playing loop */
+
+.filters-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.view-grid { margin-bottom: 28px; }
+/* Tiles take their size from the window's height so two rows fit on screen; on a laptop that is
+   three across, six in view. */
+.board {
+  --tile-w: clamp(150px, calc((100vh - var(--sticky-bottom) - 120px) * 9 / 32), 340px);
+  display: grid; grid-template-columns: repeat(auto-fill, var(--tile-w)); justify-content: start; gap: 14px;
+}
+.tile { position: relative; width: var(--tile-w); aspect-ratio: 9 / 16; border-radius: 8px; overflow: hidden; background: #000; outline: 1px solid var(--line); }
+.tile[aria-current="true"] { outline: 2px solid var(--ink); }
+.tile[data-state="locked"] { outline: 2px solid var(--accent); }
+.tile-media, .tile-video, .tile-poster { position: absolute; inset: 0; width: 100%; height: 100%; }
+.tile-video, .tile-poster { object-fit: cover; display: block; }
+.tile-wait { position: absolute; left: 50%; top: 50%; translate: -50% -50%; padding: 4px 8px; border-radius: 3px; background: rgba(0, 0, 0, .6); color: var(--ink-2); font-size: 11px; white-space: nowrap; }
+.tile-hit { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; cursor: pointer; }
+.tile-hit:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.tile-top, .tile-bottom { position: absolute; left: 0; right: 0; display: grid; gap: 6px; padding: 10px; pointer-events: none; }
+.tile-top { top: 0; display: flex; align-items: flex-start; justify-content: space-between; background: linear-gradient(rgba(0, 0, 0, .6), rgba(0, 0, 0, 0)); padding-bottom: 28px; }
+.tile-bottom { bottom: 0; background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, .72) 45%); padding-top: 26px; }
+.tile-id { display: flex; align-items: baseline; gap: 8px; }
+.tile-num { color: #fff; font-size: 15px; font-weight: 700; }
+.tile-tc { color: rgba(255, 255, 255, .72); font-size: 11px; }
+.tile-flags { display: flex; gap: 4px; }
+.tile-flag { display: inline-flex; align-items: center; gap: 3px; padding: 2px 6px; border-radius: 3px; font-size: 10.5px; font-weight: 600; background: rgba(0, 0, 0, .55); color: #fff; }
+.tile-flag.lock { background: var(--accent); color: var(--accent-ink); padding: 3px 5px; }
+.tile-flag.new { background: var(--paper); color: var(--paper-ink); }
+.tile-meta { display: flex; align-items: baseline; gap: 6px; min-width: 0; }
+.tile-role { flex: none; padding: 1px 5px; border: 1px solid rgba(255, 255, 255, .4); border-radius: 2px; color: rgba(255, 255, 255, .8); font-size: 9.5px; letter-spacing: .06em; text-transform: uppercase; }
+.tile-label { min-width: 0; color: #fff; font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tile-say { display: none; color: rgba(255, 255, 255, .82); font-size: 11.5px; line-height: 1.35; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.tile:hover .tile-say, .tile:focus-within .tile-say { display: -webkit-box; }   /* what is said shows when you point at a scene */
+.tile-actions { display: flex; align-items: center; justify-content: space-between; gap: 6px; pointer-events: auto; }
+.tile-pills { display: flex; gap: 4px; }
+.tile-pill { min-width: 26px; height: 24px; padding: 0 6px; border: 1px solid rgba(255, 255, 255, .45); border-radius: 4px; background: rgba(0, 0, 0, .45); color: #fff; font-size: 11.5px; cursor: pointer; }
+.tile-pill:hover { background: rgba(255, 255, 255, .18); }
+.tile-pill[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 700; }
+.tile-btn { display: inline-flex; align-items: center; gap: 5px; height: 24px; padding: 0 8px; border: 1px solid rgba(255, 255, 255, .45); border-radius: 4px; background: rgba(0, 0, 0, .45); color: #fff; font: 600 11.5px/1 var(--sans); cursor: pointer; }
+.tile-btn:hover { background: rgba(255, 255, 255, .18); }
+.tile[data-state="locked"] .tile-btn { border-color: var(--accent); }
+
+/* The scene dialog holds the same section the list shows. */
+.scene-dialog { width: min(1180px, calc(100vw - 48px)); max-height: calc(100vh - 48px); padding: 0; border: 1px solid var(--line-2); border-radius: 10px; background: var(--bg); color: var(--ink); }
+.scene-dialog::backdrop { background: rgba(0, 0, 0, .72); }
+.dlg-head { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; gap: 8px; padding: 12px 18px; border-bottom: 1px solid var(--line); background: var(--s1); }
+.dlg-title { font-size: 14px; font-weight: 600; }
+.dlg-body { overflow: auto; max-height: calc(100vh - 110px); padding: 6px 22px 22px; }
+.dlg-body .scene { border-top: 0; }
+@media (max-width: 640px) {
+  .board { --tile-w: calc((100vw - 2 * var(--gutter) - 14px) / 2); }
+  .scene-dialog { width: 100vw; max-height: 100vh; border-radius: 0; }
 }

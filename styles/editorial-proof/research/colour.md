@@ -222,3 +222,121 @@ Part of the Editorial Proof study; read `README.md` first for the corpus, the me
 - Card-outline glint colours come from one reel (clip39@60); dark caption shadow from one word.
 - The reconstructed plate is their asset reconstructed for measurement only; ship the procedural recipe, not the plate.
 - Whether the newest presenter-panel ring should be the default (6 of 33 reels, all in the latest 9) is an editorial choice the evidence cannot settle.
+
+## Release palette (CR01-CR12)
+
+**Why.** The measured hues above are the reference creator's own colours. For release the owner chose an original palette: an emerald accent set in place of the blue one, a violet set in place of the lime one, neutrals without the blue cast, and a white canvas with a static grid in place of the creator's palm-frond canvas. Only colour changed. Geometry, sizes, type, timing, motion, sound, structure, element behaviour, alphas of shadows, gradient stop positions and every rule C01-C30 about where a colour goes stay as measured. The values below are design choices, not measurements; each one keeps the role, and roughly the lightness, of the measured value it replaces. `src/tokens.js` cites these ids.
+
+**Contrast rule.** Where a colour carries words it meets WCAG 4.5:1 against the surface it sits on, which is at least as good as the measured palette (the measured blue strip text was 3.6:1, the light keyword 3.3:1, the dark sans keyword 2.1:1). The dark backdrop is taken at its lightest behind a caption: luma 97 (#616161; median 86), measured on rendered frames with a white card in focus. Ratios are in the table at the end of this section.
+
+### CR01 - Accent fill: emerald replaces the bright blue.
+
+- Measured: strip #0184FE [C02], callout #0885F5, white-tile digits #0083FC (graphics G17)
+- Release: #00845F for all three (strip, interstitial block, number block, filled chips, check discs, terminal lit edge, steps tree, callout outline, white-tile digits)
+- Why: the most saturated emerald (hue about 162) that still carries #FCFDFC text at 4.6:1
+
+### CR02 - Outline: a deeper emerald replaces the outline blue.
+
+- Measured: #1562C8 [C03]; dark-mode glow rgba(30,110,230,0.45)
+- Release: #006A4C; glow rgba(0,150,104,0.45)
+- Why: about 0.8 of the accent's lightness, as measured (luma 86 vs 113)
+
+### CR03 - Keyword captions.
+
+- Measured: light #0484FB [C04]; dark sans #2A9AFB, dark serif #84C5FA [C05]
+- Release: light #00734E; dark sans #7BF5C8; dark serif #B5F8DD
+- Why: the light keyword is deeper than the accent so it keeps 4.5:1 even where a glyph crosses a major grid line (#E3E3E3); on dark the sans keyword is the lifted accent and the serif a paler tint, the same order as measured, both at 4.5:1 or better on the lightest backdrop
+
+### CR04 - Highlight.
+
+- Measured: rgba(1,132,254,0.337) multiplied over white = #A9D7FD [C06]; on dark pages #215F9B screened
+- Release: rgba(16,196,136,0.38) = #A4E9D2 on white; #186A4F on dark
+- Why: a mint about as light as the measured tint, so dark text over it keeps 13:1
+
+### CR05 - Presenter panel ring and glints.
+
+- Measured: ring #5578D8 / #325FC5 / #155BCC (lit outer, inner, shaded side) [C25]; glint head #94C6FE, tail #3C88E4 [C24], hot glint #B9DBFF
+- Release: ring #3B8C71 / #1C7457 / #0B6A4C; glint #79D6B4, tail #1E9B6E, hot #B3EBD7
+- Why: same three-tone bevel and the same lightness order
+
+### CR06 - Number digit ramp.
+
+- Measured: #F4F9FE, #E5F1FE, #CCE5FD, #9BD0FD, #6BBCFD, #3EA8FE, glow rgba(62,168,254,0.5) [C26]
+- Release: #F2FCF8, #E0F8EE, #C3F0DE, #8FE3C2, #5DD4A6, #2FC489, glow rgba(47,196,137,0.5)
+- Why: white to emerald over the same six stops; the bottom stop keeps 5.2:1 on the tile
+
+### CR07 - Colours derived from the accent.
+
+- Strip and block shadows: rgba(0,60,160,0.20) and rgba(0,70,190,0.24) become the accent at 63 %, rgba(0,83,60,0.20) and rgba(0,83,60,0.24)
+- Lit tile (steps) and active row (rank list): #E1F0FC / #E1F0FB become 12 % of the accent over white, #E0F0EC
+- Muted row (rank list): fill #F3F9FB and edge #D4E0EC become 4.8 % of the accent (#F3F9F7) and 19 % of the outline (#CFE3DD) over white, the proportions of the measured values
+- Compare tile, side A: the measured #0F6BF7 / #E5EEFB / #D5DFF2 set becomes tintOf(outline): #006A4C / #E2EEEA / #D3DEDB (11.5 % over white, edge 6.5 % darker, as measured on the warm tile)
+- Steps pill icon: lavender #E9E6F4 with #7F8FC8 squares becomes the lit tint #E0F0EC with #4D9782 (the outline mixed 30 % toward white)
+- Terminal lit row: #0E2942 (the blue at 20 % over the body) becomes the same 20 % of the accent, #0F2A22; its checks #71BDFC / #77B9F4 / #75B8F3 become the dark serif keyword colour #B5F8DD
+
+### CR08 - Neutrals without the blue cast.
+
+Each becomes the grey of the same Rec. 709 luma.
+
+- Caption white on dark #EEF5FC -> #F4F4F4
+- Dark number tile #343842 -> #383838, rgba(48,51,58,0.92) -> rgba(51,51,51,0.92); its edge #3A6077 -> #5A5A5A; label #EBEEF3 -> #EEEEEE; the backdrop echo it casts (110,115,125) -> (115,115,115)
+- Dark logo card gradient #050F1D / #030A17 / #00030F -> #0E0E0F / #09090A / #030303; its echo (4,10,22) -> (10,10,10); taglines #A9B3C2 -> #B2B2B2 and #6E7179 -> #717171
+- Logo-grid tile shadow rgba(10,50,110,0.25) -> rgba(46,46,46,0.25); logo-chip shadow rgba(20,40,70,a) -> rgba(38,38,38,a)
+- Terminal lit text #F7FFFF -> #FDFDFD, done text #D1D9E5 -> #D8D8D8
+- Steps sub-line #747D88 -> #7C7C7C; text-card eyebrow #8A8F98 -> #8F8F8F; media and price greys #8A8E96 -> #8E8E8E
+- Unchanged: ink, card white, terminal greys, chrome greys and every neutral whose blue exceeds its red by less than 8 levels
+
+### CR09 - CTA dot.
+
+- Measured: core #217FF6, rim #277CF1 [C28]
+- Release: core #0F9D6D, rim rgba(14,150,104,0.9)
+
+### CR10 - Light canvas: white with a static grid.
+
+- Measured: a horizontal pale-blue to off-white gradient, two palm-frond shadows, monochrome grain and a 5 s travelling wave [C11-C17], plus a slightly darker lower third [C12]
+- Release: flat #FFFFFF under a grid of 2 px lines every 90 px (#EFEFEF), every third line #E3E3E3 (so every 270 px), centred on the frame centre (540, 960): 12 columns, with a major line through the centre both ways. No fronds, no grain, no wave, no darkening: the canvas is the same at every t
+- Why: the owner asked for a clean white ground with a quiet design grid. 90 px cells read as a layout grid behind the 894 px card rather than graph paper; at phone size (about 0.36x) the lines sit near the threshold of notice
+- The white interstitial ground stays flat #FFFFFF with no grid [C18]; card shadows [C22, C23] are unchanged and fall on white
+
+### CR11 - The violet look replaces the lime look.
+
+The second look keeps the lime look's role [C29]: one product's own colour, the whole set swapping together. Violet is dark where lime is light, so its strip text is light (#FCFDFC) where lime's was dark.
+
+| Role | Lime (measured) | Violet (release) |
+|---|---|---|
+| accent / callout | #D5ED1D / #BDD70C | #8846FA / #8846FA |
+| text on accent | #131314 | #FCFDFC |
+| keyword on light | #D6EC2B | #7836E4 |
+| keyword on dark, sans / serif | #DAEE3A / #E6F58A | #E5D6FF / #F0E8FF |
+| outline / glow | #BDD70C / rgba(190,220,30,0.4) | #6430CC / rgba(130,80,240,0.45) |
+| panel ring | #D5ED1D, #BDD70C, #A8C008 | #9578E4, #7552D6, #6237C6 |
+| glint / tail / hot | #F3FFB0 / #C8E030 / #FBFFD8 | #CDB8FF / #9363F2 / #E6DCFF |
+| highlight / on dark | rgba(213,237,29,0.42) / #5C6B12 | rgba(136,70,250,0.30) = #DBC8FE / #5E40AE |
+| digits | #FDFFF0 ... #B7FD39 | #F8F5FF, #EFE9FF, #E0D4FF, #CDB9FF, #BFA6FF, #B293FF |
+| CTA dot | #BDD70C | #8A4DF5, rim rgba(120,64,230,0.9) |
+| derived (CR07) | from the accent | tint #F1E9FE, muted #F9F6FF, edge #E2D8F5, icon #936EDB, shadow rgba(86,44,158,a) |
+
+A violet light enough for 4.5:1 on the dark backdrop is a pale lavender, so on dark the violet keyword stands out from the white caption less than the emerald one does; the italic serif and the weight carry the rest.
+
+### CR12 - CTA keyword tones.
+
+- The default tone follows the look: `emerald` #BFFFE8 to #4CFCBC (hsv 158, s 0.25 to 0.70), `violet` #DBC7FF to #AD7EFC (hsv 262, s 0.22 to 0.50; the bottom saturation is below the measured 0.64-0.77 because a violet that saturated falls under 4.5:1 on dark clothing)
+- The brand tones `blue`, `yellow`, `orange`, `green`, `cyan`, `lime` stay as measured [C27]; `blue` is now only for a brand whose colour is blue
+
+### Contrast, measured palette against release palette
+
+| Text and surface | blue (measured) | lime (measured) | emerald | violet |
+|---|---|---|---|---|
+| strip, block, chip and pill text on the accent | 3.59 | 14.11 | 4.61 | 4.79 |
+| keyword on the light ground (measured canvas #EFF1F1; release white) | 3.25 | 1.17 | 5.90 | 6.09 |
+| the same over a major grid line #E3E3E3 | - | - | 4.59 | 4.75 |
+| sans keyword on dark, lightest backdrop (#616161) | 2.10 | 4.80 | 4.64 | 4.54 |
+| serif keyword on dark, lightest backdrop | 3.35 | 5.25 | 5.14 | 5.22 |
+| caption white on dark, lightest backdrop | 5.63 | 5.63 | 5.63 | 5.63 |
+| ink #131416 on the highlight | 12.07 | 16.16 | 13.31 | 12.03 |
+| accent digits or chip text on white | 3.65 | 1.29 | 4.62 | 4.80 |
+| digit ramp bottom stop on the dark tile | 4.60 | 9.56 | 5.24 | 4.75 |
+| rank number (accent, 52 px) on the active row tint | 3.15 | 1.13 | 4.00 | 4.14 |
+| CTA keyword bottom stop on dark footage (#1A1A1A) | 9.51 | 14.19 | 13.23 | 5.94 |
+
+The rank number is a single large numeral, not words; it stays the accent as measured and is better than the measured 3.15:1.

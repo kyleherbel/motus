@@ -74,7 +74,7 @@ Transcription suspects: "frame wise" (words 62-63, p 0.52 and 0.48), "tone box" 
 
 ```json
 {
-  "motus": 1, "style": "editorial-proof", "look": {"accent": "blue"},
+  "motus": 1, "style": "editorial-proof", "look": {"accent": "emerald"},
   "captions": {
     "fixes": {"62": "Framewise", "63": "", "90": "Tonebox", "91": "", "117": "Reelgrid", "118": ""},
     "emphasis": {"5": "accent+serif", "8": "accent", "10": "accent+serif", "13": "serif", "20": "accent", "30": "accent+serif", "34": "accent", "37": "accent+serif", "42": "accent+serif", "45": "accent+serif", "46": "serif", "58": "accent+serif", "73": "accent+serif", "82": "serif", "86": "accent", "96": "accent+serif", "99": "accent+serif", "109": "accent+serif", "112": "accent", "122": "serif", "127": "accent+serif", "132": "accent", "138": "serif", "144": "accent"},
@@ -163,7 +163,7 @@ Transcription suspects: "frame wise" (words 62-63, p 0.52 and 0.48), "tone box" 
       ] },
     { "id": "s17", "words": [139, 156], "role": "cta", "single": true, "note": "The style's ending is fixed: he asks for a comment with the keyword tools, already spoken in the hook.", "pick": "a",
       "options": [
-        {"id": "a", "label": "Comment Tools", "why": "Comment tools, as he says it, with the keyword he used in the first sentence", "layout": "presenter-full", "slots": {"cta": {"type": "comment-cta", "keyword": "Tools", "tone": "blue"}}}
+        {"id": "a", "label": "Comment Tools", "why": "Comment tools, as he says it, with the keyword he used in the first sentence", "layout": "presenter-full", "slots": {"cta": {"type": "comment-cta", "keyword": "Tools", "tone": "emerald"}}}
       ] }
   ],
   "audio": {"sfx": true, "bed": "a"}

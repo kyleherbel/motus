@@ -1,0 +1,41 @@
+{
+  "motus": 1,
+  "style": "ember-brief",
+  "look": {},
+  "captions": { "fixes": { "97": "Claude" } },
+  "scenes": [
+    { "id": "s01", "words": [0, 12], "role": "how", "single": true, "options": [
+      { "id": "a", "label": "Link with a check", "why": "fixture: the measured order, first node, line on the verb, second node on its name, check 7 frames later", "layout": "split",
+        "slots": { "graphic": { "type": "link", "key": "row", "nodes": [ { "name": "Cloud", "image": "assets/fx-node-ring.png" }, { "name": "Jot", "image": "assets/fx-node-steps.png", "at": 7 } ],
+          "beats": [ { "at": 4, "do": "connect" } ] } } } ], "pick": "a" },
+    { "id": "s02", "words": [13, 38], "role": "how", "single": true, "options": [
+      { "id": "a", "label": "Request and reply", "why": "fixture: two sends, there and back, each lighting its target", "layout": "split",
+        "slots": { "graphic": { "type": "link", "key": "ask", "nodes": [ { "name": "You", "glyph": "person" }, { "name": "Archive", "glyph": "folder" } ],
+          "beats": [ { "at": 17, "do": "connect" }, { "at": 22, "do": "send" }, { "at": 27, "do": "send" } ] } } } ], "pick": "a" },
+    { "id": "s03", "words": [39, 53], "role": "how", "single": true, "options": [
+      { "id": "a", "label": "In sync", "why": "fixture: the dotted line with the dot that keeps travelling", "layout": "split",
+        "slots": { "graphic": { "type": "link", "key": "sync", "line": "dotted", "nodes": [ { "name": "Laptop", "glyph": "code" }, { "name": "Phone", "glyph": "phone" } ],
+          "beats": [ { "at": 43, "do": "connect" } ] } } } ], "pick": "a" },
+    { "id": "s04", "words": [54, 63], "role": "how", "single": true, "options": [
+      { "id": "a", "label": "Talks to", "why": "fixture: the two still waves", "layout": "split",
+        "slots": { "graphic": { "type": "link", "key": "talk", "line": "waves", "nodes": [ { "name": "Ana", "glyph": "person" }, { "name": "Ben", "glyph": "mic" } ],
+          "beats": [ { "at": 55, "do": "connect" } ] } } } ], "pick": "a" },
+    { "id": "s05", "words": [64, 76], "role": "how", "single": true, "options": [
+      { "id": "a", "label": "Long names", "why": "fixture: names that do not fit beside the tiles go under them; initials; the check on its own word", "layout": "split",
+        "slots": { "graphic": { "type": "link", "key": "long", "nodes": [ { "name": "Spreadsheet" }, { "name": "Tidy Planner", "at": 68 } ],
+          "beats": [ { "at": 66, "do": "connect" }, { "at": 72, "do": "check" } ] } } } ], "pick": "a" },
+    { "id": "s06", "words": [77, 92], "role": "how", "single": true, "options": [
+      { "id": "a", "label": "Process in three beats", "why": "fixture: the input goes in on the verb, the output comes out on its word, the badge lands on its own", "layout": "split",
+        "slots": { "graphic": { "type": "process", "key": "three", "input": "Rough draft", "output": "Clean page", "badge": "check",
+          "beats": [ { "at": 80, "do": "run" }, { "at": 83, "do": "out" }, { "at": 88, "do": "badge" } ] } } } ], "pick": "a" },
+    { "id": "s07", "words": [93, 105], "role": "how", "single": true, "options": [
+      { "id": "a", "label": "Straight through", "why": "fixture: one run beat, the output comes out as the input goes in; a picture in, a mark on the tool", "layout": "split",
+        "slots": { "graphic": { "type": "process", "key": "through", "inputImage": "assets/fx-sheet.png", "mark": "assets/fx-tool-diamond.png", "output": "0400 000 000",
+          "beats": [ { "at": 96, "do": "run" } ] } } } ], "pick": "a" },
+    { "id": "s08", "words": [106, 132], "role": "how", "single": true, "options": [
+      { "id": "a", "label": "Made from nothing", "why": "fixture: no input, the tool works and the output comes out", "layout": "split",
+        "slots": { "graphic": { "type": "process", "key": "make", "glyph": "mic", "output": "New sound",
+          "beats": [ { "at": 111, "do": "run" }, { "at": 115, "do": "out" } ] } } } ], "pick": "a" }
+  ],
+  "audio": { "sfx": false }
+}

@@ -37,7 +37,7 @@ async function loadDoc(force) {
 async function build(force) {
   const doc = await loadDoc(force);
   const mod = (await import(`/styles/${doc.style}/style.js?v=${encodeURIComponent(doc.styleVersion)}`)).default;
-  const footage = new kit.Footage({ width: doc.width, height: doc.height, hasMatte: doc.hasMatte });
+  const footage = new kit.Footage({ width: doc.width, height: doc.height, hasMatte: doc.hasMatte, wide: doc.wide });
   const env = {
     W: doc.width, H: doc.height, fps: doc.fps, mode: MODE, kit, footage,
     styleUrl: (rel) => `/styles/${doc.style}/${rel}`,
@@ -141,9 +141,15 @@ async function bootPreview() {
       live.push(src);
     }
   }
+  // the bed's level, with the style's fade over the last seconds when it asks for one (as in the render mix)
+  function musicVolume(t) {
+    const m = doc.audio.music;
+    const base = Math.min(1, 10 ** ((m.gainDb + 2.5) / 20));
+    return m.fadeOut > 0 ? base * Math.max(0, Math.min(1, (doc.duration - t) / m.fadeOut)) : base;
+  }
   function syncMusic() {
     if (!doc.audio?.music?.url) return;
-    if (!music) { music = new Audio(doc.audio.music.url); music.loop = true; music.volume = Math.min(1, 10 ** ((doc.audio.music.gainDb + 2.5) / 20)); }
+    if (!music) { music = new Audio(doc.audio.music.url); music.loop = true; music.volume = musicVolume(video.currentTime); }
     music.muted = video.muted;
     if (Math.abs(music.currentTime - video.currentTime) > 0.12) music.currentTime = video.currentTime;
     if (video.paused) music.pause(); else music.play().catch(() => {});
@@ -153,6 +159,7 @@ async function bootPreview() {
     let t = meta.mediaTime;
     if (loop && t >= loop[1]) { video.currentTime = loop[0]; t = loop[0]; if (!video.paused) scheduleSfx(); }
     draw(t);
+    if (music && doc.audio.music.fadeOut > 0) music.volume = musicVolume(t);
     post({ type: 'time', t, playing: !video.paused });
     video.requestVideoFrameCallback(tick);
   };

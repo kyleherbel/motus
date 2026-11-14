@@ -18,7 +18,7 @@ Editorial Proof reproduces one editing style as closely as it could be measured.
 - **VP9 decode calibration.** The files are VP9 at 1.1-2.1 Mbps. A default ffmpeg PNG extraction reads about 2 levels low on every channel (white 253); the colour study used an explicit BT.709 limited-to-full decode (white 255) and its hexes are the reference ([C01]). Other studies quote default decodes; where they differ by a couple of levels, colour wins.
 - **Speech alignment** from ASR word timestamps (faster-whisper large-v3-turbo, not forced alignment, about +-2-3 frames). Sentence and clause boundaries come from ASR punctuation.
 - **Presenter** measured with Apple Vision face landmarks and the microphone as a rigid scale reference.
-- **Evidence ids.** Evidence is cited as `clipNN@frame`: `clip01`-`clip40` number the snapshot's reels by publication date, oldest first. The map from clip id to the source video lives only with the local study (`corpus/_study/clip-ids.json`, git-ignored) and is not published.
+- **Evidence ids.** Evidence is cited as `clipNN@frame`: `clip01`-`clip40` number the snapshot's reels by publication date, oldest first. The map from clip id to the source video lives only with the local study (`corpus/_study/<source>/clip-ids.json`, git-ignored) and is not published.
 - **Sound** measured on the mix: EBU R128 loudness, energy gaps, a side-channel fingerprint for the music bed, and effect onsets in the 16-21 kHz band that the low-passed voice leaves empty.
 - **Judgement steps** are stated where they exist: shots were labelled by hand in 20 reels (structure), every graphic segment was coded by hand from 2 fps thumbnails (graphics), emphasis word classes came from word lists (type).
 

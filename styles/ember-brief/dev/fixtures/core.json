@@ -1,0 +1,209 @@
+{
+ "motus": 1,
+ "style": "ember-brief",
+ "look": {},
+ "captions": {
+  "fixes": {
+   "97": "Claude"
+  }
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "words": [
+    0,
+    12
+   ],
+   "role": "hook",
+   "single": true,
+   "options": [
+    {
+     "id": "a",
+     "label": "Opening title",
+     "why": "fixture: the opening build, illustration under the dots",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "hook-title",
+       "key": "hook",
+       "light1": "This is",
+       "light2": "our new",
+       "heavy1": "AI video",
+       "heavy2": "editor",
+       "image": "assets/fx-illustration.png"
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s02",
+   "words": [
+    13,
+    38
+   ],
+   "role": "source",
+   "single": true,
+   "options": [
+    {
+     "id": "a",
+     "label": "Capture",
+     "why": "fixture: a light capture with two highlights",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "capture-card",
+       "key": "post",
+       "src": "assets/fx-post.png",
+       "beats": [
+        {
+         "at": 20,
+         "do": "highlight",
+         "find": "finds the model number"
+        },
+        {
+         "at": 30,
+         "do": "highlight",
+         "find": "25 files"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s03",
+   "words": [
+    39,
+    63
+   ],
+   "role": "item",
+   "single": true,
+   "options": [
+    {
+     "id": "a",
+     "label": "Heading + capture",
+     "why": "fixture: full layout, heading, outline",
+     "layout": "full",
+     "slots": {
+      "heading": {
+       "type": "section-heading",
+       "key": "h1",
+       "n": 1,
+       "name": "Tidy Folder"
+      },
+      "graphic": {
+       "type": "capture-card",
+       "key": "repo",
+       "src": "assets/fx-repo.png",
+       "beats": [
+        {
+         "at": 50,
+         "do": "outline",
+         "find": "Works on 300+ file types"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s04",
+   "words": [
+    64,
+    92
+   ],
+   "role": "proof",
+   "single": true,
+   "options": [
+    {
+     "id": "a",
+     "label": "Figure",
+     "why": "fixture: count-up under a heading, back in split",
+     "layout": "split",
+     "slots": {
+      "heading": {
+       "type": "section-heading",
+       "key": "h1",
+       "n": 1,
+       "name": "Tidy Folder"
+      },
+      "graphic": {
+       "type": "big-figure",
+       "key": "fig",
+       "value": "40,000+",
+       "label": "files sorted",
+       "at": 70
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s05",
+   "words": [
+    93,
+    125
+   ],
+   "role": "proof",
+   "single": true,
+   "options": [
+    {
+     "id": "a",
+     "label": "Dark capture",
+     "why": "fixture: dark paper highlight",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "capture-card",
+       "key": "dark",
+       "src": "assets/fx-dark.png",
+       "beats": [
+        {
+         "at": 97,
+         "do": "highlight",
+         "find": "pauses, laughs and changes its mind"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s06",
+   "words": [
+    126,
+    132
+   ],
+   "role": "cta",
+   "single": true,
+   "options": [
+    {
+     "id": "a",
+     "label": "Comment",
+     "why": "fixture: the call to action, held to the end",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "comment-cta",
+       "key": "cta",
+       "keyword": "clipframe"
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  }
+ ],
+ "audio": {
+  "sfx": false
+ }
+}

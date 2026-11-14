@@ -1,5 +1,5 @@
 {
- "motus": 1, "style": "editorial-proof", "look": { "accent": "blue" },
+ "motus": 1, "style": "editorial-proof", "look": { "accent": "emerald" },
  "captions": { "emphasis": {}, "fixes": {} },
  "scenes": [
   { "id": "s01", "words": [0, 11], "role": "hook", "single": true, "options": [ { "id": "a", "label": "Splash + typed command", "why": "fixture: clip38@79-200 - splash, typed command, installed list", "layout": "dark-focus",

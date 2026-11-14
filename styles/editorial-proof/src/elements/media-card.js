@@ -8,7 +8,7 @@
 //               over 20 frames (rmse 0.3 % of the travel, clip36@646-666), smeared along the motion;
 //               strips land on their own words, 32-38 frames apart (clip36@616, 648, 686)
 //   label pill  46-50 px tall, fully round, 18-20 px side padding, bold white 27 px,
-//               #444444 on white (= black at 73 %) or the accent #0083FC, 21 px in from the strip's
+//               #444444 on white (= black at 73 %) or the accent, 21 px in from the strip's
 //               outer left edge and 22 px down (clip31@615, clip14@690)
 // Video is frame-exact in renders: seek(t) sets currentTime and settled() resolves only once every
 // visible clip has seeked to it and its frame has been copied onto the strip's canvas.
@@ -132,7 +132,7 @@ export default {
       } else if (m.kind === 'video') {
         media = m.video;
         Object.assign(media.style, pos, { display: 'block', objectFit: 'fill' });
-      } else media = h('div', { text: it.src.split('/').pop(), style: { position: 'absolute', inset: '0', display: 'flex', alignItems: 'center', justifyContent: 'center', font: `600 28px/1 ${fonts.sans}`, color: '#8A8E96', background: '#16171A' } });
+      } else media = h('div', { text: it.src.split('/').pop(), style: { position: 'absolute', inset: '0', display: 'flex', alignItems: 'center', justifyContent: 'center', font: `600 28px/1 ${fonts.sans}`, color: '#8E8E8E', background: '#16171A' } });
       card.body.append(media);
       if (it.label) {
         const pill = h('div.ep-media-pill', { text: it.label, style: { position: 'absolute', left: `${G.pill.x}px`, top: `${G.pill.y}px`, height: `${G.pill.h}px`, padding: `0 ${G.pill.padX}px`, borderRadius: `${G.pill.h / 2}px`, display: 'flex', alignItems: 'center', whiteSpace: 'nowrap',

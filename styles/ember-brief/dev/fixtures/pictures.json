@@ -1,0 +1,43 @@
+{
+  "motus": 1,
+  "style": "ember-brief",
+  "look": {},
+  "captions": { "fixes": { "97": "Claude" } },
+  "scenes": [
+    { "id": "s01", "words": [0, 10], "role": "what", "single": true, "options": [
+      { "id": "a", "label": "Cut-out on the field", "why": "fixture: a transparent picture sits on the dots, contained in 1000 x 770", "layout": "split",
+        "slots": { "graphic": { "type": "picture", "key": "cutout", "src": "assets/fx-cutout.png" } } } ], "pick": "a" },
+    { "id": "s02", "words": [11, 22], "role": "what", "single": true, "options": [
+      { "id": "a", "label": "Dark picture on the field", "why": "fixture: an opaque dark ground fades into the field", "layout": "split",
+        "slots": { "graphic": { "type": "picture", "key": "ground", "src": "assets/fx-ground.png" } } } ], "pick": "a" },
+    { "id": "s03", "words": [23, 34], "role": "item", "single": true, "options": [
+      { "id": "a", "label": "Cut-out on a card", "why": "fixture: a transparent mark on the raised dark card", "layout": "split",
+        "slots": { "graphic": { "type": "picture", "key": "icon", "src": "assets/fx-icon.png", "frame": "card" } } } ], "pick": "a" },
+    { "id": "s04", "words": [35, 46], "role": "proof", "single": true, "options": [
+      { "id": "a", "label": "Clip on a card", "why": "fixture: a 16:9 clip on the picture card, frame exact", "layout": "split",
+        "slots": { "graphic": { "type": "picture", "key": "clip", "src": "assets/fx-clip.mp4" } } } ], "pick": "a" },
+    { "id": "s05", "words": [47, 58], "role": "proof", "single": true, "options": [
+      { "id": "a", "label": "Labelled picture", "why": "fixture: full layout, a label over a picture card", "layout": "full",
+        "slots": { "graphic": { "type": "picture", "key": "labelled", "src": "assets/fx-before.png", "frame": "card", "label": "Old layout" } } } ], "pick": "a" },
+    { "id": "s06", "words": [59, 74], "role": "benefit", "single": true, "options": [
+      { "id": "a", "label": "Before and after", "why": "fixture: the stacked pair, second half on a word", "layout": "full",
+        "slots": { "graphic": { "type": "before-after", "key": "pair", "before": "assets/fx-before.png", "after": "assets/fx-after.png", "beats": [ { "at": 66, "do": "reveal" } ] } } } ], "pick": "a" },
+    { "id": "s07", "words": [75, 86], "role": "how", "single": true, "options": [
+      { "id": "a", "label": "Phone, full", "why": "fixture: the large outline phone", "layout": "full",
+        "slots": { "graphic": { "type": "phone-frame", "key": "phone-full", "src": "assets/fx-screen.png" } } } ], "pick": "a" },
+    { "id": "s08", "words": [87, 100], "role": "item", "single": true, "options": [
+      { "id": "a", "label": "Phone under a heading", "why": "fixture: the small outline phone under a section heading", "layout": "split",
+        "slots": { "heading": { "type": "section-heading", "key": "h1", "n": 1, "name": "Tidy Folder" },
+          "graphic": { "type": "phone-frame", "key": "phone-split", "src": "assets/fx-screen.png" } } } ], "pick": "a" },
+    { "id": "s09", "words": [101, 110], "role": "benefit", "single": true, "options": [
+      { "id": "a", "label": "Labelled cut-out", "why": "fixture: the widest label the limits allow, over a cut-out on the field", "layout": "split",
+        "slots": { "graphic": { "type": "picture", "key": "cutout-label", "src": "assets/fx-cutout.png", "label": "Wrong numbers" } } } ], "pick": "a" },
+    { "id": "s10", "words": [111, 120], "role": "how", "single": true, "options": [
+      { "id": "a", "label": "Phone with a clip", "why": "fixture: a light 16:9 clip cropped to the phone's screen, frame exact", "layout": "split",
+        "slots": { "graphic": { "type": "phone-frame", "key": "phone-clip", "src": "assets/fx-clip.mp4" } } } ], "pick": "a" },
+    { "id": "s11", "words": [121, 132], "role": "recap", "single": true, "options": [
+      { "id": "a", "label": "Light picture", "why": "fixture: a light opaque picture goes on a card by itself", "layout": "split",
+        "slots": { "graphic": { "type": "picture", "key": "light", "src": "assets/fx-post.png" } } } ], "pick": "a" }
+  ],
+  "audio": { "sfx": false }
+}

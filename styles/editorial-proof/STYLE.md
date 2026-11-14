@@ -14,12 +14,12 @@ Read all of this before planning, then the two worked examples in `examples/` (a
 
 What makes it recognisable (if a plan loses one of these, it is no longer this style):
 
-1. A two-line title from frame 1: dark sans line over a blue strip of italic serif words, held for the first sentence only [H01-H08, H13].
+1. A two-line title from frame 1: dark sans line over an emerald accent strip of italic serif words, held for the first sentence only [H01-H08, H13].
 2. Light split and dark focus alternating sentence by sentence, about 40 % of runtime each, about 13 layout changes a minute [S05].
-3. One card component for every proof: same width, white, thin blue outline, small radius, glints circling it [G01, M27].
-4. Real pages shown as tight crops at reading size, marked with a blue highlight on the exact words being said [G07, G09, G10].
+3. One card component for every proof: same width, white, thin emerald outline, small radius, glints circling it [G01, M27].
+4. Real pages shown as tight crops at reading size, marked with an emerald highlight on the exact words being said [G07, G09, G10].
 5. Something new on screen about every 0.7 s, in step with the words [S09, S15].
-6. One-line word-by-word captions, lower case, about one line in three carrying a blue or italic serif keyword [T07, T14].
+6. One-line word-by-word captions, lower case, about one line in three carrying an emerald or italic serif keyword [T07, T14].
 7. White numbered interstitials ("Tool Number" / "One") opening each item of a list video [S17, H16].
 8. A short full-frame punch-in on a sentence's payoff phrase [S16].
 9. A fixed ending: full-frame presenter, italic "comment", the glowing one-word keyword [H21-H25].
@@ -383,7 +383,7 @@ The reference ends every video the same way [H21-H26, S21]:
 | Spoken skeleton | "[So] if you want [the thing], just comment [KEYWORD] down below and I'll send you [the link] [directly]": "just comment" 32/33, "down below" 30/33, "send" 26/33 (or "DM" 7/33), "directly" 28/33, "if you want..." lead-in 22/33; 12-34 words (median 20) |
 | Element | `comment-cta` in `presenter-full`: italic "comment" lands on its spoken word, the keyword in quotes flickers in 14 f later and holds |
 | Keyword | one word (33/33), 2-7 letters (median 6), Title Case, already used in the video (spoken before the CTA 31/33, in the hook title 15/33): a product or brand name (10/33) or the topic noun (23/33). The reference even Title-Cases acronyms ("Api", "Seo") [T25] |
-| Tone | `blue` by default; the brand's colour for a brand word: `orange`, `yellow`, `green`, `cyan`, `lime` (newest reels switch only for brand words) [C27] |
+| Tone | the look's accent by default (`emerald`, or `violet` with the violet look; leave `tone` out to follow the look); the brand's colour for a brand word: `blue`, `orange`, `yellow`, `green`, `cyan`, `lime` (newest reels switch only for brand words) [C27, CR12] |
 | Timing | the scene starts on the first word of the CTA sentence (or of its lead-in clause, up to 41 f earlier); "comment" is spoken about 43 f in (36-55); the keyword shows 14 f after "comment"; at least 41 f (median 59) of hold after the keyword; the video ends hard [S21, H22, H23] |
 
 When the speaker's CTA is different, keep the ending's form and use only words they said:
@@ -451,7 +451,7 @@ The reference never repeats itself: 28 distinct layout sequences in 33 videos [S
 | Element types | 1-7 per video, 4 median [G21] |
 | Caption emphasis rate | 19-54 % of lines [T14] |
 | CTA keyword tone | by the keyword [C27] |
-| Accent (`look.accent`) | `blue`; `lime` only for a product whose own brand colour is lime (the reference did it for one sponsor, 3/33) [C29] |
+| Accent (`look.accent`) | `emerald`; `violet` only for a product whose own brand colour is violet or purple (the reference swapped the whole accent set for one sponsor's product, 3/33) [C29, CR11] |
 | Music bed | `a` or `b`, alternating between videos [A06] |
 
 Fixed in every video: everything in sections 4.1-4.7 marked "never" or "always", the title form, the card, the captions' form, the CTA form.
@@ -504,7 +504,7 @@ Parameters, limits and beats: see `style.json`. This table says what each elemen
 | `logo-chips` | chips (light, dark, white) | white chips in a row under the card, one per name, popping on the word, optionally struck | third-party names, "instead of X", "works with X, Y, Z" | 1-4 chips; real logo files only, otherwise the name alone [G19] |
 | `compare-panels` | card | two sides of an idea as a pair of tiles with titles, short sub-lines and icons, plus an optional title | contrasts, before / after, old way / new way, two roles | bare tiles on `white`, inside the card on light and dark; one reference instance [G23] |
 | `media-card` | card | what was made: an image or clip, or 2-3 stacked strips with label pills, each landing on its word | the tool's output; the user's own photos or clips; the hook's result | first graphic of 11/33 reference videos was media [G20, G27] |
-| `section-heading` | heading (white) | the interstitial heading: "<Noun> Number" over a blue block word ("One"), or the block alone ("It's Called") | each list item's opening; the naming beat | noun = what the list counts (Tool, Repo, Plugin, App, Step, Mistake); block word spelled out [H16-H18, L17] |
+| `section-heading` | heading (white) | the interstitial heading: "<Noun> Number" over an accent block word ("One"), or the block alone ("It's Called") | each list item's opening; the naming beat | noun = what the list counts (Tool, Repo, Plugin, App, Step, Mistake); block word spelled out [H16-H18, L17] |
 | `name-label` | name (white) | the item's or product's name under the interstitial card | with every `section-heading` | `at` the spoken name; at most 18 characters [L17, L18] |
 | `comment-cta` | cta (presenter-full) | the closing verb and glowing keyword | the CTA, every video that asks for an action | section 8 [H21-H26] |
 | `terminal` | card | a designed terminal (one fixed dark skin, never a capture): splash, commands typed on their words, result lines, a lit row | "just install / type / run / describe / give it" | 35 reference segments in 16 videos; commands and lines must be what the speaker says or what the tool really prints [G06, G26] |
@@ -515,4 +515,4 @@ Parameters, limits and beats: see `style.json`. This table says what each elemen
 | `rank-list` | card | a ranked list where one row climbs (`climb`) and the rows it passes are struck (`strike-others`) | "beats X and Y", "number one for..." | 2 segments [G23, M22] |
 | `logo-grid` | card | names arriving one by one into a grid of up to 6 tiles | four or more equal names said in a row | 4 segments [G08, M23] |
 
-`look.accent`: `blue` unless section 11 says otherwise.
+`look.accent`: `emerald` unless section 11 says otherwise.

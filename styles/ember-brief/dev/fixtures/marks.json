@@ -1,0 +1,40 @@
+{
+  "motus": 1,
+  "style": "ember-brief",
+  "look": {},
+  "captions": { "fixes": { "97": "Claude" } },
+  "scenes": [
+    { "id": "s01", "words": [0, 12], "role": "item", "single": true, "options": [
+      { "id": "a", "label": "Two name tiles", "why": "fixture: two short names fit one row at the large size", "layout": "split",
+        "slots": { "graphic": { "type": "chips", "key": "pair", "chips": [ { "label": "Laptop" }, { "label": "Tablet" } ] } } } ], "pick": "a" },
+    { "id": "s02", "words": [13, 28], "role": "item", "single": true, "options": [
+      { "id": "a", "label": "Three name tiles", "why": "fixture: one row at the small size, the first with a picture", "layout": "split",
+        "slots": { "graphic": { "type": "chips", "key": "names", "kind": "name", "chips": [ { "label": "Field Bot", "image": "assets/fx-mark-dot.png" }, { "label": "Notes" }, { "label": "Archive" } ] } } } ], "pick": "a" },
+    { "id": "s03", "words": [29, 38], "role": "source", "single": true, "options": [
+      { "id": "a", "label": "Maker pill", "why": "fixture: one dark pill with a picture", "layout": "split",
+        "slots": { "graphic": { "type": "chips", "key": "maker", "kind": "path", "chips": [ { "label": "Trailnote", "image": "assets/fx-mark-ring.png" } ] } } } ], "pick": "a" },
+    { "id": "s04", "words": [39, 53], "role": "how", "single": true, "options": [
+      { "id": "a", "label": "Path pill", "why": "fixture: a path read out, the bar wipes under it", "layout": "split",
+        "slots": { "graphic": { "type": "chips", "key": "url", "kind": "path", "chips": [ { "label": "notes.fieldkit.example" } ],
+          "beats": [ { "at": 42, "do": "highlight", "until": 46 } ] } } } ], "pick": "a" },
+    { "id": "s05", "words": [54, 63], "role": "item", "single": true, "options": [
+      { "id": "a", "label": "Six tiles", "why": "fixture: wrapped rows, two arrive on their words", "layout": "full",
+        "slots": { "graphic": { "type": "chips", "key": "six", "chips": [ { "label": "Invoices" }, { "label": "Receipts" }, { "label": "Contracts" }, { "label": "Photos", "at": 58 }, { "label": "Recordings" }, { "label": "Everything else", "at": 61 } ] } } } ], "pick": "a" },
+    { "id": "s06", "words": [64, 76], "role": "item", "single": true, "options": [
+      { "id": "a", "label": "Three logo tiles", "why": "fixture: three marks in a row", "layout": "split",
+        "slots": { "graphic": { "type": "logo-tiles", "key": "three", "tiles": [ { "image": "assets/fx-mark-four.png" }, { "image": "assets/fx-mark.png" }, { "image": "assets/fx-mark-bars.png" } ] } } } ], "pick": "a" },
+    { "id": "s07", "words": [77, 92], "role": "item", "single": true, "options": [
+      { "id": "a", "label": "Six logo tiles", "why": "fixture: six scaled to the column, initials where there is no picture", "layout": "split",
+        "slots": { "graphic": { "type": "logo-tiles", "key": "sixt", "tiles": [ { "image": "assets/fx-mark-tri.png" }, { "name": "Tidy Folder" }, { "name": "notes" }, { "image": "assets/fx-mark-dot.png" }, { "name": "Wide Mill" }, { "image": "assets/fx-mark-bars.png", "name": "Bars" } ] } } } ], "pick": "a" },
+    { "id": "s08", "words": [93, 105], "role": "recap", "single": true, "options": [
+      { "id": "a", "label": "One of eleven", "why": "fixture: 6 + 5 tiles, the ninth current", "layout": "split",
+        "slots": { "graphic": { "type": "icon-grid", "key": "g11", "total": 11, "current": 9 } } } ], "pick": "a" },
+    { "id": "s09", "words": [106, 120], "role": "recap", "single": true, "options": [
+      { "id": "a", "label": "Three of 25", "why": "fixture: a grid that arrives whole, the first three done", "layout": "split",
+        "slots": { "graphic": { "type": "icon-grid", "key": "g25", "total": 25, "done": 3 } } } ], "pick": "a" },
+    { "id": "s10", "words": [121, 132], "role": "recap", "single": true, "options": [
+      { "id": "a", "label": "Sixty", "why": "fixture: the largest grid", "layout": "split",
+        "slots": { "graphic": { "type": "icon-grid", "key": "g60", "total": 60, "current": 42 } } } ], "pick": "a" }
+  ],
+  "audio": { "sfx": false }
+}

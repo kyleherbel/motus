@@ -15,10 +15,10 @@
     "accent": {
       "label": "Accent",
       "choices": [
-        "blue",
-        "lime"
+        "emerald",
+        "violet"
       ],
-      "default": "blue"
+      "default": "emerald"
     }
   },
   "emphasis": [
@@ -385,7 +385,7 @@
         },
         "verbAt": "word?",
         "keywordAt": "word?",
-        "tone": "enum?:blue|yellow|orange|green|cyan|lime"
+        "tone": "enum?:emerald|violet|blue|yellow|orange|green|cyan|lime"
       },
       "beats": {}
     },

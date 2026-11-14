@@ -1,0 +1,30 @@
+{
+  "motus": 1, "style": "night-class", "look": { "kit": "k1", "bed": "on" },
+  "captions": { "fixes": { "97": "Claude" }, "emphasis": { "12": "concept", "129": "cta" } },
+  "scenes": [
+    { "id": "s01", "words": [0, 12], "role": "hook", "single": true, "options": [ { "id": "a", "label": "Title + capture", "why": "fixture: opening title over a single capture, card frame", "layout": "dark",
+      "slots": { "title": { "type": "title-lockup", "key": "t1", "line1": "How To *Edit* Faster", "line2": "With One Workflow", "deco": "bar", "build": "type" },
+                 "graphic": { "type": "capture", "key": "g1", "items": [ { "src": "assets/test-still-wide.png" } ], "frame": "card" } } } ] },
+    { "id": "s02", "words": [13, 28], "role": "explain", "single": true, "options": [ { "id": "a", "label": "Phone", "why": "fixture: graphic replaced in the same run, pushed in as a strip; phone zoom beat", "layout": "dark",
+      "slots": { "title": { "type": "title-lockup", "key": "t1", "line1": "How To *Edit* Faster", "line2": "With One Workflow", "deco": "bar", "build": "type" },
+                 "graphic": { "type": "phone", "key": "g2", "src": "assets/test-counter-24.mp4", "beats": [ { "at": 25, "do": "zoom" } ] } } } ] },
+    { "id": "s03", "words": [29, 45], "role": "rehook", "single": true, "options": [ { "id": "a", "label": "Presenter", "why": "fixture: full height, large push-in", "layout": "full",
+      "slots": { "camera": { "type": "push-in", "key": "c1", "level": "large", "at": 32 } } } ] },
+    { "id": "s04", "words": [46, 63], "role": "item", "single": true, "options": [ { "id": "a", "label": "Chart", "why": "fixture: header title, chart drawing in, highlight", "layout": "dark",
+      "slots": { "title": { "type": "title-lockup", "key": "t2", "line1": "Every *Single* Visual", "kind": "header" },
+                 "graphic": { "type": "line-chart", "key": "g3", "points": [2, 5, 3, 8, 6, 11], "xLabel": "Over Time", "yLabel": "Control", "beats": [ { "at": 57, "do": "highlight", "from": 4, "to": 6 } ] } } } ] },
+    { "id": "s05", "words": [64, 76], "role": "explain", "single": true, "options": [ { "id": "a", "label": "Nodes ring", "why": "fixture: hub and ring, nodes on their words", "layout": "dark",
+      "slots": { "title": { "type": "title-lockup", "key": "t2", "line1": "Every *Single* Visual", "kind": "header" },
+                 "graphic": { "type": "icon-nodes", "key": "g4", "hub": "ClipFrame", "nodes": [ { "label": "Animation", "at": 67 }, { "label": "Captions", "at": 69 }, { "label": "Visuals", "at": 73 }, { "label": "Sound", "at": 75 } ] } } } ] },
+    { "id": "s06", "words": [77, 92], "role": "payoff", "single": true, "options": [ { "id": "a", "label": "Grid, blue frame", "why": "fixture: capture grid with the blue glow frame, own entrance", "layout": "dark",
+      "slots": { "graphic": { "type": "capture", "key": "g5", "items": [ { "src": "assets/test-still-wide.png" }, { "src": "assets/test-still-wide.png" }, { "src": "assets/example.png" }, { "src": "assets/test-still-wide.png" } ], "frame": "blue", "enter": "own" } } } ] },
+    { "id": "s07", "words": [93, 105], "role": "rehook", "single": true, "options": [ { "id": "a", "label": "Presenter", "why": "fixture: full height, no push", "layout": "full", "slots": {} } ] },
+    { "id": "s08", "words": [106, 125], "role": "pitch", "single": true, "options": [ { "id": "a", "label": "Light statement", "why": "fixture: light field after a cut-in, statement", "layout": "light",
+      "slots": { "title": { "type": "title-lockup", "key": "t3", "line1": "Download The *Infrastructure*", "deco": "none" },
+                 "graphic": { "type": "statement", "key": "g6", "text": "Same *Exact* Setup" } } } ] },
+    { "id": "s09", "words": [126, 132], "role": "cta", "single": true, "options": [ { "id": "a", "label": "CTA", "why": "fixture: comment lockup and pages (the keyword is a stand-in: this take has no comment CTA)", "layout": "dark",
+      "slots": { "title": { "type": "cta-lockup", "key": "cta", "keyword": "school", "reward": "To Get The Doc", "at": 126 },
+                 "graphic": { "type": "cta-pages", "key": "g7", "count": 6, "panel": true } } } ] }
+  ],
+  "audio": { "music": null, "sfx": true }
+}

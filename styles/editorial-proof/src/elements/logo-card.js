@@ -24,8 +24,8 @@ const G = {
   wide: { cardH: 387, maxW: 0.86, maxH: 0.5 },                          // clip22@150 (clip09: 530 tall on the older 940 card)
   big: { maxW: 0.88, size: 210, min: 90, weight: 800, tracking: -0.025, lift: 20 }, // clip29@158: 785 of 892 px, cap box centred 20 px over the card's centre
   tagline: { size: 40, weight: 500, tracking: -0.01, gap: 66, extra: 70, maxW: 0.84 },
-  fill: { white: '#FDFDFD', dark: 'linear-gradient(170deg, #050F1D 0%, #030A17 55%, #00030F 100%)' },
-  ink: { white: '#131416', dark: '#FFFFFF', taglineWhite: '#6E7179', taglineDark: '#A9B3C2' },
+  fill: { white: '#FDFDFD', dark: 'linear-gradient(170deg, #0E0E0F 0%, #09090A 55%, #030303 100%)' },   // dark: measured navy, neutralised (colour CR08)
+  ink: { white: '#131416', dark: '#FFFFFF', taglineWhite: '#717171', taglineDark: '#B2B2B2' },
   wideAspect: 1.8,                                                      // wider than this: a wordmark, shown alone
 };
 const M = {
@@ -172,7 +172,7 @@ export default {
 
     return {
       el: card.el,
-      tone: skin === 'dark' ? [4, 10, 22] : 'light',
+      tone: skin === 'dark' ? [10, 10, 10] : 'light',   // the dark fill's echo, neutralised with it (colour CR08)
       seek(t) {
         card.seek(t);
         const age = t - tIn;

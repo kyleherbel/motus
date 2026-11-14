@@ -1,5 +1,9 @@
 # Motus: notes for agents
 
+## If the user says "go"
+
+When the user hands you this folder and says "go", "start", "open Motus" or similar, follow `skills/start/SKILL.md`. In short: run `node engine/bin/motus.mjs app --open --json`, tell the user the app is open, then loop on `node engine/bin/motus.mjs next --agent "<your name>"` and do each job it gives you. The user works in the app in the browser. You do the planning in the background.
+
 ## What this repository is
 
 Motus edits talking-head 9:16 video (Reels, TikTok, Shorts) in a chosen editing style. It has three parts:
@@ -16,12 +20,13 @@ The skills live in `skills/<name>/SKILL.md`. Read the one that matches the reque
 
 | Skill | Use it when |
 |---|---|
+| `skills/start/SKILL.md` | The user says "go" or asks to start or open Motus. Starts the app and works its job queue. |
 | `skills/edit/SKILL.md` | The user gives a video and wants it edited, cut, captioned or styled. |
 | `skills/styles/SKILL.md` | The user asks which styles exist or which one fits. |
 | `skills/doctor/SKILL.md` | Something fails to start, or the user asks whether the setup is ready. |
 | `skills/new-style/SKILL.md` | The user wants a new style pack built from reference videos. |
 
-In Claude Code the same skills are `/motus:edit`, `/motus:styles`, `/motus:doctor` and `/motus:new-style`.
+In Claude Code the same skills are `/motus:start`, `/motus:edit`, `/motus:styles`, `/motus:doctor` and `/motus:new-style`.
 
 ## Calling the engine
 

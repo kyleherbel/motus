@@ -57,9 +57,11 @@ plan/
   cuts.json                  kept source ranges [{in,out}] (locked mode: one range covering everything)
   edit.json                  THE EDIT DOCUMENT (section 4)
 conform/                     the output timeline, built by `motus conform` from cuts.json
-  timeline.json              {fps:[num,den], frames, duration, map:[{out,in,len}]}
+  timeline.json              {fps:[num,den], frames, duration, map:[{out,in,len}], framing, wide}
   words.json                 transcript words re-timed to output time, renumbered 0..n-1 (src = index in transcript.json; cut words dropped)
-  packed.mp4                 preview proxy: [footage | matte] side by side, H.264, short GOP
+  wide.mp4, wide-matte.mp4   only for a style with "footage": {"wide": true} and a source at least as wide as it is tall:
+                             the whole source frame at 960 px high (at most 1706 wide) and its person matte
+  packed.mp4                 preview proxy: [footage | matte | wide over wide matte] side by side, H.264, short GOP
   frames/%06d.jpg            the same packed frames as stills, for frame-exact rendering (built lazily by render)
   voice.wav                  conformed voice track
 assets/                      evidence gathered for this video (screenshots + text rects, logos, clips)
@@ -83,7 +85,7 @@ renders/draft-NN.mp4, final.mp4, frames/
 {
   "motus": 1,
   "style": "editorial-proof",
-  "look": { "accent": "blue" },              // global choices declared by the style manifest
+  "look": { "accent": "emerald" },           // global choices declared by the style manifest
   "captions": {
     "fixes": { "12": "Claude" },              // word index -> corrected text (ASR repair, casing, numerals)
     "emphasis": { "14": "accent", "22": "serif", "23": "accent+serif" },   // kinds come from the style manifest
@@ -154,7 +156,7 @@ styles/<id>/
   "id": "editorial-proof", "name": "Editorial Proof", "version": "0.1.0",
   "summary": "One line the user sees when choosing a style.",
   "bestFor": ["tool breakdowns", "list videos"], "aspect": "9:16",
-  "look": { "accent": { "label": "Accent", "choices": ["blue", "lime"], "default": "blue" } },
+  "look": { "accent": { "label": "Accent", "choices": ["emerald", "violet"], "default": "emerald" } },
   "emphasis": ["accent", "serif", "accent+serif"],
   "roles": ["hook", "proof", "item", "payoff", "cta"],
   "layouts": {
@@ -167,9 +169,15 @@ styles/<id>/
       "beats": { "strike-all": {}, "total": { "value": "string" } }
     }
   },
-  "sfx": { "pop": "assets/sfx/pop.wav" }
+  "sfx": { "pop": "assets/sfx/pop.wav" },
+  "beds": { "a": { "label": "Warm pad", "src": "assets/music/bed-a.m4a", "gainDb": -24, "fadeOut": 1 } },   // optional music beds; the first is the default
+  "footage": { "wide": true }               // optional: also keep the whole source frame (see below)
 }
 ```
+
+`footage.wide`: some styles cut two framings from one camera frame (a small presenter panel showing the room, and a full-height 9:16 crop). A 9:16 source cannot give the panel's framing, so a style can ask conform to keep the whole source frame as well. When the source is at least as wide as it is tall, conform writes a wide view (960 px high, at most 1706 wide, centre-cropped beyond 16:9) with its own matte, and the resolved document carries `wide: { width, height, window: {x,y,w,h}, framing }`: `window` is where the 9:16 footage sits inside the wide view and `framing` is the speaker's median face in wide-view pixels. `env.footage.hasWide` tells the style whether it has one; `env.footage.view({ wide: true, matte })` returns a canvas of that size. With a 9:16 source there is no wide view and the style must fall back. Conform reads the style from `plan/edit.json` or `project.json`, so changing a project to such a style means running conform again.
+
+`beds`: the style's own music. A plan picks one with `audio.bed` (`"none"` for no music); a user's file in `audio.music` replaces it. The bed loops to the length of the video. `gainDb` is its level against the voice reference. `fadeOut` (seconds, optional) fades only the music, linearly, over the end of the video.
 
 Param spec mini-language: `"string"`, `"string?"`, `"number"`, `"boolean"`, `"asset"` (a path under the project's `assets/`), `"enum:a|b|c"`, or an object `{type, min, max, maxChars, of}`.
 
@@ -190,7 +198,7 @@ export default {
 };
 ```
 
-`env.kit` (engine-provided, `engine/runtime/kit/`, all pure): `ease` (named easings), `cubicBezier`, `spring`, `tween`, `prog`, `clamp`, `lerp`, `invLerp`, `remap`, `F` (frames to seconds), `seeded` and `hash` (deterministic randomness), `Layer`, `Group`, `h`, `css` (DOM helpers), `measure`, `fitSize`, `wrap`, `groupWords`, `bare` (text). Footage is not in the kit: `env.footage.view({ matte: false|true })` returns a canvas the engine keeps on the current frame; the style positions and clips it with CSS. Details in [ADDING_A_STYLE.md](ADDING_A_STYLE.md#the-kit). A style may ignore the kit and draw however it likes as long as `seek` is pure.
+`env.kit` (engine-provided, `engine/runtime/kit/`, all pure): `ease` (named easings), `cubicBezier`, `spring`, `tween`, `prog`, `clamp`, `lerp`, `invLerp`, `remap`, `F` (frames to seconds), `seeded` and `hash` (deterministic randomness), `Layer`, `Group`, `h`, `css` (DOM helpers), `measure`, `fitSize`, `wrap`, `groupWords`, `bare` (text). Footage is not in the kit: `env.footage.view({ matte: false|true, wide: false|true })` returns a canvas the engine keeps on the current frame; the style positions and clips it with CSS. Details in [ADDING_A_STYLE.md](ADDING_A_STYLE.md#the-kit). A style may ignore the kit and draw however it likes as long as `seek` is pure.
 
 ## 6. The stage (`engine/runtime/stage.html`)
 
@@ -215,6 +223,16 @@ The server binds 127.0.0.1 only. It answers only requests whose `Host` header is
 
 Interface: a sticky phone-frame player showing the current cut with a scene filmstrip under it; one section per scene (time range, what is said, the option cards A/B/C playing in context over the real footage, pick, note, lock); global look choices; safe-zone overlay; "Send notes" while anything is unlocked or annotated, "Render final" when every scene is locked. Rendering runs server-side with live progress and ends with the finished file.
 
+## 8a. The app
+
+The app is what a person uses. They give their AI session (Claude Code or Codex) the Motus folder and say "go". The session follows `skills/start/SKILL.md`: it runs `motus app --open`, which starts `engine/lib/app.mjs` detached on port 4700 (or any free port) and opens the home page (`engine/app/`). Then it loops on `motus next`.
+
+The workspace is one folder that holds every project the app made: `$MOTUS_HOME`, else `~/Movies/Motus` on a Mac, else `~/Motus`. Beside the project folders it keeps `.motus-app.json` (where the app listens), `.motus-agent.json` (what the session is doing) and `.uploads/` (videos still being set up). Each project keeps `review/app.json`: the ingest the app ran and the session's current job. The code that reads and writes these files is `engine/lib/workspace.mjs`.
+
+Flow: the page uploads the video (`PUT /api/upload`, streamed into `.uploads/`), the person picks a cut mode, a style and names to spell, and `POST /api/projects` moves the file into `<project>/source/`, runs `init`, and starts `ingest` as a child process, turning its log lines into plain-words progress. When ingest ends, the app queues a `plan` job. `motus next` claims the oldest job in the workspace and prints it with instructions that point at the edit skill. The session reports progress with `motus say` and finishes with `motus done`. When the session asks for work while a job it claimed is still open, it gets that job again, marked `"resumed": true`. Notes sent from Studio become `notes` jobs through the same queue (`review/submissions/`, `review/.seen`), so `motus wait` and `motus next` never hand out the same submission twice. Rendering never needs the session: it runs in Studio's own server.
+
+The page polls `GET /api/state` (the session's status, the styles, and every project's stage: listening, waiting, planning, review, rendered or error). `POST /api/open` starts or finds the project's Studio server and returns its URL. `POST /api/retry` and `POST /api/reveal` cover Try again and Show in Finder. Writes need the header `x-motus: 1`, which a cross-site page cannot send without a preflight that this server never approves. Studio links back to the app and shows the session's status (`GET /api/agent`).
+
 ## 9. CLI
 
 The same list as `node engine/bin/motus.mjs help`:
@@ -226,7 +244,7 @@ motus init <video> [--style id] [--mode raw|locked] [--project dir] [--force]
 motus ingest <project> [--transcript file] [--language en] [--prompt "names, terms"]
 motus sheet <project> [--from s --to s --fps n] | [--at t1,t2,...]
 motus conform <project> [--no-matte]
-motus capture <url> --out <project>/assets/name.png [--find "text"] [--width 1200] [--dark] [--clip x,y,w,h] [--full]
+motus capture <url> --out <project>/assets/name.png [--find "text"] [--width 1200] [--scale 2] [--selector css] [--dark] [--clip x,y,w,h] [--full]
 motus validate <project>
 motus stills <project> [--posters [--force]] [--scene id --option id] [--at t1,t2] [--sheet] [--every s]
 motus studio <project> [--port n] [--open] [--stop]

@@ -7,63 +7,75 @@ export const W = 1080, H = 1920, CX = 540;
 export const F = (n) => n / 30;
 
 // ------------------------------------------------------------------ colour (research/colour.md)
-// Two blues, not one: a bright accent fills strips and colours keywords; a deeper blue draws outlines.
+// The release palette is original: every hue below replaces a measured value of the reference, role for
+// role, as listed in research/colour.md, "Release palette" (CR01-CR12). Roles, gradient stop positions and
+// shadow geometry are as measured; only the colours changed.
+// Two accent shades, not one: a bright accent fills strips and colours keywords; a deeper one draws outlines.
 const base = {
   ink: '#131416',            // captions and titles on light
   white: '#FFFFFF',
   cardFill: '#FFFFFF',
-  captionOnDark: '#EEF5FC', captionOnVideo: '#FDFBFA',
+  captionOnDark: '#F4F4F4', captionOnVideo: '#FDFBFA',   // CR08: the measured cool white, neutralised
   red: '#FE4D2E',            // marker strike
   redText: '#DB5A53',        // typographic strikethrough in designed lists
   redSoft: 'rgba(229,72,77,0.30)',
-  tile: 'rgba(48,51,58,0.92)', tileEdge: '#3A6077', tileLabel: '#EBEEF3',
+  tile: 'rgba(51,51,51,0.92)', tileEdge: '#5A5A5A', tileLabel: '#EEEEEE',   // CR08: measured slate, blue edge and label, neutralised
   chip: '#FDFDFD', chipLabel: '#121212',
   counter: '#1F1F1F', counterText: '#F8F7F7',
   termBar: '#1B1B1B', termBg: '#111111', termRow: '#222226', termText: '#EEEEEE', termGreen: '#34A54D', termDim: '#8A8A90', termAccent: '#E07C51',
   chromeTop: '#F4F4F6', chromeBottom: '#EFEFEF', chromeLine: '#E4E4E4',
   lightRed: '#FD6C52', lightYellow: '#FCB723', lightGreen: '#1AAD3A',
-  canvas: 'linear-gradient(90deg, #DDEAF1 0%, #E4EAED 14%, #E9EEEF 25%, #ECEFF0 36%, #EFF1F1 50%, #F2F1F0 100%)',
-  frond: 'rgb(231,238,242)',                       // multiplied over the canvas
+  canvas: '#FFFFFF',                               // CR10: flat white under a static grid (replaces the measured canvas, fronds and grain)
+  gridLine: '#EFEFEF', gridMajor: '#E3E3E3',       // CR10
   cardShadow: '0 13px 20px -8px rgba(0,0,0,0.11)',
   stripShadow: '0 12px 28px -6px rgba(0,0,0,0.18)',
   captionShadowDark: '0 13px 25px rgba(0,0,0,0.6)',
 };
 
+/** The light canvas grid (CR10): lines centred on the frame centre, a stronger line every `every` cells. */
+export const grid = { pitch: 90, every: 3, line: 2, major: 2, origin: [540, 960] };
+
 const looks = {
-  blue: {
-    accent: '#0184FE',        // title strip, number blocks
+  emerald: {                  // CR01-CR07, CR09: replaces the measured blue set
+    accent: '#00845F',        // title strip, number blocks
     onAccent: '#FCFDFC',
-    accentText: '#0484FB',    // emphasised caption words on light
-    accentTextDark: '#2A9AFB', accentSerifDark: '#84C5FA',
-    outline: '#1562C8',       // every card outline
-    outlineGlow: 'rgba(30,110,230,0.45)',
-    panel: ['#5578D8', '#325FC5', '#155BCC'],     // presenter panel ring: lit outer, inner, shaded side
-    glint: '#94C6FE', glintTail: '#3C88E4', glintHot: '#B9DBFF',
-    highlight: 'rgba(1,132,254,0.337)',           // #A9D7FD on white
-    highlightDark: '#215F9B',
-    callout: '#0885F5',
-    digits: ['#F4F9FE', '#E5F1FE', '#CCE5FD', '#9BD0FD', '#6BBCFD', '#3EA8FE'], digitGlow: 'rgba(62,168,254,0.5)',
-    ctaDot: '#217FF6',
+    accentText: '#00734E',    // emphasised caption words on light: 4.5:1 even over a major grid line
+    accentTextDark: '#7BF5C8', accentSerifDark: '#B5F8DD',
+    outline: '#006A4C',       // every card outline
+    outlineGlow: 'rgba(0,150,104,0.45)',
+    panel: ['#3B8C71', '#1C7457', '#0B6A4C'],     // presenter panel ring: lit outer, inner, shaded side
+    glint: '#79D6B4', glintTail: '#1E9B6E', glintHot: '#B3EBD7',
+    highlight: 'rgba(16,196,136,0.38)',           // #A4E9D2 on white
+    highlightDark: '#186A4F',
+    callout: '#00845F',
+    digits: ['#F2FCF8', '#E0F8EE', '#C3F0DE', '#8FE3C2', '#5DD4A6', '#2FC489'], digitGlow: 'rgba(47,196,137,0.5)',
+    ctaDot: '#0F9D6D', ctaRim: 'rgba(14,150,104,0.9)',
+    shade: '0,83,60',         // strip and block shadows: the accent at 63 %
+    tint: '#E0F0EC', tintMuted: '#F3F9F7', tintEdge: '#CFE3DD', iconInk: '#4D9782',   // CR07: accent and outline over white
   },
-  lime: {
-    accent: '#D5ED1D', onAccent: '#131314',
-    accentText: '#D6EC2B', accentTextDark: '#DAEE3A', accentSerifDark: '#E6F58A',
-    outline: '#BDD70C', outlineGlow: 'rgba(190,220,30,0.4)',
-    panel: ['#D5ED1D', '#BDD70C', '#A8C008'],
-    glint: '#F3FFB0', glintTail: '#C8E030', glintHot: '#FBFFD8',
-    highlight: 'rgba(213,237,29,0.42)', highlightDark: '#5C6B12', callout: '#BDD70C',
-    digits: ['#FDFFF0', '#F6FFCC', '#EEFEAF', '#DDF870', '#CBF24A', '#B7FD39'], digitGlow: 'rgba(183,253,57,0.45)',
-    ctaDot: '#BDD70C',
+  violet: {                   // CR11: replaces the measured lime set (a product whose own colour is violet)
+    accent: '#8846FA', onAccent: '#FCFDFC',
+    accentText: '#7836E4', accentTextDark: '#E5D6FF', accentSerifDark: '#F0E8FF',
+    outline: '#6430CC', outlineGlow: 'rgba(130,80,240,0.45)',
+    panel: ['#9578E4', '#7552D6', '#6237C6'],
+    glint: '#CDB8FF', glintTail: '#9363F2', glintHot: '#E6DCFF',
+    highlight: 'rgba(136,70,250,0.30)', highlightDark: '#5E40AE', callout: '#8846FA',
+    digits: ['#F8F5FF', '#EFE9FF', '#E0D4FF', '#CDB9FF', '#BFA6FF', '#B293FF'], digitGlow: 'rgba(178,147,255,0.5)',
+    ctaDot: '#8A4DF5', ctaRim: 'rgba(120,64,230,0.9)',
+    shade: '86,44,158',
+    tint: '#F1E9FE', tintMuted: '#F9F6FF', tintEdge: '#E2D8F5', iconInk: '#936EDB',
   },
 };
 
-/** The closing keyword is the one place hue is free: pale top, saturated bottom, same-hue glow. */
+/** The closing keyword is the one place hue is free: pale top, saturated bottom, same-hue glow.
+ *  emerald and violet follow the look (CR12); the others are brand colours, as measured [C27]. */
 export const ctaTones = {
+  emerald: ['#BFFFE8', '#4CFCBC'], violet: ['#DBC7FF', '#AD7EFC'],
   blue: ['#CFFDFE', '#5BCCFB'], yellow: ['#FFFDB7', '#FDFE53'], orange: ['#FEDEB6', '#FD9D52'],
   green: ['#BAFDC2', '#56FD69'], cyan: ['#BAFDFD', '#58FDFB'], lime: ['#EEFEAF', '#B7FD39'],
 };
 
-export const colours = (look = {}) => ({ ...base, ...(looks[look.accent] || looks.blue), accentName: looks[look.accent] ? look.accent : 'blue' });
+export const colours = (look = {}) => ({ ...base, ...(looks[look.accent] || looks.emerald), accentName: looks[look.accent] ? look.accent : 'emerald' });
 
 // ------------------------------------------------------------------ type (research/type.md)
 // Sans: Inter (display optical size), 600 for titles and captions, 700 for names, numbers and the CTA keyword.

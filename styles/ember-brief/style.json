@@ -1,0 +1,674 @@
+{
+  "id": "ember-brief",
+  "name": "Ember Brief",
+  "version": "0.1.0",
+  "status": "beta",
+  "summary": "A fast tool briefing: a dark dotted field over the speaker in the bottom half, an illustrated title, graphics that act each idea out on its words (a link that connects, a race, a figure that fills) beside real page captures, two-word captions with the spoken word in magenta, and a comment call to action.",
+  "bestFor": [
+    "new tool and feature explainers",
+    "news takes with a source to show",
+    "short numbered tool lists",
+    "solo talking-head briefings of 30 to 45 seconds"
+  ],
+  "aspect": "9:16",
+  "footage": {
+    "wide": true
+  },
+  "look": {},
+  "emphasis": [],
+  "roles": [
+    "hook",
+    "source",
+    "what",
+    "proof",
+    "how",
+    "item",
+    "benefit",
+    "limits",
+    "recap",
+    "cta"
+  ],
+  "sfx": {},
+  "beds": {
+    "a": {
+      "label": "Low pulse",
+      "src": "assets/music/bed-a.m4a",
+      "gainDb": -16.7,
+      "fadeOut": 1
+    }
+  },
+  "timing": {
+    "sceneLead": 0
+  },
+  "layouts": {
+    "split": {
+      "label": "Split",
+      "presenter": "panel",
+      "slots": {
+        "graphic": [
+          "hook-title",
+          "comment-cta",
+          "capture-card",
+          "big-figure",
+          "ui-card",
+          "prompt-box",
+          "chat-card",
+          "chips",
+          "logo-tiles",
+          "icon-grid",
+          "picture",
+          "phone-frame",
+          "link",
+          "process",
+          "versus",
+          "item-cards",
+          "player"
+        ],
+        "heading": [
+          "section-heading"
+        ]
+      }
+    },
+    "full": {
+      "label": "Full graphic",
+      "presenter": "none",
+      "slots": {
+        "graphic": [
+          "capture-card",
+          "big-figure",
+          "ui-card",
+          "prompt-box",
+          "chat-card",
+          "chips",
+          "logo-tiles",
+          "icon-grid",
+          "picture",
+          "before-after",
+          "phone-frame",
+          "link",
+          "versus",
+          "item-cards",
+          "player"
+        ],
+        "heading": [
+          "section-heading"
+        ]
+      }
+    }
+  },
+  "elements": {
+    "hook-title": {
+      "label": "Opening title",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "light1": {
+          "type": "string",
+          "maxChars": 16,
+          "maxWords": 2
+        },
+        "light2": {
+          "type": "string",
+          "maxChars": 16,
+          "maxWords": 2
+        },
+        "heavy1": {
+          "type": "string",
+          "maxChars": 14,
+          "maxWords": 2
+        },
+        "heavy2": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 14,
+          "maxWords": 2
+        },
+        "image": "asset?"
+      },
+      "beats": {}
+    },
+    "comment-cta": {
+      "label": "Comment call to action",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "keyword": {
+          "type": "string",
+          "maxChars": 10,
+          "maxWords": 1
+        },
+        "at": "word?",
+        "image": "asset?"
+      },
+      "beats": {}
+    },
+    "section-heading": {
+      "label": "Section heading",
+      "slots": [
+        "heading"
+      ],
+      "params": {
+        "n": {
+          "type": "number",
+          "min": 1,
+          "max": 9
+        },
+        "name": {
+          "type": "string",
+          "maxChars": 22,
+          "maxWords": 3
+        },
+        "icon": "asset?"
+      },
+      "beats": {}
+    },
+    "capture-card": {
+      "label": "Capture",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "src": "asset",
+        "width": {
+          "type": "number",
+          "optional": true,
+          "min": 500,
+          "max": 1040
+        }
+      },
+      "beats": {
+        "highlight": {
+          "find": "string?",
+          "x": "number?",
+          "y": "number?",
+          "w": "number?",
+          "h": "number?"
+        },
+        "outline": {
+          "find": "string?",
+          "x": "number?",
+          "y": "number?",
+          "w": "number?",
+          "h": "number?"
+        }
+      }
+    },
+    "big-figure": {
+      "label": "Big figure",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "value": {
+          "type": "string",
+          "maxChars": 10
+        },
+        "unit": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 6,
+          "maxWords": 1
+        },
+        "label": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 26,
+          "maxWords": 4
+        },
+        "image": "asset?",
+        "fill": "boolean?",
+        "from": {
+          "type": "number",
+          "optional": true
+        },
+        "at": "word?"
+      },
+      "beats": {}
+    },
+    "ui-card": {
+      "label": "App screen card",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "title": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 24
+        },
+        "rows": {
+          "type": "array",
+          "min": 1,
+          "max": 6,
+          "of": {
+            "label": {
+              "type": "string",
+              "optional": true,
+              "maxChars": 18
+            },
+            "value": {
+              "type": "string",
+              "optional": true,
+              "maxChars": 8
+            },
+            "toggle": "enum?:off|on"
+          }
+        }
+      },
+      "beats": {
+        "toggle": {
+          "row": {
+            "type": "number",
+            "optional": true,
+            "min": 1,
+            "max": 6
+          }
+        },
+        "select": {
+          "row": {
+            "type": "number",
+            "optional": false,
+            "min": 1,
+            "max": 6
+          }
+        },
+        "outline": {
+          "row": {
+            "type": "number",
+            "optional": true,
+            "min": 1,
+            "max": 6
+          }
+        }
+      }
+    },
+    "prompt-box": {
+      "label": "Prompt box",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "text": {
+          "type": "string",
+          "maxChars": 150
+        },
+        "at": "word?"
+      },
+      "beats": {
+        "outline": {}
+      }
+    },
+    "chat-card": {
+      "label": "Chat card",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "title": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 30
+        },
+        "messages": {
+          "type": "array",
+          "min": 1,
+          "max": 3,
+          "of": {
+            "from": "enum:user|assistant",
+            "text": {
+              "type": "string",
+              "maxChars": 70
+            }
+          }
+        }
+      },
+      "beats": {
+        "next": {}
+      }
+    },
+    "chips": {
+      "label": "Chips",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "kind": "enum?:name|path",
+        "chips": {
+          "type": "array",
+          "min": 1,
+          "max": 6,
+          "of": {
+            "label": {
+              "type": "string",
+              "maxChars": 24
+            },
+            "image": "asset?",
+            "at": "word?"
+          }
+        }
+      },
+      "beats": {
+        "highlight": {
+          "chip": {
+            "type": "number",
+            "optional": true,
+            "min": 1,
+            "max": 6
+          },
+          "until": "word?"
+        }
+      }
+    },
+    "logo-tiles": {
+      "label": "Logo tiles",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "tiles": {
+          "type": "array",
+          "min": 1,
+          "max": 6,
+          "of": {
+            "image": "asset?",
+            "name": {
+              "type": "string",
+              "optional": true,
+              "maxChars": 24
+            },
+            "at": "word?"
+          }
+        }
+      },
+      "beats": {}
+    },
+    "icon-grid": {
+      "label": "Series grid",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "total": {
+          "type": "number",
+          "min": 2,
+          "max": 60
+        },
+        "current": {
+          "type": "number",
+          "optional": true,
+          "min": 1,
+          "max": 60
+        },
+        "done": {
+          "type": "number",
+          "optional": true,
+          "min": 1,
+          "max": 60
+        }
+      },
+      "beats": {}
+    },
+    "picture": {
+      "label": "Picture",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "src": "asset",
+        "frame": "enum?:none|card",
+        "label": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 14,
+          "maxWords": 2
+        },
+        "look": "enum?:halftone|plain"
+      },
+      "beats": {
+        "badge": {
+          "kind": "enum:check|cross|lock|unlock|offline",
+          "place": "enum?:corner|centre"
+        },
+        "tag": {
+          "text": {
+            "type": "string",
+            "maxChars": 8,
+            "maxWords": 1
+          },
+          "style": "enum?:chip|stamp"
+        },
+        "chip": {
+          "label": {
+            "type": "string",
+            "optional": true,
+            "maxChars": 12,
+            "maxWords": 2
+          },
+          "image": "asset?",
+          "place": "enum?:corner|between"
+        },
+        "bubble": {
+          "state": "enum?:waiting|talking"
+        }
+      }
+    },
+    "before-after": {
+      "label": "Before / after",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "before": "asset",
+        "after": "asset",
+        "beforeLabel": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 10,
+          "maxWords": 1
+        },
+        "afterLabel": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 10,
+          "maxWords": 1
+        }
+      },
+      "beats": {
+        "reveal": {}
+      }
+    },
+    "phone-frame": {
+      "label": "Phone",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "src": "asset"
+      },
+      "beats": {}
+    },
+    "link": {
+      "label": "Link",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "nodes": {
+          "type": "array",
+          "min": 2,
+          "max": 2,
+          "of": {
+            "name": {
+              "type": "string",
+              "maxChars": 12,
+              "maxWords": 2
+            },
+            "image": "asset?",
+            "glyph": "enum?:check|cross|lock|unlock|offline|refresh|document|picture|chart|person|phone|clock|folder|play|mic|mail|link|code|search|star",
+            "at": "word?"
+          }
+        },
+        "line": "enum?:solid|dotted|waves",
+        "check": "boolean?"
+      },
+      "beats": {
+        "connect": {},
+        "check": {},
+        "send": {
+          "from": "enum?:a|b"
+        }
+      }
+    },
+    "process": {
+      "label": "Process",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "input": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 14,
+          "maxWords": 3
+        },
+        "inputImage": "asset?",
+        "glyph": "enum?:check|cross|lock|unlock|offline|refresh|document|picture|chart|person|phone|clock|folder|play|mic|mail|link|code|search|star",
+        "mark": "asset?",
+        "output": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 14,
+          "maxWords": 3
+        },
+        "outputImage": "asset?",
+        "badge": "enum?:check|cross|lock|unlock|offline"
+      },
+      "beats": {
+        "run": {},
+        "out": {},
+        "badge": {}
+      }
+    },
+    "versus": {
+      "label": "Versus cards",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "a": {
+          "name": {
+            "type": "string",
+            "maxChars": 24
+          },
+          "image": "asset?",
+          "glyph": "enum?:check|cross|lock|unlock|offline|refresh|document|picture|chart|person|phone|clock|folder|play|mic|mail|link|code|search|star",
+          "initials": "boolean?",
+          "value": {
+            "type": "string",
+            "maxChars": 7
+          },
+          "second": {
+            "type": "string",
+            "optional": true,
+            "maxChars": 9
+          }
+        },
+        "b": {
+          "name": {
+            "type": "string",
+            "maxChars": 24
+          },
+          "image": "asset?",
+          "glyph": "enum?:check|cross|lock|unlock|offline|refresh|document|picture|chart|person|phone|clock|folder|play|mic|mail|link|code|search|star",
+          "initials": "boolean?",
+          "value": {
+            "type": "string",
+            "maxChars": 7
+          },
+          "second": {
+            "type": "string",
+            "optional": true,
+            "maxChars": 9
+          }
+        },
+        "progress": "enum?:mosaic|bar",
+        "count": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        }
+      },
+      "beats": {
+        "count": {},
+        "race": {},
+        "win": {
+          "side": "enum?:a|b"
+        },
+        "second": {}
+      }
+    },
+    "item-cards": {
+      "label": "Item cards",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "mode": "enum?:row|swap",
+        "items": {
+          "type": "array",
+          "min": 2,
+          "max": 5,
+          "of": {
+            "image": "asset?",
+            "glyph": "enum?:check|cross|lock|unlock|offline|refresh|document|picture|chart|person|phone|clock|folder|play|mic|mail|link|code|search|star",
+            "label": {
+              "type": "string",
+              "optional": true,
+              "maxChars": 13,
+              "maxWords": 2
+            },
+            "at": "word?"
+          }
+        },
+        "mark": "asset?"
+      },
+      "beats": {
+        "outline": {},
+        "badge": {
+          "kind": "enum?:check|cross|lock|unlock|offline"
+        }
+      }
+    },
+    "player": {
+      "label": "Demo player",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "src": "asset?",
+        "tracks": {
+          "type": "array",
+          "optional": true,
+          "min": 1,
+          "max": 2,
+          "of": {
+            "image": "asset?",
+            "glyph": "enum?:check|cross|lock|unlock|offline|refresh|document|picture|chart|person|phone|clock|folder|play|mic|mail|link|code|search|star"
+          }
+        }
+      },
+      "beats": {
+        "clip": {},
+        "speak": {
+          "track": {
+            "type": "number",
+            "min": 1,
+            "max": 2
+          }
+        }
+      }
+    }
+  }
+}

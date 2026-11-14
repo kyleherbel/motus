@@ -1,5 +1,5 @@
 {
-  "motus": 1, "style": "editorial-proof", "look": {"accent": "blue"},
+  "motus": 1, "style": "editorial-proof", "look": {"accent": "emerald"},
   "captions": {
     "fixes": {"13": "2", "56": "2", "143": "Skool"},
     "emphasis": {"5": "accent+serif", "8": "accent+serif", "11": "accent", "13": "accent", "17": "accent+serif", "25": "serif", "30": "accent+serif", "34": "accent+serif", "40": "serif", "48": "accent+serif", "55": "accent+serif", "56": "accent", "59": "accent+serif", "66": "accent+serif", "84": "accent", "89": "accent+serif", "92": "serif", "97": "accent", "99": "accent+serif", "105": "accent", "114": "accent", "124": "serif", "130": "accent+serif", "137": "accent+serif"}
@@ -77,7 +77,7 @@
       ] },
     { "id": "s15", "words": [131, 150], "role": "cta", "pick": "a",
       "options": [
-        {"id": "a", "label": "Join Community", "why": "He asks people to join his free community: the ending block with his own verb and noun", "layout": "presenter-full", "slots": {"cta": {"type": "comment-cta", "verb": "join", "verbAt": 140, "keyword": "Community", "keywordAt": 144, "tone": "blue"}}},
+        {"id": "a", "label": "Join Community", "why": "He asks people to join his free community: the ending block with his own verb and noun", "layout": "presenter-full", "slots": {"cta": {"type": "comment-cta", "verb": "join", "verbAt": 140, "keyword": "Community", "keywordAt": 144, "tone": "emerald"}}},
         {"id": "b", "label": "Captions only", "why": "Ends on him with captions only, since he is not asking for a comment", "layout": "presenter-full", "slots": {}}
       ] }
   ],
