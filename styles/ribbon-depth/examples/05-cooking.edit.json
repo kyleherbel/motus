@@ -1,0 +1,202 @@
+{
+  "motus": 1,
+  "style": "ribbon-depth",
+  "look": {
+    "theme": "orange"
+  },
+  "captions": {},
+  "scenes": [
+    {
+      "id": "s01",
+      "words": [
+        0,
+        10
+      ],
+      "role": "hook",
+      "options": [
+        {
+          "label": "15 minutes behind",
+          "why": "The time counts up behind the speaker with the spiral as the opening signature.",
+          "layout": "depth",
+          "slots": {
+            "fx": {
+              "type": "ribbon",
+              "form": "spiral"
+            },
+            "back": {
+              "type": "stat",
+              "value": "15 minutes",
+              "label": "one pot to wash",
+              "icon": "bolt",
+              "at": 4
+            }
+          },
+          "id": "a"
+        },
+        {
+          "id": "b",
+          "label": "Presenter and captions",
+          "why": "Keep the speaker and the full sentence as captions.",
+          "layout": "clean",
+          "slots": {}
+        }
+      ],
+      "pick": "a"
+    },
+    {
+      "id": "s02",
+      "words": [
+        11,
+        22
+      ],
+      "role": "process",
+      "options": [
+        {
+          "label": "Three steps",
+          "why": "The three cooking steps rise in order on their words.",
+          "layout": "abstract",
+          "slots": {
+            "stage": {
+              "type": "glass-stack",
+              "cards": [
+                {
+                  "title": "Boil the pasta",
+                  "at": 11,
+                  "icon": "bolt"
+                },
+                {
+                  "title": "Garlic and butter",
+                  "at": 16,
+                  "icon": "spark"
+                },
+                {
+                  "title": "Finish with lemon",
+                  "at": 20,
+                  "icon": "check"
+                }
+              ]
+            }
+          },
+          "id": "a"
+        },
+        {
+          "id": "b",
+          "label": "Presenter and captions",
+          "why": "Keep the speaker and the full sentence as captions.",
+          "layout": "clean",
+          "slots": {}
+        }
+      ],
+      "pick": "a"
+    },
+    {
+      "id": "s03",
+      "words": [
+        23,
+        30
+      ],
+      "role": "proof",
+      "options": [
+        {
+          "label": "Friend's text",
+          "why": "The quoted message arrives as a chat bubble.",
+          "layout": "split",
+          "slots": {
+            "panel": {
+              "type": "chat",
+              "messages": [
+                {
+                  "text": "what is that smell?",
+                  "side": "left",
+                  "at": 27
+                }
+              ]
+            }
+          },
+          "id": "a"
+        },
+        {
+          "id": "b",
+          "label": "Presenter and captions",
+          "why": "Keep the speaker and the full sentence as captions.",
+          "layout": "clean",
+          "slots": {}
+        }
+      ],
+      "pick": "a"
+    },
+    {
+      "id": "s04",
+      "words": [
+        31,
+        35
+      ],
+      "role": "payoff",
+      "options": [
+        {
+          "label": "Garlic behind",
+          "why": "The hero ingredient fills the wall; the line lands in front.",
+          "layout": "depth",
+          "slots": {
+            "back": {
+              "type": "big-word",
+              "text": "Garlic",
+              "at": 31
+            },
+            "front": {
+              "type": "phrase",
+              "text": "does all the work",
+              "accent": "all the work",
+              "at": 32
+            }
+          },
+          "id": "a"
+        },
+        {
+          "id": "b",
+          "label": "Presenter and captions",
+          "why": "Keep the speaker and the full sentence as captions.",
+          "layout": "clean",
+          "slots": {}
+        }
+      ],
+      "pick": "a"
+    },
+    {
+      "id": "s05",
+      "words": [
+        36,
+        40
+      ],
+      "role": "cta",
+      "options": [
+        {
+          "label": "Save it",
+          "why": "A clean close on the speaker.",
+          "layout": "clean",
+          "slots": {
+            "front": {
+              "type": "phrase",
+              "text": "Save this for dinner tonight",
+              "accent": "tonight",
+              "at": 36
+            }
+          },
+          "id": "a"
+        },
+        {
+          "id": "b",
+          "label": "Presenter and captions",
+          "why": "Keep the speaker and the full sentence as captions.",
+          "layout": "clean",
+          "slots": {}
+        }
+      ],
+      "pick": "a"
+    }
+  ],
+  "audio": {
+    "sfx": true,
+    "bed": "none"
+  }
+}

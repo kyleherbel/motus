@@ -1,0 +1,182 @@
+{
+  "motus": 1,
+  "style": "ribbon-depth",
+  "look": {
+    "theme": "violet"
+  },
+  "captions": {},
+  "scenes": [
+    {
+      "id": "s01",
+      "words": [
+        0,
+        10
+      ],
+      "role": "hook",
+      "options": [
+        {
+          "id": "a",
+          "label": "Idea behind speaker",
+          "why": "Idea behind speaker illustrates the spoken clause.",
+          "layout": "depth",
+          "slots": {
+            "back": {
+              "type": "glass-card",
+              "title": "clear idea",
+              "accent": "idea",
+              "rows": [
+                {
+                  "text": "promise",
+                  "at": 7
+                }
+              ]
+            },
+            "front": {
+              "type": "phrase",
+              "text": "clear idea",
+              "accent": "idea",
+              "at": 3
+            }
+          }
+        },
+        {
+          "id": "b",
+          "label": "Keep the speaker",
+          "why": "Keep the speaker illustrates the spoken clause.",
+          "layout": "clean",
+          "slots": {}
+        }
+      ],
+      "pick": "a"
+    },
+    {
+      "id": "s02",
+      "words": [
+        11,
+        22
+      ],
+      "role": "process",
+      "options": [
+        {
+          "id": "a",
+          "label": "Build and search",
+          "why": "Build and search illustrates the spoken clause.",
+          "layout": "abstract",
+          "slots": {
+            "stage": {
+              "type": "glass-stack",
+              "cards": [
+                {
+                  "title": "scene",
+                  "at": 14
+                },
+                {
+                  "title": "steps",
+                  "at": 17
+                },
+                {
+                  "title": "answer",
+                  "at": 22
+                }
+              ]
+            },
+            "detail": {
+              "type": "search-query",
+              "query": "the answer",
+              "at": 19,
+              "doneAt": 22
+            }
+          }
+        },
+        {
+          "id": "b",
+          "label": "Keep the speaker",
+          "why": "Keep the speaker illustrates the spoken clause.",
+          "layout": "clean",
+          "slots": {}
+        }
+      ],
+      "pick": "a"
+    },
+    {
+      "id": "s03",
+      "words": [
+        23,
+        30
+      ],
+      "role": "contrast",
+      "options": [
+        {
+          "id": "a",
+          "label": "Compare the edits",
+          "why": "Compare the edits illustrates the spoken clause.",
+          "layout": "abstract",
+          "slots": {
+            "stage": {
+              "type": "glass-compare",
+              "left": "busy edit",
+              "right": "clear edit",
+              "at": 25,
+              "rightAt": 29,
+              "beats": [
+                {
+                  "at": 29,
+                  "do": "focus",
+                  "side": "right"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "b",
+          "label": "Keep the speaker",
+          "why": "Keep the speaker illustrates the spoken clause.",
+          "layout": "clean",
+          "slots": {}
+        }
+      ],
+      "pick": "a"
+    },
+    {
+      "id": "s04",
+      "words": [
+        31,
+        41
+      ],
+      "role": "cta",
+      "options": [
+        {
+          "id": "a",
+          "label": "Review the result",
+          "why": "Review the result illustrates the spoken clause.",
+          "layout": "abstract",
+          "slots": {
+            "stage": {
+              "type": "action-button",
+              "label": "review the result",
+              "beats": [
+                {
+                  "at": 32,
+                  "do": "click"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "b",
+          "label": "Keep the speaker",
+          "why": "Keep the speaker illustrates the spoken clause.",
+          "layout": "clean",
+          "slots": {}
+        }
+      ],
+      "pick": "a"
+    }
+  ],
+  "audio": {
+    "sfx": true,
+    "bed": "none"
+  }
+}

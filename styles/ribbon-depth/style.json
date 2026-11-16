@@ -1,0 +1,670 @@
+{
+  "id": "ribbon-depth",
+  "name": "Ribbon Depth",
+  "version": "0.2.0",
+  "status": "beta",
+  "order": 0,
+  "summary": "A luminous 3D glass ribbon wound behind the speaker, frosted cards and icon tiles behind the head, a capsule-and-italic text stack, camera shakes on landings and word-timed abstract glass scenes. Orange (default), Violet and Light Lime.",
+  "bestFor": [
+    "polished talking-head reels on any topic or niche",
+    "personal brands and coaching",
+    "tool, product and money explainers",
+    "fitness, food and lifestyle tips"
+  ],
+  "aspect": "9:16",
+  "look": {
+    "theme": {
+      "label": "Material and light",
+      "choices": [
+        "orange",
+        "violet",
+        "light-lime"
+      ],
+      "default": "orange"
+    },
+    "motion": {
+      "label": "Motion intensity",
+      "choices": [
+        "restrained",
+        "balanced",
+        "punchy"
+      ],
+      "default": "balanced"
+    },
+    "ribbon": {
+      "label": "Ribbon",
+      "choices": [
+        "sculpted",
+        "subtle",
+        "off"
+      ],
+      "default": "sculpted"
+    },
+    "captions": {
+      "label": "Supporting captions",
+      "choices": [
+        "on",
+        "off"
+      ],
+      "default": "on"
+    }
+  },
+  "emphasis": [
+    "accent",
+    "serif",
+    "accent+serif"
+  ],
+  "roles": [
+    "hook",
+    "context",
+    "problem",
+    "proof",
+    "process",
+    "contrast",
+    "item",
+    "payoff",
+    "cta",
+    "breath"
+  ],
+  "sfx": {
+    "air": "assets/sfx/air.wav",
+    "glass": "assets/sfx/glass.wav",
+    "tap": "assets/sfx/tap.wav"
+  },
+  "preview": {
+    "video": "preview.webm",
+    "poster": "preview.webp"
+  },
+  "timing": {
+    "sceneLead": 0
+  },
+  "layouts": {
+    "depth": {
+      "label": "Speaker with rear depth",
+      "presenter": "full",
+      "slots": {
+        "back": [
+          "glass-card",
+          "media-fan",
+          "filmstrip",
+          "stat",
+          "notify",
+          "big-word"
+        ],
+        "front": [
+          "phrase"
+        ],
+        "fx": [
+          "ribbon"
+        ]
+      }
+    },
+    "abstract": {
+      "label": "Abstract glass stage",
+      "presenter": "none",
+      "slots": {
+        "stage": [
+          "glass-card",
+          "glass-stack",
+          "search-query",
+          "action-button",
+          "glass-compare",
+          "media-fan",
+          "filmstrip",
+          "stat",
+          "chat",
+          "chart",
+          "orbit",
+          "quote",
+          "swap",
+          "notify"
+        ],
+        "front": [
+          "phrase"
+        ],
+        "detail": [
+          "search-query"
+        ]
+      }
+    },
+    "split": {
+      "label": "Speaker window and panel",
+      "presenter": "window",
+      "slots": {
+        "panel": [
+          "stat",
+          "chat",
+          "chart",
+          "orbit",
+          "quote",
+          "swap",
+          "notify"
+        ],
+        "front": [
+          "phrase"
+        ],
+        "detail": [
+          "search-query"
+        ],
+        "fx": [
+          "ribbon"
+        ]
+      }
+    },
+    "studio": {
+      "label": "Small presenter and gallery",
+      "presenter": "cutout",
+      "slots": {
+        "back": [
+          "glass-card",
+          "media-fan",
+          "filmstrip",
+          "stat",
+          "notify",
+          "big-word"
+        ],
+        "back-title": [
+          "phrase"
+        ],
+        "front": [
+          "phrase"
+        ],
+        "fx": [
+          "ribbon"
+        ]
+      }
+    },
+    "portrait-search": {
+      "label": "Circular portrait and query",
+      "presenter": "circle",
+      "slots": {
+        "detail": [
+          "search-query"
+        ]
+      }
+    },
+    "clean": {
+      "label": "Presenter breathing room",
+      "presenter": "full",
+      "slots": {
+        "front": [
+          "phrase"
+        ],
+        "fx": [
+          "ribbon"
+        ]
+      }
+    }
+  },
+  "elements": {
+    "phrase": {
+      "label": "Mixed-type phrase",
+      "slots": [
+        "front",
+        "back-title"
+      ],
+      "params": {
+        "text": {
+          "type": "string",
+          "maxChars": 36,
+          "maxWords": 7
+        },
+        "accent": {
+          "type": "string",
+          "maxChars": 22,
+          "optional": true
+        },
+        "label": {
+          "type": "string",
+          "maxChars": 38,
+          "optional": true
+        },
+        "lead": {
+          "type": "string",
+          "maxChars": 30,
+          "optional": true
+        },
+        "at": "word?",
+        "labelAt": "word?",
+        "steps": {
+          "type": "array",
+          "min": 1,
+          "max": 3,
+          "optional": true,
+          "of": {
+            "text": {
+              "type": "string",
+              "maxChars": 14
+            },
+            "at": "word?",
+            "icon": "enum?:check|search|arrow|person|spark|people|eye|cursor|cart|lock|chat|bolt"
+          }
+        }
+      },
+      "beats": {
+        "underline": {}
+      }
+    },
+    "glass-card": {
+      "label": "Rear frosted card",
+      "slots": [
+        "back",
+        "stage"
+      ],
+      "params": {
+        "title": {
+          "type": "string",
+          "maxChars": 24
+        },
+        "accent": {
+          "type": "string",
+          "maxChars": 18,
+          "optional": true
+        },
+        "treatment": "enum?:rows|funnel|plain",
+        "tile": "enum?:check|search|arrow|person|spark|people|eye|cursor|cart|lock|chat|bolt",
+        "rows": {
+          "type": "array",
+          "min": 1,
+          "max": 3,
+          "optional": true,
+          "of": {
+            "text": {
+              "type": "string",
+              "maxChars": 23
+            },
+            "at": "word?",
+            "icon": "enum?:check|search|arrow|person|spark|people|eye|cursor|cart|lock|chat|bolt"
+          }
+        }
+      },
+      "beats": {
+        "focus": {
+          "index": {
+            "type": "number",
+            "min": 0,
+            "max": 2
+          }
+        }
+      }
+    },
+    "glass-stack": {
+      "label": "Linked glass sequence",
+      "slots": [
+        "stage"
+      ],
+      "params": {
+        "cards": {
+          "type": "array",
+          "min": 2,
+          "max": 4,
+          "of": {
+            "title": {
+              "type": "string",
+              "maxChars": 23
+            },
+            "detail": {
+              "type": "string",
+              "maxChars": 32,
+              "optional": true
+            },
+            "at": "word?",
+            "icon": "enum?:check|search|arrow|person|spark|people|eye|cursor|cart|lock|chat|bolt"
+          }
+        }
+      },
+      "beats": {}
+    },
+    "search-query": {
+      "label": "Typed search",
+      "slots": [
+        "detail",
+        "stage"
+      ],
+      "params": {
+        "query": {
+          "type": "string",
+          "maxChars": 34
+        },
+        "at": "word?",
+        "doneAt": "word?"
+      },
+      "beats": {}
+    },
+    "action-button": {
+      "label": "Glass action and ripple",
+      "slots": [
+        "stage"
+      ],
+      "params": {
+        "label": {
+          "type": "string",
+          "maxChars": 25
+        }
+      },
+      "beats": {
+        "click": {}
+      }
+    },
+    "glass-compare": {
+      "label": "Two contrasting outcomes",
+      "slots": [
+        "stage"
+      ],
+      "params": {
+        "left": {
+          "type": "string",
+          "maxChars": 26
+        },
+        "right": {
+          "type": "string",
+          "maxChars": 26
+        },
+        "leftLabel": {
+          "type": "string",
+          "maxChars": 16,
+          "optional": true
+        },
+        "rightLabel": {
+          "type": "string",
+          "maxChars": 16,
+          "optional": true
+        },
+        "at": "word?",
+        "rightAt": "word?"
+      },
+      "beats": {
+        "focus": {
+          "side": "enum:left|right"
+        }
+      }
+    },
+    "media-fan": {
+      "label": "Photo triptych",
+      "slots": [
+        "back",
+        "stage"
+      ],
+      "params": {
+        "items": {
+          "type": "array",
+          "min": 1,
+          "max": 3,
+          "of": {
+            "src": "asset",
+            "label": {
+              "type": "string",
+              "maxChars": 20,
+              "optional": true
+            },
+            "at": "word?"
+          }
+        }
+      },
+      "beats": {}
+    },
+    "filmstrip": {
+      "label": "Filmstrip",
+      "slots": [
+        "back",
+        "stage"
+      ],
+      "params": {
+        "items": {
+          "type": "array",
+          "min": 1,
+          "max": 3,
+          "of": {
+            "src": "asset",
+            "label": {
+              "type": "string",
+              "maxChars": 20,
+              "optional": true
+            },
+            "at": "word?"
+          }
+        }
+      },
+      "beats": {}
+    },
+    "stat": {
+      "label": "Counting number",
+      "slots": [
+        "back",
+        "stage",
+        "panel"
+      ],
+      "params": {
+        "value": {
+          "type": "string",
+          "maxChars": 10
+        },
+        "label": {
+          "type": "string",
+          "maxChars": 30,
+          "optional": true
+        },
+        "meter": {
+          "type": "number",
+          "min": 0,
+          "max": 100,
+          "optional": true
+        },
+        "icon": "enum?:check|search|arrow|person|spark|people|eye|cursor|cart|lock|chat|bolt",
+        "at": "word?"
+      },
+      "beats": {}
+    },
+    "chat": {
+      "label": "Message bubbles",
+      "slots": [
+        "stage",
+        "panel"
+      ],
+      "params": {
+        "name": {
+          "type": "string",
+          "maxChars": 18,
+          "optional": true
+        },
+        "messages": {
+          "type": "array",
+          "min": 1,
+          "max": 4,
+          "of": {
+            "text": {
+              "type": "string",
+              "maxChars": 44
+            },
+            "side": "enum?:left|right",
+            "at": "word?"
+          }
+        }
+      },
+      "beats": {}
+    },
+    "chart": {
+      "label": "Line or bars",
+      "slots": [
+        "stage",
+        "panel"
+      ],
+      "params": {
+        "kind": "enum?:line|bars",
+        "title": {
+          "type": "string",
+          "maxChars": 26,
+          "optional": true
+        },
+        "accent": {
+          "type": "string",
+          "maxChars": 16,
+          "optional": true
+        },
+        "points": {
+          "type": "array",
+          "min": 2,
+          "max": 6,
+          "of": {
+            "label": {
+              "type": "string",
+              "maxChars": 10,
+              "optional": true
+            },
+            "value": {
+              "type": "number",
+              "min": 0,
+              "max": 100
+            },
+            "at": "word?"
+          }
+        }
+      },
+      "beats": {}
+    },
+    "orbit": {
+      "label": "Hub and satellites",
+      "slots": [
+        "stage",
+        "panel"
+      ],
+      "params": {
+        "center": {
+          "type": "string",
+          "maxChars": 16
+        },
+        "items": {
+          "type": "array",
+          "min": 2,
+          "max": 6,
+          "of": {
+            "text": {
+              "type": "string",
+              "maxChars": 14
+            },
+            "icon": "enum?:check|search|arrow|person|spark|people|eye|cursor|cart|lock|chat|bolt",
+            "at": "word?"
+          }
+        },
+        "at": "word?"
+      },
+      "beats": {}
+    },
+    "quote": {
+      "label": "Statement slab",
+      "slots": [
+        "stage",
+        "panel"
+      ],
+      "params": {
+        "text": {
+          "type": "string",
+          "maxChars": 90
+        },
+        "accent": {
+          "type": "string",
+          "maxChars": 24,
+          "optional": true
+        },
+        "by": {
+          "type": "string",
+          "maxChars": 28,
+          "optional": true
+        },
+        "at": "word?",
+        "doneAt": "word?"
+      },
+      "beats": {}
+    },
+    "swap": {
+      "label": "Replace one thing with another",
+      "slots": [
+        "stage",
+        "panel"
+      ],
+      "params": {
+        "from": {
+          "type": "string",
+          "maxChars": 28
+        },
+        "to": {
+          "type": "string",
+          "maxChars": 28
+        },
+        "fromLabel": {
+          "type": "string",
+          "maxChars": 14,
+          "optional": true
+        },
+        "toLabel": {
+          "type": "string",
+          "maxChars": 14,
+          "optional": true
+        },
+        "at": "word?",
+        "toAt": "word?"
+      },
+      "beats": {}
+    },
+    "notify": {
+      "label": "Notification stack",
+      "slots": [
+        "back",
+        "stage",
+        "panel"
+      ],
+      "params": {
+        "app": {
+          "type": "string",
+          "maxChars": 16,
+          "optional": true
+        },
+        "items": {
+          "type": "array",
+          "min": 1,
+          "max": 4,
+          "of": {
+            "title": {
+              "type": "string",
+              "maxChars": 24
+            },
+            "text": {
+              "type": "string",
+              "maxChars": 42,
+              "optional": true
+            },
+            "icon": "enum?:check|search|arrow|person|spark|people|eye|cursor|cart|lock|chat|bolt",
+            "at": "word?"
+          }
+        }
+      },
+      "beats": {}
+    },
+    "big-word": {
+      "label": "Giant word behind the head",
+      "slots": [
+        "back"
+      ],
+      "params": {
+        "text": {
+          "type": "string",
+          "maxChars": 14
+        },
+        "italic": "boolean?",
+        "at": "word?"
+      },
+      "beats": {}
+    },
+    "ribbon": {
+      "label": "Glass ribbon effect",
+      "slots": [
+        "fx"
+      ],
+      "params": {
+        "form": "enum:spiral|sweep|halo|arc",
+        "at": "word?"
+      },
+      "beats": {}
+    }
+  }
+}

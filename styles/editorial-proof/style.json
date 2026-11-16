@@ -63,6 +63,10 @@
       "gainDb": -22
     }
   },
+  "preview": {
+    "video": "preview.webm",
+    "poster": "preview.webp"
+  },
   "timing": {
     "sceneLead": 0
   },

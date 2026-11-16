@@ -120,6 +120,8 @@ p { margin: 0; }
 .choice span { color: var(--ink-2); font-size: 13px; }
 .choice .best { color: var(--ink-3); font-size: 12.5px; }
 .choice .warn { color: var(--accent); font-size: 12.5px; }
+.choice .preview { display: block; margin: 6px 0 6px; aspect-ratio: 544 / 312; pointer-events: none; }
+.choice .preview video, .choice .preview img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .choice:has(input:checked) { border-color: var(--accent); background: var(--s2); }
 .text { width: 100%; font: 400 14px/1.4 var(--sans); color: var(--ink); background: var(--bg-deep); border: 1px solid var(--line-2); border-radius: var(--r); padding: 10px 12px; }
 .text::placeholder { color: var(--ink-3); }

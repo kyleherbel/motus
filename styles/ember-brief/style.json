@@ -37,6 +37,10 @@
       "fadeOut": 1
     }
   },
+  "preview": {
+    "video": "preview.webm",
+    "poster": "preview.webp"
+  },
   "timing": {
     "sceneLead": 0
   },

@@ -469,6 +469,16 @@ Release
 - [ ] `claude plugin validate .` passes.
 - [ ] Nothing from `corpus/` is in the commit.
 
+## A preview for the style picker
+
+The app's "Pick a look" screen shows each style with a few seconds of a real edit. Render a take of your own in the new style, pick three moments where its signature elements land, and run:
+
+```
+node styles/_tools/make-preview.mjs <style-id> <render.mp4> <t1> <t2> <t3>
+```
+
+It writes `preview.webm` (three 2.5 s clips side by side, silent, looping, transparent corners) and `preview.webp` (a still from three quarters in) into the pack. Add `"preview": { "video": "preview.webm", "poster": "preview.webp" }` to the manifest head and regenerate `style.json`. Use only footage you have the rights to show; never reference media.
+
 ## The worked example: Editorial Proof
 
 | What | Where |

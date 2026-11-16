@@ -62,5 +62,9 @@
       "src": "assets/music/bed-b.m4a",
       "gainDb": -22
     }
+  },
+  "preview": {
+    "video": "preview.webm",
+    "poster": "preview.webp"
   }
 }

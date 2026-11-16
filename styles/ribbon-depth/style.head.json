@@ -1,0 +1,78 @@
+{
+  "id": "ribbon-depth",
+  "name": "Ribbon Depth",
+  "version": "0.2.0",
+  "status": "beta",
+  "order": 0,
+  "summary": "A luminous 3D glass ribbon wound behind the speaker, frosted cards and icon tiles behind the head, a capsule-and-italic text stack, camera shakes on landings and word-timed abstract glass scenes. Orange (default), Violet and Light Lime.",
+  "bestFor": [
+    "polished talking-head reels on any topic or niche",
+    "personal brands and coaching",
+    "tool, product and money explainers",
+    "fitness, food and lifestyle tips"
+  ],
+  "aspect": "9:16",
+  "look": {
+    "theme": {
+      "label": "Material and light",
+      "choices": [
+        "orange",
+        "violet",
+        "light-lime"
+      ],
+      "default": "orange"
+    },
+    "motion": {
+      "label": "Motion intensity",
+      "choices": [
+        "restrained",
+        "balanced",
+        "punchy"
+      ],
+      "default": "balanced"
+    },
+    "ribbon": {
+      "label": "Ribbon",
+      "choices": [
+        "sculpted",
+        "subtle",
+        "off"
+      ],
+      "default": "sculpted"
+    },
+    "captions": {
+      "label": "Supporting captions",
+      "choices": [
+        "on",
+        "off"
+      ],
+      "default": "on"
+    }
+  },
+  "emphasis": [
+    "accent",
+    "serif",
+    "accent+serif"
+  ],
+  "roles": [
+    "hook",
+    "context",
+    "problem",
+    "proof",
+    "process",
+    "contrast",
+    "item",
+    "payoff",
+    "cta",
+    "breath"
+  ],
+  "sfx": {
+    "air": "assets/sfx/air.wav",
+    "glass": "assets/sfx/glass.wav",
+    "tap": "assets/sfx/tap.wav"
+  },
+  "preview": {
+    "video": "preview.webm",
+    "poster": "preview.webp"
+  }
+}

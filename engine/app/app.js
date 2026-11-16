@@ -232,6 +232,23 @@ function startSetup(file) {
   xhr.send(file);
 }
 
+// A few seconds of the style's real edit, looping silently on its card (a still when motion is reduced).
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)');
+function previewOf(st) {
+  const p = st.preview;
+  if (!p) return null;
+  const box = h('span', { class: 'preview', 'aria-hidden': 'true' });
+  if (p.video && !REDUCED.matches) {
+    const v = document.createElement('video');
+    Object.assign(v, { muted: true, loop: true, autoplay: true, playsInline: true, preload: 'auto', disablePictureInPicture: true });
+    v.setAttribute('muted', ''); v.setAttribute('playsinline', '');
+    if (p.poster) v.poster = p.poster;
+    v.src = p.video;
+    box.append(v);
+  } else if (p.poster) box.append(h('img', { src: p.poster, alt: '', loading: 'lazy' }));
+  return box;
+}
+
 function paintStyles(force = false) {
   const s = app.setup;
   const list = app.state?.styles || [];
@@ -244,6 +261,7 @@ function paintStyles(force = false) {
   root.replaceChildren(...list.map((st) => h('label', { class: 'choice' },
     h('input', { type: 'radio', name: 'style', value: st.id, checked: s.style === st.id, onchange: () => { s.style = st.id; paintSetup(); } }),
     h('b', null, st.name),
+    previewOf(st),
     h('span', null, st.summary),
     st.bestFor?.length ? h('span', { class: 'best' }, `Best for: ${st.bestFor.join(', ')}`) : null,
     st.wide && vertical ? h('span', { class: 'warn' }, 'Works best from a horizontal recording. Yours is vertical, so the speaker panel shows a closer crop.') : null)));

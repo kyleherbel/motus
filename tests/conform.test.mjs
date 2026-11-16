@@ -10,7 +10,7 @@ describe('wide view', () => {
   test('a 16:9 source becomes a 1706x960 band; the 9:16 window and the face map into it', () => {
     const b = wideBand(uhd, { x: 1312, y: 0, w: 1216, h: 2160 }, { cx: 0.5, eyeY: 0.3, faceW: 0.1, eyeDist: 0.04, headTopY: 0.12, chinY: 0.5 });
     assert.equal(b.width, 1706); assert.equal(b.height, 960);
-    assert.match(b.filter, /^scale=1706:960:flags=lanczos,crop=1706:960:0:0$/);
+    assert.match(b.filter, /^scale=1706:960:flags=lanczos,crop=1706:960:0:0,setsar=1$/);
     assert.deepEqual(b.window, { x: 582.9, y: 0, w: 540.2, h: 960 });
     assert.equal(b.framing.eyeX, 853); assert.equal(b.framing.eyeY, 288); assert.equal(b.framing.eyeDist, 68);
   });

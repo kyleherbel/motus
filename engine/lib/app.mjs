@@ -18,7 +18,7 @@ import { agentStatus, listProjects, projectSummary, patchAppState, appState, pid
 
 const BIN = path.join(ENGINE, 'bin', 'motus.mjs');
 const VIDEO_EXT = /\.(mp4|mov|m4v|mkv|webm|avi|mts)$/i;
-const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.ttf': 'font/ttf', '.jpg': 'image/jpeg', '.svg': 'image/svg+xml', '.json': 'application/json; charset=utf-8' };
+const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.ttf': 'font/ttf', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp', '.webm': 'video/webm', '.mp4': 'video/mp4', '.svg': 'image/svg+xml', '.json': 'application/json; charset=utf-8' };
 
 // Ingest log lines ("[motus] transcript 40%") in the words the page shows.
 export function friendlyIngest(line) {
@@ -86,7 +86,8 @@ export async function createAppServer(ws, { port = 0, host = '127.0.0.1', runIng
         try { wide = !!(await loadStyle(s.id)).manifest.footage?.wide; } catch { /* listed, not loadable */ }
         styleCache.set(s.id, wide);
       }
-      out.push({ id: s.id, name: s.name, version: s.version, summary: s.summary, bestFor: s.bestFor, status: s.status, wide: styleCache.get(s.id) });
+      const preview = s.preview ? Object.fromEntries(Object.entries(s.preview).map(([k, f]) => [k, `/style-preview/${encodeURIComponent(s.id)}/${encodeURIComponent(f)}`])) : null;
+      out.push({ id: s.id, name: s.name, version: s.version, summary: s.summary, bestFor: s.bestFor, status: s.status, wide: styleCache.get(s.id), preview });
     }
     return out;
   }
@@ -228,6 +229,13 @@ export async function createAppServer(ws, { port = 0, host = '127.0.0.1', runIng
       }
       if (p === '/api/thumb' && req.method === 'GET') return thumb(res, url.searchParams.get('project'));
       if (p === '/' || p === '/index.html') return sendFile(res, path.join(ENGINE, 'app'), 'index.html');
+      if (p.startsWith('/style-preview/')) {
+        // only the files a pack declares as its preview, never anything else in the pack
+        const [id, file] = p.slice(15).split('/');
+        const st = (await listStyles()).find((x) => x.id === id);
+        if (!st?.preview || !Object.values(st.preview).includes(file)) return send(res, 404, 'not found');
+        return sendFile(res, st.dir, file);
+      }
       if (p.startsWith('/app/')) return sendFile(res, path.join(ENGINE, 'app'), p.slice(5));
       if (p.startsWith('/assets/')) return sendFile(res, path.join(ENGINE, 'assets'), p.slice(8));
       return send(res, 404, 'not found');

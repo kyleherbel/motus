@@ -72,6 +72,10 @@
     "bedA2": "assets/music/bed-a2.m4a"
   },
   "beds": {},
+  "preview": {
+    "video": "preview.webm",
+    "poster": "preview.webp"
+  },
   "timing": {
     "sceneLead": 0
   },

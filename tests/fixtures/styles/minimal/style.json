@@ -5,6 +5,7 @@
   "summary": "A bare style used to test the engine: presenter panel with head pop-out, one caption line, one title card.",
   "bestFor": ["engine tests"],
   "aspect": "9:16",
+  "preview": { "poster": "preview.webp" },
   "look": { "accent": { "label": "Accent", "choices": ["blue", "lime"], "default": "blue" } },
   "emphasis": ["accent"],
   "roles": ["hook", "body", "cta"],

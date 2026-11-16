@@ -2,6 +2,18 @@
 
 All notable changes to Motus are recorded here. The plugin version is the `version` field in `.claude-plugin/plugin.json` and `.codex-plugin/plugin.json`. Each style pack has its own version in `styles/<id>/style.json`.
 
+## 0.2.0 (unreleased)
+
+- Added Ribbon Depth (beta): behind-head glass ribbon and cards, mixed DM Sans/Playfair italic type, abstract sequence/search/action scenes, comparison, photo fan, filmstrip and circular portrait layouts. Violet is based on moving public samples; Light Lime has static reference evidence and extrapolated motion.
+- Added `/motus:ribbon-reel`: content-led planning with variable duration, word anchors, persistent elements and materially different scene alternatives. No fixed ten-second/five-scene recipe.
+- Added original synthesized sound effects, openly licensed fonts, measured research notes, two worked examples, style-specific plan audit and browser checks for repeat seeking and matte fallback.
+- Ribbon Depth 0.2.0 rebuild after owner review. A 3D glass spiral ribbon (perspective, depth-sorted, bloom, sparkles) turns for the whole run. Entrances go blur-to-sharp. The phrase is now a text stack (capsule, lead line, heavy italic hero, self-drawing underline, node timeline). Rear cards get two-line titles, check-in rows and icon tiles. Camera shakes are measured from the public shake preview. Transitions use zoom-defocus out and a vertical smear with RGB split in. The abstract world gains a bright core, bokeh and a light trail between cards. New Orange palette (default). `clean` keeps the room grade. Rules: `research/design.md` D09.
+- Ribbon Depth scene library (D13): the ribbon is now a placed `fx` effect with four forms (spiral, sweep, halo, arc), used on the hook and a few later moments instead of every speaker scene. New topic-agnostic devices: `stat`, `chat`, `chart`, `orbit`, `quote`, `swap`, `notify` and `big-word`. New `split` layout (speaker window plus panel). The audit gains variety warnings. Fitness, finance and cooking example plans were added. The ribbon bloom no longer uses canvas blur filters, and the browser check now verifies exact style state between seeks.
+- App: a style manifest can set `order` (lower first) and the style list sorts by it, then by name. Ribbon Depth uses `order: 0`, so it is the first look on the app's "Pick a look" screen and in `motus styles`.
+- App: each style card on "Pick a look" now plays a few seconds of a real edit in that style (three clips side by side, silent, looping; a still when reduced motion is on). Packs declare it with `"preview"` in their manifest; the app serves only those declared files. `styles/_tools/make-preview.mjs` builds the preview from a render. All four styles have one.
+- Engine: conform forces square pixels after the 9:16 crop (`setsar=1`). An even-rounded crop of a 4K horizontal source left SAR 9728:9729, AVFoundation read the width as 1079 and the person matte came out sheared. The matte step now refuses a byte count that is not a whole number of frames.
+- Both plugin manifests now use 0.2.0. Local integration only; nothing has been published.
+
 ## 0.1.0 (unreleased)
 
 First version. Not yet published.

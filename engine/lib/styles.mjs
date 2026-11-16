@@ -6,6 +6,16 @@ import { STYLES, readJson, exists, MotusError } from './util.mjs';
 /** A style id is a folder name: letters, digits, "-" and "_" (never a path). */
 const ID = /^[a-z0-9][a-z0-9_-]*$/i;
 
+// A pack may show a small preview on the app's style cards: "preview": { "video": "preview.webm", "poster": "preview.webp" }.
+// Only plain file names inside the pack with an image or video extension are accepted.
+const PREVIEW_FILE = /^[\w.-]+\.(webm|mp4|webp|png|jpg|jpeg)$/i;
+function previewOf(p) {
+  if (!p || typeof p !== 'object') return null;
+  const out = {};
+  for (const k of ['video', 'poster']) if (typeof p[k] === 'string' && PREVIEW_FILE.test(p[k]) && !p[k].startsWith('.')) out[k] = p[k];
+  return out.video || out.poster ? out : null;
+}
+
 export async function listStyles() {
   let dirs = [];
   try { dirs = await fs.readdir(STYLES, { withFileTypes: true }); } catch { return []; }
@@ -23,10 +33,11 @@ export async function listStyles() {
     }
     out.push({
       id: m.id ?? d.name, name: m.name ?? d.name, version: m.version, summary: m.summary ?? '', bestFor: m.bestFor || [],
-      aspect: m.aspect || '9:16', status: m.status || 'stable', ...base,
+      aspect: m.aspect || '9:16', status: m.status || 'stable', order: Number.isFinite(m.order) ? m.order : 100, preview: previewOf(m.preview), ...base,
     });
   }
-  return out.sort((a, b) => String(a.name).localeCompare(String(b.name)));
+  // a manifest may ask to be listed earlier with "order" (lower first); ties and the rest go by name
+  return out.sort((a, b) => (a.order ?? 100) - (b.order ?? 100) || String(a.name).localeCompare(String(b.name)));
 }
 
 export async function loadStyle(id) {

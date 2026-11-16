@@ -1,0 +1,209 @@
+{
+  "motus": 1,
+  "style": "ribbon-depth",
+  "look": {
+    "theme": "orange"
+  },
+  "captions": {},
+  "scenes": [
+    {
+      "id": "s01",
+      "words": [
+        0,
+        9
+      ],
+      "role": "hook",
+      "options": [
+        {
+          "label": "Saved, behind",
+          "why": "The amount counts up on a rear card under an arc.",
+          "layout": "depth",
+          "slots": {
+            "fx": {
+              "type": "ribbon",
+              "form": "arc"
+            },
+            "back": {
+              "type": "stat",
+              "value": "$10,000",
+              "label": "saved in one year",
+              "icon": "lock",
+              "at": 2
+            }
+          },
+          "id": "a"
+        },
+        {
+          "id": "b",
+          "label": "Presenter and captions",
+          "why": "Keep the speaker and the full sentence as captions.",
+          "layout": "clean",
+          "slots": {}
+        }
+      ],
+      "pick": "a"
+    },
+    {
+      "id": "s02",
+      "words": [
+        10,
+        18
+      ],
+      "role": "process",
+      "options": [
+        {
+          "label": "Paycheck hub",
+          "why": "The paycheck sits in the centre and the three destinations orbit it as they are named.",
+          "layout": "abstract",
+          "slots": {
+            "stage": {
+              "type": "orbit",
+              "center": "Every paycheck",
+              "at": 11,
+              "items": [
+                {
+                  "text": "Bills",
+                  "icon": "check",
+                  "at": 15
+                },
+                {
+                  "text": "Savings",
+                  "icon": "lock",
+                  "at": 16
+                },
+                {
+                  "text": "Fun",
+                  "icon": "spark",
+                  "at": 18
+                }
+              ]
+            }
+          },
+          "id": "a"
+        },
+        {
+          "id": "b",
+          "label": "Presenter and captions",
+          "why": "Keep the speaker and the full sentence as captions.",
+          "layout": "clean",
+          "slots": {}
+        }
+      ],
+      "pick": "a"
+    },
+    {
+      "id": "s03",
+      "words": [
+        19,
+        29
+      ],
+      "role": "proof",
+      "options": [
+        {
+          "label": "The bank message",
+          "why": "The transfer notification drops in as it is said, the face in the window.",
+          "layout": "split",
+          "slots": {
+            "panel": {
+              "type": "notify",
+              "app": "My bank",
+              "items": [
+                {
+                  "title": "Transfer complete",
+                  "icon": "check",
+                  "at": 28
+                }
+              ]
+            }
+          },
+          "id": "a"
+        },
+        {
+          "id": "b",
+          "label": "Presenter and captions",
+          "why": "Keep the speaker and the full sentence as captions.",
+          "layout": "clean",
+          "slots": {}
+        }
+      ],
+      "pick": "a"
+    },
+    {
+      "id": "s04",
+      "words": [
+        30,
+        35
+      ],
+      "role": "payoff",
+      "options": [
+        {
+          "label": "Guessing, behind",
+          "why": "The rejected word fills the wall behind the head.",
+          "layout": "depth",
+          "slots": {
+            "back": {
+              "type": "big-word",
+              "text": "guessing",
+              "at": 32
+            }
+          },
+          "id": "a"
+        },
+        {
+          "id": "b",
+          "label": "Presenter and captions",
+          "why": "Keep the speaker and the full sentence as captions.",
+          "layout": "clean",
+          "slots": {}
+        }
+      ],
+      "pick": "a"
+    },
+    {
+      "id": "s05",
+      "words": [
+        36,
+        44
+      ],
+      "role": "cta",
+      "options": [
+        {
+          "label": "Comment button",
+          "why": "The spoken action as a click, then the promise.",
+          "layout": "abstract",
+          "slots": {
+            "stage": {
+              "type": "action-button",
+              "label": "Comment “system”",
+              "beats": [
+                {
+                  "at": 37,
+                  "do": "click"
+                }
+              ]
+            },
+            "front": {
+              "type": "phrase",
+              "text": "I will send you the template",
+              "accent": "template",
+              "at": 41
+            }
+          },
+          "id": "a"
+        },
+        {
+          "id": "b",
+          "label": "Presenter and captions",
+          "why": "Keep the speaker and the full sentence as captions.",
+          "layout": "clean",
+          "slots": {}
+        }
+      ],
+      "pick": "a"
+    }
+  ],
+  "audio": {
+    "sfx": true,
+    "bed": "none"
+  }
+}

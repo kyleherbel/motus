@@ -96,6 +96,8 @@ export async function matteVideo(video, out, { width, height, rate, mode = 'pers
       try { stats = JSON.parse(toolErr.trim().split('\n').filter((l) => l.startsWith('{')).pop() || '{}'); } catch { /* stats are optional */ }
       const frames = Math.round(bytes / (width * height));
       if (!frames) return resolve({ ok: false, reason: `the vision helper produced no frames: ${toolErr.trim().split('\n').pop()}` });
+      // a frame size other than width x height (e.g. non-square pixels in the input) shears every row
+      if (bytes % (width * height) !== 0) return resolve({ ok: false, reason: `the vision helper wrote ${bytes} bytes, not a whole number of ${width}x${height} frames (check the footage is square-pixel ${width}x${height})` });
       resolve({ ok: true, frames, emptyFrames: stats.empty_frames ?? 0, seconds: (Date.now() - t0) / 1000, mode });
     });
   });

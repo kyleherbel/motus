@@ -8,7 +8,7 @@
 </p>
 
 <p align="center">
-  <a href="CHANGELOG.md"><img alt="Version 0.1.0" src="https://img.shields.io/badge/version-0.1.0-f2a33a?style=flat-square&labelColor=18181b"></a>
+  <a href="CHANGELOG.md"><img alt="Version 0.2.0" src="https://img.shields.io/badge/version-0.2.0-f2a33a?style=flat-square&labelColor=18181b"></a>
   <a href="#install"><img alt="Claude Code plugin" src="https://img.shields.io/badge/Claude_Code-plugin-d97757?style=flat-square&labelColor=18181b"></a>
   <a href="#codex-experimental"><img alt="Codex: experimental" src="https://img.shields.io/badge/Codex-experimental-8b8f97?style=flat-square&labelColor=18181b"></a>
   <a href="#status-and-known-limits"><img alt="Tested on macOS" src="https://img.shields.io/badge/tested_on-macOS-8b8f97?style=flat-square&labelColor=18181b"></a>
@@ -19,7 +19,7 @@
 
 <p align="center">
   <a href="#start-here"><b>Start here</b></a> ·
-  <a href="#three-styles">Styles</a> ·
+  <a href="#four-styles">Styles</a> ·
   <a href="#how-it-works">How it works</a> ·
   <a href="#studio">Studio</a> ·
   <a href="#how-styles-are-made">How styles are made</a> ·
@@ -40,11 +40,11 @@
 
 You give Motus a raw take or a picture-locked cut and pick a style. You choose between options for each scene on a local review page, and you get a 1080×1920 MP4.
 
-Version 0.1.0. Three style packs, in beta. Built and tested on macOS only. Claude Code is the first target. OpenAI Codex support is experimental.
+Version 0.2.0. Four style packs, in beta. Built and tested on macOS only. Claude Code is the first target. OpenAI Codex support is experimental.
 
-## Three styles
+## Four styles
 
-A style is a pack of rules, layouts and elements measured from one creator's reference videos. Pick one per video. All three are in beta, version 0.1.0.
+A style is a pack of rules, layouts and elements studied from reference videos. Pick one per video. All four are in beta: Editorial Proof, Night Class and Ember Brief are version 0.1.0, Ribbon Depth is 0.2.0. Ribbon Depth combines measured public examples with documented original extensions.
 
 ### Editorial Proof &nbsp;<sub><code>editorial-proof</code></sub>
 
@@ -70,17 +70,23 @@ A style is a pack of rules, layouts and elements measured from one creator's ref
 
 **Best for** solo briefings of 30 to 45 seconds: new tool and feature explainers, news takes with a source to show, short numbered tool lists.
 
+### Ribbon Depth &nbsp;<sub><code>ribbon-depth</code></sub>
+
+A bright speaker in their own darkened room, a turning 3D glass ribbon behind the head, frosted cards and icon tiles, and a cream capsule over a sans phrase with one heavy italic accent. Entrances go blur to sharp, the camera shakes on landings, and layout changes smear vertically. A scene library picks the device from what each sentence does, so it fits any topic or niche: counting numbers, stop-to-start swaps, charts, a hub with satellites, chat bubbles, notifications, quotes, a giant word behind the head, step stacks with a light trail, typed searches and a clicked button. The ribbon is a placed accent in four forms (spiral, sweep, halo, arc), not a background on every scene. A `split` layout puts the speaker in a glass window above a panel.
+
+**Best for** polished talking-head reels on any topic or niche: personal brands and coaching; tool, product and money explainers; fitness, food and lifestyle tips. It is listed first in the app. Use `/motus:ribbon-reel`, or select Ribbon Depth in the app. Controls: Orange (default), Violet or Light Lime; motion intensity; ribbon strength; supporting captions. 17 elements and 6 layouts. See [the directing guide](skills/ribbon-reel/SKILL.md), [the style guide](styles/ribbon-depth/STYLE.md) and [what was measured](styles/ribbon-depth/research/README.md).
+
 ### Side by side
 
-| | Editorial Proof | Night Class | Ember Brief |
-|---|---|---|---|
-| Frame | Speaker panel at the bottom, evidence above, white grid | Small presenter panel under a black dot-grid field | Dotted field over the speaker, half and half |
-| Captions | Word by word, accent keywords | One word | Two words, the spoken word in magenta |
-| Signature move | Dark focus shots for close reading | A hard cut to the full-height speaker about every 10 s | A new graphic about every 3 s, half of them explaining in motion |
-| Sound | Sound effects and two music beds | A sound kit and a music bed | No sound effects, one music bed |
-| Look choices | Accent: emerald or violet | Sound kit, music bed, field texture | None |
-| Best source | Any take, cropped to 9:16 around the speaker | A shot wider than 9:16 (the horizontal recording) | A shot wider than 9:16 (the horizontal recording) |
-| Measured from | 33 short videos | 32 teaching reels | 11 reels |
+| | Editorial Proof | Night Class | Ember Brief | Ribbon Depth |
+|---|---|---|---| --- |
+| Frame | Speaker panel at the bottom, evidence above, white grid | Small presenter panel under a black dot-grid field | Dotted field over the speaker, half and half | Full-frame speaker with graphics behind the head, a speaker window over a panel, and abstract glass scenes |
+| Captions | Word by word, accent keywords | One word | Two words, the spoken word in magenta | Words land one by one; capsule plus sans/heavy-italic hero |
+| Signature move | Dark focus shots for close reading | A hard cut to the full-height speaker about every 10 s | A new graphic about every 3 s, half of them explaining in motion | A turning glass ribbon used as an accent, a scene library for any niche, shakes on landings |
+| Sound | Sound effects and two music beds | A sound kit and a music bed | No sound effects, one music bed | Three optional original effects; no bundled bed |
+| Look choices | Accent: emerald or violet | Sound kit, music bed, field texture | None | Orange, Violet or Light Lime; motion intensity; ribbon strength; captions |
+| Best source | Any take, cropped to 9:16 around the speaker | A shot wider than 9:16 (the horizontal recording) | A shot wider than 9:16 (the horizontal recording) | Clear 9:16 take and a good matte; explicit no-matte fallback |
+| Measured from | 33 short videos | 32 teaching reels | 11 reels | Two Violet examples in one public promo; static bright-family boards |
 
 Each style's layouts, elements and their parameters are listed in `styles/<id>/style.json`. Run `/motus:styles` or `node engine/bin/motus.mjs styles` to see what is installed.
 
@@ -146,7 +152,7 @@ Your decisions are saved in `review/state.json` inside the project, so nothing i
 
 ## How styles are made
 
-A style pack is not designed from taste. It is measured from a corpus of reference videos.
+The original three packs are measured from a corpus of reference videos. Ribbon Depth studies a smaller set of public examples and clearly separates observed geometry and timing from reconstructed materials and original extensions.
 
 <table>
   <tr>
@@ -193,6 +199,7 @@ From a local clone, without installing: `claude --plugin-dir /path/to/motus`.
 | `/motus:edit` | Edits a video: the eight steps above, in the chat. |
 | `/motus:styles` | Lists the installed styles and what each one suits. |
 | `/motus:doctor` | Checks this machine and helps fix what is missing. |
+| `/motus:ribbon-reel` | Edits a flexible ribbon/glass reel in Ribbon Depth. |
 | `/motus:new-style` | Builds a new style pack from reference videos. For people who make styles. |
 
 Motus needs local files, ffmpeg and a browser, so it runs in Claude Code on your own machine (the CLI, or a local session in the desktop app). It cannot run in claude.ai chat.
@@ -294,7 +301,7 @@ Environment overrides: `MOTUS_CHROME` (browser binary), `MOTUS_PYTHON` (interpre
 .claude-plugin/        plugin.json and marketplace.json for Claude Code
 .codex-plugin/         plugin.json for Codex (experimental)
 .agents/plugins/       marketplace.json for Codex (experimental)
-skills/                start, edit, styles, doctor, new-style: the agent procedures
+skills/                start, edit, ribbon-reel, styles, doctor, new-style: the agent procedures
 engine/bin/motus.mjs   the command line tool
 engine/lib/            Node side: project, ingest, conform, plan, capture, render, app and Studio server
 engine/py/             transcription (faster-whisper)
@@ -331,7 +338,7 @@ Your source video is treated as read-only. Everything Motus writes goes into the
 ## Status and known limits
 
 - **macOS first.** The person matte and face tracking use Apple Vision through a small Swift helper. Without them (no Swift toolchain, or Linux or Windows) the engine falls back to un-matted framing: no head rising above the presenter panel, and a centre crop for sources that are not 9:16. Linux and Windows have code paths for finding Chrome and opening the browser, but nothing has been run there.
-- **Three style packs, all in beta.** Expect their elements and rules to change before 1.0.
+- **Four style packs, all in beta.** Expect their elements and rules to change before 1.0.
 - **Output** is always 1080×1920 at the source frame rate. Draft renders are 540×960. A style can also ask conform to keep the whole source frame as a wide view (Night Class and Ember Brief do); then the preview proxy is about 3870 px wide.
 - **The source must contain the speech.** A file with no audio stream cannot be planned.
 - **Transcription is automatic** and makes mistakes, mostly on names. The agent repairs captions from context. Pass names up front to help it.
@@ -343,7 +350,7 @@ Your source video is treated as read-only. Everything Motus writes goes into the
 
 Code: MIT, see [LICENSE](LICENSE).
 
-Bundled fonts (Inter, EB Garamond, JetBrains Mono, Instrument Serif, Outfit) are under the SIL Open Font License 1.1: see `OFL.txt` beside them. The styles' sound effects and music beds are original, synthesised by each style's `dev/make-audio.mjs`, and MIT like the code: see `LICENSE.md` beside them.
+Bundled fonts (Inter, EB Garamond, JetBrains Mono, Instrument Serif, Outfit, DM Sans, Playfair Display) are under the SIL Open Font License 1.1: see `OFL.txt` beside them. The styles' sound effects and music beds are original, synthesised by each style's `dev/make-audio.mjs`, and MIT like the code: see `LICENSE.md` beside them.
 
 Reference corpora are never included. A style pack contains measurements and original assets only.
 

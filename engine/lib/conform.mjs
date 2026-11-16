@@ -36,7 +36,7 @@ export function wideBand(src, crop, framingMedian) {
     const L = (v) => (v == null ? null : Math.round(v * src.width * sx));
     framing = { eyeX: X(m.cx), eyeY: Y(m.eyeY), faceW: L(m.faceW), faceH: m.faceH == null ? null : Math.round(m.faceH * src.height * s), eyeDist: L(m.eyeDist), headTopY: Y(m.headTopY), chinY: Y(m.chinY), headW: L(m.headW) };
   }
-  return { width, height: WIDE_H, window, framing, filter: `scale=${scaledW}:${WIDE_H}:flags=lanczos,crop=${width}:${WIDE_H}:${offX}:0` };
+  return { width, height: WIDE_H, window, framing, filter: `scale=${scaledW}:${WIDE_H}:flags=lanczos,crop=${width}:${WIDE_H}:${offX}:0,setsar=1` };
 }
 
 /**
@@ -149,6 +149,9 @@ export async function conform(project, opt = {}) {
   const nineSixteen = [
     crop ? `crop=${crop.w}:${crop.h}:${crop.x}:${crop.y}` : null,
     `scale=${OUT_W}:${OUT_H}:force_original_aspect_ratio=increase:flags=lanczos`, `crop=${OUT_W}:${OUT_H}`,
+    // square pixels: an even-rounded crop (1216 of a 1215 px window) otherwise leaves a SAR like 9728:9729,
+    // AVFoundation then reports the width as 1079 and the person matte comes out sheared
+    'setsar=1',
   ].filter(Boolean).join(',');
   // start_time=0: frame n is source time n/fps even when the video stream starts after the audio
   // (or has negative timestamps from an edit list), so picture and voice cut at the same instant

@@ -1,0 +1,144 @@
+{
+  "motus": 1,
+  "style": "ribbon-depth",
+  "look": {
+    "theme": "light-lime"
+  },
+  "captions": {},
+  "scenes": [
+    {
+      "id": "s01",
+      "words": [
+        0,
+        8
+      ],
+      "role": "hook",
+      "options": [
+        {
+          "id": "a",
+          "label": "Three real frames",
+          "why": "Three real frames illustrates the spoken clause.",
+          "layout": "studio",
+          "slots": {
+            "back": {
+              "type": "media-fan",
+              "items": [
+                {
+                  "src": "assets/rd-sample-1.svg",
+                  "at": 2
+                },
+                {
+                  "src": "assets/rd-sample-2.svg",
+                  "at": 3
+                },
+                {
+                  "src": "assets/rd-sample-3.svg",
+                  "at": 4
+                }
+              ]
+            },
+            "back-title": {
+              "type": "phrase",
+              "text": "three frames",
+              "accent": "frames",
+              "at": 3
+            }
+          }
+        },
+        {
+          "id": "b",
+          "label": "Keep the speaker",
+          "why": "Keep the speaker illustrates the spoken clause.",
+          "layout": "clean",
+          "slots": {}
+        }
+      ],
+      "pick": "a"
+    },
+    {
+      "id": "s02",
+      "words": [
+        9,
+        17
+      ],
+      "role": "process",
+      "options": [
+        {
+          "id": "a",
+          "label": "Find the detail",
+          "why": "Find the detail illustrates the spoken clause.",
+          "layout": "portrait-search",
+          "slots": {
+            "detail": {
+              "type": "search-query",
+              "query": "the detail",
+              "at": 9,
+              "doneAt": 13
+            }
+          }
+        },
+        {
+          "id": "b",
+          "label": "Keep the speaker",
+          "why": "Keep the speaker illustrates the spoken clause.",
+          "layout": "clean",
+          "slots": {}
+        }
+      ],
+      "pick": "a"
+    },
+    {
+      "id": "s03",
+      "words": [
+        18,
+        26
+      ],
+      "role": "payoff",
+      "options": [
+        {
+          "id": "a",
+          "label": "Sequence of frames",
+          "why": "Sequence of frames illustrates the spoken clause.",
+          "layout": "studio",
+          "slots": {
+            "back": {
+              "type": "filmstrip",
+              "items": [
+                {
+                  "src": "assets/rd-sample-1.svg",
+                  "at": 18
+                },
+                {
+                  "src": "assets/rd-sample-2.svg",
+                  "at": 19
+                },
+                {
+                  "src": "assets/rd-sample-3.svg",
+                  "at": 20
+                }
+              ]
+            },
+            "back-title": {
+              "type": "phrase",
+              "text": "the sequence",
+              "accent": "sequence",
+              "at": 21
+            }
+          }
+        },
+        {
+          "id": "b",
+          "label": "Keep the speaker",
+          "why": "Keep the speaker illustrates the spoken clause.",
+          "layout": "clean",
+          "slots": {}
+        }
+      ],
+      "pick": "a"
+    }
+  ],
+  "audio": {
+    "sfx": true,
+    "bed": "none"
+  }
+}

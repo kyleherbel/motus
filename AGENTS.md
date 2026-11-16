@@ -24,9 +24,10 @@ The skills live in `skills/<name>/SKILL.md`. Read the one that matches the reque
 | `skills/edit/SKILL.md` | The user gives a video and wants it edited, cut, captioned or styled. |
 | `skills/styles/SKILL.md` | The user asks which styles exist or which one fits. |
 | `skills/doctor/SKILL.md` | Something fails to start, or the user asks whether the setup is ready. |
+| `skills/ribbon-reel/SKILL.md` | The user wants the premium ribbon/glass look, Ribbon Depth, or a flexible ribbon reel. |
 | `skills/new-style/SKILL.md` | The user wants a new style pack built from reference videos. |
 
-In Claude Code the same skills are `/motus:start`, `/motus:edit`, `/motus:styles`, `/motus:doctor` and `/motus:new-style`.
+In Claude Code the same skills are `/motus:start`, `/motus:edit`, `/motus:styles`, `/motus:doctor`, `/motus:new-style` and `/motus:ribbon-reel`.
 
 ## Calling the engine
 

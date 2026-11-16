@@ -156,6 +156,8 @@ styles/<id>/
   "id": "editorial-proof", "name": "Editorial Proof", "version": "0.1.0",
   "summary": "One line the user sees when choosing a style.",
   "bestFor": ["tool breakdowns", "list videos"], "aspect": "9:16",
+  "order": 10,                      // optional: lower is listed first in the app and `motus styles`; the rest go by name
+  "preview": { "video": "preview.webm", "poster": "preview.webp" },  // optional: shown on the app's style card
   "look": { "accent": { "label": "Accent", "choices": ["emerald", "violet"], "default": "emerald" } },
   "emphasis": ["accent", "serif", "accent+serif"],
   "roles": ["hook", "proof", "item", "payoff", "cta"],

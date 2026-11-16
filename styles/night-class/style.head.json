@@ -71,5 +71,9 @@
     "bedA": "assets/music/bed-a.m4a",
     "bedA2": "assets/music/bed-a2.m4a"
   },
-  "beds": {}
+  "beds": {},
+  "preview": {
+    "video": "preview.webm",
+    "poster": "preview.webp"
+  }
 }

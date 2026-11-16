@@ -1,7 +1,7 @@
 {
   "name": "motus",
   "displayName": "Motus",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Edit talking-head 9:16 video in a chosen editing style: transcribe, understand, plan section by section, review options in a local Studio, render the final cut.",
   "author": {
     "name": "kyleherbel"
@@ -9,5 +9,13 @@
   "license": "MIT",
   "homepage": "https://github.com/kyleherbel/motus",
   "repository": "https://github.com/kyleherbel/motus",
-  "keywords": ["video", "editing", "reels", "shorts", "tiktok", "captions", "motion-graphics"]
+  "keywords": [
+    "video",
+    "editing",
+    "reels",
+    "shorts",
+    "tiktok",
+    "captions",
+    "motion-graphics"
+  ]
 }

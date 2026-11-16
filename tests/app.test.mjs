@@ -157,6 +157,19 @@ describe('the app server', () => {
     } finally { await s.close(); fs.rmSync(ws, { recursive: true, force: true }); }
   });
 
+  test('serves a style card preview, and only the files a pack declares as its preview', async () => {
+    const ws = tmpDir();
+    const s = await createAppServer(ws, { port: 0, runIngest: stubIngest });
+    try {
+      const st = await (await fetch(`${s.url}api/state`)).json();
+      assert.deepEqual(st.styles[0].preview, { poster: '/style-preview/minimal/preview.webp' });
+      const ok = await fetch(`${s.url}style-preview/minimal/preview.webp`);
+      assert.equal(ok.status, 200);
+      assert.equal(ok.headers.get('content-type'), 'image/webp');
+      for (const bad of ['style-preview/minimal/style.json', 'style-preview/minimal/..%2Fminimal%2Fstyle.json', 'style-preview/nope/preview.webp']) assert.equal((await fetch(`${s.url}${bad}`)).status, 404, bad);
+    } finally { await s.close(); fs.rmSync(ws, { recursive: true, force: true }); }
+  });
+
   test('a dropped video becomes a project, is ingested, and queues a plan job for the agent', { skip: !hasBinary('ffmpeg') && 'needs ffmpeg' }, async () => {
     const ws = tmpDir();
     const src = path.join(tmpDir(), 'clip.mp4');

@@ -9,6 +9,8 @@ You are the editor. The engine does the mechanical work (transcription, frames, 
 
 If you got here from a `motus next` job (the user started in the Motus app, see `skills/start/SKILL.md`), the job's instructions say which steps below to do. The project already exists and is ingested. Report progress with `motus say` and finish with `motus done` instead of talking to the user in the chat or opening Studio.
 
+For the Ribbon Depth style, also read `../ribbon-reel/SKILL.md` before planning. A request for that ribbon/glass look already selects `ribbon-depth`; preserve it in step 2 instead of asking the user to select it again.
+
 ## The engine
 
 The CLI is `engine/bin/motus.mjs` at the plugin root. In Claude Code that is `${CLAUDE_PLUGIN_ROOT}/engine/bin/motus.mjs`; anywhere else it is two folders above this skill (`<this skill>/../../engine/bin/motus.mjs`). Below, `motus …` means `node <that path> …`. Add `--json` when you want to parse the result. Errors come with a `fix:` line: do what it says.

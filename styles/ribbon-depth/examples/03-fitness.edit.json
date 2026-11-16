@@ -1,0 +1,236 @@
+{
+  "motus": 1,
+  "style": "ribbon-depth",
+  "look": {
+    "theme": "orange"
+  },
+  "captions": {},
+  "scenes": [
+    {
+      "id": "s01",
+      "words": [
+        0,
+        7
+      ],
+      "role": "hook",
+      "options": [
+        {
+          "label": "Number behind",
+          "why": "The 3 weeks lands as a counting number behind the speaker, a halo instead of the spiral.",
+          "layout": "depth",
+          "slots": {
+            "fx": {
+              "type": "ribbon",
+              "form": "halo"
+            },
+            "back": {
+              "type": "stat",
+              "value": "3 weeks",
+              "label": "Most people quit the gym",
+              "icon": "bolt",
+              "at": 6
+            }
+          },
+          "id": "a"
+        },
+        {
+          "id": "b",
+          "label": "Presenter and captions",
+          "why": "Keep the speaker and the full sentence as captions.",
+          "layout": "clean",
+          "slots": {}
+        }
+      ],
+      "pick": "a"
+    },
+    {
+      "id": "s02",
+      "words": [
+        8,
+        12
+      ],
+      "role": "context",
+      "options": [
+        {
+          "label": "Phrase on speaker",
+          "why": "A short denial stays on the speaker.",
+          "layout": "clean",
+          "slots": {
+            "front": {
+              "type": "phrase",
+              "text": "not because they are lazy",
+              "accent": "lazy",
+              "at": 8
+            }
+          },
+          "id": "a"
+        },
+        {
+          "id": "b",
+          "label": "Presenter and captions",
+          "why": "Keep the speaker and the full sentence as captions.",
+          "layout": "clean",
+          "slots": {}
+        }
+      ],
+      "pick": "a"
+    },
+    {
+      "id": "s03",
+      "words": [
+        13,
+        19
+      ],
+      "role": "contrast",
+      "options": [
+        {
+          "label": "Stop → start",
+          "why": "Strikes through the old habit and raises the new one on 'Start'.",
+          "layout": "abstract",
+          "slots": {
+            "stage": {
+              "type": "swap",
+              "fromLabel": "Stop",
+              "from": "Chasing soreness",
+              "toLabel": "Start",
+              "to": "Tracking your reps",
+              "at": 13,
+              "toAt": 16
+            }
+          },
+          "id": "a"
+        },
+        {
+          "id": "b",
+          "label": "Presenter and captions",
+          "why": "Keep the speaker and the full sentence as captions.",
+          "layout": "clean",
+          "slots": {}
+        }
+      ],
+      "pick": "a"
+    },
+    {
+      "id": "s04",
+      "words": [
+        20,
+        27
+      ],
+      "role": "proof",
+      "options": [
+        {
+          "label": "Strength climbing",
+          "why": "A line rises week by week while the speaker stays in the window.",
+          "layout": "split",
+          "slots": {
+            "panel": {
+              "type": "chart",
+              "title": "Your strength climbs",
+              "accent": "climbs",
+              "points": [
+                {
+                  "value": 18,
+                  "at": 20
+                },
+                {
+                  "value": 34,
+                  "at": 22
+                },
+                {
+                  "value": 52,
+                  "at": 24
+                },
+                {
+                  "value": 80,
+                  "at": 27
+                }
+              ]
+            }
+          },
+          "id": "a"
+        },
+        {
+          "id": "b",
+          "label": "Presenter and captions",
+          "why": "Keep the speaker and the full sentence as captions.",
+          "layout": "clean",
+          "slots": {}
+        }
+      ],
+      "pick": "a"
+    },
+    {
+      "id": "s05",
+      "words": [
+        28,
+        34
+      ],
+      "role": "payoff",
+      "options": [
+        {
+          "label": "The coach's line",
+          "why": "The rule the coach gave lands word by word on a slab.",
+          "layout": "abstract",
+          "slots": {
+            "stage": {
+              "type": "quote",
+              "text": "Consistency beats intensity.",
+              "accent": "Consistency",
+              "by": "My coach",
+              "at": 32
+            }
+          },
+          "id": "a"
+        },
+        {
+          "id": "b",
+          "label": "Presenter and captions",
+          "why": "Keep the speaker and the full sentence as captions.",
+          "layout": "clean",
+          "slots": {}
+        }
+      ],
+      "pick": "a"
+    },
+    {
+      "id": "s06",
+      "words": [
+        35,
+        39
+      ],
+      "role": "cta",
+      "options": [
+        {
+          "label": "Follow, with a sweep",
+          "why": "Ends on the speaker with a different ribbon form.",
+          "layout": "depth",
+          "slots": {
+            "fx": {
+              "type": "ribbon",
+              "form": "sweep"
+            },
+            "front": {
+              "type": "phrase",
+              "text": "Follow for the full plan",
+              "accent": "full plan",
+              "at": 35
+            }
+          },
+          "id": "a"
+        },
+        {
+          "id": "b",
+          "label": "Presenter and captions",
+          "why": "Keep the speaker and the full sentence as captions.",
+          "layout": "clean",
+          "slots": {}
+        }
+      ],
+      "pick": "a"
+    }
+  ],
+  "audio": {
+    "sfx": true,
+    "bed": "none"
+  }
+}

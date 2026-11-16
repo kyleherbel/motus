@@ -36,5 +36,9 @@
       "gainDb": -16.7,
       "fadeOut": 1
     }
+  },
+  "preview": {
+    "video": "preview.webm",
+    "poster": "preview.webp"
   }
 }

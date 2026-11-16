@@ -1,6 +1,6 @@
 {
   "name": "motus",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Edit talking-head 9:16 video in a chosen editing style: transcribe, understand, plan scene by scene, review options in a local Studio, render the final cut.",
   "author": {
     "name": "kyleherbel"
@@ -8,7 +8,15 @@
   "license": "MIT",
   "homepage": "https://github.com/kyleherbel/motus",
   "repository": "https://github.com/kyleherbel/motus",
-  "keywords": ["video", "editing", "reels", "shorts", "tiktok", "captions", "motion-graphics"],
+  "keywords": [
+    "video",
+    "editing",
+    "reels",
+    "shorts",
+    "tiktok",
+    "captions",
+    "motion-graphics"
+  ],
   "skills": "./skills/",
   "interface": {
     "displayName": "Motus",
@@ -21,6 +29,7 @@
       "Write"
     ],
     "defaultPrompt": [
+      "Make a flexible ribbon reel from this video in Ribbon Depth",
       "Edit this talking-head video in the Editorial Proof style",
       "Check that this machine can run Motus",
       "Which Motus editing styles are installed?"
