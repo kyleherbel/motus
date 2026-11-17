@@ -8,11 +8,14 @@
 //   toggle   a row's toggle flips at a word; without `row` every toggle flips, in reading order [M16]
 //   select   a raised fill appears behind a row (the one in use); a later select moves it
 //   outline  an accent box points at a row, or at the whole card without `row` [G13]
+//   click    a pointer glides to a row and clicks it: its toggle flips, or the row is selected when it has
+//            none. The pointer arrives on the word and stays where it clicked (research/explain-composites.md
+//            K10, K11: clip37@440-448, clip34@870-890)
 // Up to 3 rows are drawn at the size of a settings card with one setting in view (clip29@680, clip34@898);
 // 4 to 6 rows at the size of a list (clip31@150, clip37@540).
 // Write generic labels. Never copy a product's interface, names or marks.
 import { layout, motion, fonts, colour } from '../tokens.js';
-import { place, setStyle, textAt, fitCap, measureText, fontFor } from '../common.js';
+import { place, setStyle, textAt, fitCap, measureText, fontFor, expoInOut } from '../common.js';
 import { card } from '../card.js';
 
 // TOKENS (research/graphics.md G13, G14, G15; frame px on the 1000 px card)
@@ -46,6 +49,10 @@ export const UI = {
   track: { light: -0.015, title: -0.02, label: -0.03 },
   flip: motion.toggle * 1.5,      // 3 frames [verified]; was measured as 4 on one instance:        // knob travel and track colour on the move curve: 4 %, 88 %, 100 % at +0, +2, +4 frames [M17: clip29@653-657]
   selectFade: 3 / 30,             // [M17: clip34@879-882]
+  // the pointer [K10, K11]: a plain arrow 44 x 64 px, white with a dark rim; it glides 8 frames on expo.inOut and
+  // lands 2 frames after the word's onset (clip37@440-446); the click presses it to 0.86 for 3 frames and the
+  // control answers on the landing frame. Its first glide starts 150 px right of and 190 px below the target
+  cursor: { w: 44, h: 64, glide: 8 / 30, lead: 6 / 30, press: 3 / 30, pressTo: 0.86, from: [150, 190] },
 };
 
 const rgb = (hex) => hex.match(/[0-9a-f]{2}/gi).map((x) => parseInt(x, 16));
@@ -82,10 +89,12 @@ export default {
     toggle: { row: ROW },                                        // omit row to flip every toggle, in reading order
     select: { row: { ...ROW, optional: false } },
     outline: { row: ROW },                                       // omit row to box the whole card
+    click: { row: { ...ROW, optional: false } },                 // a pointer clicks the row: its toggle flips, or it is selected
   },
 
   build(ctx) {
-    const { S, params: p, beats } = ctx; const { kit } = S; const { h } = kit;
+    const { S, params: p } = ctx; const { kit } = S; const { h } = kit;
+    const beats = [...ctx.beats];
     const rows = (p.rows || []).slice(0, 6);
     const T = rows.length <= 3 ? UI.large : UI.list;
     const W = layout.column.w;
@@ -143,6 +152,19 @@ export default {
     // ---- beats
     const rowOf = (b) => (Number.isInteger(b.row) && parts[b.row - 1] ? parts[b.row - 1] : null);
     const outlines = [];
+    // a click lands 2 frames after its word and then acts as a toggle or a select on that frame [K10]
+    const Cu = UI.cursor;
+    const clicks = beats.filter((b) => b.do === 'click' && rowOf(b)).map((b) => {
+      const r = rowOf(b);
+      const land = b.t - Cu.lead + Cu.glide;
+      const tx = r.toggle ? endX - T.toggle.w / 2 + 8 : Math.min(endX - 40, UI.textX + 420);
+      return { t0: b.t - Cu.lead, land, x: tx, y: r.y + T.row / 2 + 6, r };
+    });
+    for (const c of clicks) {
+      if (c.r.toggle) c.r.toggle.flips.push(c.land);
+      else beats.push({ do: 'select', row: parts.indexOf(c.r) + 1, t: c.land });
+    }
+    beats.sort((a, b) => a.t - b.t);
     const selects = beats.filter((b) => b.do === 'select' && rowOf(b));
     for (const b of beats) {
       const r = rowOf(b);
@@ -158,6 +180,28 @@ export default {
     }
     selects.forEach((b, k) => rowOf(b).selects.push({ t0: b.t, t1: selects[k + 1] ? selects[k + 1].t : Infinity }));
 
+    let cursor = null;
+    if (clicks.length) {
+      const NS = 'http://www.w3.org/2000/svg';
+      const svg = document.createElementNS(NS, 'svg');
+      svg.setAttribute('width', String(Cu.w)); svg.setAttribute('height', String(Cu.h)); svg.setAttribute('viewBox', '0 0 22 32');
+      Object.assign(svg.style, { position: 'absolute', left: '0', top: '0', overflow: 'visible', filter: 'drop-shadow(0 6px 10px rgba(0,0,0,0.45))', transformOrigin: '0 0', display: 'none' });
+      const path = document.createElementNS(NS, 'path');
+      path.setAttribute('d', 'M1.5 1.5 L1.5 25.5 L7.4 19.9 L11.3 29.2 L15.6 27.4 L11.8 18.4 L19.8 18.4 Z');
+      path.setAttribute('fill', '#FFFFFF'); path.setAttribute('stroke', '#121316'); path.setAttribute('stroke-width', '1.6'); path.setAttribute('stroke-linejoin', 'round');
+      svg.append(path); el.append(svg);
+      cursor = svg;
+    }
+    const cursorAt = (t) => {
+      if (t < clicks[0].t0) return null;
+      let k = 0;
+      while (k + 1 < clicks.length && t >= clicks[k + 1].t0) k++;
+      const c = clicks[k];
+      const from = k === 0 ? { x: c.x + Cu.from[0], y: c.y + Cu.from[1] } : { x: clicks[k - 1].x, y: clicks[k - 1].y };
+      const u = kit.clamp((t - c.t0) / Cu.glide), e = expoInOut(u);
+      const press = t >= c.land && t < c.land + Cu.press ? Cu.pressTo : 1;
+      return { x: from.x + (c.x - from.x) * e, y: from.y + (c.y - from.y) * e, o: k === 0 ? Math.min(1, u / 0.3) : 1, s: press };
+    };
     const C = colour.toggle;
     return {
       el: root, box: { x: box.x, y: box.y, w: box.w, h: box.h },
@@ -176,6 +220,14 @@ export default {
           setStyle(g.knob, 'transform', `translateX(${(g.x0 + (g.x1 - g.x0) * v).toFixed(2)}px)`);
         }
         for (const o of outlines) seekOutline(S, o.el, t, o.t);
+        if (cursor) {
+          const c = cursorAt(t);
+          setStyle(cursor, 'display', c ? '' : 'none');
+          if (c) {
+            setStyle(cursor, 'transform', `translate(${c.x.toFixed(1)}px, ${c.y.toFixed(1)}px) scale(${c.s})`);
+            setStyle(cursor, 'opacity', c.o >= 1 ? '' : c.o.toFixed(3));
+          }
+        }
       },
     };
   },

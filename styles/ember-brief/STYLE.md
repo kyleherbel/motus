@@ -122,6 +122,8 @@ What makes it read as an explanation and not decoration [X17, X24, X28, X31]:
 - One device per scene. Two unrelated devices never share a scene.
 - After its last event the picture is still. Nothing drifts, breathes or loops, except a part that carries meaning (the dot on an "in sync" link, a player).
 
+**Fill the zone** [X26, K01-K12]. The reference's explanatory units take about 77 % of the width and 82 % of the graphic zone, and most of them are composites: a card plus the things around it. A scene whose whole graphic is a short row of tiles, two tiles and a line, or two or three chips leaves most of the field empty and reads as thin. For an idea with more than one part reach first for a composite (`hub`, `task-card`, a `capture-card` with a `pop`, a `ui-card` a pointer `click`s) or a large card, and keep the small devices for short scenes and recaps. Prefer devices that keep working while the speaker describes work: a task that ticks itself off, dots that flow into a card, a pointer that clicks the setting being named.
+
 ### 6.2 Which device explains which idea [X03, X04, G24, S21]
 
 | The idea | Device | Element and its events |
@@ -140,6 +142,10 @@ What makes it read as an explanation and not decoration [X17, X24, X28, X31]:
 | **A metaphor for a state**: waiting its turn, behind a rope, wide open | One cut-out picture standing for the idea, then the event that makes the point | `picture` with `bubble`, `badge` or `tag` |
 | **Where to find it**: a path, a URL, a maker | Dark pills, read out | `chips` with `kind: "path"` and `highlight` |
 | **One of a series, or a recap count** | A grid with one lit | `icon-grid` |
+| **Many feed one**: it connects to these apps, pulls from all of them, integrates with | The tiles above one card, lines into it, dots flowing down | `hub`: sources on their nouns, `flow` on the verb, the card's figure counting on its number, `outline` or `check` when it lands [K01-K04]. `flow` with `dir: "out"` for "it goes out and does things" [K05] |
+| **Work in progress**: it starts working, it does the task for you, while you are away | A task card that ticks its steps off and fills its bar | `task-card`: `run` on the verb (with `until` to spread the steps to a later word), `away` on the word that says you are not there, `done` [K06-K09] |
+| **A setting switched**: you turn this on, it lets you enable | A pointer glides in and clicks the control | `ui-card` with a `click` on the row [K10, K11] |
+| **The exact figure behind a rounded one**: over 20,000 stars | The row outlined on the capture and a chip that counts to the exact value | `capture-card` with `outline` and `pop` on the number word [K12, X17] |
 | **The offer** | The call to action | `comment-cta`, always the last scene |
 
 The reference also has devices this style does not build, each seen once or twice: a route drawn across a map, a calendar tile flipping through months, the view travelling down a chain of cards, value chips pinned to a picture, alignment lines between two tracks [X22]. When a sentence calls for one, use the nearest device above: a `link` for a route between two places, a `big-figure` with a unit for "every month", `ui-card` steps for a chain.
@@ -162,6 +168,7 @@ A picture is the user's file. The style ships no art and never draws a third par
   ```
 
   A width of about 330 CSS px gives the reference's reading size on the 1000 px card: body text with an x-height near 26 px, 2 to 8 lines of 37 to 47 characters [G06]. Show one block of the page, not a whole viewport. No browser frame is drawn [G05, G29].
+- **Real footage of the product.** When the speaker names a real product, use its maker's own launch or demo footage (`skills/edit/SKILL.md` step 6): a short clip as a `picture` with `frame: "card"` and a chip or badge on the word, or a still of it as a `capture-card` with marks. The reference shows real interfaces this way in its demo players [X23]; the maker's footage replaces a redrawn card wherever it shows the same thing.
 - **App screens are redrawn.** The reference never shows a screenshot of an app. Use `ui-card`, `prompt-box` and `chat-card` with the labels and words the speaker says [G14]. Rows that do not matter are placeholder bars.
 - **Never invent.** A highlighted phrase must be in the capture. A figure must be the speaker's own number. A prompt must be what the speaker tells the viewer to type. A chat message is something the speaker quotes or describes being sent, shortened to fit (70 characters), in their words: do not write a reply nobody mentioned.
 - **Placeholder rows are filler, not content.** In a `ui-card` use them for at most one or two rows around the rows that matter. A card that is half placeholder bars reads as empty.
@@ -190,6 +197,8 @@ Heights on the 1000 px column:
 | `versus` | two cards fit `split`; with a `progress` mosaic the pair is 1106 px tall: `full` only |
 | `process` | `split` only |
 | `big-figure`, `chips`, `logo-tiles`, `icon-grid`, `phone-frame`, `picture`, `link`, `item-cards`, `player` | fit `split` |
+| `hub` | about 790 px: fits `split` |
+| `task-card` | 520 px for 2 steps, 94 px a step more, 120 px more with a person: fits `split` up to 5 steps |
 
 So in `split` a `ui-card` holds up to 5 rows, or 4 under a heading; a 6-row card with a title needs `full`.
 
@@ -275,9 +284,9 @@ Before you show the plan, check (13 items):
 | `hook-title` | graphic | split | The opening. `light1`, `light2` (max 16 characters, 2 words each), `heavy1`, `heavy2` (max 14 characters, 2 words; leave `heavy2` out for a one-word claim), `image` |
 | `comment-cta` | graphic | split | The call to action. `keyword` (1 word, max 10 characters), `at`, `image` |
 | `section-heading` | heading | both | "N. Name" for a list item. `n` 1-9, `name` (max 22 characters, 3 words), `icon` |
-| `capture-card` | graphic | both | A real page. `src`, `width` 500-1040 (default the 1000 px column); beats `highlight` and `outline` with `find`, or `x, y, w, h` |
+| `capture-card` | graphic | both | A real page. `src`, `width` 500-1040 (default the 1000 px column); beats `highlight` and `outline` with `find`, or `x, y, w, h`; `pop {find or x, y, w, h, value, glyph}`: a dark chip with an accent glyph (default star) pops out beside that row and counts up to `value`, the page's exact figure [K12] |
 | `big-figure` | graphic | both | A spoken number that counts up. `value` (max 10 characters, as said: "40,000+"), `unit` (a word set smaller: "min"), `label` (max 26 characters), `image` (a picture of the thing, under the figure), `fill` (the picture fills from the bottom as the figure counts), `from`, `at` |
-| `ui-card` | graphic | both | An app screen redrawn. `title` (max 24), `rows` 1-6 of `{label (max 18), value (max 8), toggle: off or on}`; a row with no label is placeholder bars. Beats: `toggle {row}` flips that row's toggle (no `row`: every toggle, in reading order); `select {row}` raises one row as the one in use, and a later `select` moves it; `outline {row}` adds an accent box round a row (no `row`: the whole card), and boxes stay once drawn |
+| `ui-card` | graphic | both | An app screen redrawn. `title` (max 24), `rows` 1-6 of `{label (max 18), value (max 8), toggle: off or on}`; a row with no label is placeholder bars. Beats: `toggle {row}` flips that row's toggle (no `row`: every toggle, in reading order); `select {row}` raises one row as the one in use, and a later `select` moves it; `outline {row}` adds an accent box round a row (no `row`: the whole card), and boxes stay once drawn; `click {row}`: a pointer glides in and lands on the row 2 frames after the word, flipping its toggle or selecting it, and stays there [K10, K11] |
 | `prompt-box` | graphic | both | A prompt to copy. `text` (max 150 characters, 6 lines). The text is on the card when it arrives; with `at` the card arrives empty and the whole text comes in at that word. It is never typed. Beat `outline` boxes the card |
 | `chat-card` | graphic | both | 1 to 3 messages. `title` (max 30), `messages` of `{from: user or assistant, text (max 70)}`. The first message arrives with the card; each later one follows 5 frames after the one before, or at a `next` beat |
 | `chips` | graphic | both | 1 to 6 short labels. `kind` name (chalk tiles) or path (dark pills), `chips` of `{label (max 24), image, at}`. Chips arrive one after another; with `at` a chip waits for its word, and its place is kept empty until then, so the row does not shift. Beat `highlight {chip, until}` (path pills only) wipes an accent bar across one label while the speaker reads it out: it starts at the beat's word and is complete at the end of the word `until` (1.3 s when `until` is left out) |
@@ -291,6 +300,8 @@ Before you show the plan, check (13 items):
 | `versus` | graphic | both | Two contestants. `a` and `b`: `{name (max 24), image, glyph or initials, value (max 7, the speaker's number), second (max 9)}`; `progress` mosaic or bar; `count` (a figure above both). Beats: `count`, `race` (both values run from zero: with it the element is a race, without it the values are simply shown), `win {side}` (the winner is outlined; in a plain comparison the other dims to 0.30, so keep the loser's name short and its value large), `second` (lights the second values; it has no effect in a plain comparison) |
 | `item-cards` | graphic | both | One picture per noun. `mode` row (2 to 4 small cards, each `at` its noun) or swap (one large card whose picture is replaced per noun); `items` 2-5 of `{image or glyph, label (max 13 characters, 2 words), at}`; `mark`. Beats: `outline` (every card takes the accent), `badge {kind}` (a badge on every card) |
 | `player` | graphic | both | A demo on its own clock. `src` (the user's clip or still, in a player card with a progress bar), or no `src` and `tracks` 1-2 of `{image or glyph}` (waveform tracks for an audio demo; the bars are a fixed pattern, not the sound). Beats: `clip` (a clip chip lands on a strip under the player), `speak {track}` (that voice has the turn) |
+| `hub` | graphic | both | Things that feed one card (research/explain-composites.md K01-K05). `sources` 1-5 of `{image or glyph, name, at}` (tiles in a row; with `at` a tile and its line arrive on its noun), `target {name (max 18), image or glyph}`, `value` (max 12: a figure that counts, or a one-word state) with `label`, and `at` (the figure arrives counting on its word). Beats: `flow {dir: in or out}` (an accent dot runs along every line, 2 frames apart), `outline` (the card), `check` (a disc on the card's corner). About 790 px tall: fits `split` |
+| `task-card` | graphic | both | A task at work (K06-K09). `title` (max 24), `image` (the agent's mark), `rows` 2-5 of `{label (max 22)}` (no label: a grey bar), `status` (default "Working"), `done` (the status when finished), `person` (max 12: a row with an Online chip). Beats: `run {until}` (the steps tick one by one: every 15 frames, or spread up to the word `until`; the bar follows), `tick {row}`, `away` (the person row dims, Online becomes Away), `done`. 4 steps with a person: about 760 px |
 
 Glyphs for tiles and cards: check, cross, lock, unlock, offline, refresh, document, picture, chart, person, phone, clock, folder, play, mic, mail, link, code, search, star.
 

@@ -29,7 +29,7 @@ The October and September treatments are not built. A light-field variant would 
 - **Independent verification.** After the nine studies, four checkers re-measured every quantity two studies disagreed on, plus the numbers the build depends on, with methods written from scratch. Their verdicts appear under each rule as "Verified" and in full in [verification.md](verification.md): 107 quantities, 86 confirmed, 9 settled for the other claim, 11 corrected, 1 open.
 - **Judgement steps** are stated where they exist. Graphic types and clause categories were labelled by eye (graphics); beat labels came from reading the transcripts (structure).
 
-## The twelve records
+## The thirteen records
 
 | File | Ids | What it covers |
 |---|---|---|
@@ -45,6 +45,7 @@ The October and September treatments are not built. A light-field variant would 
 | [explain.md](explain.md) | X01-X32 | the second study: how a picture explains a sentence. Anchor and events, which device serves which idea, where events land against speech, what is generic and what is bespoke |
 | [explain-motion.md](explain-motion.md) | D01-D28 | how the devices move: lines that draw, travellers, badges landing, fills tied to a count, timers, flips, swaps, the travelling view |
 | [explain-look.md](explain-look.md) | R01-R32 | how the pictures look: the screened cut-out and its recipe, the 3D-shaded and flat pictures, lines, discs, tiles, glyph icons, chips |
+| [explain-composites.md](explain-composites.md) | K01-K12 | the third pass: composites that fill the zone (a card fed by tiles, a task that ticks itself off, a pointer that clicks, a figure pulled out of a capture) |
 
 Each record lists every rule with its numbers, sample size, confidence and evidence. It then gives what is constant and what varies, open questions, and what still needs an eye or an ear.
 
@@ -77,7 +78,7 @@ The second study has not had an independent verification pass. Its motion record
 - **A swap is a cross-fade.** The reference morphs one icon's outline into the next over about 9 frames ([D19]). A morph between arbitrary pictures is not generic, so `item-cards` cross-fades over the same 9 frames.
 - **Waveform bars are a pattern.** The reference's audio demo lights real waveforms. The style never reads the audio: `player` draws bars from a fixed seeded pattern.
 - **Sound.** The bed is an original track of the same role, synthesised by `dev/make-audio.mjs` from the measured tempo, sections, levels and stereo width ([A14]-[A20], [A27]). It is not a copy of the reference's music, and nobody has listened to it yet.
-- **Not built** (each seen once or twice): a route drawn across a map or a terrain, a calendar tile flipping through months, the view travelling down a chain of cards, value chips pinned to a picture, alignment lines between two tracks and the timeline diagram, particles gathering into a shape ([X22], [D18], [D23], [D24]); the bespoke drawings themselves (a shredder, a pipe, a pixel scene); a nested panel inside a frame, sidebars and cursors in app cards, a person card, page-thumbnail pairs, the second heading position of one reel ([L19]), a slow scroll inside a capture ([M21]), the picture variants of the call to action above the text ([H25]).
+- **Not built** (each seen once or twice): a route drawn across a map or a terrain, a calendar tile flipping through months, the view travelling down a chain of cards, value chips pinned to a picture, alignment lines between two tracks and the timeline diagram, particles gathering into a shape ([X22], [D18], [D23], [D24]); the bespoke drawings themselves (a shredder, a pipe, a pixel scene); a nested panel inside a frame, sidebars in app cards (pointers are built since: [K10]), a person card, page-thumbnail pairs, the second heading position of one reel ([L19]), a slow scroll inside a capture ([M21]), the picture variants of the call to action above the text ([H25]).
 
 ## Open for a person
 

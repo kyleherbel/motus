@@ -9,7 +9,7 @@
 // the house look, as the picture element prints it; flat art and opaque pictures are shown as they are.
 // The figure must be the speaker's own number. Never invent one.
 import { CX, F, motion, fonts, type, colour, explain as X } from '../tokens.js';
-import { place, textAt, fitCap, sizeForCap, expoInOut, enterAt, applyState, setStyle } from '../common.js';
+import { parseFigure, formatFigure as fmt, place, textAt, fitCap, sizeForCap, expoInOut, enterAt, applyState, setStyle } from '../common.js';
 import { loadMedia } from '../media.js';
 import { roomOf, shapeOf, groundOf, flatOf, printHouse } from './picture.js';
 
@@ -36,19 +36,6 @@ const G = {
   // 13 number events start a median 0.8 frames before the onset of their number word (-7.2 to +5.2) and are
   // complete 11.2 frames after it [X16]
   lead: F(1),
-};
-
-/** "$154,778+" -> { pre: '$', num: 154778, post: '+', dec: 0, commas: true } */
-function parseFigure(s) {
-  const m = /^([^\d-]*)(-?[\d,]*\.?\d+)(.*)$/.exec(String(s).trim());
-  if (!m) return null;
-  const digits = m[2];
-  return { pre: m[1], num: Number(digits.replace(/,/g, '')), post: m[3], dec: (digits.split('.')[1] || '').length, commas: digits.includes(',') };
-}
-const fmt = (f, v) => {
-  let s = v.toFixed(f.dec);
-  if (f.commas) { const [a, b] = s.split('.'); s = a.replace(/\B(?=(\d{3})+(?!\d))/g, ',') + (b ? `.${b}` : ''); }
-  return `${f.pre}${s}${f.post}`;
 };
 
 export default {

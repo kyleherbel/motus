@@ -99,3 +99,17 @@ export function fitCap(text, cap, weight, maxW, tracking = 0, min = 20) {
   const w = measureText(text, fontFor(cap, weight), tracking);
   return w <= maxW ? cap : Math.max(min, cap * (maxW / w));
 }
+
+/** A spoken figure split for counting: "$154,778+" -> { pre: '$', num: 154778, post: '+', dec: 0, commas: true } [X16, X17]. */
+export function parseFigure(s) {
+  const m = /^([^\d-]*)(-?[\d,]*\.?\d+)(.*)$/.exec(String(s).trim());
+  if (!m) return null;
+  const digits = m[2];
+  return { pre: m[1], num: Number(digits.replace(/,/g, '')), post: m[3], dec: (digits.split('.')[1] || '').length, commas: digits.includes(',') };
+}
+/** The figure at value v, written the way the spoken figure is written (same decimals, same thousands commas). */
+export const formatFigure = (f, v) => {
+  let s = v.toFixed(f.dec);
+  if (f.commas) { const [a, b] = s.split('.'); s = a.replace(/\B(?=(\d{3})+(?!\d))/g, ',') + (b ? `.${b}` : ''); }
+  return `${f.pre}${s}${f.post}`;
+};

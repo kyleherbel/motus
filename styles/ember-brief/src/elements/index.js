@@ -11,6 +11,7 @@ const NAMES = [
   'chips', 'logo-tiles', 'icon-grid',
   'picture', 'before-after', 'phone-frame',
   'link', 'process', 'versus', 'item-cards', 'player',
+  'hub', 'task-card',
 ];
 
 const loaded = await Promise.all(NAMES.map(async (name) => {

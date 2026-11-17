@@ -2,6 +2,17 @@
 
 All notable changes to Motus are recorded here. The plugin version is the `version` field in `.claude-plugin/plugin.json` and `.codex-plugin/plugin.json`. Each style pack has its own version in `styles/<id>/style.json`.
 
+## Unreleased
+
+Ember Brief: composite pictures that fill the field, from a third pass over the reference (`styles/ember-brief/research/explain-composites.md`, K01-K12).
+
+- `hub`: a card fed by a row of app tiles, grey lines curving into it, accent dots flowing down them (or out, with `dir: "out"`), and a figure or one-word state that lands counting on its word.
+- `task-card`: a task at work. Steps tick off one by one (every 15 frames, or spread up to a word), a Working bar fills, an optional person row goes from Online to Away, and the status reads the done text at the end.
+- `ui-card` `click`: a pointer glides to a row and clicks it, flipping its toggle or selecting it.
+- `capture-card` `pop`: a dark chip with an accent star pops out beside a captured row and counts up to the page's exact figure.
+- Edit skill: "Real footage of real things". When the speaker names a real product, the planner finds its maker's launch or demo video (the repository's media, the site, the maker's X or YouTube posts), downloads it with yt-dlp and cuts short clips and stills into the project. Ember Brief's evidence rules say to prefer that footage to a redrawn card.
+- STYLE.md: a "Fill the zone" rule (prefer composites and large cards to a short row of tiles or chips) and four new rows in the idea-to-device table.
+
 ## 0.3.1
 
 Windows support. Motus now runs on Windows 10 and 11. Checked on a Windows runner: `motus doctor`, transcription with faster-whisper, the app and Studio servers, the unit tests and an end-to-end render. The person matte and face tracking stay macOS only (Apple Vision); Windows uses the un-matted framing that was already the fallback.

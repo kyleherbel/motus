@@ -66,7 +66,9 @@
           "process",
           "versus",
           "item-cards",
-          "player"
+          "player",
+          "hub",
+          "task-card"
         ],
         "heading": [
           "section-heading"
@@ -92,7 +94,9 @@
           "link",
           "versus",
           "item-cards",
-          "player"
+          "player",
+          "hub",
+          "task-card"
         ],
         "heading": [
           "section-heading"
@@ -196,6 +200,18 @@
           "y": "number?",
           "w": "number?",
           "h": "number?"
+        },
+        "pop": {
+          "find": "string?",
+          "x": "number?",
+          "y": "number?",
+          "w": "number?",
+          "h": "number?",
+          "value": {
+            "type": "string",
+            "maxChars": 9
+          },
+          "glyph": "enum?:check|cross|lock|unlock|offline|refresh|document|picture|chart|person|phone|clock|folder|play|mic|mail|link|code|search|star"
         }
       }
     },
@@ -282,6 +298,14 @@
           "row": {
             "type": "number",
             "optional": true,
+            "min": 1,
+            "max": 6
+          }
+        },
+        "click": {
+          "row": {
+            "type": "number",
+            "optional": false,
             "min": 1,
             "max": 6
           }
@@ -672,6 +696,110 @@
             "max": 2
           }
         }
+      }
+    },
+    "hub": {
+      "label": "Hub",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "sources": {
+          "type": "array",
+          "min": 1,
+          "max": 5,
+          "of": {
+            "image": "asset?",
+            "glyph": "enum?:check|cross|lock|unlock|offline|refresh|document|picture|chart|person|phone|clock|folder|play|mic|mail|link|code|search|star",
+            "name": {
+              "type": "string",
+              "optional": true,
+              "maxChars": 24
+            },
+            "at": "word?"
+          }
+        },
+        "target": {
+          "name": {
+            "type": "string",
+            "maxChars": 18
+          },
+          "image": "asset?",
+          "glyph": "enum?:check|cross|lock|unlock|offline|refresh|document|picture|chart|person|phone|clock|folder|play|mic|mail|link|code|search|star"
+        },
+        "value": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 12
+        },
+        "label": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 24,
+          "maxWords": 4
+        },
+        "at": "word?"
+      },
+      "beats": {
+        "flow": {
+          "dir": "enum?:in|out"
+        },
+        "outline": {},
+        "check": {}
+      }
+    },
+    "task-card": {
+      "label": "Task card",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "title": {
+          "type": "string",
+          "maxChars": 24
+        },
+        "image": "asset?",
+        "rows": {
+          "type": "array",
+          "min": 2,
+          "max": 5,
+          "of": {
+            "label": {
+              "type": "string",
+              "optional": true,
+              "maxChars": 22
+            }
+          }
+        },
+        "status": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 14
+        },
+        "done": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 14
+        },
+        "person": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 12
+        }
+      },
+      "beats": {
+        "run": {
+          "until": "word?"
+        },
+        "tick": {
+          "row": {
+            "type": "number",
+            "min": 1,
+            "max": 5
+          }
+        },
+        "away": {},
+        "done": {}
       }
     }
   }
