@@ -1,0 +1,45 @@
+{
+  "id": "open-canvas",
+  "name": "Open Canvas",
+  "version": "0.1.0",
+  "status": "beta",
+  "summary": "The video as an open design file: the speaker cut out over their own footage rectangle on a black drafting grid, real screen captures in light-blue selection frames, a cursor that drags things into place, pointers that land on the spoken word, word-by-word captions with one brush-script word, and a bare-face ask to close. Voice only, hard cuts.",
+  "bestFor": [
+    "tool and repo walkthroughs with real pages to show",
+    "\"this now does that\" news in 30 to 60 seconds",
+    "daily solo talking-head reels"
+  ],
+  "aspect": "9:16",
+  "look": {
+    "palette": {
+      "label": "Palette",
+      "choices": [
+        "mono",
+        "cobalt",
+        "ember",
+        "moss",
+        "ink"
+      ],
+      "default": "mono"
+    }
+  },
+  "emphasis": [
+    "script"
+  ],
+  "roles": [
+    "hook",
+    "thing",
+    "proof",
+    "demo",
+    "mechanism",
+    "step",
+    "uses",
+    "limit",
+    "cta"
+  ],
+  "sfx": {},
+  "preview": {
+    "video": "preview.webm",
+    "poster": "preview.webp"
+  }
+}

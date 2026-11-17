@@ -1,0 +1,570 @@
+{
+ "motus": 1,
+ "style": "open-canvas",
+ "look": {
+  "palette": "mono"
+ },
+ "captions": {
+  "fixes": {
+   "27": "Mirroir",
+   "82": "Codex",
+   "84": "Claude",
+   "85": "Code.",
+   "115": "Claude",
+   "116": "Code",
+   "118": "Codex",
+   "168": "If"
+  },
+  "emphasis": {
+   "7": "script",
+   "21": "script",
+   "38": "script",
+   "59": "script",
+   "78": "script",
+   "96": "script",
+   "111": "script",
+   "128": "script",
+   "138": "script",
+   "155": "script",
+   "175": "script"
+  }
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "words": [
+    0,
+    16
+   ],
+   "role": "hook",
+   "single": true,
+   "pick": "a",
+   "options": [
+    {
+     "id": "a",
+     "label": "Demo clips",
+     "why": "The claim over the tool's own demo clips",
+     "layout": "desk",
+     "slots": {
+      "title": {
+       "type": "hook-title",
+       "line1": "Claude Code Now",
+       "line2": "Controls Your iPhone"
+      },
+      "window": {
+       "type": "capture",
+       "src": "assets/video2-waze-slack.mp4",
+       "start": 0.5,
+       "beats": [
+        {
+         "at": 10,
+         "do": "swap",
+         "src": "assets/video1-expo-login.mp4",
+         "start": 3.6
+        }
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s02",
+   "words": [
+    17,
+    29
+   ],
+   "role": "thing",
+   "single": true,
+   "pick": "a",
+   "options": [
+    {
+     "id": "a",
+     "label": "GitHub repo",
+     "why": "The real repo, box on free and on the name",
+     "layout": "full",
+     "slots": {
+      "window": {
+       "type": "capture",
+       "src": "assets/github.png",
+       "x": 0,
+       "y": 110,
+       "w": 1260,
+       "beats": [
+        {
+         "at": 21,
+         "do": "highlight",
+         "x": 1018,
+         "y": 486,
+         "w": 226,
+         "h": 72,
+         "until": 24
+        },
+        {
+         "at": 24,
+         "do": "highlight",
+         "x": 88,
+         "y": 340,
+         "w": 236,
+         "h": 68
+        },
+        {
+         "at": 26,
+         "do": "view",
+         "x": 0,
+         "y": 3990,
+         "w": 1000
+        },
+        {
+         "at": 27,
+         "do": "highlight",
+         "x": 90,
+         "y": 4300,
+         "w": 370,
+         "h": 90
+        }
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s03",
+   "words": [
+    30,
+    39
+   ],
+   "role": "proof",
+   "single": true,
+   "pick": "a",
+   "options": [
+    {
+     "id": "a",
+     "label": "Apple page",
+     "why": "Apple's own page, box on iPhone Mirroring",
+     "layout": "desk",
+     "slots": {
+      "window": {
+       "type": "capture",
+       "src": "assets/apple.png",
+       "x": 60,
+       "y": 150,
+       "w": 1520,
+       "beats": [
+        {
+         "at": 37,
+         "do": "highlight",
+         "x": 120,
+         "y": 208,
+         "w": 600,
+         "h": 92
+        }
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "words": [
+    40,
+    53
+   ],
+   "role": "proof",
+   "single": true,
+   "pick": "a",
+   "options": [
+    {
+     "id": "a",
+     "label": "Devices",
+     "why": "The devices named, boxed as he says them",
+     "layout": "hero",
+     "slots": {
+      "screen": {
+       "type": "capture",
+       "src": "assets/apple.png",
+       "x": 170,
+       "y": 600,
+       "w": 1380,
+       "beats": [
+        {
+         "at": 47,
+         "do": "highlight",
+         "x": 1250,
+         "y": 770,
+         "w": 266,
+         "h": 546
+        },
+        {
+         "at": 48,
+         "do": "highlight",
+         "x": 200,
+         "y": 632,
+         "w": 948,
+         "h": 676
+        }
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s05",
+   "words": [
+    54,
+    66
+   ],
+   "role": "mechanism",
+   "single": true,
+   "pick": "a",
+   "options": [
+    {
+     "id": "a",
+     "label": "Screen transfer",
+     "why": "Acts out one screen put onto the other",
+     "layout": "graphic",
+     "slots": {
+      "object": {
+       "type": "transfer",
+       "img": "assets/still-chess-phone.png",
+       "from": "iPhone",
+       "to": "Mac",
+       "beats": [
+        {
+         "at": 58,
+         "do": "select"
+        },
+        {
+         "at": 62,
+         "do": "drop"
+        }
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s06",
+   "words": [
+    67,
+    85
+   ],
+   "role": "step",
+   "single": true,
+   "pick": "a",
+   "options": [
+    {
+     "id": "a",
+     "label": "Install line",
+     "why": "The install command on the real site",
+     "layout": "desk",
+     "slots": {
+      "window": {
+       "type": "capture",
+       "src": "assets/site.png",
+       "x": 40,
+       "y": 4030,
+       "w": 1120,
+       "beats": [
+        {
+         "at": 79,
+         "do": "highlight",
+         "x": 76,
+         "y": 4626,
+         "w": 470,
+         "h": 58
+        },
+        {
+         "at": 82,
+         "do": "highlight",
+         "x": 556,
+         "y": 4084,
+         "w": 448,
+         "h": 54
+        }
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s07",
+   "words": [
+    86,
+    103
+   ],
+   "role": "demo",
+   "single": true,
+   "pick": "a",
+   "options": [
+    {
+     "id": "a",
+     "label": "Phone screen",
+     "why": "Reads the screen: a tap, then boxes on what it sees",
+     "layout": "hero",
+     "slots": {
+      "screen": {
+       "type": "capture",
+       "src": "assets/still-login-phone.png",
+       "beats": [
+        {
+         "at": 91,
+         "do": "tap",
+         "x": 226,
+         "y": 478
+        },
+        {
+         "at": 96,
+         "do": "highlight",
+         "x": 133,
+         "y": 343,
+         "w": 190,
+         "h": 36
+        },
+        {
+         "at": 97,
+         "do": "highlight",
+         "x": 61,
+         "y": 377,
+         "w": 332,
+         "h": 28
+        },
+        {
+         "at": 98,
+         "do": "highlight",
+         "x": 49,
+         "y": 427,
+         "w": 50,
+         "h": 24
+        },
+        {
+         "at": 99,
+         "do": "highlight",
+         "x": 51,
+         "y": 453,
+         "w": 352,
+         "h": 48
+        },
+        {
+         "at": 100,
+         "do": "highlight",
+         "x": 49,
+         "y": 515,
+         "w": 76,
+         "h": 24
+        }
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s08",
+   "words": [
+    104,
+    122
+   ],
+   "role": "demo",
+   "single": true,
+   "pick": "a",
+   "options": [
+    {
+     "id": "a",
+     "label": "Terminal",
+     "why": "The agent's own log lines, boxed in turn",
+     "layout": "full",
+     "slots": {
+      "window": {
+       "type": "capture",
+       "src": "assets/still-terminal.png",
+       "x": 0,
+       "y": 120,
+       "w": 900,
+       "beats": [
+        {
+         "at": 111,
+         "do": "highlight",
+         "x": 14,
+         "y": 286,
+         "w": 492,
+         "h": 36
+        },
+        {
+         "at": 114,
+         "do": "highlight",
+         "x": 50,
+         "y": 314,
+         "w": 530,
+         "h": 34
+        },
+        {
+         "at": 120,
+         "do": "highlight",
+         "x": 66,
+         "y": 344,
+         "w": 310,
+         "h": 58
+        }
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s09",
+   "words": [
+    123,
+    145
+   ],
+   "role": "uses",
+   "single": true,
+   "pick": "a",
+   "options": [
+    {
+     "id": "a",
+     "label": "Three uses",
+     "why": "One real clip per use, hard swaps",
+     "layout": "behind",
+     "slots": {
+      "screen": {
+       "type": "capture",
+       "src": "assets/video1-expo-login.mp4",
+       "x": 1447,
+       "y": 380,
+       "w": 453,
+       "start": 4,
+       "beats": [
+        {
+         "at": 135,
+         "do": "swap",
+         "src": "assets/video2-waze-slack.mp4",
+         "x": 1450,
+         "y": 300,
+         "w": 455,
+         "start": 5
+        },
+        {
+         "at": 139,
+         "do": "swap",
+         "src": "assets/chess-vs-maximum.mp4",
+         "x": 985,
+         "y": 330,
+         "w": 600,
+         "start": 8
+        }
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s10",
+   "words": [
+    146,
+    154
+   ],
+   "role": "limit",
+   "single": true,
+   "pick": "a",
+   "options": [
+    {
+     "id": "a",
+     "label": "Safety section",
+     "why": "The site's own safety line",
+     "layout": "desk",
+     "slots": {
+      "window": {
+       "type": "capture",
+       "src": "assets/site.png",
+       "x": 20,
+       "y": 5290,
+       "w": 900,
+       "beats": [
+        {
+         "at": 151,
+         "do": "highlight",
+         "x": 40,
+         "y": 5452,
+         "w": 820,
+         "h": 58
+        }
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s11",
+   "words": [
+    155,
+    167
+   ],
+   "role": "limit",
+   "single": true,
+   "pick": "a",
+   "options": [
+    {
+     "id": "a",
+     "label": "Apps locked",
+     "why": "Bank and Wallet lock as he names them",
+     "layout": "graphic",
+     "slots": {
+      "object": {
+       "type": "app-lock",
+       "beats": [
+        {
+         "at": 162,
+         "do": "lock",
+         "app": "Bank"
+        },
+        {
+         "at": 167,
+         "do": "lock",
+         "app": "Wallet"
+        }
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s12",
+   "words": [
+    168,
+    194
+   ],
+   "role": "cta",
+   "single": true,
+   "pick": "a",
+   "options": [
+    {
+     "id": "a",
+     "label": "The ask",
+     "why": "Bare face and the comment keyword",
+     "layout": "face",
+     "slots": {
+      "cta": {
+       "type": "comment-cta",
+       "word": 187,
+       "verb": 184,
+       "text": "MIRROR"
+      }
+     }
+    }
+   ]
+  }
+ ],
+ "audio": {
+  "sfx": false
+ }
+}

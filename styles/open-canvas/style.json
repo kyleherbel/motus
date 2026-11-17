@@ -1,0 +1,275 @@
+{
+  "id": "open-canvas",
+  "name": "Open Canvas",
+  "version": "0.1.0",
+  "status": "beta",
+  "summary": "The video as an open design file: the speaker cut out over their own footage rectangle on a black drafting grid, real screen captures in light-blue selection frames, a cursor that drags things into place, pointers that land on the spoken word, word-by-word captions with one brush-script word, and a bare-face ask to close. Voice only, hard cuts.",
+  "bestFor": [
+    "tool and repo walkthroughs with real pages to show",
+    "\"this now does that\" news in 30 to 60 seconds",
+    "daily solo talking-head reels"
+  ],
+  "aspect": "9:16",
+  "look": {
+    "palette": {
+      "label": "Palette",
+      "choices": [
+        "mono",
+        "cobalt",
+        "ember",
+        "moss",
+        "ink"
+      ],
+      "default": "mono"
+    }
+  },
+  "emphasis": [
+    "script"
+  ],
+  "roles": [
+    "hook",
+    "thing",
+    "proof",
+    "demo",
+    "mechanism",
+    "step",
+    "uses",
+    "limit",
+    "cta"
+  ],
+  "sfx": {},
+  "preview": {
+    "video": "preview.webm",
+    "poster": "preview.webp"
+  },
+  "timing": {
+    "sceneLead": 0.06666666666666667
+  },
+  "layouts": {
+    "desk": {
+      "label": "Desk",
+      "presenter": "cutout",
+      "slots": {
+        "window": [
+          "capture"
+        ],
+        "title": [
+          "hook-title"
+        ]
+      }
+    },
+    "full": {
+      "label": "Full window",
+      "presenter": "none",
+      "slots": {
+        "window": [
+          "capture"
+        ]
+      }
+    },
+    "hero": {
+      "label": "Hero screen",
+      "presenter": "none",
+      "slots": {
+        "screen": [
+          "capture"
+        ]
+      }
+    },
+    "behind": {
+      "label": "Screen behind",
+      "presenter": "cutout",
+      "slots": {
+        "screen": [
+          "capture"
+        ]
+      }
+    },
+    "graphic": {
+      "label": "Built object",
+      "presenter": "none",
+      "slots": {
+        "object": [
+          "transfer",
+          "app-lock"
+        ]
+      }
+    },
+    "face": {
+      "label": "Face",
+      "presenter": "full",
+      "slots": {
+        "cta": [
+          "comment-cta"
+        ]
+      }
+    }
+  },
+  "elements": {
+    "capture": {
+      "label": "Real capture",
+      "slots": [
+        "window",
+        "screen"
+      ],
+      "params": {
+        "src": "asset",
+        "x": {
+          "type": "number",
+          "optional": true,
+          "min": 0
+        },
+        "y": {
+          "type": "number",
+          "optional": true,
+          "min": 0
+        },
+        "w": {
+          "type": "number",
+          "optional": true,
+          "min": 40
+        },
+        "start": {
+          "type": "number",
+          "optional": true,
+          "min": 0
+        }
+      },
+      "beats": {
+        "highlight": {
+          "find": {
+            "type": "string",
+            "optional": true,
+            "maxChars": 80
+          },
+          "x": "number?",
+          "y": "number?",
+          "w": "number?",
+          "h": "number?",
+          "until": "word?"
+        },
+        "tap": {
+          "x": "number",
+          "y": "number"
+        },
+        "view": {
+          "x": {
+            "type": "number",
+            "optional": true,
+            "min": 0
+          },
+          "y": {
+            "type": "number",
+            "optional": true,
+            "min": 0
+          },
+          "w": {
+            "type": "number",
+            "optional": true,
+            "min": 40
+          },
+          "frames": {
+            "type": "number",
+            "optional": true,
+            "min": 6,
+            "max": 30
+          }
+        },
+        "swap": {
+          "src": "asset",
+          "x": {
+            "type": "number",
+            "optional": true,
+            "min": 0
+          },
+          "y": {
+            "type": "number",
+            "optional": true,
+            "min": 0
+          },
+          "w": {
+            "type": "number",
+            "optional": true,
+            "min": 40
+          },
+          "start": {
+            "type": "number",
+            "optional": true,
+            "min": 0
+          }
+        }
+      }
+    },
+    "hook-title": {
+      "label": "Hook title",
+      "slots": [
+        "title"
+      ],
+      "params": {
+        "line1": {
+          "type": "string",
+          "maxChars": 18,
+          "maxWords": 4
+        },
+        "line2": {
+          "type": "string",
+          "maxChars": 22,
+          "maxWords": 4
+        }
+      },
+      "beats": {}
+    },
+    "comment-cta": {
+      "label": "Comment keyword",
+      "slots": [
+        "cta"
+      ],
+      "params": {
+        "word": "word",
+        "text": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 12,
+          "maxWords": 1
+        },
+        "verb": "word?"
+      },
+      "beats": {}
+    },
+    "transfer": {
+      "label": "Screen onto screen",
+      "slots": [
+        "object"
+      ],
+      "params": {
+        "img": "asset?",
+        "from": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 10
+        },
+        "to": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 10
+        }
+      },
+      "beats": {
+        "select": {},
+        "drop": {}
+      }
+    },
+    "app-lock": {
+      "label": "Apps locked",
+      "slots": [
+        "object"
+      ],
+      "params": {},
+      "beats": {
+        "lock": {
+          "app": "enum:Messages|Maps|Photos|Mail|Notes|Chat|Music|Bank|Wallet"
+        }
+      }
+    }
+  }
+}

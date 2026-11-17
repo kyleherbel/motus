@@ -42,9 +42,9 @@ You give Motus a raw take or a picture-locked cut and pick a style. You choose b
 
 Version 0.3.1. Five style packs, in beta. Runs on macOS and Windows 10 or 11. Claude Code is the first target. OpenAI Codex support is experimental.
 
-## Five styles
+## Six styles
 
-A style is a pack of rules, layouts and elements studied from reference videos. Pick one per video. All five are in beta: Editorial Proof, Night Class, Ember Brief and Prop Room are version 0.1.0, Ribbon Depth is 0.2.0. Ribbon Depth combines measured public examples with documented original extensions.
+A style is a pack of rules, layouts and elements studied from reference videos. Pick one per video. All six are in beta: Editorial Proof, Night Class, Ember Brief, Prop Room and Open Canvas are version 0.1.0, Ribbon Depth is 0.2.0. Ribbon Depth combines measured public examples with documented original extensions.
 
 ### Editorial Proof &nbsp;<sub><code>editorial-proof</code></sub>
 
@@ -84,17 +84,23 @@ A bright speaker in their own darkened room, a turning 3D glass ribbon behind th
 
 **Best for** solo tool, skill and workflow explainers of 30 to 47 seconds, where each step can become a picture. 20 elements and 3 layouts. See [the style guide](styles/prop-room/STYLE.md), [the prop library](styles/prop-room/props/README.md) and [what was measured](styles/prop-room/research/README.md).
 
+### Open Canvas &nbsp;<sub><code>open-canvas</code></sub>
+
+**The video as an open design file.** The speaker is cut out over their own footage rectangle on a black drafting grid that drifts upward. Real pages and screens sit in light-blue selection frames with handles, and a cursor drags them into place. Pointers land on the spoken word: a box means read, a dot means tap, a whip scroll means "or over here". Captions arrive one word at a time with one brush-script word a sentence. Every change is a hard cut. There is no music and no sound effect, and the video ends on the bare face with the comment keyword.
+
+**Best for** tool and repo walkthroughs with real pages to show, and daily solo reels of 25 to 60 seconds. 5 elements and 6 layouts; five palettes (black and white by default). Measured from a single clip, so its rules are provisional. See [the style guide](styles/open-canvas/STYLE.md) and [what was measured](styles/open-canvas/research/README.md).
+
 ### Side by side
 
-| | Editorial Proof | Night Class | Ember Brief | Ribbon Depth | Prop Room |
-|---|---|---|---| --- | --- |
-| Frame | Speaker panel at the bottom, evidence above, white grid | Small presenter panel under a black dot-grid field | Dotted field over the speaker, half and half | Full-frame speaker with graphics behind the head, a speaker window over a panel, and abstract glass scenes | Pale panel over the speaker, cut every 2 s to full-frame scenes and short full-height speaker beats |
-| Captions | Word by word, accent keywords | One word | Two words, the spoken word in magenta | Words land one by one; capsule plus sans/heavy-italic hero | One to three words, white on a dark plate across the seam |
-| Signature move | Dark focus shots for close reading | A hard cut to the full-height speaker about every 10 s | A new graphic about every 3 s, half of them explaining in motion | A turning glass ribbon used as an accent, a scene library for any niche, shakes on landings | Code-drawn props and rebuilt app windows that act each sentence out on its words |
-| Sound | Sound effects and two music beds | A sound kit and a music bed | No sound effects, one music bed | Three optional original effects; no bundled bed | Original effects and three beds: two drum-led, one pad |
-| Look choices | Accent: emerald or violet | Sound kit, music bed, field texture | None | Orange, Violet or Light Lime; motion intensity; ribbon strength; captions | None: the plate is chosen per scene |
-| Best source | Any take, cropped to 9:16 around the speaker | A shot wider than 9:16 (the horizontal recording) | A shot wider than 9:16 (the horizontal recording) | Clear 9:16 take and a good matte; explicit no-matte fallback | A shot wider than 9:16 (the horizontal recording) |
-| Measured from | 33 short videos | 32 teaching reels | 11 reels | Two Violet examples in one public promo; static bright-family boards | 19 reels |
+| | Editorial Proof | Night Class | Ember Brief | Ribbon Depth | Prop Room | Open Canvas |
+|---|---|---|---| --- | --- | --- |
+| Frame | Speaker panel at the bottom, evidence above, white grid | Small presenter panel under a black dot-grid field | Dotted field over the speaker, half and half | Full-frame speaker with graphics behind the head, a speaker window over a panel, and abstract glass scenes | Pale panel over the speaker, cut every 2 s to full-frame scenes and short full-height speaker beats | Speaker cut-out over their footage rectangle on a drafting grid, captures in selection frames; six layouts |
+| Captions | Word by word, accent keywords | One word | Two words, the spoken word in magenta | Words land one by one; capsule plus sans/heavy-italic hero | One to three words, white on a dark plate across the seam | Word by word, one brush-script word a sentence |
+| Signature move | Dark focus shots for close reading | A hard cut to the full-height speaker about every 10 s | A new graphic about every 3 s, half of them explaining in motion | A turning glass ribbon used as an accent, a scene library for any niche, shakes on landings | Code-drawn props and rebuilt app windows that act each sentence out on its words | A cursor that drags windows into place and pointers that land on the spoken word |
+| Sound | Sound effects and two music beds | A sound kit and a music bed | No sound effects, one music bed | Three optional original effects; no bundled bed | Original effects and three beds: two drum-led, one pad | Voice only |
+| Look choices | Accent: emerald or violet | Sound kit, music bed, field texture | None | Orange, Violet or Light Lime; motion intensity; ribbon strength; captions | None: the plate is chosen per scene | Palette: mono (default), cobalt, ember, moss, ink |
+| Best source | Any take, cropped to 9:16 around the speaker | A shot wider than 9:16 (the horizontal recording) | A shot wider than 9:16 (the horizontal recording) | Clear 9:16 take and a good matte; explicit no-matte fallback | A shot wider than 9:16 (the horizontal recording) | A 9:16 take with a good matte |
+| Measured from | 33 short videos | 32 teaching reels | 11 reels | Two Violet examples in one public promo; static bright-family boards | 19 reels | 1 reel |
 
 Each style's layouts, elements and their parameters are listed in `styles/<id>/style.json`. Run `/motus:styles` or `node engine/bin/motus.mjs styles` to see what is installed.
 

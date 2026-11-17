@@ -4,6 +4,13 @@ All notable changes to Motus are recorded here. The plugin version is the `versi
 
 ## Unreleased
 
+Open Canvas 0.1.0 (beta): a new style, `styles/open-canvas/`. The video staged as an open design file: the speaker cut out over their own footage rectangle on a drifting drafting grid, real captures in selection frames, a cursor that drags things into place, pointers on the spoken word, word-by-word captions with a brush-script word, a bare-face comment ask. Voice only.
+
+- 6 layouts (`desk`, `full`, `hero`, `behind`, `graphic`, `face`) and 5 elements (`capture` with `highlight`, `tap`, `view` and `swap` beats on stills and clips; `hook-title`; `comment-cta`; `transfer`; `app-lock`).
+- Look: `palette` with `mono` (black sheet, white lines, light-blue selection; the default), `cobalt`, `ember`, `moss`, `ink`. Emphasis kind `script`.
+- Measured from one clip read at every frame, not a corpus: every rule is medium or low confidence and the research notes say so. No sounds shipped. Fonts: Outfit, Caveat Brush, JetBrains Mono (SIL OFL 1.1).
+- End-to-end test on a Daily Update take: 12 scenes, 54.4 s, 1080x1920 at 29.97 fps, -14 LUFS.
+
 Ember Brief: composite pictures that fill the field, from a third pass over the reference (`styles/ember-brief/research/explain-composites.md`, K01-K12).
 
 - `hub`: a card fed by a row of app tiles, grey lines curving into it, accent dots flowing down them (or out, with `dir: "out"`), and a figure or one-word state that lands counting on its word.
