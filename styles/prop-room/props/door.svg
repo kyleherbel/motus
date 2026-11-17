@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1300" data-shadow="rest">
+  <!-- Prop Room library prop: a panelled door in its frame (props/STANDARD.md). The leaf swings on its hinge
+       (a front view narrows it to the hinge side); light pours out of the doorway.
+       Parts:
+         rays      warm light beams behind the frame, start hidden                (show fade)
+         frame     the casing and the dark room behind the leaf, static
+         light     bright doorway and the spill on the floor, start hidden          (show fade, with the open)
+         leaf      the door, data-pivot at the hinge                                (move sx 0.14 ease inOut opens it)
+         sign      a small plate on the leaf; data-base (inside leaf)               (recolor, pulse)
+         knob      the handle (inside leaf)                                         (pulse) -->
+  <defs>
+    <linearGradient id="casing" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4F2EF"/><stop offset="1" stop-color="#D8D3CD"/></linearGradient>
+    <linearGradient id="leafLight" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.16"/><stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.16"/></linearGradient>
+    <linearGradient id="panelIn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0.16"/><stop offset="0.12" stop-color="#000" stop-opacity="0.04"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0.06"/></linearGradient>
+    <linearGradient id="brass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF1C2"/><stop offset="0.45" stop-color="#E9C46A"/><stop offset="1" stop-color="#B98A2E"/></linearGradient>
+    <linearGradient id="room" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2B2F3A"/><stop offset="1" stop-color="#14161C"/></linearGradient>
+    <radialGradient id="glowIn" cx="0.5" cy="0.55" r="0.65"><stop offset="0" stop-color="#FFFBF0"/><stop offset="0.6" stop-color="#FFE7B0"/><stop offset="1" stop-color="#FFC56B"/></radialGradient>
+    <radialGradient id="spill" cx="0.5" cy="0" r="0.6"><stop offset="0" stop-color="#FFD98A" stop-opacity="0.85"/><stop offset="1" stop-color="#FFD98A" stop-opacity="0"/></radialGradient>
+    <linearGradient id="ray" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFD98A" stop-opacity="0.65"/><stop offset="1" stop-color="#FFD98A" stop-opacity="0"/></linearGradient>
+  </defs>
+
+  <g id="rays" visibility="hidden">
+    <g transform="translate(500 640)">
+      <path d="M0 -40 L560 -330 L560 -150 Z" fill="url(#ray)"/><path d="M0 0 L560 -40 L560 140 Z" fill="url(#ray)"/><path d="M0 40 L560 330 L560 510 Z" fill="url(#ray)"/>
+      <g transform="scale(-1 1)"><path d="M0 -40 L560 -330 L560 -150 Z" fill="url(#ray)"/><path d="M0 0 L560 -40 L560 140 Z" fill="url(#ray)"/><path d="M0 40 L560 330 L560 510 Z" fill="url(#ray)"/></g>
+    </g>
+  </g>
+
+  <g id="frame">
+    <rect x="120" y="30" width="760" height="1250" rx="22" fill="url(#casing)"/>
+    <rect x="132" y="36" width="736" height="5" rx="2.5" fill="#FFFFFF"/>
+    <rect x="180" y="96" width="640" height="1184" fill="url(#room)"/>
+    <rect x="180" y="96" width="640" height="26" fill="#000" opacity="0.25"/>
+    <rect x="100" y="1262" width="800" height="26" rx="10" fill="#C7C1B9"/>
+  </g>
+
+  <g id="light" visibility="hidden">
+    <rect x="180" y="96" width="640" height="1184" fill="url(#glowIn)"/>
+    <ellipse cx="500" cy="1282" rx="440" ry="60" fill="url(#spill)"/>
+  </g>
+
+  <g id="leaf" data-pivot="180 690">
+    <rect x="180" y="96" width="640" height="1184" fill="#2F5D8C" data-base=""/>
+    <rect x="180" y="96" width="640" height="1184" fill="url(#leafLight)"/>
+    <rect x="186" y="100" width="628" height="5" fill="#FFFFFF" opacity="0.3"/>
+    <rect x="250" y="170" width="500" height="420" rx="10" fill="url(#panelIn)"/>
+    <rect x="250" y="586" width="500" height="4" fill="#FFFFFF" opacity="0.25"/>
+    <rect x="250" y="680" width="500" height="520" rx="10" fill="url(#panelIn)"/>
+    <rect x="250" y="1196" width="500" height="4" fill="#FFFFFF" opacity="0.25"/>
+    <rect x="812" y="96" width="8" height="1184" fill="#000" opacity="0.18"/>
+    <g id="sign">
+      <rect x="390" y="300" width="220" height="80" rx="14" fill="url(#brass)"/>
+      <rect x="406" y="318" width="188" height="44" rx="8" fill="#000" opacity="0.10" data-base=""/>
+      <rect x="398" y="304" width="204" height="4" rx="2" fill="#FFFFFF" opacity="0.7"/>
+    </g>
+    <g id="knob">
+      <circle cx="752" cy="680" r="30" fill="url(#brass)"/>
+      <circle cx="744" cy="670" r="10" fill="#FFFFFF" opacity="0.6"/>
+    </g>
+  </g>
+</svg>

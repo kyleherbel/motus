@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" data-shadow="rest">
+  <!-- Prop Room library prop: a padlock (props/STANDARD.md). Chrome shackle [C24], a glossy white body lit from
+       the top, a keyhole that can turn colour.
+       Parts:
+         shackle   the U bar; its legs run into the body                              (move dy -120 unlocks it, ease inOut)
+         body      the lock body, static                                               (pulse)
+         keyhole   the keyhole; data-base                                              (recolor #13904C when it opens) -->
+  <defs>
+    <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8F959B"/><stop offset="0.2" stop-color="#F7F8FA"/><stop offset="0.45" stop-color="#D6DAE0"/><stop offset="0.7" stop-color="#B5BAC1"/><stop offset="0.85" stop-color="#E9ECEF"/><stop offset="1" stop-color="#8F959B"/></linearGradient>
+    <linearGradient id="bodyG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#DADEE3"/></linearGradient>
+    <linearGradient id="bodySide" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#000" stop-opacity="0.06"/><stop offset="0.2" stop-color="#000" stop-opacity="0"/><stop offset="0.8" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.10"/></linearGradient>
+    <linearGradient id="holeShade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0.35"/><stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient>
+  </defs>
+
+  <g id="shackle">
+    <path d="M220 560 V330 C220 190 300 90 400 90 C500 90 580 190 580 330 V560" fill="none" stroke="url(#chrome)" stroke-width="78" stroke-linecap="round"/>
+    <path d="M206 340 C210 220 270 140 340 118" fill="none" stroke="#FFFFFF" stroke-opacity="0.85" stroke-width="14" stroke-linecap="round"/>
+  </g>
+
+  <g id="body">
+    <rect x="40" y="440" width="720" height="540" rx="96" fill="url(#bodyG)"/>
+    <rect x="40" y="440" width="720" height="540" rx="96" fill="url(#bodySide)"/>
+    <rect x="96" y="446" width="608" height="6" rx="3" fill="#FFFFFF"/>
+    <rect x="40" y="900" width="720" height="80" rx="40" fill="#000" opacity="0.05"/>
+    <rect x="200" y="440" width="40" height="22" fill="#000" opacity="0.10"/><rect x="560" y="440" width="40" height="22" fill="#000" opacity="0.10"/>
+  </g>
+  <g id="keyhole">
+    <path d="M400 620 C440 620 470 650 470 690 C470 716 456 736 436 748 L452 840 H348 L364 748 C344 736 330 716 330 690 C330 650 360 620 400 620 Z" fill="#2A2D33" data-base=""/>
+    <path d="M400 620 C440 620 470 650 470 690 C470 716 456 736 436 748 L452 840 H348 L364 748 C344 736 330 716 330 690 C330 650 360 620 400 620 Z" fill="url(#holeShade)"/>
+    <path d="M352 846 H448" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" opacity="0.8"/>
+  </g>
+</svg>

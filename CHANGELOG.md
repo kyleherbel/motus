@@ -2,6 +2,14 @@
 
 All notable changes to Motus are recorded here. The plugin version is the `version` field in `.claude-plugin/plugin.json` and `.codex-plugin/plugin.json`. Each style pack has its own version in `styles/<id>/style.json`.
 
+## 0.3.0 (unreleased)
+
+- Added Prop Room (beta): a pale panel over the speaker, hard cuts about every two seconds between the split, full-frame scenes and short full-height speaker beats, one-to-three-word captions on a dark plate across the seam, and a quoted serif keyword to close. Measured from 19 reels in nine dimensions plus an explanation pass over all 279 graphic units, with an independent verification of 29 numbers (`styles/prop-room/research/`).
+- Prop Room draws its pictures in code. The `prop` element renders an SVG with named parts that beats move (show, hide, move, fill, draw, spin, swap, recolor, pulse, badge); `props/` holds 22 library props and `props/STANDARD.md`, the drawing standard the planning agent follows to draw a new prop for a video. 19 more elements cover figures (counter, big number, value bars, item sets, name reveal, stamp, route) and rebuilt interfaces (window with a pointer, prompt, picker, file drop, checklist, item stack, before/after wipe, captured page, code window, key caps, title card).
+- Prop Room sound: three original beds (130 BPM, 118 BPM, a pad) and four effect families with action textures, synthesised by `dev/make-audio.mjs` and placed by `src/sound.js` from the measured rules. Not yet auditioned.
+- Prop Room fonts: Inter, PT Serif Bold and JetBrains Mono, all SIL OFL 1.1, with their notices in `assets/fonts/OFL.txt`. PT Serif Bold stands in for the reference's unidentified serif.
+- Both plugin manifests now use 0.3.0. Local integration only; nothing has been published.
+
 ## 0.2.0 (unreleased)
 
 - Added Ribbon Depth (beta): behind-head glass ribbon and cards, mixed DM Sans/Playfair italic type, abstract sequence/search/action scenes, comparison, photo fan, filmstrip and circular portrait layouts. Violet is based on moving public samples; Light Lime has static reference evidence and extrapolated motion.

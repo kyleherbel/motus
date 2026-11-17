@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1250" data-shadow="rest">
+  <!-- Prop Room library prop: a light bulb (props/STANDARD.md). Off: pale glass with a grey filament. On: warm
+       glass and a halo in its own hue, about 30 px wide at the hero size [C25].
+       Parts:
+         rays      short light rays around the globe, start hidden                 (show fade)
+         glass     the unlit globe with its filament                                (swap to lit)
+         lit       the lit globe, filament and halo, start hidden                   (show fade or the swap target; pulse)
+         base      the screw base, static -->
+  <defs>
+    <radialGradient id="offG" cx="0.4" cy="0.32" r="0.75"><stop offset="0" stop-color="#FFFFFF"/><stop offset="0.7" stop-color="#E7ECF1"/><stop offset="1" stop-color="#CDD5DE"/></radialGradient>
+    <radialGradient id="onG" cx="0.5" cy="0.42" r="0.7"><stop offset="0" stop-color="#FFFDF2"/><stop offset="0.45" stop-color="#FFE9A6"/><stop offset="1" stop-color="#F7BE45"/></radialGradient>
+    <radialGradient id="halo" cx="0.5" cy="0.5" r="0.5"><stop offset="0.6" stop-color="#FFD15C" stop-opacity="0.55"/><stop offset="0.8" stop-color="#FFD15C" stop-opacity="0.18"/><stop offset="1" stop-color="#FFD15C" stop-opacity="0"/></radialGradient>
+    <linearGradient id="screw" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8F959B"/><stop offset="0.25" stop-color="#F7F8FA"/><stop offset="0.55" stop-color="#D6DAE0"/><stop offset="1" stop-color="#8F959B"/></linearGradient>
+    <linearGradient id="tipG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A3E44"/><stop offset="1" stop-color="#1A1C20"/></linearGradient>
+    <linearGradient id="ray" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7BE45"/><stop offset="1" stop-color="#F7BE45" stop-opacity="0.2"/></linearGradient>
+  </defs>
+
+  <g id="rays" visibility="hidden">
+    <g stroke="#F2B632" stroke-width="28" stroke-linecap="round">
+      <path d="M500 -40 V-130" transform="rotate(0 500 470)"/><path d="M500 -40 V-130" transform="rotate(-40 500 470)"/><path d="M500 -40 V-130" transform="rotate(40 500 470)"/>
+      <path d="M500 -40 V-130" transform="rotate(-80 500 470)"/><path d="M500 -40 V-130" transform="rotate(80 500 470)"/>
+    </g>
+  </g>
+
+  <g id="glass">
+    <path d="M500 40 C740 40 920 220 920 460 C920 640 820 750 720 840 C680 876 664 900 660 950 H340 C336 900 320 876 280 840 C180 750 80 640 80 460 C80 220 260 40 500 40 Z" fill="url(#offG)"/>
+    <path d="M430 950 V700 C430 650 400 620 400 570 C400 530 430 510 460 530 C490 550 510 550 540 530 C570 510 600 530 600 570 C600 620 570 650 570 700 V950" fill="none" stroke="#9AA3AD" stroke-width="12" stroke-linejoin="round"/>
+    <path d="M190 400 C200 270 290 170 410 138" fill="none" stroke="#FFFFFF" stroke-width="30" stroke-linecap="round" opacity="0.9"/>
+    <path d="M820 560 C800 650 750 720 690 780" fill="none" stroke="#B9C2CC" stroke-width="16" stroke-linecap="round" opacity="0.6"/>
+  </g>
+
+  <g id="lit" visibility="hidden">
+    <circle cx="500" cy="470" r="600" fill="url(#halo)"/>
+    <path d="M500 40 C740 40 920 220 920 460 C920 640 820 750 720 840 C680 876 664 900 660 950 H340 C336 900 320 876 280 840 C180 750 80 640 80 460 C80 220 260 40 500 40 Z" fill="url(#onG)" data-base=""/>
+    <path d="M430 950 V700 C430 650 400 620 400 570 C400 530 430 510 460 530 C490 550 510 550 540 530 C570 510 600 530 600 570 C600 620 570 650 570 700 V950" fill="none" stroke="#FFFFFF" stroke-width="14" stroke-linejoin="round"/>
+    <path d="M190 400 C200 270 290 170 410 138" fill="none" stroke="#FFFFFF" stroke-width="30" stroke-linecap="round" opacity="0.9"/>
+  </g>
+
+  <g id="base">
+    <rect x="330" y="940" width="340" height="60" rx="18" fill="url(#screw)"/>
+    <rect x="340" y="1000" width="320" height="52" rx="18" fill="url(#screw)"/>
+    <rect x="350" y="1052" width="300" height="52" rx="18" fill="url(#screw)"/>
+    <rect x="364" y="1104" width="272" height="48" rx="18" fill="url(#screw)"/>
+    <g fill="#000" opacity="0.18"><rect x="340" y="995" width="320" height="8" rx="4"/><rect x="350" y="1047" width="300" height="8" rx="4"/><rect x="360" y="1099" width="280" height="8" rx="4"/></g>
+    <path d="M400 1148 H600 C600 1200 560 1236 500 1236 C440 1236 400 1200 400 1148 Z" fill="url(#tipG)"/>
+    <rect x="350" y="946" width="300" height="5" rx="2.5" fill="#FFFFFF" opacity="0.7"/>
+  </g>
+</svg>

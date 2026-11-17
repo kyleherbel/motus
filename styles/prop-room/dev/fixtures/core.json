@@ -1,0 +1,270 @@
+{
+ "motus": 1,
+ "style": "prop-room",
+ "captions": {},
+ "scenes": [
+  {
+   "id": "s01",
+   "words": [
+    0,
+    6
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "core check",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "counter",
+       "key": "c1",
+       "to": 29,
+       "prefix": "$",
+       "suffix": "/mo",
+       "label": "what you pay now",
+       "plate": "dark"
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true,
+   "role": "hook"
+  },
+  {
+   "id": "s02",
+   "words": [
+    7,
+    13
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "core check",
+     "layout": "full",
+     "slots": {
+      "graphic": {
+       "type": "counter",
+       "key": "c2",
+       "to": 4200,
+       "suffix": "+",
+       "label": "stars this week",
+       "plate": "pale"
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s03",
+   "words": [
+    14,
+    16
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "core check",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "counter",
+       "key": "c3",
+       "to": 1,
+       "label": "open-source repo",
+       "plate": "navy"
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true,
+   "role": "name"
+  },
+  {
+   "id": "s04",
+   "words": [
+    17,
+    20
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "core check",
+     "layout": "speaker",
+     "slots": {}
+    }
+   ],
+   "pick": "a",
+   "single": true,
+   "role": "pivot"
+  },
+  {
+   "id": "s05",
+   "words": [
+    21,
+    45
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "core check",
+     "layout": "full",
+     "slots": {
+      "graphic": {
+       "type": "prop",
+       "key": "printer",
+       "name": "printer",
+       "plate": "pale",
+       "beats": [
+        {
+         "at": 23,
+         "do": "move",
+         "part": "sheet",
+         "dy": 300,
+         "ease": "inOut"
+        },
+        {
+         "at": 29,
+         "do": "pulse",
+         "part": "led"
+        },
+        {
+         "at": 33,
+         "do": "move",
+         "part": "sheet2",
+         "dy": 300,
+         "ease": "inOut"
+        },
+        {
+         "at": 36,
+         "do": "badge",
+         "kind": "check",
+         "part": "led"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true,
+   "role": "feature"
+  },
+  {
+   "id": "s06",
+   "words": [
+    46,
+    70
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "core check",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "counter",
+       "key": "c6",
+       "to": 12600,
+       "label": "comments a day",
+       "plate": "white"
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s07",
+   "words": [
+    71,
+    105
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "core check",
+     "layout": "full",
+     "slots": {
+      "graphic": {
+       "type": "counter",
+       "key": "c7",
+       "to": 0,
+       "prefix": "$",
+       "label": "per contact",
+       "plate": "warm"
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s08",
+   "words": [
+    106,
+    152
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "core check",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "counter",
+       "key": "c8",
+       "to": 3,
+       "label": "ways to gate it",
+       "plate": "teal"
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s09",
+   "words": [
+    153,
+    178
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "core check",
+     "layout": "speaker",
+     "slots": {
+      "keyword": {
+       "type": "comment-keyword",
+       "key": "kw",
+       "word": 167
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true,
+   "role": "cta"
+  }
+ ],
+ "audio": {
+  "music": null,
+  "sfx": false
+ }
+}

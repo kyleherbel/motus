@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" data-shadow="rest">
+  <!-- Prop Room library prop: a battery lying on its side (props/STANDARD.md). Graphite case lit from the top,
+       a recessed well, the charge as one flat colour with light and shade overlays.
+       Parts:
+         case      the shell and the terminal, static                              (pulse)
+         charge    the charge inside the well; data-fill="slide" data-axis="x" data-level 0.3; data-base
+                   (fill to 1 axis x charges it, fill to 0.1 drains it; recolor #F0574A when low)
+         cells     segment lines over the charge, static
+         bolt      a lightning bolt over the well, start hidden                    (show grow; pulse) -->
+  <defs>
+    <linearGradient id="caseG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3B4047"/><stop offset="1" stop-color="#1B1D21"/></linearGradient>
+    <linearGradient id="termG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7F8FA"/><stop offset="0.5" stop-color="#D6DAE0"/><stop offset="1" stop-color="#8F959B"/></linearGradient>
+    <linearGradient id="wellG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C4C9CF"/><stop offset="0.1" stop-color="#DDE1E5"/><stop offset="1" stop-color="#EEF0F2"/></linearGradient>
+    <linearGradient id="chargeLight" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.32"/><stop offset="0.3" stop-color="#FFFFFF" stop-opacity="0.05"/><stop offset="0.7" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.16"/></linearGradient>
+    <clipPath id="well"><rect x="74" y="92" width="772" height="336" rx="40"/></clipPath>
+  </defs>
+
+  <g id="case">
+    <rect x="884" y="170" width="96" height="180" rx="28" fill="url(#termG)"/>
+    <rect x="890" y="176" width="70" height="5" rx="2.5" fill="#FFFFFF" opacity="0.9"/>
+    <rect x="20" y="40" width="880" height="440" rx="80" fill="url(#caseG)"/>
+    <rect x="70" y="44" width="780" height="6" rx="3" fill="#FFFFFF" opacity="0.3"/>
+    <rect x="24" y="110" width="5" height="300" rx="2.5" fill="#FFFFFF" opacity="0.12"/>
+    <rect x="74" y="92" width="772" height="336" rx="40" fill="url(#wellG)"/>
+  </g>
+
+  <g clip-path="url(#well)">
+    <g id="charge" data-fill="slide" data-axis="x" data-level="0.3">
+      <rect x="74" y="92" width="772" height="336" rx="40" fill="#34C46A" data-base=""/>
+      <rect x="74" y="92" width="772" height="336" rx="40" fill="url(#chargeLight)"/>
+      <rect x="110" y="106" width="700" height="8" rx="4" fill="#FFFFFF" opacity="0.45"/>
+    </g>
+    <rect x="74" y="92" width="772" height="20" fill="#000" opacity="0.10"/>
+  </g>
+
+  <g id="cells" fill="#1B1D21" opacity="0.35">
+    <rect x="223" y="92" width="10" height="336"/><rect x="379" y="92" width="10" height="336"/>
+    <rect x="535" y="92" width="10" height="336"/><rect x="691" y="92" width="10" height="336"/>
+  </g>
+
+  <g id="bolt" visibility="hidden">
+    <path d="M492 128 L370 282 H458 L420 400 L556 236 H466 L512 128 Z" fill="#000" opacity="0.15" transform="translate(6 10)"/>
+    <path d="M492 128 L370 282 H458 L420 400 L556 236 H466 L512 128 Z" fill="#FFFFFF"/>
+  </g>
+</svg>

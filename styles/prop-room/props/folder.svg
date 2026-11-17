@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 800" data-shadow="rest">
+  <!-- Prop Room library prop: a document folder (props/STANDARD.md). Back panel with the tab, sheets that drop
+       in between the panels, a front panel lit from the top.
+       Parts:
+         back      back panel and tab; data-base                                    (recolor)
+         file1..file3  sheets inside, start hidden                                  (show slide from up dist 380, one per
+                   beat: they drop in; badge on a sheet)
+         front     front panel; data-base                                           (recolor, pulse) -->
+  <defs>
+    <linearGradient id="light" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.24"/><stop offset="0.45" stop-color="#FFFFFF" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.18"/></linearGradient>
+    <linearGradient id="backShade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0.05"/><stop offset="1" stop-color="#000" stop-opacity="0.22"/></linearGradient>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#EEF0F3"/></linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.16"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></linearGradient>
+    <linearGradient id="lipShade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0.18"/><stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient>
+  </defs>
+
+  <g id="back">
+    <path d="M20 120 C20 98 38 80 60 80 H330 C352 80 366 90 378 108 L402 146 H940 C962 146 980 164 980 186 V740 C980 762 962 780 940 780 H60 C38 780 20 762 20 740 Z" fill="#3D8FE0" data-base=""/>
+    <path d="M20 120 C20 98 38 80 60 80 H330 C352 80 366 90 378 108 L402 146 H940 C962 146 980 164 980 186 V740 C980 762 962 780 940 780 H60 C38 780 20 762 20 740 Z" fill="url(#backShade)"/>
+    <path d="M60 86 H330" stroke="#FFFFFF" stroke-opacity="0.45" stroke-width="5" stroke-linecap="round"/>
+  </g>
+
+  <g id="file1" visibility="hidden">
+    <g transform="rotate(-4 400 420)">
+      <rect x="160" y="190" width="560" height="460" rx="16" fill="url(#paper)"/>
+      <rect x="210" y="236" width="220" height="24" rx="12" fill="#ECAB44"/>
+      <rect x="210" y="284" width="420" height="14" rx="7" fill="#D8DADF"/><rect x="210" y="314" width="360" height="14" rx="7" fill="#E3E5E9"/>
+    </g>
+  </g>
+  <g id="file2" visibility="hidden">
+    <g transform="rotate(3 520 420)">
+      <rect x="250" y="168" width="560" height="460" rx="16" fill="url(#paper)"/>
+      <rect x="300" y="214" width="180" height="24" rx="12" fill="#13904C"/>
+      <rect x="300" y="262" width="420" height="14" rx="7" fill="#D8DADF"/><rect x="300" y="292" width="380" height="14" rx="7" fill="#E3E5E9"/>
+    </g>
+  </g>
+  <g id="file3" visibility="hidden">
+    <g transform="rotate(-1 500 420)">
+      <rect x="210" y="150" width="560" height="460" rx="16" fill="url(#paper)"/>
+      <rect x="260" y="196" width="240" height="24" rx="12" fill="#357CEF"/>
+      <rect x="260" y="244" width="440" height="14" rx="7" fill="#D8DADF"/><rect x="260" y="274" width="340" height="14" rx="7" fill="#E3E5E9"/>
+    </g>
+  </g>
+
+  <g id="front">
+    <path d="M20 312 C20 290 38 272 60 272 H940 C962 272 980 290 980 312 V740 C980 762 962 780 940 780 H60 C38 780 20 762 20 740 Z" fill="#5AA6F2" data-base=""/>
+    <path d="M20 312 C20 290 38 272 60 272 H940 C962 272 980 290 980 312 V740 C980 762 962 780 940 780 H60 C38 780 20 762 20 740 Z" fill="url(#light)"/>
+    <path d="M62 279 H938" stroke="#FFFFFF" stroke-opacity="0.75" stroke-width="5" stroke-linecap="round"/>
+    <path d="M20 312 C20 290 38 272 60 272 H560 L300 780 H60 C38 780 20 762 20 740 Z" fill="url(#sheen)"/>
+    <path d="M60 774 H940" stroke="#000" stroke-opacity="0.10" stroke-width="10" stroke-linecap="round"/>
+    <rect x="380" y="380" width="240" height="22" rx="11" fill="#FFFFFF" opacity="0.35"/>
+    <rect x="380" y="400" width="240" height="4" rx="2" fill="#000" opacity="0.06"/>
+  </g>
+  <rect x="40" y="250" width="920" height="24" fill="url(#lipShade)" opacity="0.6"/>
+</svg>

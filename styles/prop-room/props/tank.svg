@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 860" data-shadow="rest">
+  <!-- Prop Room library prop: a glass tank of liquid with two leak holes (props/STANDARD.md). Glass keeps a
+       9-unit soft wall [X25 glass exception]; the liquid is one flat base colour with light and shade overlays,
+       so a recolour keeps the shading.
+       Parts:
+         glass     back wall of the tank, static
+         liquid    the liquid with bubbles; data-fill="slide", data-level 0.78; base colour has data-base
+                   (fill to 0.2 drains it, fill to 1 refills it; recolor)
+         leakL     a stream out of the left hole, stroke drawn on                (draw; hide)
+         leakR     the same on the right                                          (draw; hide)
+         holeL     the left hole, static
+         holeR     the right hole, static
+         plugL     a plug that seals the left hole, starts hidden                 (show pop or land)
+         plugR     the same on the right                                          (show)
+         rim       the front glass wall and its highlights, static -->
+  <defs>
+    <linearGradient id="liqLight" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.30"/><stop offset="0.25" stop-color="#FFFFFF" stop-opacity="0.08"/><stop offset="0.6" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.16"/></linearGradient>
+    <linearGradient id="liqSide" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.12"/><stop offset="0.2" stop-color="#FFFFFF" stop-opacity="0"/><stop offset="0.85" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.10"/></linearGradient>
+    <linearGradient id="backG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.55"/><stop offset="1" stop-color="#E9ECF1" stop-opacity="0.55"/></linearGradient>
+    <linearGradient id="plugG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7F8FA"/><stop offset="1" stop-color="#9DA3AA"/></linearGradient>
+    <clipPath id="inside"><rect x="49" y="69" width="902" height="722" rx="76"/></clipPath>
+  </defs>
+
+  <g id="glass">
+    <rect x="40" y="60" width="920" height="740" rx="86" fill="url(#backG)"/>
+  </g>
+
+  <g clip-path="url(#inside)">
+    <g id="liquid" data-fill="slide" data-level="0.78">
+      <path d="M40 104 C160 76 260 76 380 98 C500 120 600 124 720 100 C820 80 900 82 960 96 L960 800 L40 800 Z" fill="#F0916B" data-base=""/>
+      <path d="M40 104 C160 76 260 76 380 98 C500 120 600 124 720 100 C820 80 900 82 960 96 L960 800 L40 800 Z" fill="url(#liqLight)"/>
+      <rect x="40" y="76" width="920" height="724" fill="url(#liqSide)"/>
+      <path d="M40 104 C160 76 260 76 380 98 C500 120 600 124 720 100 C820 80 900 82 960 96" fill="none" stroke="#FFFFFF" stroke-opacity="0.55" stroke-width="8"/>
+      <g fill="#FFFFFF">
+        <circle cx="210" cy="230" r="15" opacity="0.45"/><circle cx="180" cy="300" r="8" opacity="0.40"/><circle cx="330" cy="420" r="12" opacity="0.35"/>
+        <circle cx="560" cy="250" r="9" opacity="0.40"/><circle cx="700" cy="380" r="14" opacity="0.35"/><circle cx="820" cy="250" r="8" opacity="0.40"/>
+        <circle cx="430" cy="560" r="10" opacity="0.30"/><circle cx="160" cy="610" r="13" opacity="0.30"/><circle cx="860" cy="640" r="11" opacity="0.30"/>
+        <circle cx="610" cy="500" r="7" opacity="0.35"/>
+      </g>
+    </g>
+  </g>
+
+  <g id="leakL" data-drawn="0"><path d="M34 560 C-20 572 -54 640 -66 760" fill="none" stroke="#F0916B" stroke-width="22" stroke-linecap="round" data-base=""/></g>
+  <g id="leakR" data-drawn="0"><path d="M966 560 C1020 572 1054 640 1066 760" fill="none" stroke="#F0916B" stroke-width="22" stroke-linecap="round" data-base=""/></g>
+
+  <g id="rim">
+    <rect x="44.5" y="64.5" width="911" height="731" rx="81.5" fill="none" stroke="#FFFFFF" stroke-opacity="0.75" stroke-width="9"/>
+    <rect x="40" y="60" width="920" height="740" rx="86" fill="none" stroke="#C9CDD6" stroke-opacity="0.9" stroke-width="3"/>
+    <rect x="88" y="150" width="26" height="520" rx="13" fill="#FFFFFF" opacity="0.55"/>
+    <rect x="128" y="170" width="10" height="300" rx="5" fill="#FFFFFF" opacity="0.35"/>
+    <path d="M800 92 C860 96 900 120 918 160" fill="none" stroke="#FFFFFF" stroke-opacity="0.7" stroke-width="10" stroke-linecap="round"/>
+  </g>
+
+  <g id="holeL"><circle cx="40" cy="560" r="30" fill="#232B3C"/><circle cx="36" cy="552" r="9" fill="#FFFFFF" opacity="0.25"/></g>
+  <g id="holeR"><circle cx="960" cy="560" r="30" fill="#232B3C"/><circle cx="956" cy="552" r="9" fill="#FFFFFF" opacity="0.25"/></g>
+
+  <g id="plugL" visibility="hidden"><circle cx="40" cy="560" r="40" fill="url(#plugG)"/><circle cx="40" cy="560" r="22" fill="#357CEF"/><circle cx="34" cy="552" r="8" fill="#FFFFFF" opacity="0.5"/></g>
+  <g id="plugR" visibility="hidden"><circle cx="960" cy="560" r="40" fill="url(#plugG)"/><circle cx="960" cy="560" r="22" fill="#357CEF"/><circle cx="954" cy="552" r="8" fill="#FFFFFF" opacity="0.5"/></g>
+</svg>

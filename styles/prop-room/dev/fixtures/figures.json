@@ -1,0 +1,646 @@
+{
+ "motus": 1,
+ "style": "prop-room",
+ "captions": {},
+ "audio": {
+  "music": null,
+  "sfx": false
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "words": [
+    0,
+    6
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "figures check",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "value-bar",
+       "key": "vb1",
+       "title": "Plan limits",
+       "suffix": "% used",
+       "plate": "pale",
+       "rows": [
+        {
+         "label": "This session",
+         "from": 62,
+         "to": 100
+        },
+        {
+         "label": "This week",
+         "from": 38,
+         "to": 97
+        },
+        {
+         "label": "Image credits",
+         "from": 71,
+         "to": 100
+        }
+       ],
+       "beats": [
+        {
+         "at": 5,
+         "do": "flag",
+         "text": "Limit reached"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true,
+   "role": "hook"
+  },
+  {
+   "id": "s02",
+   "words": [
+    7,
+    13
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "figures check",
+     "layout": "full",
+     "slots": {
+      "graphic": {
+       "type": "big-number",
+       "key": "bn1",
+       "text": "90%",
+       "look": "type",
+       "word": 9,
+       "label": "of the code",
+       "plate": "warm"
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s03",
+   "words": [
+    14,
+    16
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "figures check",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "name-reveal",
+       "key": "nr1",
+       "name": "Relay",
+       "how": "flip",
+       "word": 16,
+       "color": "#8B7CF6",
+       "plate": "pale"
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true,
+   "role": "name"
+  },
+  {
+   "id": "s04",
+   "words": [
+    17,
+    20
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "figures check",
+     "layout": "speaker",
+     "slots": {}
+    }
+   ],
+   "pick": "a",
+   "single": true,
+   "role": "pivot"
+  },
+  {
+   "id": "s05",
+   "words": [
+    21,
+    33
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "figures check",
+     "layout": "full",
+     "slots": {
+      "graphic": {
+       "type": "item-set",
+       "key": "is1",
+       "kind": "drop",
+       "plate": "white",
+       "items": [
+        {
+         "label": "Writer",
+         "sub": "drafts"
+        },
+        {
+         "label": "Editor",
+         "sub": "cuts"
+        },
+        {
+         "label": "Scout",
+         "sub": "finds"
+        },
+        {
+         "label": "Analyst",
+         "sub": "checks"
+        }
+       ],
+       "beats": [
+        {
+         "at": 23,
+         "do": "add"
+        },
+        {
+         "at": 25,
+         "do": "add"
+        },
+        {
+         "at": 28,
+         "do": "add"
+        },
+        {
+         "at": 31,
+         "do": "add"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s06",
+   "words": [
+    34,
+    45
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "figures check",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "route",
+       "key": "rt1",
+       "kind": "chain",
+       "plate": "navy",
+       "nodes": [
+        {
+         "label": "Pick a word"
+        },
+        {
+         "label": "Viewer comments"
+        },
+        {
+         "label": "Reply sent"
+        },
+        {
+         "label": "Link opened"
+        }
+       ],
+       "beats": [
+        {
+         "at": 37,
+         "do": "next"
+        },
+        {
+         "at": 40,
+         "do": "next"
+        },
+        {
+         "at": 43,
+         "do": "next"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s07",
+   "words": [
+    46,
+    59
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "figures check",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "counter",
+       "key": "c7",
+       "from": 0,
+       "to": 12600,
+       "word": 51,
+       "label": "comments a day",
+       "plate": "pale"
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s08",
+   "words": [
+    60,
+    70
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "figures check",
+     "layout": "full",
+     "slots": {
+      "graphic": {
+       "type": "stamp",
+       "key": "st1",
+       "text": "FREE",
+       "word": 69,
+       "title": "Monthly bill",
+       "lines": [
+        {
+         "label": "Messages",
+         "value": "$0.00"
+        },
+        {
+         "label": "Contacts",
+         "value": "$0.00"
+        },
+        {
+         "label": "Total",
+         "value": "$0.00"
+        }
+       ],
+       "plate": "pale"
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s09",
+   "words": [
+    71,
+    80
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "figures check",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "value-bar",
+       "key": "vb2",
+       "kind": "score",
+       "title": "Fit check",
+       "plate": "white",
+       "color": "#2E9C86",
+       "rows": [
+        {
+         "label": "Speed",
+         "to": 78
+        },
+        {
+         "label": "Price",
+         "to": 92
+        },
+        {
+         "label": "Setup",
+         "to": 70
+        },
+        {
+         "label": "Support",
+         "to": 61
+        }
+       ],
+       "total": 81,
+       "totalLabel": "Overall",
+       "max": 100
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s10",
+   "words": [
+    81,
+    92
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "figures check",
+     "layout": "full",
+     "slots": {
+      "graphic": {
+       "type": "item-set",
+       "key": "is2",
+       "kind": "grid",
+       "count": 23,
+       "of": 28,
+       "label": "days",
+       "color": "#C9E83A",
+       "plate": "pale"
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s11",
+   "words": [
+    93,
+    105
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "figures check",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "big-number",
+       "key": "bn2",
+       "text": "6",
+       "suffix": "/10",
+       "label": "Price score",
+       "plate": "white",
+       "beats": [
+        {
+         "at": 97,
+         "do": "change",
+         "text": "9",
+         "color": "#2456D8"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s12",
+   "words": [
+    106,
+    117
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "figures check",
+     "layout": "full",
+     "slots": {
+      "graphic": {
+       "type": "route",
+       "key": "rt2",
+       "kind": "route",
+       "token": true,
+       "plate": "pale",
+       "nodes": [
+        {
+         "label": "Follow"
+        },
+        {
+         "label": "Unlock"
+        },
+        {
+         "label": "Download"
+        }
+       ],
+       "beats": [
+        {
+         "at": 110,
+         "do": "next"
+        },
+        {
+         "at": 114,
+         "do": "next"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s13",
+   "words": [
+    118,
+    131
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "figures check",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "item-set",
+       "key": "is3",
+       "kind": "segments",
+       "count": 4,
+       "label": "4 steps",
+       "plate": "pale",
+       "beats": [
+        {
+         "at": 120,
+         "do": "add"
+        },
+        {
+         "at": 123,
+         "do": "add"
+        },
+        {
+         "at": 126,
+         "do": "add"
+        },
+        {
+         "at": 129,
+         "do": "add"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s14",
+   "words": [
+    132,
+    140
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "figures check",
+     "layout": "full",
+     "slots": {
+      "graphic": {
+       "type": "stamp",
+       "key": "st2",
+       "kind": "tick",
+       "word": 135,
+       "title": "Open source",
+       "lines": [
+        {
+         "label": "Licence",
+         "value": "MIT"
+        },
+        {
+         "label": "Price",
+         "value": "$0"
+        }
+       ],
+       "plate": "teal"
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s15",
+   "words": [
+    141,
+    152
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "figures check",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "name-reveal",
+       "key": "nr2",
+       "name": "Openline",
+       "how": "type",
+       "sub": "free and open",
+       "word": 148,
+       "color": "#2E9C86",
+       "plate": "dark"
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s16",
+   "words": [
+    153,
+    163
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "figures check",
+     "layout": "full",
+     "slots": {
+      "graphic": {
+       "type": "counter",
+       "key": "c16",
+       "to": 5,
+       "from": 0,
+       "prefix": "",
+       "suffix": " min",
+       "label": "to set up",
+       "word": 159,
+       "plate": "pale"
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s17",
+   "words": [
+    164,
+    178
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "figures check",
+     "layout": "speaker",
+     "slots": {
+      "keyword": {
+       "type": "comment-keyword",
+       "key": "kw",
+       "word": 167
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true,
+   "role": "cta"
+  }
+ ]
+}

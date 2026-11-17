@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 620" data-shadow="none">
+  <!-- Prop Room library prop: a locomotive on a track with a junction, a points lever and a signal
+       (props/STANDARD.md). The track lies on the plate, so the prop casts no drop shadow; the locomotive
+       carries its own soft contact shadow.
+       Parts:
+         track     main line: rail, sleepers and the buffer stop, static
+         branch    the branch line from the junction; data-drawn 0, drawn on       (draw; recolor)
+         lever     points lever, data-pivot at its foot                           (move rotate 50)
+         signal    post and head, static
+         lamp      the signal light; data-base                                     (recolor #13904C, pulse)
+         train     the locomotive with its wheels                                   (move dx 360 ease slow stops at the
+                   buffer; move dx 560 dy 64 rotate 17.2 ease slow takes the branch)
+         wheel1..wheel4   wheels inside train                                       (spin) -->
+  <defs>
+    <linearGradient id="bodyLight" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.24"/><stop offset="0.45" stop-color="#FFFFFF" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.16"/></linearGradient>
+    <linearGradient id="glassG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6F9FC"/><stop offset="1" stop-color="#C6D0DD"/></linearGradient>
+    <linearGradient id="darkG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A4354"/><stop offset="1" stop-color="#1F2533"/></linearGradient>
+    <radialGradient id="contact" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#000" stop-opacity="0.24"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+    <radialGradient id="lampGlow"><stop offset="0.4" stop-color="#F0574A" stop-opacity="0.5"/><stop offset="1" stop-color="#F0574A" stop-opacity="0"/></radialGradient>
+    <radialGradient id="hubG" cx="0.4" cy="0.35" r="0.7"><stop offset="0" stop-color="#4A5468"/><stop offset="1" stop-color="#1A2030"/></radialGradient>
+  </defs>
+
+  <g id="track">
+    <g fill="#B9A48F">
+      <rect x="24" y="488" width="20" height="16" rx="3"/><rect x="80" y="488" width="20" height="16" rx="3"/><rect x="136" y="488" width="20" height="16" rx="3"/>
+      <rect x="192" y="488" width="20" height="16" rx="3"/><rect x="248" y="488" width="20" height="16" rx="3"/><rect x="304" y="488" width="20" height="16" rx="3"/>
+      <rect x="360" y="488" width="20" height="16" rx="3"/><rect x="416" y="488" width="20" height="16" rx="3"/><rect x="472" y="488" width="20" height="16" rx="3"/>
+      <rect x="528" y="488" width="20" height="16" rx="3"/><rect x="584" y="488" width="20" height="16" rx="3"/><rect x="640" y="488" width="20" height="16" rx="3"/>
+      <rect x="696" y="488" width="20" height="16" rx="3"/><rect x="752" y="488" width="20" height="16" rx="3"/><rect x="808" y="488" width="20" height="16" rx="3"/>
+      <rect x="864" y="488" width="20" height="16" rx="3"/>
+    </g>
+    <rect x="20" y="474" width="900" height="14" rx="7" fill="url(#darkG)"/>
+    <rect x="24" y="475" width="892" height="3" rx="1.5" fill="#FFFFFF" opacity="0.25"/>
+    <rect x="884" y="436" width="46" height="52" rx="10" fill="url(#darkG)"/>
+    <rect x="884" y="436" width="46" height="14" rx="7" fill="#F0574A"/>
+  </g>
+
+  <g id="branch" data-drawn="0">
+    <path d="M600 482 L980 600" fill="none" stroke="#13904C" stroke-width="14" stroke-linecap="round" data-base=""/>
+  </g>
+
+  <g id="signal">
+    <rect x="948" y="236" width="18" height="250" rx="9" fill="url(#darkG)"/>
+    <rect x="916" y="150" width="82" height="118" rx="41" fill="url(#darkG)"/>
+    <rect x="928" y="156" width="58" height="5" rx="2.5" fill="#FFFFFF" opacity="0.25"/>
+  </g>
+  <g id="lamp">
+    <circle cx="957" cy="200" r="64" fill="url(#lampGlow)"/>
+    <circle cx="957" cy="200" r="26" fill="#F0574A" data-base=""/>
+    <circle cx="950" cy="192" r="8" fill="#FFFFFF" opacity="0.5"/>
+  </g>
+
+  <g id="lever" data-pivot="530 590">
+    <path d="M530 590 L494 506" stroke="#2A3142" stroke-width="16" stroke-linecap="round"/>
+    <circle cx="494" cy="506" r="24" fill="#F0574A"/>
+    <circle cx="487" cy="498" r="8" fill="#FFFFFF" opacity="0.5"/>
+  </g>
+  <rect x="490" y="576" width="80" height="36" rx="10" fill="url(#darkG)"/>
+
+  <g id="train">
+    <ellipse cx="252" cy="478" rx="250" ry="18" fill="url(#contact)"/>
+    <path d="M30 300 H392 C444 300 478 342 478 394 V440 H30 Z" fill="#D9876A" data-base=""/>
+    <path d="M30 300 H392 C444 300 478 342 478 394 V440 H30 Z" fill="url(#bodyLight)"/>
+    <rect x="40" y="305" width="350" height="6" rx="3" fill="#FFFFFF" opacity="0.55"/>
+    <path d="M402 324 C442 328 464 352 468 388 H402 Z" fill="url(#glassG)"/>
+    <rect x="70" y="326" width="74" height="54" rx="14" fill="url(#glassG)"/>
+    <rect x="166" y="326" width="74" height="54" rx="14" fill="url(#glassG)"/>
+    <rect x="262" y="326" width="74" height="54" rx="14" fill="url(#glassG)"/>
+    <rect x="30" y="398" width="448" height="12" fill="#FFFFFF" opacity="0.6"/>
+    <circle cx="468" cy="422" r="11" fill="#FFE28A"/>
+    <rect x="24" y="428" width="460" height="20" rx="8" fill="url(#darkG)"/>
+    <g id="wheel1"><circle cx="96" cy="448" r="26" fill="url(#hubG)"/><path d="M96 432 V464 M80 448 H112" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/></g>
+    <g id="wheel2"><circle cx="176" cy="448" r="26" fill="url(#hubG)"/><path d="M176 432 V464 M160 448 H192" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/></g>
+    <g id="wheel3"><circle cx="330" cy="448" r="26" fill="url(#hubG)"/><path d="M330 432 V464 M314 448 H346" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/></g>
+    <g id="wheel4"><circle cx="410" cy="448" r="26" fill="url(#hubG)"/><path d="M410 432 V464 M394 448 H426" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/></g>
+  </g>
+</svg>

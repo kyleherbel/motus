@@ -1,0 +1,1252 @@
+{
+  "id": "prop-room",
+  "name": "Prop Room",
+  "version": "0.1.0",
+  "status": "beta",
+  "summary": "A tool explainer where the pictures do the explaining: a pale panel over the speaker, cut every two seconds to full-frame scenes in which code-drawn props and app windows act each sentence out, two-word captions on a dark plate across the seam, and a quoted serif keyword to close.",
+  "bestFor": [
+    "tool, skill and workflow explainers",
+    "\"here is what this does\" walkthroughs",
+    "solo talking-head reels of 30 to 45 seconds"
+  ],
+  "aspect": "9:16",
+  "footage": {
+    "wide": true
+  },
+  "look": {},
+  "emphasis": [],
+  "roles": [
+    "hook",
+    "name",
+    "problem",
+    "feature",
+    "step",
+    "number",
+    "benefit",
+    "pivot",
+    "cta"
+  ],
+  "sfx": {
+    "swell-1": "assets/sfx/swell-1.wav",
+    "swell-2": "assets/sfx/swell-2.wav",
+    "swell-3": "assets/sfx/swell-3.wav",
+    "swell-4": "assets/sfx/swell-4.wav",
+    "boom-1": "assets/sfx/boom-1.wav",
+    "boom-2": "assets/sfx/boom-2.wav",
+    "boom-3": "assets/sfx/boom-3.wav",
+    "boom-4": "assets/sfx/boom-4.wav",
+    "ping-1": "assets/sfx/ping-1.wav",
+    "ping-2": "assets/sfx/ping-2.wav",
+    "ping-3": "assets/sfx/ping-3.wav",
+    "ping-4": "assets/sfx/ping-4.wav",
+    "reel-10": "assets/sfx/reel-10.wav",
+    "reel-18": "assets/sfx/reel-18.wav",
+    "reel-32": "assets/sfx/reel-32.wav",
+    "printer-10": "assets/sfx/printer-10.wav",
+    "printer-18": "assets/sfx/printer-18.wav",
+    "printer-32": "assets/sfx/printer-32.wav"
+  },
+  "beds": {
+    "a": {
+      "label": "Bass groove, 130 BPM",
+      "src": "assets/music/bed-a.m4a",
+      "gainDb": -13.5
+    },
+    "b": {
+      "label": "Kick and keys, 118 BPM",
+      "src": "assets/music/bed-b.m4a",
+      "gainDb": -14.4
+    },
+    "c": {
+      "label": "Pad, no beat",
+      "src": "assets/music/bed-c.m4a",
+      "gainDb": -14.4
+    }
+  },
+  "preview": {
+    "video": "preview.webm",
+    "poster": "preview.webp"
+  },
+  "timing": {
+    "sceneLead": 0
+  },
+  "layouts": {
+    "split": {
+      "label": "Split",
+      "presenter": "panel",
+      "slots": {
+        "graphic": [
+          "counter",
+          "big-number",
+          "value-bar",
+          "item-set",
+          "name-reveal",
+          "stamp",
+          "prop",
+          "route",
+          "window",
+          "prompt",
+          "picker",
+          "item-stack",
+          "before-after",
+          "file-drop",
+          "capture",
+          "code-window",
+          "checklist",
+          "key-caps",
+          "title-card"
+        ]
+      }
+    },
+    "full": {
+      "label": "Full picture",
+      "presenter": "none",
+      "slots": {
+        "graphic": [
+          "counter",
+          "big-number",
+          "value-bar",
+          "item-set",
+          "name-reveal",
+          "stamp",
+          "prop",
+          "route",
+          "window",
+          "prompt",
+          "picker",
+          "item-stack",
+          "before-after",
+          "file-drop",
+          "capture",
+          "code-window",
+          "checklist",
+          "key-caps",
+          "title-card"
+        ]
+      }
+    },
+    "speaker": {
+      "label": "Speaker",
+      "presenter": "full",
+      "slots": {
+        "keyword": [
+          "comment-keyword"
+        ]
+      }
+    }
+  },
+  "elements": {
+    "comment-keyword": {
+      "label": "Comment keyword",
+      "slots": [
+        "keyword"
+      ],
+      "params": {
+        "word": "word",
+        "text": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 12,
+          "maxWords": 1
+        }
+      },
+      "beats": {}
+    },
+    "counter": {
+      "label": "Counter",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "to": "number",
+        "from": {
+          "type": "number",
+          "optional": true
+        },
+        "word": {
+          "type": "word",
+          "optional": true
+        },
+        "prefix": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 2
+        },
+        "suffix": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 8
+        },
+        "label": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 22,
+          "maxWords": 4
+        },
+        "plate": "enum?:pale|white|dark|navy|warm|teal|field",
+        "field": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        }
+      },
+      "beats": {}
+    },
+    "big-number": {
+      "label": "Big number",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "text": {
+          "type": "string",
+          "maxChars": 6,
+          "maxWords": 1
+        },
+        "suffix": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 4
+        },
+        "label": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 22,
+          "maxWords": 4
+        },
+        "word": {
+          "type": "word",
+          "optional": true
+        },
+        "look": "enum?:solid|type|outline|image",
+        "asset": "asset?",
+        "color": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        },
+        "plate": "enum?:pale|white|dark|navy|warm|teal|field",
+        "field": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        }
+      },
+      "beats": {
+        "change": {
+          "text": {
+            "type": "string",
+            "maxChars": 6,
+            "maxWords": 1
+          },
+          "color": {
+            "type": "string",
+            "optional": true,
+            "maxChars": 7
+          }
+        }
+      }
+    },
+    "value-bar": {
+      "label": "Value bars",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "kind": "enum?:usage|score",
+        "title": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 24,
+          "maxWords": 4
+        },
+        "rows": {
+          "type": "array",
+          "min": 1,
+          "max": 5,
+          "of": {
+            "label": {
+              "type": "string",
+              "maxChars": 22,
+              "maxWords": 4
+            },
+            "to": "number",
+            "from": {
+              "type": "number",
+              "optional": true
+            }
+          }
+        },
+        "max": {
+          "type": "number",
+          "optional": true,
+          "min": 1
+        },
+        "suffix": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 8
+        },
+        "total": {
+          "type": "number",
+          "optional": true
+        },
+        "totalLabel": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 14,
+          "maxWords": 2
+        },
+        "color": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        },
+        "plate": "enum?:pale|white|dark|navy|warm|teal|field",
+        "field": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        }
+      },
+      "beats": {
+        "fill": {
+          "row": {
+            "type": "number",
+            "optional": true,
+            "min": 0,
+            "max": 4
+          },
+          "to": "number"
+        },
+        "flag": {
+          "text": {
+            "type": "string",
+            "maxChars": 24,
+            "maxWords": 4
+          }
+        }
+      }
+    },
+    "item-set": {
+      "label": "Item set",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "kind": "enum?:drop|segments|grid",
+        "items": {
+          "type": "array",
+          "optional": true,
+          "min": 1,
+          "max": 6,
+          "of": {
+            "label": {
+              "type": "string",
+              "maxChars": 10,
+              "maxWords": 2
+            },
+            "sub": {
+              "type": "string",
+              "optional": true,
+              "maxChars": 14,
+              "maxWords": 3
+            }
+          }
+        },
+        "count": {
+          "type": "number",
+          "optional": true,
+          "min": 1,
+          "max": 56
+        },
+        "of": {
+          "type": "number",
+          "optional": true,
+          "min": 1,
+          "max": 56
+        },
+        "label": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 10,
+          "maxWords": 2
+        },
+        "color": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        },
+        "plate": "enum?:pale|white|dark|navy|warm|teal|field",
+        "field": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        }
+      },
+      "beats": {
+        "add": {}
+      }
+    },
+    "name-reveal": {
+      "label": "Name reveal",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "name": {
+          "type": "string",
+          "maxChars": 12,
+          "maxWords": 2
+        },
+        "how": "enum?:flip|focus|type",
+        "word": {
+          "type": "word",
+          "optional": true
+        },
+        "mark": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 2
+        },
+        "asset": "asset?",
+        "sub": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 26,
+          "maxWords": 5
+        },
+        "color": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        },
+        "plate": "enum?:pale|white|dark|navy|warm|teal|field",
+        "field": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        }
+      },
+      "beats": {}
+    },
+    "stamp": {
+      "label": "Stamp",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "kind": "enum?:stamp|tick|cross",
+        "text": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 9,
+          "maxWords": 2
+        },
+        "word": {
+          "type": "word",
+          "optional": true
+        },
+        "title": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 18,
+          "maxWords": 3
+        },
+        "lines": {
+          "type": "array",
+          "optional": true,
+          "min": 1,
+          "max": 4,
+          "of": {
+            "label": {
+              "type": "string",
+              "maxChars": 14,
+              "maxWords": 3
+            },
+            "value": {
+              "type": "string",
+              "maxChars": 8
+            }
+          }
+        },
+        "asset": "asset?",
+        "color": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        },
+        "plate": "enum?:pale|white|dark|navy|warm|teal|field",
+        "field": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        }
+      },
+      "beats": {}
+    },
+    "prop": {
+      "label": "Prop",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "name": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 24
+        },
+        "src": "asset?",
+        "size": "enum?:s|m|l",
+        "flat": "boolean?",
+        "plate": "enum?:pale|white|dark|navy|warm|teal|field",
+        "field": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        }
+      },
+      "beats": {
+        "show": {
+          "part": "string",
+          "how": "enum?:pop|slide|grow|land|fade",
+          "from": "enum?:up|down|left|right",
+          "dist": "number?"
+        },
+        "hide": {
+          "part": "string",
+          "how": "enum?:fade|pop|away"
+        },
+        "move": {
+          "part": "string",
+          "dx": "number?",
+          "dy": "number?",
+          "scale": "number?",
+          "sx": "number?",
+          "sy": "number?",
+          "rotate": "number?",
+          "ease": "enum?:out|inOut|slow"
+        },
+        "fill": {
+          "part": "string",
+          "to": {
+            "type": "number",
+            "min": 0,
+            "max": 1
+          },
+          "from": {
+            "type": "number",
+            "min": 0,
+            "max": 1,
+            "optional": true
+          },
+          "axis": "enum?:x|y"
+        },
+        "draw": {
+          "part": "string",
+          "to": {
+            "type": "number",
+            "min": 0,
+            "max": 1,
+            "optional": true
+          },
+          "ease": "enum?:out|sweep"
+        },
+        "spin": {
+          "part": "string",
+          "stop": "boolean?",
+          "rate": {
+            "type": "number",
+            "min": -4,
+            "max": 4,
+            "optional": true
+          }
+        },
+        "swap": {
+          "part": "string",
+          "to": "string"
+        },
+        "recolor": {
+          "part": "string",
+          "color": {
+            "type": "string",
+            "maxChars": 7
+          }
+        },
+        "pulse": {
+          "part": "string"
+        },
+        "badge": {
+          "kind": "enum:check|cross|text",
+          "text": {
+            "type": "string",
+            "optional": true,
+            "maxChars": 10
+          },
+          "big": "boolean?",
+          "x": "number?",
+          "y": "number?",
+          "part": "string?"
+        }
+      }
+    },
+    "route": {
+      "label": "Route",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "kind": "enum?:route|chain",
+        "nodes": {
+          "type": "array",
+          "min": 2,
+          "max": 5,
+          "of": {
+            "label": {
+              "type": "string",
+              "maxChars": 16,
+              "maxWords": 3
+            }
+          }
+        },
+        "token": "boolean?",
+        "color": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        },
+        "plate": "enum?:pale|white|dark|navy|warm|teal|field",
+        "field": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        }
+      },
+      "beats": {
+        "next": {}
+      }
+    },
+    "window": {
+      "label": "Window",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "kind": "enum?:window|card",
+        "title": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 30
+        },
+        "heading": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 13
+        },
+        "status": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 38
+        },
+        "look": "enum?:rows|buttons|tiles",
+        "items": {
+          "type": "array",
+          "min": 1,
+          "max": 4,
+          "of": {
+            "label": {
+              "type": "string",
+              "maxChars": 16,
+              "maxWords": 3
+            },
+            "sub": {
+              "type": "string",
+              "optional": true,
+              "maxChars": 28
+            },
+            "after": {
+              "type": "string",
+              "optional": true,
+              "maxChars": 14
+            },
+            "icon": "enum?:bolt|leaf|cube|globe|star|letter"
+          }
+        },
+        "selected": {
+          "type": "number",
+          "optional": true,
+          "min": 0,
+          "max": 3
+        },
+        "theme": "enum?:light|dark",
+        "accent": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        },
+        "plate": "enum?:pale|white|dark|navy|warm|teal|field",
+        "field": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        }
+      },
+      "beats": {
+        "click": {
+          "item": {
+            "type": "number",
+            "min": 0,
+            "max": 3
+          },
+          "status": {
+            "type": "string",
+            "optional": true,
+            "maxChars": 38
+          }
+        },
+        "hover": {
+          "item": {
+            "type": "number",
+            "min": 0,
+            "max": 3
+          }
+        },
+        "status": {
+          "text": {
+            "type": "string",
+            "maxChars": 38
+          }
+        },
+        "result": {
+          "text": {
+            "type": "string",
+            "maxChars": 14
+          }
+        }
+      }
+    },
+    "prompt": {
+      "label": "Prompt",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "text": {
+          "type": "string",
+          "maxChars": 48
+        },
+        "chip": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 12
+        },
+        "label": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 16
+        },
+        "answer": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 140
+        },
+        "kind": "enum?:card|window",
+        "title": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 30
+        },
+        "heading": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 26
+        },
+        "pointer": "boolean?",
+        "accent": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        },
+        "plate": "enum?:pale|white|dark|navy|warm|teal|field",
+        "field": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        }
+      },
+      "beats": {
+        "type": {},
+        "send": {},
+        "answer": {}
+      }
+    },
+    "picker": {
+      "label": "Picker",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "options": {
+          "type": "array",
+          "min": 2,
+          "max": 5,
+          "of": {
+            "label": {
+              "type": "string",
+              "maxChars": 16
+            },
+            "sub": {
+              "type": "string",
+              "optional": true,
+              "maxChars": 26
+            },
+            "icon": "enum?:bolt|leaf|cube|globe|star|letter"
+          }
+        },
+        "prompt": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 40
+        },
+        "selected": {
+          "type": "number",
+          "optional": true,
+          "min": 0,
+          "max": 4
+        },
+        "pointer": "boolean?",
+        "accent": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        },
+        "plate": "enum?:pale|white|dark|navy|warm|teal|field",
+        "field": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        }
+      },
+      "beats": {
+        "open": {},
+        "pick": {
+          "item": {
+            "type": "number",
+            "min": 0,
+            "max": 4
+          }
+        }
+      }
+    },
+    "item-stack": {
+      "label": "Items stack in",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "items": {
+          "type": "array",
+          "min": 2,
+          "max": 6,
+          "of": {
+            "title": {
+              "type": "string",
+              "maxChars": 26
+            },
+            "meta": {
+              "type": "string",
+              "optional": true,
+              "maxChars": 40
+            },
+            "tag": {
+              "type": "string",
+              "optional": true,
+              "maxChars": 10
+            }
+          }
+        },
+        "start": {
+          "type": "number",
+          "optional": true,
+          "min": 0,
+          "max": 5
+        },
+        "from": "enum?:alternate|right|left|below|grow",
+        "accent": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        },
+        "plate": "enum?:pale|white|dark|navy|warm|teal|field",
+        "field": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        }
+      },
+      "beats": {
+        "add": {},
+        "mark": {
+          "item": {
+            "type": "number",
+            "optional": true,
+            "min": 1,
+            "max": 6
+          }
+        }
+      }
+    },
+    "before-after": {
+      "label": "Before / after wipe",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "before": "asset?",
+        "after": "asset?",
+        "title": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 30,
+          "maxWords": 6
+        },
+        "frame": "enum?:card|window",
+        "url": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 28
+        },
+        "accent": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        },
+        "front": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        },
+        "plate": "enum?:pale|white|dark|navy|warm|teal|field",
+        "field": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        }
+      },
+      "beats": {
+        "wipe": {
+          "frames": {
+            "type": "number",
+            "optional": true,
+            "min": 5,
+            "max": 30
+          },
+          "from": "enum?:left|right|top|bottom"
+        }
+      }
+    },
+    "file-drop": {
+      "label": "File drop",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "items": {
+          "type": "array",
+          "min": 1,
+          "max": 4,
+          "of": {
+            "label": {
+              "type": "string",
+              "maxChars": 14
+            },
+            "kind": "enum?:file|image|doc|folder|link",
+            "meta": {
+              "type": "string",
+              "optional": true,
+              "maxChars": 12
+            }
+          }
+        },
+        "target": "enum?:composer|slot",
+        "placeholder": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 30
+        },
+        "accent": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        },
+        "plate": "enum?:pale|white|dark|navy|warm|teal|field",
+        "field": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        }
+      },
+      "beats": {
+        "drop": {
+          "item": {
+            "type": "number",
+            "optional": true,
+            "min": 0,
+            "max": 3
+          }
+        }
+      }
+    },
+    "capture": {
+      "label": "Captured page",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "src": "asset",
+        "url": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 28
+        },
+        "top": {
+          "type": "number",
+          "optional": true,
+          "min": 0
+        },
+        "dark": "boolean?",
+        "accent": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        },
+        "plate": "enum?:pale|white|dark|navy|warm|teal|field",
+        "field": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        }
+      },
+      "beats": {
+        "scroll": {
+          "to": {
+            "type": "number",
+            "min": 0
+          },
+          "frames": {
+            "type": "number",
+            "optional": true,
+            "min": 11,
+            "max": 42
+          }
+        },
+        "outline": {
+          "find": {
+            "type": "string",
+            "optional": true,
+            "maxChars": 60
+          },
+          "x": "number?",
+          "y": "number?",
+          "w": "number?",
+          "h": "number?",
+          "shape": "enum?:box|ellipse"
+        },
+        "highlight": {
+          "find": {
+            "type": "string",
+            "optional": true,
+            "maxChars": 60
+          },
+          "x": "number?",
+          "y": "number?",
+          "w": "number?",
+          "h": "number?"
+        },
+        "arrow": {
+          "find": {
+            "type": "string",
+            "optional": true,
+            "maxChars": 60
+          },
+          "x": "number?",
+          "y": "number?",
+          "w": "number?",
+          "h": "number?"
+        }
+      }
+    },
+    "code-window": {
+      "label": "Code window",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "lines": {
+          "type": "array",
+          "min": 1,
+          "max": 40,
+          "of": {
+            "type": "string",
+            "maxChars": 50
+          }
+        },
+        "file": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 30
+        },
+        "kind": "enum?:editor|terminal",
+        "pace": "enum?:lines|stream",
+        "accent": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        },
+        "plate": "enum?:pale|white|dark|navy|warm|teal|field",
+        "field": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        }
+      },
+      "beats": {
+        "run": {},
+        "mark": {
+          "line": {
+            "type": "number",
+            "min": 1,
+            "max": 40
+          }
+        }
+      }
+    },
+    "checklist": {
+      "label": "Checklist",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "items": {
+          "type": "array",
+          "min": 2,
+          "max": 6,
+          "of": {
+            "label": {
+              "type": "string",
+              "maxChars": 26
+            }
+          }
+        },
+        "heading": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 22
+        },
+        "kind": "enum?:card|window",
+        "title": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 30
+        },
+        "reveal": "boolean?",
+        "accent": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        },
+        "plate": "enum?:pale|white|dark|navy|warm|teal|field",
+        "field": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        }
+      },
+      "beats": {
+        "tick": {
+          "item": {
+            "type": "number",
+            "optional": true,
+            "min": 0,
+            "max": 5
+          }
+        }
+      }
+    },
+    "key-caps": {
+      "label": "Key caps press",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "keys": {
+          "type": "array",
+          "min": 1,
+          "max": 3,
+          "of": {
+            "type": "string",
+            "maxChars": 6
+          }
+        },
+        "text": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 34
+        },
+        "result": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 120
+        },
+        "accent": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        },
+        "plate": "enum?:pale|white|dark|navy|warm|teal|field",
+        "field": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        }
+      },
+      "beats": {
+        "press": {},
+        "result": {}
+      }
+    },
+    "title-card": {
+      "label": "Title card",
+      "slots": [
+        "graphic"
+      ],
+      "params": {
+        "text": {
+          "type": "string",
+          "maxChars": 40,
+          "maxWords": 7
+        },
+        "kind": "enum?:title|sign",
+        "mark": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 2
+        },
+        "accent": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        },
+        "plate": "enum?:pale|white|dark|navy|warm|teal|field",
+        "field": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 7
+        }
+      },
+      "beats": {
+        "word": {}
+      }
+    }
+  }
+}

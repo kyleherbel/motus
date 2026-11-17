@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1184" data-shadow="rest">
+  <!-- Prop Room library prop: a steel funnel with things dropping in and one coming out (props/STANDARD.md).
+       Chrome per [C24]: cool silver, one soft vertical highlight band.
+       Parts:
+         in1..in3  pieces above the mouth, in front of the dark inside, behind the cone wall
+                   (move dy 330 ease inOut drops one in; hide)
+         mouth     the dark inside and the rim's back half, static
+         cone      the funnel wall, rim front and spout, static                     (pulse)
+         out       the result under the spout, start hidden                          (show slide from up dist 90; badge) -->
+  <defs>
+    <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#9DA3AA"/><stop offset="0.16" stop-color="#E9ECEF"/><stop offset="0.3" stop-color="#F7F8FA"/>
+      <stop offset="0.48" stop-color="#D6DAE0"/><stop offset="0.78" stop-color="#B5BAC1"/><stop offset="1" stop-color="#8F959B"/>
+    </linearGradient>
+    <linearGradient id="coneLight" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.18"/><stop offset="0.6" stop-color="#FFFFFF" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.12"/></linearGradient>
+    <radialGradient id="inside" cx="0.5" cy="0.2" r="0.8"><stop offset="0" stop-color="#5A6069"/><stop offset="1" stop-color="#22252B"/></radialGradient>
+    <linearGradient id="rimG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#B5BAC1"/></linearGradient>
+    <radialGradient id="ballA" cx="0.35" cy="0.3" r="0.75"><stop offset="0" stop-color="#FFE2A0"/><stop offset="1" stop-color="#E09A2C"/></radialGradient>
+    <radialGradient id="ballB" cx="0.35" cy="0.3" r="0.75"><stop offset="0" stop-color="#A9CBFF"/><stop offset="1" stop-color="#2A64D6"/></radialGradient>
+    <radialGradient id="ballC" cx="0.35" cy="0.3" r="0.75"><stop offset="0" stop-color="#FFC0B3"/><stop offset="1" stop-color="#E0503F"/></radialGradient>
+    <linearGradient id="gemG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7FE3A6"/><stop offset="1" stop-color="#13904C"/></linearGradient>
+  </defs>
+
+  <g id="mouth">
+    <ellipse cx="500" cy="320" rx="456" ry="84" fill="url(#inside)"/>
+    <path d="M44 320 A456 84 0 0 1 956 320" fill="none" stroke="url(#rimG)" stroke-width="22"/>
+  </g>
+
+  <g id="in1"><circle cx="330" cy="150" r="70" fill="url(#ballA)"/><ellipse cx="305" cy="118" rx="22" ry="14" fill="#FFFFFF" opacity="0.55"/></g>
+  <g id="in2"><rect x="436" y="40" width="128" height="128" rx="30" fill="url(#ballB)" transform="rotate(12 500 104)"/><rect x="458" y="60" width="44" height="18" rx="9" fill="#FFFFFF" opacity="0.45" transform="rotate(12 500 104)"/></g>
+  <g id="in3"><circle cx="680" cy="170" r="62" fill="url(#ballC)"/><ellipse cx="658" cy="142" rx="20" ry="12" fill="#FFFFFF" opacity="0.55"/></g>
+
+  <g id="cone">
+    <path d="M44 320 A456 84 0 0 0 956 320 L590 790 V950 C590 962 580 972 568 972 H432 C420 972 410 962 410 950 V790 Z" fill="url(#chrome)"/>
+    <path d="M44 320 A456 84 0 0 0 956 320 L590 790 V950 C590 962 580 972 568 972 H432 C420 972 410 962 410 950 V790 Z" fill="url(#coneLight)"/>
+    <path d="M44 320 A456 84 0 0 0 956 320" fill="none" stroke="url(#rimG)" stroke-width="22"/>
+    <path d="M60 334 A440 76 0 0 0 940 334" fill="none" stroke="#000" stroke-opacity="0.10" stroke-width="8"/>
+    <path d="M250 470 L430 720" stroke="#FFFFFF" stroke-opacity="0.75" stroke-width="18" stroke-linecap="round"/>
+    <rect x="410" y="790" width="180" height="14" fill="#000" opacity="0.08"/>
+    <path d="M448 820 V940" stroke="#FFFFFF" stroke-opacity="0.6" stroke-width="10" stroke-linecap="round"/>
+  </g>
+
+  <g id="out" visibility="hidden">
+    <path d="M500 984 L630 1050 L500 1180 L370 1050 Z" fill="url(#gemG)"/>
+    <path d="M500 984 L630 1050 H370 Z" fill="#FFFFFF" opacity="0.4"/>
+    <path d="M370 1050 L500 1180 L450 1050 Z" fill="#FFFFFF" opacity="0.15"/>
+  </g>
+</svg>

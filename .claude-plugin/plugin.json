@@ -1,7 +1,7 @@
 {
   "name": "motus",
   "displayName": "Motus",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Edit talking-head 9:16 video in a chosen editing style: transcribe, understand, plan section by section, review options in a local Studio, render the final cut.",
   "author": {
     "name": "kyleherbel"

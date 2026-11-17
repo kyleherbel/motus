@@ -1,0 +1,518 @@
+{
+ "motus": 1,
+ "style": "prop-room",
+ "captions": {},
+ "scenes": [
+  {
+   "id": "s01",
+   "words": [
+    0,
+    13
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "ui-b check",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "before-after",
+       "key": "ba1",
+       "before": "assets/ui-b-before.png",
+       "after": "assets/ui-b-after.png",
+       "plate": "pale",
+       "beats": [
+        {
+         "at": 7,
+         "do": "wipe",
+         "frames": 28
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true,
+   "role": "hook"
+  },
+  {
+   "id": "s02",
+   "words": [
+    14,
+    16
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "ui-b check",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "title-card",
+       "key": "sign",
+       "kind": "sign",
+       "text": "Echo Desk",
+       "plate": "white",
+       "beats": [
+        {
+         "at": 15,
+         "do": "word"
+        },
+        {
+         "at": 16,
+         "do": "word"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true,
+   "role": "name"
+  },
+  {
+   "id": "s03",
+   "words": [
+    17,
+    20
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "ui-b check",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "title-card",
+       "key": "t1",
+       "text": "Getting started with reply rules",
+       "mark": "E",
+       "plate": "pale"
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s04",
+   "words": [
+    21,
+    45
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "ui-b check",
+     "layout": "full",
+     "slots": {
+      "graphic": {
+       "type": "item-stack",
+       "key": "st1",
+       "plate": "white",
+       "items": [
+        {
+         "title": "GUIDE",
+         "meta": "keyword, 214 replies",
+         "tag": "Hits"
+        },
+        {
+         "title": "TEMPLATE",
+         "meta": "keyword, 98 replies",
+         "tag": "New"
+        },
+        {
+         "title": "CHECKLIST",
+         "meta": "keyword, 61 replies",
+         "tag": "New"
+        },
+        {
+         "title": "PRESET PACK",
+         "meta": "keyword, 12 replies",
+         "tag": "Draft"
+        }
+       ],
+       "beats": [
+        {
+         "at": 25,
+         "do": "add"
+        },
+        {
+         "at": 33,
+         "do": "add"
+        },
+        {
+         "at": 36,
+         "do": "add"
+        },
+        {
+         "at": 25,
+         "do": "mark"
+        },
+        {
+         "at": 33,
+         "do": "mark"
+        },
+        {
+         "at": 36,
+         "do": "mark"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true,
+   "role": "step"
+  },
+  {
+   "id": "s05",
+   "words": [
+    46,
+    62
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "ui-b check",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "capture",
+       "key": "cap1",
+       "src": "assets/ui-b-page.png",
+       "url": "example.studio",
+       "plate": "pale",
+       "beats": [
+        {
+         "at": 50,
+         "do": "scroll",
+         "to": 2350
+        },
+        {
+         "at": 59,
+         "do": "outline",
+         "find": "Auto replies"
+        },
+        {
+         "at": 61,
+         "do": "highlight",
+         "find": "Auto replies"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true,
+   "role": "feature"
+  },
+  {
+   "id": "s06",
+   "words": [
+    63,
+    70
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "ui-b check",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "key-caps",
+       "key": "kc1",
+       "keys": [
+        "⌘",
+        "V"
+       ],
+       "text": "Send me the guide",
+       "result": "Thanks for the comment! Here is the guide you asked for, with the checklist inside.",
+       "plate": "pale",
+       "beats": [
+        {
+         "at": 65,
+         "do": "press"
+        },
+        {
+         "at": 68,
+         "do": "press"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true,
+   "role": "step"
+  },
+  {
+   "id": "s07",
+   "words": [
+    71,
+    92
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "ui-b check",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "code-window",
+       "key": "cw1",
+       "file": "keyword-match.ts",
+       "plate": "pale",
+       "lines": [
+        "export interface MatchResult {",
+        "  matched: boolean;",
+        "  keyword: string | null;",
+        "}",
+        "",
+        "export function matchKeyword(",
+        "  text: string,",
+        "  keywords: string[],",
+        "): MatchResult {",
+        "  const words = text.toLowerCase().split(' ');",
+        "  for (const k of keywords) {",
+        "    if (words.includes(k)) {",
+        "      return { matched: true, keyword: k };",
+        "    }",
+        "  }",
+        "  return { matched: false, keyword: null };",
+        "}"
+       ],
+       "beats": [
+        {
+         "at": 72,
+         "do": "run"
+        },
+        {
+         "at": 86,
+         "do": "mark",
+         "line": 12
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true,
+   "role": "feature"
+  },
+  {
+   "id": "s08",
+   "words": [
+    93,
+    105
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "ui-b check",
+     "layout": "full",
+     "slots": {
+      "graphic": {
+       "type": "before-after",
+       "key": "ba2",
+       "title": "A cheaper way to reply",
+       "frame": "window",
+       "url": "example.studio",
+       "plate": "navy",
+       "beats": [
+        {
+         "at": 97,
+         "do": "wipe"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true,
+   "role": "benefit"
+  },
+  {
+   "id": "s09",
+   "words": [
+    106,
+    131
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "ui-b check",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "item-stack",
+       "key": "st2",
+       "plate": "pale",
+       "from": "below",
+       "start": 0,
+       "items": [
+        {
+         "title": "Keyword match",
+         "meta": "any comment, any post"
+        },
+        {
+         "title": "Follow first",
+         "meta": "lock the link behind a follow"
+        },
+        {
+         "title": "Private reply",
+         "meta": "sent in a direct message"
+        },
+        {
+         "title": "Message flow",
+         "meta": "two or three steps"
+        }
+       ],
+       "beats": [
+        {
+         "at": 112,
+         "do": "add"
+        },
+        {
+         "at": 115,
+         "do": "add"
+        },
+        {
+         "at": 122,
+         "do": "add"
+        },
+        {
+         "at": 130,
+         "do": "add"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true,
+   "role": "feature"
+  },
+  {
+   "id": "s10",
+   "words": [
+    132,
+    152
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "ui-b check",
+     "layout": "full",
+     "slots": {
+      "graphic": {
+       "type": "code-window",
+       "key": "cw2",
+       "kind": "terminal",
+       "file": "zsh",
+       "plate": "dark",
+       "lines": [
+        "reply serve --keyword guide",
+        "Loading rules from rules.json",
+        "Watching comments on 3 posts",
+        "Matched GUIDE from @sam_k",
+        "  sent private reply (212 ms)",
+        "Matched GUIDE from @noor.d",
+        "  sent private reply (198 ms)",
+        "Ready."
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true,
+   "role": "feature"
+  },
+  {
+   "id": "s11",
+   "words": [
+    153,
+    163
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "ui-b check",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "capture",
+       "key": "cap2",
+       "src": "assets/ui-b-page.png",
+       "url": "example.studio",
+       "top": 3600,
+       "plate": "white",
+       "beats": [
+        {
+         "at": 155,
+         "do": "arrow",
+         "find": "Free plan"
+        },
+        {
+         "at": 158,
+         "do": "outline",
+         "find": "Free plan",
+         "shape": "ellipse"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true,
+   "role": "cta"
+  },
+  {
+   "id": "s12",
+   "words": [
+    164,
+    178
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "ui-b check",
+     "layout": "speaker",
+     "slots": {
+      "keyword": {
+       "type": "comment-keyword",
+       "key": "kw",
+       "word": 167
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true,
+   "role": "cta"
+  }
+ ]
+}

@@ -1,0 +1,70 @@
+{
+  "id": "prop-room",
+  "name": "Prop Room",
+  "version": "0.1.0",
+  "status": "beta",
+  "summary": "A tool explainer where the pictures do the explaining: a pale panel over the speaker, cut every two seconds to full-frame scenes in which code-drawn props and app windows act each sentence out, two-word captions on a dark plate across the seam, and a quoted serif keyword to close.",
+  "bestFor": [
+    "tool, skill and workflow explainers",
+    "\"here is what this does\" walkthroughs",
+    "solo talking-head reels of 30 to 45 seconds"
+  ],
+  "aspect": "9:16",
+  "footage": {
+    "wide": true
+  },
+  "look": {},
+  "emphasis": [],
+  "roles": [
+    "hook",
+    "name",
+    "problem",
+    "feature",
+    "step",
+    "number",
+    "benefit",
+    "pivot",
+    "cta"
+  ],
+  "sfx": {
+    "swell-1": "assets/sfx/swell-1.wav",
+    "swell-2": "assets/sfx/swell-2.wav",
+    "swell-3": "assets/sfx/swell-3.wav",
+    "swell-4": "assets/sfx/swell-4.wav",
+    "boom-1": "assets/sfx/boom-1.wav",
+    "boom-2": "assets/sfx/boom-2.wav",
+    "boom-3": "assets/sfx/boom-3.wav",
+    "boom-4": "assets/sfx/boom-4.wav",
+    "ping-1": "assets/sfx/ping-1.wav",
+    "ping-2": "assets/sfx/ping-2.wav",
+    "ping-3": "assets/sfx/ping-3.wav",
+    "ping-4": "assets/sfx/ping-4.wav",
+    "reel-10": "assets/sfx/reel-10.wav",
+    "reel-18": "assets/sfx/reel-18.wav",
+    "reel-32": "assets/sfx/reel-32.wav",
+    "printer-10": "assets/sfx/printer-10.wav",
+    "printer-18": "assets/sfx/printer-18.wav",
+    "printer-32": "assets/sfx/printer-32.wav"
+  },
+  "beds": {
+    "a": {
+      "label": "Bass groove, 130 BPM",
+      "src": "assets/music/bed-a.m4a",
+      "gainDb": -13.5
+    },
+    "b": {
+      "label": "Kick and keys, 118 BPM",
+      "src": "assets/music/bed-b.m4a",
+      "gainDb": -14.4
+    },
+    "c": {
+      "label": "Pad, no beat",
+      "src": "assets/music/bed-c.m4a",
+      "gainDb": -14.4
+    }
+  },
+  "preview": {
+    "video": "preview.webm",
+    "poster": "preview.webp"
+  }
+}

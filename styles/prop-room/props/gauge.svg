@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 620" data-shadow="rest">
+  <!-- Prop Room library prop: a dial gauge from red to green with a needle (props/STANDARD.md). White face in a
+       graphite case lit from the top.
+       Parts:
+         case      the half-round case and its foot, static
+         face      the dial face; data-base                                           (recolor, pulse)
+         zones     the four coloured arcs, red to green                               (draw ease sweep sweeps them on)
+         needle    data-pivot 500 540; rests at the low end                           (move rotate 150 ease inOut swings it high;
+                   move rotate 60 to the middle)
+         hub       centre cap, static -->
+  <defs>
+    <linearGradient id="caseG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3B4047"/><stop offset="1" stop-color="#1B1D21"/></linearGradient>
+    <linearGradient id="faceShade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0.08"/><stop offset="0.25" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.05"/></linearGradient>
+    <radialGradient id="hubG" cx="0.4" cy="0.35" r="0.7"><stop offset="0" stop-color="#4A5060"/><stop offset="1" stop-color="#15171B"/></radialGradient>
+  </defs>
+
+  <g id="case">
+    <path d="M20 560 A480 480 0 0 1 980 560 V580 C980 596 966 610 950 610 H50 C34 610 20 596 20 580 Z" fill="url(#caseG)"/>
+    <path d="M70 420 A440 440 0 0 1 930 420" fill="none" stroke="#FFFFFF" stroke-opacity="0.18" stroke-width="8" stroke-linecap="round"/>
+  </g>
+  <g id="face">
+    <path d="M60 560 A440 440 0 0 1 940 560 Z" fill="#FBFBFC" data-base=""/>
+    <path d="M60 560 A440 440 0 0 1 940 560 Z" fill="url(#faceShade)"/>
+  </g>
+  <g id="zones" fill="none" stroke-width="64">
+    <path d="M120.2 526.7 A380 380 0 0 1 222.1 280.8" stroke="#E5484D"/>
+    <path d="M240.8 262.1 A380 380 0 0 1 486.7 160.2" stroke="#ECAB44"/>
+    <path d="M513.3 160.2 A380 380 0 0 1 759.2 262.1" stroke="#7CCB9E"/>
+    <path d="M777.9 280.8 A380 380 0 0 1 879.8 526.7" stroke="#2BA37A"/>
+  </g>
+  <g stroke="#2A2D33" stroke-width="8" stroke-linecap="round" opacity="0.55">
+    <path d="M500 230 V256" transform="rotate(-60 500 540)"/><path d="M500 230 V256" transform="rotate(-30 500 540)"/><path d="M500 230 V256"/>
+    <path d="M500 230 V256" transform="rotate(30 500 540)"/><path d="M500 230 V256" transform="rotate(60 500 540)"/>
+  </g>
+  <g id="needle" data-pivot="500 540">
+    <g transform="rotate(-75 500 540)">
+      <path d="M486 540 L496 214 C497 206 503 206 504 214 L514 540 Z" fill="#000" opacity="0.12" transform="translate(6 8)"/>
+      <path d="M486 540 L496 214 C497 206 503 206 504 214 L514 540 Z" fill="#1C2026"/>
+    </g>
+  </g>
+  <g id="hub">
+    <circle cx="500" cy="540" r="44" fill="url(#hubG)"/>
+    <circle cx="490" cy="528" r="12" fill="#FFFFFF" opacity="0.35"/>
+  </g>
+</svg>

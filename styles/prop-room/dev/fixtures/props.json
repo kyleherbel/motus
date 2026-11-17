@@ -1,0 +1,1250 @@
+{
+ "motus": 1,
+ "style": "prop-room",
+ "captions": {},
+ "scenes": [
+  {
+   "id": "s01",
+   "words": [
+    0,
+    7
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "printer acts a clause out",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "prop",
+       "key": "printer",
+       "name": "printer",
+       "plate": "pale",
+       "beats": [
+        {
+         "at": 1,
+         "do": "move",
+         "part": "sheet",
+         "dy": 300,
+         "ease": "inOut"
+        },
+        {
+         "at": 3,
+         "do": "pulse",
+         "part": "led"
+        },
+        {
+         "at": 4,
+         "do": "move",
+         "part": "sheet2",
+         "dy": 300,
+         "ease": "inOut"
+        },
+        {
+         "at": 7,
+         "do": "badge",
+         "kind": "check",
+         "x": 760,
+         "y": 520
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true,
+   "role": "hook"
+  },
+  {
+   "id": "s02",
+   "words": [
+    8,
+    14
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "cloche acts a clause out",
+     "layout": "full",
+     "slots": {
+      "graphic": {
+       "type": "prop",
+       "key": "cloche",
+       "name": "cloche",
+       "plate": "white",
+       "beats": [
+        {
+         "at": 9,
+         "do": "hide",
+         "part": "lid",
+         "how": "away"
+        },
+        {
+         "at": 9,
+         "do": "show",
+         "part": "glow",
+         "how": "fade"
+        },
+        {
+         "at": 12,
+         "do": "pulse",
+         "part": "prize"
+        },
+        {
+         "at": 13,
+         "do": "badge",
+         "kind": "text",
+         "text": "new",
+         "part": "prize"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s03",
+   "words": [
+    15,
+    19
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "cassette acts a clause out",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "prop",
+       "key": "cassette",
+       "name": "cassette",
+       "plate": "dark",
+       "beats": [
+        {
+         "at": 16,
+         "do": "spin",
+         "part": "reelL"
+        },
+        {
+         "at": 16,
+         "do": "spin",
+         "part": "reelR",
+         "rate": 1.4
+        },
+        {
+         "at": 17,
+         "do": "pulse",
+         "part": "label"
+        },
+        {
+         "at": 17,
+         "do": "recolor",
+         "part": "label",
+         "color": "#357CEF"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s04",
+   "words": [
+    20,
+    25
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "tank acts a clause out",
+     "layout": "full",
+     "slots": {
+      "graphic": {
+       "type": "prop",
+       "key": "tank",
+       "name": "tank",
+       "plate": "pale",
+       "beats": [
+        {
+         "at": 20,
+         "do": "draw",
+         "part": "leakL"
+        },
+        {
+         "at": 20,
+         "do": "draw",
+         "part": "leakR"
+        },
+        {
+         "at": 21,
+         "do": "fill",
+         "part": "liquid",
+         "to": 0.25
+        },
+        {
+         "at": 23,
+         "do": "show",
+         "part": "plugL",
+         "how": "land"
+        },
+        {
+         "at": 23,
+         "do": "hide",
+         "part": "leakL"
+        },
+        {
+         "at": 24,
+         "do": "show",
+         "part": "plugR",
+         "how": "land"
+        },
+        {
+         "at": 24,
+         "do": "hide",
+         "part": "leakR"
+        },
+        {
+         "at": 25,
+         "do": "fill",
+         "part": "liquid",
+         "to": 0.9
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s05",
+   "words": [
+    26,
+    35
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "train acts a clause out",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "prop",
+       "key": "train",
+       "name": "train",
+       "plate": "white",
+       "beats": [
+        {
+         "at": 26,
+         "do": "move",
+         "part": "train",
+         "dx": 120,
+         "ease": "slow"
+        },
+        {
+         "at": 26,
+         "do": "spin",
+         "part": "wheel1"
+        },
+        {
+         "at": 26,
+         "do": "spin",
+         "part": "wheel2"
+        },
+        {
+         "at": 26,
+         "do": "spin",
+         "part": "wheel3"
+        },
+        {
+         "at": 26,
+         "do": "spin",
+         "part": "wheel4"
+        },
+        {
+         "at": 30,
+         "do": "move",
+         "part": "lever",
+         "rotate": 50
+        },
+        {
+         "at": 31,
+         "do": "draw",
+         "part": "branch"
+        },
+        {
+         "at": 32,
+         "do": "recolor",
+         "part": "lamp",
+         "color": "#13904C"
+        },
+        {
+         "at": 33,
+         "do": "move",
+         "part": "train",
+         "dx": 440,
+         "dy": 64,
+         "rotate": 17.2,
+         "ease": "slow"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s06",
+   "words": [
+    36,
+    47
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "gate acts a clause out",
+     "layout": "full",
+     "slots": {
+      "graphic": {
+       "type": "prop",
+       "key": "gate",
+       "name": "gate",
+       "plate": "pale",
+       "beats": [
+        {
+         "at": 36,
+         "do": "move",
+         "part": "bug1",
+         "dy": -800,
+         "ease": "slow"
+        },
+        {
+         "at": 38,
+         "do": "show",
+         "part": "bars2",
+         "how": "pop"
+        },
+        {
+         "at": 41,
+         "do": "move",
+         "part": "bug2",
+         "dy": -70
+        },
+        {
+         "at": 43,
+         "do": "badge",
+         "kind": "cross",
+         "part": "bug2"
+        },
+        {
+         "at": 45,
+         "do": "show",
+         "part": "bars3",
+         "how": "pop"
+        },
+        {
+         "at": 46,
+         "do": "recolor",
+         "part": "lamp",
+         "color": "#13904C"
+        },
+        {
+         "at": 46,
+         "do": "pulse",
+         "part": "lamp"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s07",
+   "words": [
+    48,
+    58
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "clock acts a clause out",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "prop",
+       "key": "clock",
+       "name": "clock",
+       "plate": "navy",
+       "beats": [
+        {
+         "at": 48,
+         "do": "draw",
+         "part": "wedge",
+         "ease": "sweep"
+        },
+        {
+         "at": 48,
+         "do": "spin",
+         "part": "minuteHand"
+        },
+        {
+         "at": 48,
+         "do": "spin",
+         "part": "hourHand",
+         "rate": 0.083
+        },
+        {
+         "at": 56,
+         "do": "recolor",
+         "part": "face",
+         "color": "#CEE6E5"
+        },
+        {
+         "at": 56,
+         "do": "hide",
+         "part": "wedge",
+         "how": "pop"
+        },
+        {
+         "at": 56,
+         "do": "pulse",
+         "part": "rim"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s08",
+   "words": [
+    59,
+    65
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "envelope acts a clause out",
+     "layout": "full",
+     "slots": {
+      "graphic": {
+       "type": "prop",
+       "key": "envelope",
+       "name": "envelope",
+       "plate": "warm",
+       "beats": [
+        {
+         "at": 60,
+         "do": "move",
+         "part": "flap",
+         "sy": -1,
+         "ease": "inOut"
+        },
+        {
+         "at": 62,
+         "do": "move",
+         "part": "letter",
+         "dy": -330,
+         "ease": "slow"
+        },
+        {
+         "at": 65,
+         "do": "badge",
+         "kind": "check",
+         "part": "letter"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s09",
+   "words": [
+    66,
+    72
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "iceberg acts a clause out",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "prop",
+       "key": "iceberg",
+       "name": "iceberg",
+       "plate": "pale",
+       "beats": [
+        {
+         "at": 66,
+         "do": "pulse",
+         "part": "tip"
+        },
+        {
+         "at": 67,
+         "do": "fill",
+         "part": "water",
+         "to": 0.3
+        },
+        {
+         "at": 70,
+         "do": "show",
+         "part": "item1",
+         "how": "grow"
+        },
+        {
+         "at": 71,
+         "do": "show",
+         "part": "item2",
+         "how": "grow"
+        },
+        {
+         "at": 72,
+         "do": "show",
+         "part": "item3",
+         "how": "grow"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s10",
+   "words": [
+    73,
+    79
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "door acts a clause out",
+     "layout": "full",
+     "slots": {
+      "graphic": {
+       "type": "prop",
+       "key": "door",
+       "name": "door",
+       "plate": "pale",
+       "beats": [
+        {
+         "at": 74,
+         "do": "move",
+         "part": "leaf",
+         "sx": 0.14,
+         "ease": "inOut"
+        },
+        {
+         "at": 74,
+         "do": "show",
+         "part": "light",
+         "how": "fade"
+        },
+        {
+         "at": 76,
+         "do": "show",
+         "part": "rays",
+         "how": "fade"
+        },
+        {
+         "at": 78,
+         "do": "pulse",
+         "part": "sign"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s11",
+   "words": [
+    80,
+    87
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "bulb acts a clause out",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "prop",
+       "key": "bulb",
+       "name": "bulb",
+       "plate": "dark",
+       "beats": [
+        {
+         "at": 81,
+         "do": "swap",
+         "part": "glass",
+         "to": "lit"
+        },
+        {
+         "at": 82,
+         "do": "show",
+         "part": "rays",
+         "how": "fade"
+        },
+        {
+         "at": 86,
+         "do": "pulse",
+         "part": "lit"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s12",
+   "words": [
+    88,
+    92
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "battery acts a clause out",
+     "layout": "full",
+     "slots": {
+      "graphic": {
+       "type": "prop",
+       "key": "battery",
+       "name": "battery",
+       "plate": "pale",
+       "beats": [
+        {
+         "at": 88,
+         "do": "fill",
+         "part": "charge",
+         "to": 1,
+         "axis": "x",
+         "from": 0.12
+        },
+        {
+         "at": 90,
+         "do": "show",
+         "part": "bolt",
+         "how": "grow"
+        },
+        {
+         "at": 92,
+         "do": "pulse",
+         "part": "case"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s13",
+   "words": [
+    93,
+    99
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "folder acts a clause out",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "prop",
+       "key": "folder",
+       "name": "folder",
+       "plate": "teal",
+       "beats": [
+        {
+         "at": 96,
+         "do": "show",
+         "part": "file1",
+         "how": "slide",
+         "from": "up",
+         "dist": 380
+        },
+        {
+         "at": 98,
+         "do": "show",
+         "part": "file2",
+         "how": "slide",
+         "from": "up",
+         "dist": 380
+        },
+        {
+         "at": 99,
+         "do": "show",
+         "part": "file3",
+         "how": "slide",
+         "from": "up",
+         "dist": 380
+        },
+        {
+         "at": 99,
+         "do": "pulse",
+         "part": "front"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s14",
+   "words": [
+    100,
+    104
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "funnel acts a clause out",
+     "layout": "full",
+     "slots": {
+      "graphic": {
+       "type": "prop",
+       "key": "funnel",
+       "name": "funnel",
+       "plate": "white",
+       "beats": [
+        {
+         "at": 101,
+         "do": "move",
+         "part": "in1",
+         "dy": 330,
+         "ease": "inOut"
+        },
+        {
+         "at": 102,
+         "do": "move",
+         "part": "in2",
+         "dy": 360,
+         "ease": "inOut"
+        },
+        {
+         "at": 103,
+         "do": "move",
+         "part": "in3",
+         "dy": 330,
+         "ease": "inOut"
+        },
+        {
+         "at": 104,
+         "do": "show",
+         "part": "out",
+         "how": "slide",
+         "from": "up",
+         "dist": 90
+        },
+        {
+         "at": 104,
+         "do": "badge",
+         "kind": "check",
+         "part": "out"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s15",
+   "words": [
+    105,
+    112
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "magnet acts a clause out",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "prop",
+       "key": "magnet",
+       "name": "magnet",
+       "plate": "pale",
+       "beats": [
+        {
+         "at": 105,
+         "do": "draw",
+         "part": "field"
+        },
+        {
+         "at": 106,
+         "do": "move",
+         "part": "item1",
+         "dy": -140
+        },
+        {
+         "at": 108,
+         "do": "move",
+         "part": "item3",
+         "dy": -140
+        },
+        {
+         "at": 109,
+         "do": "move",
+         "part": "item2",
+         "dy": -190
+        },
+        {
+         "at": 112,
+         "do": "pulse",
+         "part": "magnet"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s16",
+   "words": [
+    113,
+    116
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "trophy acts a clause out",
+     "layout": "full",
+     "slots": {
+      "graphic": {
+       "type": "prop",
+       "key": "trophy",
+       "name": "trophy",
+       "plate": "warm",
+       "beats": [
+        {
+         "at": 113,
+         "do": "show",
+         "part": "spark1",
+         "how": "grow"
+        },
+        {
+         "at": 114,
+         "do": "move",
+         "part": "shine",
+         "dx": 760,
+         "ease": "inOut"
+        },
+        {
+         "at": 114,
+         "do": "show",
+         "part": "spark2",
+         "how": "grow"
+        },
+        {
+         "at": 115,
+         "do": "show",
+         "part": "spark3",
+         "how": "grow"
+        },
+        {
+         "at": 116,
+         "do": "pulse",
+         "part": "cup"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s17",
+   "words": [
+    117,
+    123
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "rocket acts a clause out",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "prop",
+       "key": "rocket",
+       "name": "rocket",
+       "plate": "navy",
+       "beats": [
+        {
+         "at": 118,
+         "do": "show",
+         "part": "flame",
+         "how": "grow"
+        },
+        {
+         "at": 118,
+         "do": "show",
+         "part": "smoke",
+         "how": "grow"
+        },
+        {
+         "at": 119,
+         "do": "move",
+         "part": "rocket",
+         "dy": -900,
+         "ease": "slow"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s18",
+   "words": [
+    124,
+    129
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "laptop acts a clause out",
+     "layout": "full",
+     "slots": {
+      "graphic": {
+       "type": "prop",
+       "key": "laptop",
+       "name": "laptop",
+       "plate": "pale",
+       "beats": [
+        {
+         "at": 125,
+         "do": "move",
+         "part": "cursor",
+         "dx": -150,
+         "dy": 40,
+         "ease": "inOut"
+        },
+        {
+         "at": 125,
+         "do": "pulse",
+         "part": "cursor"
+        },
+        {
+         "at": 127,
+         "do": "swap",
+         "part": "screenA",
+         "to": "screenB"
+        },
+        {
+         "at": 128,
+         "do": "fill",
+         "part": "bar",
+         "to": 1,
+         "from": 0.3
+        },
+        {
+         "at": 129,
+         "do": "badge",
+         "kind": "check",
+         "big": true,
+         "x": 500,
+         "y": 290
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s19",
+   "words": [
+    130,
+    134
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "phone acts a clause out",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "prop",
+       "key": "phone",
+       "name": "phone",
+       "plate": "white",
+       "beats": [
+        {
+         "at": 131,
+         "do": "show",
+         "part": "notif1",
+         "how": "slide",
+         "from": "up",
+         "dist": 160
+        },
+        {
+         "at": 132,
+         "do": "show",
+         "part": "notif2",
+         "how": "slide",
+         "from": "up",
+         "dist": 160
+        },
+        {
+         "at": 133,
+         "do": "show",
+         "part": "notif3",
+         "how": "slide",
+         "from": "up",
+         "dist": 160
+        },
+        {
+         "at": 133,
+         "do": "badge",
+         "kind": "text",
+         "text": "3 new",
+         "x": 430,
+         "y": 120
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s20",
+   "words": [
+    135,
+    143
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "padlock acts a clause out",
+     "layout": "full",
+     "slots": {
+      "graphic": {
+       "type": "prop",
+       "key": "padlock",
+       "name": "padlock",
+       "plate": "teal",
+       "beats": [
+        {
+         "at": 136,
+         "do": "move",
+         "part": "shackle",
+         "dy": -150,
+         "ease": "inOut"
+        },
+        {
+         "at": 138,
+         "do": "recolor",
+         "part": "keyhole",
+         "color": "#13904C"
+        },
+        {
+         "at": 139,
+         "do": "pulse",
+         "part": "body"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s21",
+   "words": [
+    144,
+    152
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "shredder acts a clause out",
+     "layout": "split",
+     "slots": {
+      "graphic": {
+       "type": "prop",
+       "key": "shredder",
+       "name": "shredder",
+       "plate": "field",
+       "field": "#F2A541",
+       "beats": [
+        {
+         "at": 144,
+         "do": "badge",
+         "kind": "cross",
+         "part": "page"
+        },
+        {
+         "at": 148,
+         "do": "move",
+         "part": "page",
+         "dy": 540,
+         "ease": "slow"
+        },
+        {
+         "at": 149,
+         "do": "show",
+         "part": "strips",
+         "how": "slide",
+         "from": "up",
+         "dist": 220
+        },
+        {
+         "at": 151,
+         "do": "pulse",
+         "part": "led"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s22",
+   "words": [
+    153,
+    163
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "gauge acts a clause out",
+     "layout": "full",
+     "slots": {
+      "graphic": {
+       "type": "prop",
+       "key": "gauge",
+       "name": "gauge",
+       "plate": "pale",
+       "beats": [
+        {
+         "at": 153,
+         "do": "draw",
+         "part": "zones",
+         "ease": "sweep"
+        },
+        {
+         "at": 159,
+         "do": "move",
+         "part": "needle",
+         "rotate": 150,
+         "ease": "inOut"
+        },
+        {
+         "at": 163,
+         "do": "pulse",
+         "part": "hub"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  },
+  {
+   "id": "s23",
+   "words": [
+    164,
+    178
+   ],
+   "options": [
+    {
+     "id": "a",
+     "label": "Fixture",
+     "why": "close",
+     "layout": "speaker",
+     "slots": {
+      "keyword": {
+       "type": "comment-keyword",
+       "key": "kw",
+       "word": 167
+      }
+     }
+    }
+   ],
+   "pick": "a",
+   "single": true
+  }
+ ]
+}

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 980" data-shadow="rest">
+  <!-- Prop Room library prop: a rocket on the ground with smoke at launch (props/STANDARD.md). White body lit
+       from the top left with round shading, red nose and fins, a porthole of blue glass, a flame that glows in
+       its own hue [C25].
+       Parts:
+         smoke     clouds on the ground, start hidden                               (show grow at lift-off)
+         rocket    the whole rocket with its flame                                   (move dy -900 ease slow launches it;
+                   move dy -40 ease inOut is a hop)
+         flame     the exhaust under the nozzle, inside rocket, start hidden         (show grow)
+         window    the porthole, inside rocket; glass has data-base                  (recolor, pulse)
+         nose      the nose cone, inside rocket; data-base                           (recolor) -->
+  <defs>
+    <linearGradient id="hull" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#C9CED6"/><stop offset="0.25" stop-color="#FFFFFF"/><stop offset="0.6" stop-color="#EEF1F4"/><stop offset="1" stop-color="#B4BBC5"/></linearGradient>
+    <linearGradient id="hullV" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.2"/><stop offset="1" stop-color="#000" stop-opacity="0.1"/></linearGradient>
+    <linearGradient id="red" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#B8312A"/><stop offset="0.3" stop-color="#F26B5B"/><stop offset="0.7" stop-color="#E5484D"/><stop offset="1" stop-color="#A92C26"/></linearGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7F8FA"/><stop offset="1" stop-color="#8F959B"/></linearGradient>
+    <radialGradient id="glass" cx="0.35" cy="0.3" r="0.8"><stop offset="0" stop-color="#BFE0FF"/><stop offset="1" stop-color="#2A64D6"/></radialGradient>
+    <linearGradient id="nozzle" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#22252B"/><stop offset="0.35" stop-color="#5A6069"/><stop offset="1" stop-color="#1A1C20"/></linearGradient>
+    <radialGradient id="flameG" cx="0.5" cy="0.15" r="0.95"><stop offset="0" stop-color="#FFFBE6"/><stop offset="0.35" stop-color="#FFD15C"/><stop offset="0.75" stop-color="#F7893A"/><stop offset="1" stop-color="#F0574A" stop-opacity="0.85"/></radialGradient>
+    <radialGradient id="flameGlow" cx="0.5" cy="0.4" r="0.5"><stop offset="0" stop-color="#FFB547" stop-opacity="0.5"/><stop offset="1" stop-color="#FFB547" stop-opacity="0"/></radialGradient>
+    <radialGradient id="puff" cx="0.4" cy="0.3" r="0.8"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#D9DDE3"/></radialGradient>
+    <clipPath id="hullClip"><path d="M500 40 C620 120 680 300 680 520 V900 H320 V520 C320 300 380 120 500 40 Z"/></clipPath>
+  </defs>
+
+  <g id="rocket">
+    <g id="flame" visibility="hidden">
+      <ellipse cx="500" cy="1060" rx="200" ry="220" fill="url(#flameGlow)"/>
+      <path d="M430 950 H570 C580 1040 560 1130 500 1230 C440 1130 420 1040 430 950 Z" fill="url(#flameG)"/>
+      <path d="M465 950 H535 C540 1010 530 1060 500 1110 C470 1060 460 1010 465 950 Z" fill="#FFFDF2"/>
+    </g>
+    <path d="M330 640 C250 690 210 780 200 900 L330 860 Z" fill="url(#red)"/>
+    <path d="M670 640 C750 690 790 780 800 900 L670 860 Z" fill="url(#red)"/>
+    <path d="M420 900 H580 L560 960 H440 Z" fill="url(#nozzle)"/>
+    <path d="M500 40 C620 120 680 300 680 520 V900 H320 V520 C320 300 380 120 500 40 Z" fill="url(#hull)"/>
+    <g clip-path="url(#hullClip)">
+      <rect x="320" y="40" width="360" height="860" fill="url(#hullV)"/>
+      <g id="nose"><path d="M320 300 H680 V230 C640 140 580 80 500 40 C420 80 360 140 320 230 Z" fill="#E5484D" data-base=""/><path d="M320 300 H680 V230 C640 140 580 80 500 40 C420 80 360 140 320 230 Z" fill="url(#red)" opacity="0.6"/></g>
+      <rect x="320" y="300" width="360" height="14" fill="#000" opacity="0.10"/>
+      <rect x="320" y="820" width="360" height="80" fill="#E5484D"/>
+      <rect x="320" y="820" width="360" height="80" fill="url(#red)" opacity="0.6"/>
+      <path d="M390 340 V800" stroke="#FFFFFF" stroke-width="22" stroke-linecap="round" opacity="0.8"/>
+    </g>
+    <path d="M490 760 L520 900 H470 Z" fill="url(#red)"/>
+    <g id="window">
+      <circle cx="500" cy="480" r="96" fill="url(#ring)"/>
+      <circle cx="500" cy="480" r="72" fill="url(#glass)" data-base=""/>
+      <path d="M455 450 A58 58 0 0 1 515 425" fill="none" stroke="#FFFFFF" stroke-width="12" stroke-linecap="round" opacity="0.75"/>
+    </g>
+  </g>
+
+  <g id="smoke" visibility="hidden">
+    <circle cx="300" cy="960" r="110" fill="url(#puff)"/><circle cx="700" cy="960" r="110" fill="url(#puff)"/>
+    <circle cx="150" cy="1000" r="80" fill="url(#puff)"/><circle cx="850" cy="1000" r="80" fill="url(#puff)"/>
+    <circle cx="500" cy="1000" r="120" fill="url(#puff)"/>
+  </g>
+</svg>

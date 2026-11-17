@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" data-shadow="rest">
+  <!-- Prop Room library prop: a wall clock (props/STANDARD.md). Dark rim lit from the top, a white face, a
+       wedge that sweeps the face to show time spent, two hands on a pivot at the centre.
+       Parts:
+         rim        the case, static                                             (pulse)
+         face       the dial; data-base                                          (recolor #CEE6E5, pulse)
+         wedge      a pie wedge from 12 o'clock, a circle stroke                 (draw ease sweep; draw to 0.5)
+         ticks      hour marks, static
+         hourHand   data-pivot 500 500                                           (move rotate 90; spin rate 0.083)
+         minuteHand data-pivot 500 500                                           (spin; move rotate 360)
+         cap        centre cap; data-base                                        (recolor)
+         glass      a faint reflection over the dial, static -->
+  <defs>
+    <linearGradient id="rimG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3B4A50"/><stop offset="1" stop-color="#162024"/></linearGradient>
+    <radialGradient id="faceShade" cx="0.5" cy="0.42" r="0.6"><stop offset="0.7" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.10"/></radialGradient>
+    <linearGradient id="glassG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.5"/><stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0"/></linearGradient>
+  </defs>
+
+  <g id="rim">
+    <circle cx="500" cy="500" r="480" fill="url(#rimG)"/>
+    <path d="M118 330 A410 410 0 0 1 882 330" fill="none" stroke="#FFFFFF" stroke-opacity="0.22" stroke-width="10" stroke-linecap="round"/>
+  </g>
+  <g id="face">
+    <circle cx="500" cy="500" r="446" fill="#FDFDFD" data-base=""/>
+    <circle cx="500" cy="500" r="446" fill="url(#faceShade)"/>
+  </g>
+  <g id="wedge" data-drawn="0">
+    <circle cx="500" cy="500" r="215" fill="none" stroke="#F6D2D7" stroke-width="430" transform="rotate(-90 500 500)" data-base=""/>
+  </g>
+  <g id="ticks" stroke="#1C272B" stroke-linecap="round">
+    <path d="M500 76 V140" stroke-width="20"/><path d="M924 500 H860" stroke-width="20"/><path d="M500 924 V860" stroke-width="20"/><path d="M76 500 H140" stroke-width="20"/>
+    <g stroke-width="12">
+      <path d="M500 82 V122" transform="rotate(30 500 500)"/><path d="M500 82 V122" transform="rotate(60 500 500)"/>
+      <path d="M500 82 V122" transform="rotate(120 500 500)"/><path d="M500 82 V122" transform="rotate(150 500 500)"/>
+      <path d="M500 82 V122" transform="rotate(210 500 500)"/><path d="M500 82 V122" transform="rotate(240 500 500)"/>
+      <path d="M500 82 V122" transform="rotate(300 500 500)"/><path d="M500 82 V122" transform="rotate(330 500 500)"/>
+    </g>
+  </g>
+  <g id="hourHand" data-pivot="500 500">
+    <g transform="rotate(-60 500 500)"><path d="M500 530 V262" stroke="#1C272B" stroke-width="26" stroke-linecap="round"/></g>
+  </g>
+  <g id="minuteHand" data-pivot="500 500">
+    <g transform="rotate(68 500 500)"><path d="M500 540 V132" stroke="#1C272B" stroke-width="16" stroke-linecap="round"/></g>
+  </g>
+  <g id="cap">
+    <circle cx="500" cy="500" r="26" fill="#F0574A" data-base=""/>
+    <circle cx="494" cy="493" r="8" fill="#FFFFFF" opacity="0.45"/>
+  </g>
+  <g id="glass">
+    <path d="M180 360 A340 340 0 0 1 520 140 A420 420 0 0 0 180 360 Z" fill="url(#glassG)" opacity="0.6"/>
+  </g>
+</svg>

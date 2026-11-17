@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 820" data-shadow="rest">
+  <!-- Prop Room library prop: a check gate, a grille of chrome bars between hazard posts with a status lamp
+       (props/STANDARD.md). Each round of checks adds bars so fewer bugs get through.
+       Parts:
+         bug1..bug3  small beetles below the gate, behind the bars                  (move dy -560 passes through;
+                     move dy -70 is stopped at the bars; badge cross; hide)
+         bars1       six bars, static
+         bars2       five more bars between them, start hidden                       (show pop: a tighter check)
+         bars3       ten more bars, start hidden                                     (show pop: the tightest check)
+         frame       posts, header and rail, static
+         lamp        status light in the header; data-base                           (recolor #13904C, pulse) -->
+  <defs>
+    <linearGradient id="barG" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8F959B"/><stop offset="0.3" stop-color="#F7F8FA"/><stop offset="0.6" stop-color="#D6DAE0"/><stop offset="1" stop-color="#9DA3AA"/></linearGradient>
+    <linearGradient id="headG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A4354"/><stop offset="1" stop-color="#1F2533"/></linearGradient>
+    <linearGradient id="railG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7F8FA"/><stop offset="0.5" stop-color="#D6DAE0"/><stop offset="1" stop-color="#8F959B"/></linearGradient>
+    <linearGradient id="postLight" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.25"/><stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.2"/></linearGradient>
+    <pattern id="hazard" patternUnits="userSpaceOnUse" width="60" height="60" patternTransform="rotate(45)">
+      <rect width="60" height="60" fill="#F2B632"/><rect width="30" height="60" fill="#22252B"/>
+    </pattern>
+    <linearGradient id="shellG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F26B5B"/><stop offset="1" stop-color="#C93A2E"/></linearGradient>
+    <radialGradient id="lampGlow"><stop offset="0.4" stop-color="#F0574A" stop-opacity="0.55"/><stop offset="1" stop-color="#F0574A" stop-opacity="0"/></radialGradient>
+  </defs>
+
+  <g id="bug1"><g transform="translate(300 776) scale(1.45) translate(-300 -776)">
+    <ellipse cx="300" cy="776" rx="22" ry="17" fill="#22252B"/>
+    <ellipse cx="300" cy="752" rx="13" ry="10" fill="#22252B"/>
+    <path d="M276 770 L262 762 M276 784 L262 792 M324 770 L338 762 M324 784 L338 792" stroke="#22252B" stroke-width="4" stroke-linecap="round"/>
+    <ellipse cx="300" cy="780" rx="24" ry="27" fill="url(#shellG)"/>
+    <path d="M300 756 V806" stroke="#22252B" stroke-width="3"/>
+    <circle cx="289" cy="774" r="5" fill="#22252B"/><circle cx="312" cy="788" r="5" fill="#22252B"/><circle cx="310" cy="768" r="4" fill="#22252B"/>
+    <ellipse cx="290" cy="764" rx="8" ry="4" fill="#FFFFFF" opacity="0.5"/>
+  </g></g>
+  <g id="bug2"><g transform="translate(560 766) scale(1.45) translate(-560 -766)">
+    <ellipse cx="560" cy="766" rx="22" ry="17" fill="#22252B"/>
+    <ellipse cx="560" cy="742" rx="13" ry="10" fill="#22252B"/>
+    <path d="M536 760 L522 752 M536 774 L522 782 M584 760 L598 752 M584 774 L598 782" stroke="#22252B" stroke-width="4" stroke-linecap="round"/>
+    <ellipse cx="560" cy="770" rx="24" ry="27" fill="url(#shellG)"/>
+    <path d="M560 746 V796" stroke="#22252B" stroke-width="3"/>
+    <circle cx="549" cy="764" r="5" fill="#22252B"/><circle cx="572" cy="778" r="5" fill="#22252B"/><circle cx="570" cy="758" r="4" fill="#22252B"/>
+    <ellipse cx="550" cy="754" rx="8" ry="4" fill="#FFFFFF" opacity="0.5"/>
+  </g></g>
+  <g id="bug3"><g transform="translate(790 772) scale(1.45) translate(-790 -772)">
+    <ellipse cx="790" cy="772" rx="22" ry="17" fill="#22252B"/>
+    <ellipse cx="790" cy="748" rx="13" ry="10" fill="#22252B"/>
+    <path d="M766 766 L752 758 M766 780 L752 788 M814 766 L828 758 M814 780 L828 788" stroke="#22252B" stroke-width="4" stroke-linecap="round"/>
+    <ellipse cx="790" cy="776" rx="24" ry="27" fill="url(#shellG)"/>
+    <path d="M790 752 V802" stroke="#22252B" stroke-width="3"/>
+    <circle cx="779" cy="770" r="5" fill="#22252B"/><circle cx="802" cy="784" r="5" fill="#22252B"/><circle cx="800" cy="764" r="4" fill="#22252B"/>
+    <ellipse cx="780" cy="760" rx="8" ry="4" fill="#FFFFFF" opacity="0.5"/>
+  </g></g>
+
+  <g id="bars1" fill="url(#barG)">
+    <rect x="164" y="130" width="20" height="584" rx="10"/><rect x="304" y="130" width="20" height="584" rx="10"/><rect x="444" y="130" width="20" height="584" rx="10"/>
+    <rect x="584" y="130" width="20" height="584" rx="10"/><rect x="724" y="130" width="20" height="584" rx="10"/><rect x="852" y="130" width="20" height="584" rx="10"/>
+  </g>
+  <g id="bars2" fill="url(#barG)" visibility="hidden">
+    <rect x="234" y="130" width="20" height="584" rx="10"/><rect x="374" y="130" width="20" height="584" rx="10"/><rect x="514" y="130" width="20" height="584" rx="10"/>
+    <rect x="654" y="130" width="20" height="584" rx="10"/><rect x="788" y="130" width="20" height="584" rx="10"/>
+  </g>
+  <g id="bars3" fill="url(#barG)" visibility="hidden">
+    <rect x="128" y="130" width="16" height="584" rx="8"/><rect x="201" y="130" width="16" height="584" rx="8"/><rect x="271" y="130" width="16" height="584" rx="8"/>
+    <rect x="341" y="130" width="16" height="584" rx="8"/><rect x="411" y="130" width="16" height="584" rx="8"/><rect x="481" y="130" width="16" height="584" rx="8"/>
+    <rect x="551" y="130" width="16" height="584" rx="8"/><rect x="621" y="130" width="16" height="584" rx="8"/><rect x="691" y="130" width="16" height="584" rx="8"/>
+    <rect x="758" y="130" width="16" height="584" rx="8"/><rect x="822" y="130" width="16" height="584" rx="8"/>
+  </g>
+
+  <g id="frame">
+    <rect x="96" y="400" width="808" height="22" rx="11" fill="url(#railG)"/>
+    <rect x="20" y="110" width="84" height="610" rx="14" fill="url(#hazard)"/>
+    <rect x="20" y="110" width="84" height="610" rx="14" fill="url(#postLight)"/>
+    <rect x="896" y="110" width="84" height="610" rx="14" fill="url(#hazard)"/>
+    <rect x="896" y="110" width="84" height="610" rx="14" fill="url(#postLight)"/>
+    <rect x="20" y="30" width="960" height="120" rx="30" fill="url(#headG)"/>
+    <rect x="50" y="35" width="900" height="5" rx="2.5" fill="#FFFFFF" opacity="0.25"/>
+    <rect x="20" y="140" width="960" height="10" fill="#000" opacity="0.18"/>
+    <rect x="380" y="76" width="240" height="28" rx="14" fill="#FFFFFF" opacity="0.14"/>
+    <circle cx="70" cy="90" r="9" fill="#5A6578"/><circle cx="930" cy="90" r="9" fill="#5A6578"/>
+  </g>
+  <g id="lamp">
+    <circle cx="700" cy="90" r="56" fill="url(#lampGlow)"/>
+    <circle cx="700" cy="90" r="22" fill="#F0574A" data-base=""/>
+    <circle cx="694" cy="83" r="7" fill="#FFFFFF" opacity="0.5"/>
+  </g>
+</svg>

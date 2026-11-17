@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" data-shadow="rest">
+  <!-- Prop Room library prop: a silver cloche on a serving plate (props/STANDARD.md). Chrome lit from the top
+       left with one soft highlight band [C24]; a warm light spills from under the rim when the lid lifts.
+       Parts:
+         plate     the white serving plate, static
+         prize     what sits under the lid: a card with a star, hidden by the lid    (show grow, pulse, badge)
+         glow      warm light on the plate under the rim, starts hidden              (show fade)
+         lid       the dome with its knob and rim                                    (hide away lifts it off; pulse) -->
+  <defs>
+    <linearGradient id="chromeX" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#B9BEC5"/><stop offset="0.14" stop-color="#E9ECEF"/><stop offset="0.26" stop-color="#F7F8FA"/>
+      <stop offset="0.42" stop-color="#D6DAE0"/><stop offset="0.72" stop-color="#C1C6CD"/><stop offset="0.9" stop-color="#9DA3AA"/><stop offset="1" stop-color="#8F959B"/>
+    </linearGradient>
+    <linearGradient id="domeLight" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.22"/><stop offset="0.55" stop-color="#FFFFFF" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.10"/></linearGradient>
+    <linearGradient id="rimG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EEF0F3"/><stop offset="0.5" stop-color="#C3C8CF"/><stop offset="1" stop-color="#9AA0A7"/></linearGradient>
+    <linearGradient id="plateG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E6E8EC"/></linearGradient>
+    <linearGradient id="plateIn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EEF0F3"/><stop offset="1" stop-color="#FAFBFC"/></linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#EEF0F3"/></linearGradient>
+    <radialGradient id="glowG" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#FFC56B" stop-opacity="0.85"/><stop offset="0.6" stop-color="#FFC56B" stop-opacity="0.35"/><stop offset="1" stop-color="#FFC56B" stop-opacity="0"/></radialGradient>
+    <radialGradient id="contact" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#000" stop-opacity="0.22"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+    <clipPath id="domeClip"><path d="M150 470 C150 255 310 150 500 150 C690 150 850 255 850 470 Z"/></clipPath>
+  </defs>
+
+  <g id="plate">
+    <ellipse cx="500" cy="500" rx="480" ry="86" fill="url(#plateG)"/>
+    <ellipse cx="500" cy="494" rx="368" ry="54" fill="url(#plateIn)"/>
+    <ellipse cx="500" cy="494" rx="368" ry="54" fill="none" stroke="#D3D6DB" stroke-width="3"/>
+    <path d="M44 488 C120 438 300 418 500 418 C700 418 880 438 956 488" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" opacity="0.9"/>
+    <path d="M60 530 C180 575 330 586 500 586 C670 586 820 575 940 530" fill="none" stroke="#C9CDD3" stroke-width="4" stroke-linecap="round"/>
+  </g>
+
+  <g id="glow" visibility="hidden">
+    <ellipse cx="500" cy="482" rx="420" ry="60" fill="url(#glowG)"/>
+  </g>
+
+  <g id="prize">
+    <ellipse cx="500" cy="492" rx="150" ry="20" fill="url(#contact)"/>
+    <rect x="370" y="270" width="260" height="215" rx="26" fill="url(#card)"/>
+    <rect x="380" y="276" width="240" height="4" rx="2" fill="#FFFFFF"/>
+    <path d="M500 312 L517 350 L558 354 L527 381 L536 421 L500 400 L464 421 L473 381 L442 354 L483 350 Z" fill="#ECAB44" data-base=""/>
+    <path d="M500 312 L517 350 L540 352 L500 362 Z" fill="#FFFFFF" opacity="0.35"/>
+    <rect x="420" y="440" width="160" height="14" rx="7" fill="#D8DADF"/>
+  </g>
+
+  <g id="lid" data-ring="#B9BEC5">
+    <ellipse cx="500" cy="478" rx="372" ry="20" fill="url(#contact)" opacity="0.8"/>
+    <path d="M150 470 C150 255 310 150 500 150 C690 150 850 255 850 470 Z" fill="url(#chromeX)"/>
+    <g clip-path="url(#domeClip)">
+      <rect x="150" y="150" width="700" height="320" fill="url(#domeLight)"/>
+      <path d="M232 430 C232 330 285 252 365 205" fill="none" stroke="#FFFFFF" stroke-width="16" stroke-linecap="round" opacity="0.85"/>
+      <path d="M744 225 C800 280 826 350 830 420" fill="none" stroke="#7F858C" stroke-width="12" stroke-linecap="round" opacity="0.45"/>
+      <rect x="150" y="448" width="700" height="22" fill="#000" opacity="0.08"/>
+    </g>
+    <rect x="112" y="458" width="776" height="30" rx="15" fill="url(#rimG)"/>
+    <rect x="130" y="461" width="740" height="4" rx="2" fill="#FFFFFF" opacity="0.9"/>
+    <rect x="474" y="112" width="52" height="44" rx="6" fill="url(#chromeX)"/>
+    <ellipse cx="500" cy="106" rx="66" ry="24" fill="url(#rimG)"/>
+    <ellipse cx="500" cy="100" rx="44" ry="11" fill="#FFFFFF" opacity="0.75"/>
+  </g>
+</svg>
