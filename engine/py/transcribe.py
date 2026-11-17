@@ -24,13 +24,68 @@ def main():
     try:
         from faster_whisper import WhisperModel
     except ImportError:
+        exe = sys.executable or "python3"
         print(json.dumps({"error": "faster-whisper is not installed",
-                          "fix": "python3 -m pip install faster-whisper"}))
+                          "fix": f'"{exe}" -m pip install faster-whisper' if " " in exe else f"{exe} -m pip install faster-whisper"}))
         return 2
 
-    model = WhisperModel(args.model, device=args.device, compute_type=args.compute)
+    try:
+        words, segs, info = run(WhisperModel, args, args.device)
+    except Exception as e:  # noqa: BLE001
+        # "auto" picks the GPU when one is visible. Without the CUDA libraries (cuBLAS, cuDNN), which is the
+        # usual state of a Windows or Linux machine with an NVIDIA card, loading or decoding fails: use the CPU.
+        if args.device != "auto" or not cuda_visible():
+            raise
+        print(json.dumps({"note": f"GPU transcription failed ({str(e).splitlines()[0] if str(e) else type(e).__name__}); using the CPU"}),
+              file=sys.stderr, flush=True)
+        words, segs, info = run(WhisperModel, args, "cpu")
+
+    out = {
+        "language": info.language,
+        "language_probability": round(float(info.language_probability or 0), 3),
+        "duration": round(float(info.duration or 0), 3),
+        "model": args.model,
+        "words": words,
+        "segments": segs,
+    }
+    os.makedirs(os.path.dirname(os.path.abspath(args.out)), exist_ok=True)
+    with open(args.out, "w", encoding="utf-8") as f:
+        json.dump(out, f, ensure_ascii=False, indent=1)
+    print(json.dumps({"ok": True, "words": len(words), "segments": len(segs), "language": info.language}))
+    return 0
+
+
+def cuda_visible():
+    """True when CTranslate2 sees an NVIDIA GPU, which is when device "auto" tries CUDA first."""
+    try:
+        import ctranslate2
+        return ctranslate2.get_cuda_device_count() > 0
+    except Exception:  # noqa: BLE001
+        return False
+
+
+def load_audio(path, rate=16000):
+    """The audio as 16 kHz mono float32 samples, decoded by ffmpeg (which Motus requires anyway).
+
+    faster-whisper opens files through PyAV, and PyAV releases change that API: faster-whisper 1.2.1 with
+    a current PyAV fails with "open() got an unexpected keyword argument 'metadata_errors'". Samples
+    passed in directly never touch it.
+    """
+    import subprocess
+    import numpy as np
+    cmd = [os.environ.get("MOTUS_FFMPEG", "ffmpeg"), "-nostdin", "-v", "error", "-i", path,
+           "-f", "f32le", "-ac", "1", "-ar", str(rate), "-"]
+    # no console window for ffmpeg on Windows (this script itself runs without one under the app)
+    flags = getattr(subprocess, "CREATE_NO_WINDOW", 0)
+    out = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True, creationflags=flags).stdout
+    return np.frombuffer(out, np.float32).copy()
+
+
+def run(WhisperModel, args, device):
+    """Load the model on `device` and transcribe. Returns (words, segments, info)."""
+    model = WhisperModel(args.model, device=device, compute_type=args.compute)
     segments, info = model.transcribe(
-        args.audio,
+        load_audio(args.audio, model.feature_extractor.sampling_rate),
         language=args.language,
         beam_size=5,
         word_timestamps=True,
@@ -69,20 +124,7 @@ def main():
             a["end"] = round(a["start"] + 0.02, 3)
     if words and words[-1]["end"] <= words[-1]["start"]:
         words[-1]["end"] = round(words[-1]["start"] + 0.05, 3)
-
-    out = {
-        "language": info.language,
-        "language_probability": round(float(info.language_probability or 0), 3),
-        "duration": round(float(info.duration or 0), 3),
-        "model": args.model,
-        "words": words,
-        "segments": segs,
-    }
-    os.makedirs(os.path.dirname(os.path.abspath(args.out)), exist_ok=True)
-    with open(args.out, "w", encoding="utf-8") as f:
-        json.dump(out, f, ensure_ascii=False, indent=1)
-    print(json.dumps({"ok": True, "words": len(words), "segments": len(segs), "language": info.language}))
-    return 0
+    return words, segs, info
 
 
 if __name__ == "__main__":

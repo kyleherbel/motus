@@ -15,7 +15,7 @@ Three parts, three owners:
 | **Style pack** | `styles/<id>/` | Everything that makes an edit look and move like one style: the rules the agent follows (`STYLE.md`), the manifest (`style.json`), and the browser module (`style.js`) that draws it. |
 | **Skill** | `skills/<name>/` | The agent's procedures (`edit`, `styles`, `doctor`, `new-style`): which engine command to run when, what to read, what to ask the user. |
 
-Requirements on the user's machine: `ffmpeg`/`ffprobe`, Node ≥ 22, Google Chrome (or Chromium/Edge), Python 3.9+ with `faster-whisper`. macOS adds the person matte and face tracking through Apple Vision (Swift); without them the style degrades gracefully (no head pop-out, centre framing).
+Requirements on the user's machine (macOS or Windows): `ffmpeg`/`ffprobe`, Node ≥ 22, Google Chrome (or Chromium/Edge), Python 3.9+ with `faster-whisper`. macOS adds the person matte and face tracking through Apple Vision (Swift); without them the style degrades gracefully (no head pop-out, centre framing).
 
 ## 1. Repository layout
 
@@ -229,11 +229,11 @@ Interface: a sticky phone-frame player showing the current cut with a scene film
 
 The app is what a person uses. They give their AI session (Claude Code or Codex) the Motus folder and say "go". The session follows `skills/start/SKILL.md`: it runs `motus app --open`, which starts `engine/lib/app.mjs` detached on port 4700 (or any free port) and opens the home page (`engine/app/`). Then it loops on `motus next`.
 
-The workspace is one folder that holds every project the app made: `$MOTUS_HOME`, else `~/Movies/Motus` on a Mac, else `~/Motus`. Beside the project folders it keeps `.motus-app.json` (where the app listens), `.motus-agent.json` (what the session is doing) and `.uploads/` (videos still being set up). Each project keeps `review/app.json`: the ingest the app ran and the session's current job. The code that reads and writes these files is `engine/lib/workspace.mjs`.
+The workspace is one folder that holds every project the app made: `$MOTUS_HOME`, else `~/Movies/Motus` on a Mac, `~/Videos/Motus` on Windows, else `~/Motus`. Beside the project folders it keeps `.motus-app.json` (where the app listens), `.motus-agent.json` (what the session is doing) and `.uploads/` (videos still being set up). Each project keeps `review/app.json`: the ingest the app ran and the session's current job. The code that reads and writes these files is `engine/lib/workspace.mjs`.
 
 Flow: the page uploads the video (`PUT /api/upload`, streamed into `.uploads/`), the person picks a cut mode, a style and names to spell, and `POST /api/projects` moves the file into `<project>/source/`, runs `init`, and starts `ingest` as a child process, turning its log lines into plain-words progress. When ingest ends, the app queues a `plan` job. `motus next` claims the oldest job in the workspace and prints it with instructions that point at the edit skill. The session reports progress with `motus say` and finishes with `motus done`. When the session asks for work while a job it claimed is still open, it gets that job again, marked `"resumed": true`. Notes sent from Studio become `notes` jobs through the same queue (`review/submissions/`, `review/.seen`), so `motus wait` and `motus next` never hand out the same submission twice. Rendering never needs the session: it runs in Studio's own server.
 
-The page polls `GET /api/state` (the session's status, the styles, and every project's stage: listening, waiting, planning, review, rendered or error). `POST /api/open` starts or finds the project's Studio server and returns its URL. `POST /api/retry` and `POST /api/reveal` cover Try again and Show in Finder. Writes need the header `x-motus: 1`, which a cross-site page cannot send without a preflight that this server never approves. Studio links back to the app and shows the session's status (`GET /api/agent`).
+The page polls `GET /api/state` (the session's status, the styles, and every project's stage: listening, waiting, planning, review, rendered or error). `POST /api/open` starts or finds the project's Studio server and returns its URL. `POST /api/retry` and `POST /api/reveal` cover Try again and Show in Finder (Show in File Explorer on Windows). Writes need the header `x-motus: 1`, which a cross-site page cannot send without a preflight that this server never approves. Studio links back to the app and shows the session's status (`GET /api/agent`).
 
 ## 9. CLI
 

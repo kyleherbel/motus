@@ -37,8 +37,9 @@ export function fakeProject(dir = '/tmp/motus-fake') {
   };
 }
 
-/** Which ffmpeg/Chrome tools exist, for skipping tests that need them. */
+/** Which ffmpeg/Chrome tools exist, for skipping tests that need them. On Windows a program is `cmd` plus a PATHEXT extension. */
 export function hasBinary(cmd) {
-  const dirs = (process.env.PATH || '').split(path.delimiter);
-  return dirs.some((d) => { try { fs.accessSync(path.join(d, cmd), fs.constants.X_OK); return true; } catch { return false; } });
+  const dirs = (process.env.PATH || '').split(path.delimiter).filter(Boolean);
+  const exts = process.platform === 'win32' ? (process.env.PATHEXT || '.EXE;.CMD;.BAT;.COM').split(';').filter(Boolean) : [''];
+  return dirs.some((d) => exts.some((e) => { try { fs.accessSync(path.join(d, cmd + e), fs.constants.X_OK); return true; } catch { return false; } }));
 }

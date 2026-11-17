@@ -3,7 +3,7 @@ import path from 'node:path';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import fss from 'node:fs';
-import { run, readJson, writeJson, exists, mkdirp, onExit, MotusError } from './util.mjs';
+import { run, readJson, writeJson, exists, mkdirp, onExit, renameRetry, MotusError } from './util.mjs';
 import { Browser } from './cdp.mjs';
 import { createStudioServer } from './server.mjs';
 import { loadPlan, validateEdit, hashOf } from './plan.mjs';
@@ -317,7 +317,7 @@ export async function renderStills(project, opt = {}) {
           const part = `${file}.part.mp4`;
           await run('ffmpeg', ['-v', 'error', '-y', '-framerate', String(LOOP_FPS), '-start_number', '1', '-i', path.join(tmp, '%06d.jpg'),
             '-vf', 'scale=360:640:flags=bicubic,format=yuv420p', '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '27', '-movflags', '+faststart', '-an', part]);
-          await fs.rename(part, file);                              // Studio never sees a half-written clip
+          await renameRetry(part, file);                            // Studio never sees a half-written clip
           log(`loop ${sc.id}-${op.id}`);
         } finally {
           offTmp();

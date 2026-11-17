@@ -7,6 +7,7 @@ import { spawnSync } from 'node:child_process';
 import { claimJob, nextJob, say, done, agentStatus, projectSummary, listProjects, writeAgent } from '../engine/lib/workspace.mjs';
 import { createAppServer, friendlyIngest, safeName } from '../engine/lib/app.mjs';
 import { loadProject } from '../engine/lib/project.mjs';
+import { cliPath } from '../engine/lib/util.mjs';
 
 /** A project folder with just enough in it for the workspace code (no video needed). */
 function fakeProject(ws, name, { stages = {}, app = null, plan = false, final = false, created } = {}) {
@@ -35,7 +36,7 @@ describe('the agent job queue', () => {
       assert.equal(job.project, dir);
       assert.equal(job.resumed, false);
       assert.deepEqual(job.setup, { style: 'minimal', mode: 'raw', prompt: 'OpenReply' });
-      assert.ok(job.instructions.some((l) => l.includes(' done ') && l.includes(dir)));
+      assert.ok(job.instructions.some((l) => l.includes(' done ') && l.includes(cliPath(dir))));   // forward slashes on Windows
       assert.equal(readApp(dir).job.state, 'claimed');
       // the agent came back for work without finishing: the job is still its job
       const again = await claimJob(ws);
@@ -130,6 +131,8 @@ describe('project stages in the app', () => {
   test('uploaded file names are made safe and keep their extension', () => {
     assert.equal(safeName('../../etc/My Take #1.MOV'), 'My Take 1.mov');
     assert.equal(safeName('take'), 'take.mp4');
+    assert.equal(safeName('CON.mp4'), 'CON-video.mp4');           // a device name on Windows, not a file
+    assert.equal(safeName('take. .mov'), 'take.mov');             // Windows drops trailing dots and spaces
   });
 });
 

@@ -2,6 +2,22 @@
 
 All notable changes to Motus are recorded here. The plugin version is the `version` field in `.claude-plugin/plugin.json` and `.codex-plugin/plugin.json`. Each style pack has its own version in `styles/<id>/style.json`.
 
+## 0.3.1
+
+Windows support. Motus now runs on Windows 10 and 11. Checked on a Windows runner: `motus doctor`, transcription with faster-whisper, the app and Studio servers, the unit tests and an end-to-end render. The person matte and face tracking stay macOS only (Apple Vision); Windows uses the un-matted framing that was already the fallback.
+
+- Python: the engine now looks for Python 3 instead of assuming `python3`. On Windows it tries `py -3`, then `py -3.13` to `py -3.10`, `python` and `python3`, because `python3` there is usually the Microsoft Store placeholder; elsewhere `python3`, `python3.13` to `python3.10`, then `python`. It uses the first one that has faster-whisper, so a machine whose newest Python is too new for faster-whisper's packages can keep it in an older one. `MOTUS_PYTHON` still wins. Fix messages name the command that works on that machine, and `doctor` says what to do when the Python is newer than 3.13.
+- Browser: Windows looks for Chrome machine-wide and per user (`%LOCALAPPDATA%`), then Edge (ships with Windows), Chromium and Brave. Headless Chrome is ended with `taskkill /T` on Windows, which has no process groups.
+- No console windows: every program the engine starts (ffmpeg, Chrome, Python, the app and Studio servers) is started hidden. The detached app and Studio servers have no console on Windows, so before, each ffmpeg, Python or Node process they started during ingest, loops and renders opened a console window of its own.
+- File locks: on Windows a virus scanner or a server reading a file can block a rename for a moment. JSON saves, scene loops, the frame cache and uploads now retry the rename for up to about 4 s instead of failing.
+- Contact sheets: ffmpeg now reads the label font by a relative name from its own folder. An absolute Windows path in the filter graph needed escaping for the drive letter's colon, and a quote in a user name broke it on any system.
+- Transcription on a fresh install: `pip install faster-whisper` now brings a PyAV release whose `open()` no longer takes the `metadata_errors` argument that faster-whisper 1.2.1 passes, so every transcription failed. `transcribe.py` now decodes the audio with ffmpeg (16 kHz mono float samples) and hands faster-whisper the samples, which never touch PyAV. This affected every system, not only Windows; machines with an older PyAV kept working.
+- Transcription: on a machine with an NVIDIA card but no CUDA libraries, faster-whisper's `auto` device failed. It now falls back to the CPU and says so. The "not installed" fix names the interpreter that ran.
+- Names: project folders and uploaded files never take a name Windows reserves for devices (`con`, `nul`, `com1`). Upload names lose trailing dots and spaces.
+- `motus doctor` gives install commands for each system: `winget` on Windows, Homebrew on macOS, the package manager on Linux.
+- The app keeps videos in `Videos\Motus` on Windows. "Show in Finder" reads "Show in File Explorer" there and opens Explorer with the file selected. Commands printed for the agent use forward slashes on Windows, which every Windows shell accepts.
+- Tests: `hasBinary` respects `PATHEXT`, so the ffmpeg tests run on Windows. New tests cover the browser and Python search order, reserved names and the install hints. The end-to-end test runs on Windows too: its "browser that cannot start" is `node.exe` there (a shell script cannot run), it checks for left-over Chrome profiles in `TEMP`, and its colour check allows 6 levels there instead of 4 (a GPU-less Windows runner rendered saturated bars up to 5 levels darker, with ffmpeg 7.1 and 9.0 alike). On Windows: 117 unit tests pass (3 POSIX-only skipped) and the end-to-end render passes.
+
 ## 0.3.0 (unreleased)
 
 - Added Prop Room (beta): a pale panel over the speaker, hard cuts about every two seconds between the split, full-frame scenes and short full-height speaker beats, one-to-three-word captions on a dark plate across the seam, and a quoted serif keyword to close. Measured from 19 reels in nine dimensions plus an explanation pass over all 279 graphic units, with an independent verification of 29 numbers (`styles/prop-room/research/`).

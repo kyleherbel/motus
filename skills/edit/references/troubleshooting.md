@@ -4,9 +4,11 @@ Every engine error prints what went wrong and a `fix:` line. This page covers th
 
 | Symptom | Cause | What to do |
 |---|---|---|
-| `motus doctor` fails on `chrome` | No Chromium-based browser found | Install Google Chrome, or set `MOTUS_CHROME=/path/to/browser`. |
-| `motus doctor` fails on `faster-whisper` | Python package missing | `python3 -m pip install faster-whisper`. The first transcription downloads the speech model (about 1.6 GB); tell the user before it starts. Use `MOTUS_PYTHON` to point at another interpreter and `MOTUS_WHISPER_MODEL` (for example `small`) on slow machines. |
-| Ingest is very slow | Speech model on CPU | Normal on the first run (model load). A one-minute clip takes roughly one to two minutes on an Apple Silicon laptop. |
+| `motus doctor` fails on `chrome` | No Chromium-based browser found | Install Google Chrome, or set `MOTUS_CHROME=/path/to/browser`. On Windows, Microsoft Edge is found when Chrome is missing. |
+| `motus doctor` fails on `python` on Windows | Only the Microsoft Store placeholder `python3` exists | `winget install Python.Python.3.12`, then open a new terminal. Motus tries `py -3`, `python`, then `python3`. |
+| `pip install faster-whisper` fails while building `av` or `ctranslate2` | The default Python is newer than faster-whisper's packages | Install Python 3.12 beside it (`winget install Python.Python.3.12`, or `brew install python@3.12`) and run `py -3.12 -m pip install faster-whisper` (macOS: `python3.12 -m pip …`). Motus uses whichever Python has faster-whisper. |
+| `motus doctor` fails on `faster-whisper` | Python package missing | Run the command on the `fix:` line (`python3 -m pip install faster-whisper`; on Windows `py -3 -m pip install faster-whisper`). The first transcription downloads the speech model (about 1.6 GB); tell the user before it starts. Use `MOTUS_PYTHON` to point at another interpreter and `MOTUS_WHISPER_MODEL` (for example `small`) on slow machines. |
+| Ingest is very slow | Speech model on CPU | Normal on the first run (model load). A one-minute clip takes roughly one to two minutes on an Apple Silicon laptop. On a machine with an NVIDIA card but no CUDA libraries, transcription notes "GPU transcription failed; using the CPU" and carries on. |
 | Transcript has wrong names | ASR guesses unfamiliar words | Re-run ingest with `--prompt "Exact Name, Other Term"`, or repair single words with `captions.fixes` in the plan. |
 | "Matte: no" after conform | Not macOS, no Swift toolchain, or no person found | The style still works; effects that need the cut-out (head rising above a panel) are skipped. On macOS: `xcode-select --install`, then conform again. |
 | Source is horizontal or not 9:16 | Shot wide | Conform centre-crops to 9:16 around the speaker. Check the contact sheets: if the speaker leaves the crop, say so to the user before planning. |

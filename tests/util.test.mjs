@@ -5,7 +5,8 @@ import path from 'node:path';
 import fs from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
-import { parseArgs, parseRational, fpsOf, standardRate, clock, slug, readJson, writeJson, run, MotusError, STYLES } from '../engine/lib/util.mjs';
+import { parseArgs, parseRational, fpsOf, standardRate, clock, slug, readJson, writeJson, run, MotusError, STYLES, chromeCandidates, pythonCandidates, findPython } from '../engine/lib/util.mjs';
+import { installHints } from '../engine/lib/doctor.mjs';
 
 test('MOTUS_STYLES points the engine at the fixture styles', () => {
   assert.equal(STYLES, path.join(TESTS, 'fixtures', 'styles'));
@@ -52,6 +53,42 @@ test('slug handles unicode, punctuation and empty names', () => {
   assert.equal(slug('Café vidéo #1 (final)'), 'cafe-video-1-final');
   assert.equal(slug('日本語'), 'video');
   assert.equal(slug('a'.repeat(100)).length, 60);
+  // names Windows reserves for devices never become a folder name
+  assert.equal(slug('CON'), 'con-video');
+  assert.equal(slug('com1'), 'com1-video');
+  assert.equal(slug('console'), 'console');
+});
+
+test('chromeCandidates: Windows looks in Program Files and per-user LocalAppData, Chrome before Edge', () => {
+  const env = { PROGRAMFILES: 'C:\\Program Files', 'PROGRAMFILES(X86)': 'C:\\Program Files (x86)', LOCALAPPDATA: 'C:\\Users\\Kim\\AppData\\Local' };
+  const win = chromeCandidates('win32', env);
+  assert.equal(win[0], 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe');
+  assert.ok(win.includes('C:\\Users\\Kim\\AppData\\Local\\Google\\Chrome\\Application\\chrome.exe'));
+  assert.ok(win.includes('C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe'));
+  assert.ok(win.findIndex((p) => p.endsWith('chrome.exe')) < win.findIndex((p) => p.endsWith('msedge.exe')));
+  assert.ok(chromeCandidates('win32', {}).every((p) => /^C:\\Program Files/.test(p)));   // no LocalAppData: defaults only
+  assert.match(chromeCandidates('darwin')[0], /^\/Applications\/Google Chrome\.app/);
+  assert.ok(chromeCandidates('linux').includes('/usr/bin/chromium'));
+});
+
+test('pythonCandidates: the py launcher first on Windows, python3 elsewhere, MOTUS_PYTHON alone and unsplit', () => {
+  assert.deepEqual(pythonCandidates('win32', {}).map((c) => [c.cmd, ...c.args].join(' ')), ['py -3', 'py -3.13', 'py -3.12', 'py -3.11', 'py -3.10', 'python', 'python3']);
+  assert.deepEqual(pythonCandidates('darwin', {}).map((c) => c.cmd), ['python3', 'python3.13', 'python3.12', 'python3.11', 'python3.10', 'python']);
+  assert.deepEqual(pythonCandidates('win32', { MOTUS_PYTHON: 'C:\\Program Files\\Python312\\python.exe' }), [{ cmd: 'C:\\Program Files\\Python312\\python.exe', args: [] }]);
+});
+
+test('findPython reports a version and a label to type', { skip: !['python3', 'python', 'py'].some((c) => spawnSync(c, ['--version']).status === 0) && 'no Python on this machine' }, async () => {
+  const py = await findPython();
+  assert.match(py.version, /^3\./);
+  assert.ok(py.label.length > 0);
+  assert.equal(typeof py.whisper, 'boolean');
+});
+
+test('installHints name each system\'s installer', () => {
+  assert.match(installHints('win32').ffmpeg, /winget install Gyan\.FFmpeg/);
+  assert.match(installHints('win32').python, /winget install Python\.Python/);
+  assert.match(installHints('darwin').ffmpeg, /brew install ffmpeg/);
+  assert.match(installHints('linux').ffmpeg, /apt install ffmpeg/);
 });
 
 test('readJson / writeJson: atomic write, fallback, error with fix', async () => {

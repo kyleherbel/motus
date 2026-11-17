@@ -10,7 +10,7 @@ import fss from 'node:fs';
 import crypto from 'node:crypto';
 import { spawn } from 'node:child_process';
 import { pipeline } from 'node:stream/promises';
-import { ENGINE, readJson, writeJson, exists, mkdirp, slug, run, MotusError } from './util.mjs';
+import { ENGINE, readJson, writeJson, exists, mkdirp, slug, run, renameRetry, RESERVED_NAME, MotusError } from './util.mjs';
 import { probe, initProject, loadProject } from './project.mjs';
 import { listStyles, loadStyle } from './styles.mjs';
 import { ensureStudio } from './server.mjs';
@@ -62,7 +62,8 @@ const readBody = (req) => new Promise((resolve, reject) => {
 export function safeName(name) {
   const base = path.basename(String(name || 'video.mp4'));
   const ext = path.extname(base).toLowerCase().replace(/[^.a-z0-9]/g, '') || '.mp4';
-  const stem = path.basename(base, path.extname(base)).replace(/[^\p{L}\p{N} ._-]/gu, '').trim().slice(0, 80) || 'video';
+  let stem = path.basename(base, path.extname(base)).replace(/[^\p{L}\p{N} ._-]/gu, '').trim().slice(0, 80).replace(/[. ]+$/, '') || 'video';
+  if (RESERVED_NAME.test(stem)) stem = `${stem}-video`;          // "con.mp4" is a device on Windows, not a file
   return stem + ext;
 }
 
@@ -163,7 +164,7 @@ export async function createAppServer(ws, { port = 0, host = '127.0.0.1', runIng
     for (let i = 2; await exists(pdir); i++) pdir = path.join(ws, `${base}-${i}`);
     await mkdirp(path.join(pdir, 'source'));
     const video = path.join(pdir, 'source', name);
-    await fs.rename(path.join(dir, name), video);
+    await renameRetry(path.join(dir, name), video);
     await fs.rm(dir, { recursive: true, force: true });
     const p = await initProject({ video, style: body.style, mode, dir: pdir });
     await startIngest(p, String(body.prompt || '').slice(0, 400));
@@ -265,7 +266,7 @@ export async function createAppServer(ws, { port = 0, host = '127.0.0.1', runIng
 /** Run `motus ingest` as a child process and report its log lines. */
 export function spawnIngest(dir, prompt) {
   const args = [BIN, 'ingest', dir, '--json', ...(prompt ? ['--prompt', prompt] : [])];
-  const child = spawn(process.execPath, args, { stdio: ['ignore', 'pipe', 'pipe'] });
+  const child = spawn(process.execPath, args, { stdio: ['ignore', 'pipe', 'pipe'], windowsHide: true });
   let stdout = '', buf = '';
   const listeners = [];
   child.stdout.on('data', (d) => { stdout += d; });

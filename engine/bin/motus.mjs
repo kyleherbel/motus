@@ -5,7 +5,7 @@ import fs from 'node:fs/promises';
 import fss from 'node:fs';
 import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { parseArgs, MotusError, readJson, writeJson, exists, mkdirp, clock, ROOT } from '../lib/util.mjs';
+import { parseArgs, MotusError, readJson, writeJson, exists, mkdirp, clock, cliPath, ROOT } from '../lib/util.mjs';
 
 const [cmd, ...rest] = process.argv.slice(2);
 // flags that never take a value: `motus validate --json ./project` must keep ./project as the positional
@@ -66,7 +66,7 @@ const commands = {
     const { initProject } = await import('../lib/project.mjs');
     const p = await initProject({ video: need(pos[0], 'the video file', 'init <video>'), style: flags.style === true ? undefined : flags.style, mode: flags.mode || 'raw', dir: flags.project, force: !!flags.force });
     const s = p.json.source;
-    print({ project: p.dir, name: p.json.name, style: p.json.style, mode: p.json.mode, source: s, notes: p.json.notes, next: `motus ingest ${JSON.stringify(p.dir)}` },
+    print({ project: p.dir, name: p.json.name, style: p.json.style, mode: p.json.mode, source: s, notes: p.json.notes, next: `motus ingest ${cliPath(p.dir)}` },
       (x) => `Project: ${x.project}\nSource:  ${s.width}x${s.height}, ${(s.fps[0] / s.fps[1]).toFixed(2)} fps, ${clock(s.duration)} (${s.vcodec})\nStyle:   ${x.style || '(not chosen yet)'}   Mode: ${x.mode}${x.notes.length ? '\nNotes:   ' + x.notes.join('\n         ') : ''}\nNext:    ${x.next}`);
   },
 
@@ -89,7 +89,7 @@ const commands = {
     const p = await project(pos[0]);
     const { conform } = await import('../lib/conform.mjs');
     const r = await conform(p, { matte: flags.matte !== false, log });
-    print(r, (x) => `Output timeline: ${clock(x.duration)} · ${x.frames} frames @ ${x.fps.toFixed(2)} fps · ${x.ranges} kept range(s), ${x.removed.toFixed(2)} s removed\nMatte: ${x.hasMatte ? 'yes' : `no (${x.matteReason})`}${x.wide ? `\nWide view: ${x.wide}` : ''}\nWords: ${x.words} (${x.wordsFile})\nNext: write plan/edit.json, then: motus validate ${JSON.stringify(p.dir)}`);
+    print(r, (x) => `Output timeline: ${clock(x.duration)} · ${x.frames} frames @ ${x.fps.toFixed(2)} fps · ${x.ranges} kept range(s), ${x.removed.toFixed(2)} s removed\nMatte: ${x.hasMatte ? 'yes' : `no (${x.matteReason})`}${x.wide ? `\nWide view: ${x.wide}` : ''}\nWords: ${x.words} (${x.wordsFile})\nNext: write plan/edit.json, then: motus validate ${cliPath(p.dir)}`);
   },
 
   async capture() {
@@ -140,8 +140,8 @@ const commands = {
       const { ensureStudio } = await import('../lib/server.mjs');
       s = await ensureStudio(p, { port: num(flags.port, 0) });
     }
-    if (flags.open) spawn(process.platform === 'darwin' ? 'open' : process.platform === 'win32' ? 'cmd' : 'xdg-open', process.platform === 'win32' ? ['/c', 'start', '', s.url] : [s.url], { detached: true, stdio: 'ignore' }).unref();
-    print({ url: s.url, pid: s.pid, project: p.dir, next: `motus wait ${JSON.stringify(p.dir)}` }, (x) => `Studio is running: ${x.url}\nWait for the user's decisions with: ${x.next}`);
+    if (flags.open) (await import('../lib/workspace.mjs')).openUrl(s.url);
+    print({ url: s.url, pid: s.pid, project: p.dir, next: `motus wait ${cliPath(p.dir)}` }, (x) => `Studio is running: ${x.url}\nWait for the user's decisions with: ${x.next}`);
   },
 
   async _serve() {
@@ -177,13 +177,14 @@ const commands = {
       await mkdirp(ws);
       await fs.rm(info, { force: true });
       const logFile = fss.openSync(path.join(ws, '.motus-app.log'), 'a');
-      const child = spawn(process.execPath, [SELF, '_app', ws, '--port', String(num(flags.port, 4700))], { detached: true, stdio: ['ignore', logFile, logFile] });
+      // windowsHide: no console window for the server on Windows (util.run hides the programs it starts)
+      const child = spawn(process.execPath, [SELF, '_app', ws, '--port', String(num(flags.port, 4700))], { detached: true, stdio: ['ignore', logFile, logFile], windowsHide: true });
       child.unref();
       for (let i = 0; i < 60 && !s; i++) { await new Promise((r) => setTimeout(r, 150)); s = await alive(); }
       if (!s) throw new MotusError('The Motus app did not start.', `See ${path.join(ws, '.motus-app.log')}`);
     }
     if (flags.open) openUrl(s.url);
-    const next = `node ${JSON.stringify(SELF)} next --agent "<your name>"`;
+    const next = `node ${cliPath(SELF)} next --agent "<your name>"`;
     print({ url: s.url, workspace: ws, ready: check.ready, failing, next, tell: `Motus is open at ${s.url}. Drop a video there. Keep this chat open: the planning work happens here in the background.` },
       (x) => `Motus is open: ${x.url}\nVideos are kept in: ${x.workspace}${x.failing.length ? `\n\nThis machine is missing ${x.failing.length} thing(s) Motus needs:\n${x.failing.map((f) => `  ${f.name}: ${f.fix}`).join('\n')}` : ''}\n\nNext, and again after every job: ${x.next}`);
   },

@@ -4,6 +4,9 @@
 
 const $ = (s, root = document) => root.querySelector(s);
 const POLL_MS = 1500;
+// the file manager's name on this system, for the button that shows a finished video in it
+const OS = String(navigator.userAgentData?.platform || navigator.platform || '');
+const SHOW_FILE = /^win/i.test(OS) ? 'Show in File Explorer' : /mac/i.test(OS) ? 'Show in Finder' : 'Show in folder';
 
 function h(tag, attrs, ...kids) {
   const el = document.createElement(tag);
@@ -97,7 +100,7 @@ function describe(p, agent) {
 function actionsFor(p) {
   const list = [];
   if (p.stage === 'review' || p.stage === 'rendered') list.push(['primary', 'Open Studio', () => openStudio(p)]);
-  if (p.stage === 'rendered') list.push(['', 'Show in Finder', () => api('POST', '/api/reveal', { project: p.id }).catch(flashError)]);
+  if (p.stage === 'rendered') list.push(['', SHOW_FILE, () => api('POST', '/api/reveal', { project: p.id }).catch(flashError)]);
   if (p.stage === 'error') list.push(['primary', 'Try again', () => api('POST', '/api/retry', { project: p.id }).then(refresh, flashError)]);
   return list;
 }

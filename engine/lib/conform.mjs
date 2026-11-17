@@ -3,7 +3,7 @@
 import path from 'node:path';
 import fs from 'node:fs/promises';
 import fss from 'node:fs';
-import { run, readJson, writeJson, exists, mkdirp, onExit, MotusError } from './util.mjs';
+import { run, readJson, writeJson, exists, mkdirp, onExit, renameRetry, MotusError } from './util.mjs';
 import { matteVideo } from './vision.mjs';
 import { hashOf } from './plan.mjs';
 import { loadStyle } from './styles.mjs';
@@ -272,7 +272,7 @@ export async function ensureFrames(project, { onProgress } = {}) {
     await fs.writeFile(path.join(tmp, '.stamp'), want);
     if (await stamped()) return dir;                         // another process finished the same frames first
     await fs.rm(dir, { recursive: true, force: true });
-    try { await fs.rename(tmp, dir); } catch (e) { if (!(await stamped())) throw e; }
+    try { await renameRetry(tmp, dir); } catch (e) { if (!(await stamped())) throw e; }
     return dir;
   } finally {
     off();

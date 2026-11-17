@@ -11,7 +11,7 @@
   <a href="CHANGELOG.md"><img alt="Version 0.2.0" src="https://img.shields.io/badge/version-0.2.0-f2a33a?style=flat-square&labelColor=18181b"></a>
   <a href="#install"><img alt="Claude Code plugin" src="https://img.shields.io/badge/Claude_Code-plugin-d97757?style=flat-square&labelColor=18181b"></a>
   <a href="#codex-experimental"><img alt="Codex: experimental" src="https://img.shields.io/badge/Codex-experimental-8b8f97?style=flat-square&labelColor=18181b"></a>
-  <a href="#status-and-known-limits"><img alt="Tested on macOS" src="https://img.shields.io/badge/tested_on-macOS-8b8f97?style=flat-square&labelColor=18181b"></a>
+  <a href="#status-and-known-limits"><img alt="Tested on macOS and Windows" src="https://img.shields.io/badge/tested_on-macOS_%7C_Windows-8b8f97?style=flat-square&labelColor=18181b"></a>
   <a href="#requirements"><img alt="Node 22 or newer" src="https://img.shields.io/badge/node-22%2B-8b8f97?style=flat-square&labelColor=18181b"></a>
   <a href="AGENTS.md"><img alt="Zero npm dependencies" src="https://img.shields.io/badge/npm_dependencies-0-6fd6c0?style=flat-square&labelColor=18181b"></a>
   <a href="LICENSE"><img alt="MIT licence" src="https://img.shields.io/badge/licence-MIT-8b8f97?style=flat-square&labelColor=18181b"></a>
@@ -36,11 +36,11 @@
 3. The Motus app opens in your browser. Drop a video in it, pick a look, review the edit scene by scene, and render.
 
 > [!TIP]
-> Keep the chat open while you edit. The AI session does the planning in the background, and the app shows what it is doing. Your videos are kept in `~/Movies/Motus` (set `MOTUS_HOME` to change that).
+> Keep the chat open while you edit. The AI session does the planning in the background, and the app shows what it is doing. Your videos are kept in `~/Movies/Motus` on a Mac and `Videos\Motus` on Windows (set `MOTUS_HOME` to change that).
 
 You give Motus a raw take or a picture-locked cut and pick a style. You choose between options for each scene on a local review page, and you get a 1080×1920 MP4.
 
-Version 0.2.0. Four style packs, in beta. Built and tested on macOS only. Claude Code is the first target. OpenAI Codex support is experimental.
+Version 0.3.1. Five style packs, in beta. Runs on macOS and Windows 10 or 11. Claude Code is the first target. OpenAI Codex support is experimental.
 
 ## Five styles
 
@@ -289,11 +289,11 @@ node engine/bin/motus.mjs render motus-projects/take
 
 | Need | Notes |
 |---|---|
-| macOS | The only tested platform. See [Status and known limits](#status-and-known-limits) for Linux and Windows. |
-| Node.js 22 or newer | Runs the engine. No npm packages are installed. |
-| ffmpeg and ffprobe | A build with libx264 and the filters drawtext, loudnorm, silencedetect, tile and hstack. The Homebrew build has them. |
-| Google Chrome | Or Chromium, Microsoft Edge or Brave. Used headless for rendering and page capture. |
-| Python 3.9 or newer with `faster-whisper` | Transcription. `python3 -m pip install faster-whisper`. The first transcription downloads the speech model (`large-v3-turbo`, about 1.6 GB). |
+| macOS or Windows 10/11 | Both tested. Linux has the code paths but has not been run. See [Status and known limits](#status-and-known-limits). |
+| Node.js 22 or newer | Runs the engine. No npm packages are installed. Windows: `winget install OpenJS.NodeJS.LTS`. |
+| ffmpeg and ffprobe | A build with libx264 and the filters drawtext, loudnorm, silencedetect, tile and hstack. macOS: `brew install ffmpeg`. Windows: `winget install Gyan.FFmpeg`, then open a new terminal so it is on PATH. |
+| Google Chrome | Or Chromium, Microsoft Edge or Brave. Used headless for rendering and page capture. On Windows the Edge that ships with the system is enough. |
+| Python 3.9 or newer with `faster-whisper` | Transcription. macOS: `python3 -m pip install faster-whisper`. Windows: `winget install Python.Python.3.12`, then `py -3 -m pip install faster-whisper`. The first transcription downloads the speech model (`large-v3-turbo`, about 1.6 GB). |
 | Xcode command line tools | Optional, macOS only. Provides `swiftc` for the person matte and face tracking (Apple Vision). `xcode-select --install`. The helper is compiled on first use into `~/.cache/motus`. |
 | Claude Code, or Codex CLI | The agent that drives the engine. |
 
@@ -345,7 +345,8 @@ Your source video is treated as read-only. Everything Motus writes goes into the
 
 ## Status and known limits
 
-- **macOS first.** The person matte and face tracking use Apple Vision through a small Swift helper. Without them (no Swift toolchain, or Linux or Windows) the engine falls back to un-matted framing: no head rising above the presenter panel, and a centre crop for sources that are not 9:16. Linux and Windows have code paths for finding Chrome and opening the browser, but nothing has been run there.
+- **Windows works without the person matte.** The person matte and face tracking use Apple Vision through a small Swift helper, so they are macOS only. On Windows (and on a Mac without the Swift toolchain) the engine falls back to un-matted framing: no head rising above the presenter panel, and a centre crop for sources that are not 9:16. Everything else (the app, transcription, Studio, rendering) runs the same. Windows is checked on a Windows runner: `motus doctor`, transcription with faster-whisper, the app and Studio servers, the unit tests and an end-to-end render. Linux has code paths but has not been run.
+- **Transcription on an NVIDIA GPU** needs the CUDA libraries (cuBLAS, cuDNN). Without them it falls back to the CPU on its own, which is slower.
 - **Four style packs, all in beta.** Expect their elements and rules to change before 1.0.
 - **Output** is always 1080×1920 at the source frame rate. Draft renders are 540×960. A style can also ask conform to keep the whole source frame as a wide view (Night Class and Ember Brief do); then the preview proxy is about 3870 px wide.
 - **The source must contain the speech.** A file with no audio stream cannot be planned.

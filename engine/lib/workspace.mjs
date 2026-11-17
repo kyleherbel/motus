@@ -12,7 +12,7 @@ import os from 'node:os';
 import fs from 'node:fs/promises';
 import fss from 'node:fs';
 import { spawn } from 'node:child_process';
-import { ROOT, readJson, writeJson, exists, MotusError } from './util.mjs';
+import { ROOT, readJson, writeJson, exists, cliPath, MotusError } from './util.mjs';
 import { loadProject, listFiles } from './project.mjs';
 
 export const AGENT_FILE = '.motus-agent.json';
@@ -21,11 +21,11 @@ const WAITING_FRESH_MS = 20000;          // `next` beats every 5 s while it wait
 const WORKING_FRESH_MS = 45 * 60000;     // a planning job can run long between `say` lines
 const IDLE_FRESH_MS = 3 * 60000;         // between `done` and the next `next`
 
-/** Where the app keeps projects: $MOTUS_HOME, else ~/Movies/Motus on a Mac, else ~/Motus. */
+/** Where the app keeps projects: $MOTUS_HOME, else ~/Movies/Motus on a Mac, ~/Videos/Motus on Windows, else ~/Motus. */
 export function defaultWorkspace() {
   if (process.env.MOTUS_HOME) return path.resolve(process.env.MOTUS_HOME);
-  const movies = path.join(os.homedir(), 'Movies');
-  return fss.existsSync(movies) ? path.join(movies, 'Motus') : path.join(os.homedir(), 'Motus');
+  const videos = path.join(os.homedir(), process.platform === 'win32' ? 'Videos' : 'Movies');
+  return fss.existsSync(videos) ? path.join(videos, 'Motus') : path.join(os.homedir(), 'Motus');
 }
 
 export const appState = (p) => readJson(p.path('review', 'app.json'), {});
@@ -39,16 +39,22 @@ export async function patchAppState(p, fn) {
 
 /** Show a file in Finder (or the system's file manager). */
 export function reveal(file) {
-  const [cmd, args] = process.platform === 'darwin' ? ['open', ['-R', file]]
-    : process.platform === 'win32' ? ['explorer', [`/select,${file}`]]
-      : ['xdg-open', [path.dirname(file)]];
+  if (process.platform === 'win32') {
+    // Explorer parses its own command line: the path is quoted after "/select," (Node would quote the whole
+    // argument, which Explorer does not understand), so the arguments go through verbatim
+    spawn('explorer.exe', [`/select,"${path.resolve(file)}"`], { detached: true, stdio: 'ignore', windowsVerbatimArguments: true }).on('error', () => {}).unref();
+    return;
+  }
+  const [cmd, args] = process.platform === 'darwin' ? ['open', ['-R', file]] : ['xdg-open', [path.dirname(file)]];
   spawn(cmd, args, { detached: true, stdio: 'ignore' }).on('error', () => {}).unref();
 }
 
 /** Open a URL in the default browser. */
 export function openUrl(url) {
+  // Windows: `start` is a cmd built-in; its first quoted argument is a window title, so an empty one
+  // (Node passes '' as "") goes first. windowsHide keeps cmd's own console window from flashing up.
   const [cmd, args] = process.platform === 'darwin' ? ['open', [url]] : process.platform === 'win32' ? ['cmd', ['/c', 'start', '', url]] : ['xdg-open', [url]];
-  spawn(cmd, args, { detached: true, stdio: 'ignore' }).on('error', () => {}).unref();
+  spawn(cmd, args, { detached: true, stdio: 'ignore', windowsHide: true }).on('error', () => {}).unref();
 }
 
 export const pidAlive = (pid) => { if (!pid) return false; try { process.kill(pid, 0); return true; } catch (e) { return e.code === 'EPERM'; } };
@@ -144,7 +150,7 @@ export async function projectSummary(dir, agent) {
 
 const EDIT_SKILL = path.join(ROOT, 'skills', 'edit', 'SKILL.md');
 const BIN = path.join(ROOT, 'engine', 'bin', 'motus.mjs');
-const q = (s) => JSON.stringify(s);
+const q = cliPath;
 
 function planInstructions(p, setup, resumed) {
   const cli = `node ${q(BIN)}`;

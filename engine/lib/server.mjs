@@ -25,7 +25,7 @@ export async function ensureStudio(p, { port = 0 } = {}) {
   await mkdirp(p.path('review'));
   await fs.rm(info, { force: true });
   const logFile = fss.openSync(p.path('review', 'server.log'), 'a');
-  const child = spawn(process.execPath, [BIN, '_serve', p.dir, '--port', String(port)], { detached: true, stdio: ['ignore', logFile, logFile] });
+  const child = spawn(process.execPath, [BIN, '_serve', p.dir, '--port', String(port)], { detached: true, stdio: ['ignore', logFile, logFile], windowsHide: true });
   child.unref();
   fss.closeSync(logFile);
   for (let i = 0; i < 60 && !s; i++) { await new Promise((r) => setTimeout(r, 150)); s = await alive(); }
@@ -228,7 +228,7 @@ export async function createStudioServer(projectDir, { port = 0, host = '127.0.0
     if (loopRun || render.status === 'running') { loopAgain = true; return; }
     loopAgain = false;
     const logFile = fss.openSync(project.path('review', 'loops.log'), 'a');
-    loopRun = spawn(process.execPath, [BIN, 'stills', project.dir, '--loops', '--quiet'], { stdio: ['ignore', logFile, logFile] });
+    loopRun = spawn(process.execPath, [BIN, 'stills', project.dir, '--loops', '--quiet'], { stdio: ['ignore', logFile, logFile], windowsHide: true });
     fss.closeSync(logFile);
     emit('state');
     const finish = () => { loopRun = null; emit('plan'); if (loopAgain) loopTimer = setTimeout(ensureLoops, 500); };

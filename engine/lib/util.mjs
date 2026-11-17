@@ -11,6 +11,7 @@ export const ROOT = path.resolve(ENGINE, '..');
 export const STYLES = process.env.MOTUS_STYLES ? path.resolve(process.env.MOTUS_STYLES) : path.join(ROOT, 'styles');
 /** Compiled helpers and other machine-local caches live outside the repo. */
 export const CACHE = process.env.MOTUS_CACHE ? path.resolve(process.env.MOTUS_CACHE) : path.join(os.homedir(), '.cache', 'motus');
+export const WIN = process.platform === 'win32';
 
 /** An error the user or the agent can act on: `fix` says what to do next. */
 export class MotusError extends Error {
@@ -23,7 +24,9 @@ export class MotusError extends Error {
  */
 export function run(cmd, args = [], opt = {}) {
   return new Promise((resolve, reject) => {
-    const child = spawn(cmd, args, { cwd: opt.cwd, env: { ...process.env, ...(opt.env || {}) }, stdio: ['pipe', 'pipe', 'pipe'] });
+    // windowsHide: the detached app and Studio servers have no console on Windows, so without it every
+    // ffmpeg, Python or Node process they start would open a console window of its own
+    const child = spawn(cmd, args, { cwd: opt.cwd, env: { ...process.env, ...(opt.env || {}) }, stdio: ['pipe', 'pipe', 'pipe'], windowsHide: true });
     let stdout = '', stderr = '';
     const feed = (stream) => {
       let tail = '';
@@ -77,21 +80,46 @@ export async function readJson(p, fallback) {
   }
 }
 
+/**
+ * fs.rename that rides out Windows file locks. On Windows a virus scanner or the search indexer briefly
+ * opens a file that was just written, and a server reading the target holds it too: rename then fails
+ * with EPERM, EACCES or EBUSY for a moment. Retry for up to about 4 s there; elsewhere this is fs.rename.
+ */
+export async function renameRetry(from, to) {
+  for (let wait = 20; ; wait *= 2) {
+    try { return await fs.rename(from, to); } catch (e) {
+      if (!WIN || !['EPERM', 'EACCES', 'EBUSY'].includes(e.code) || wait > 2000) throw e;
+      await new Promise((r) => setTimeout(r, wait));
+    }
+  }
+}
+
 let writeSeq = 0;
 /** Atomic JSON write: a reader never sees a half-written file. */
 export async function writeJson(p, obj) {
   await fs.mkdir(path.dirname(p), { recursive: true });
   const tmp = `${p}.${process.pid}.${Date.now()}.${++writeSeq}.tmp`;   // unique even for two writes in one millisecond
   await fs.writeFile(tmp, JSON.stringify(obj, null, 2) + '\n');
-  await fs.rename(tmp, p);
+  try { await renameRetry(tmp, p); } catch (e) { await fs.rm(tmp, { force: true }).catch(() => {}); throw e; }
 }
 
 export const mkdirp = (p) => fs.mkdir(p, { recursive: true });
 
+/** Names Windows reserves for devices, with or without an extension: "con", "nul.mp4", "com1". */
+export const RESERVED_NAME = /^(con|prn|aux|nul|com\d|lpt\d)(\..*)?$/i;
+
 export function slug(s) {
-  return String(s).normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+  const out = String(s).normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
     .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60) || 'video';
+  return RESERVED_NAME.test(out) ? `${out}-video` : out;      // a folder named "con" cannot exist on Windows
 }
+
+/**
+ * A path written into a command line the user or agent will run. On Windows it uses forward slashes,
+ * which Node accepts and every shell (cmd, PowerShell, Git Bash) leaves alone; JSON quoting there would
+ * double every backslash. Elsewhere: JSON quoting, as before.
+ */
+export const cliPath = (p) => JSON.stringify(WIN ? String(p).replace(/\\/g, '/') : String(p));
 
 /** "30000/1001" -> [30000, 1001]; "30" -> [30, 1] */
 export function parseRational(s) {
@@ -125,20 +153,68 @@ export function clock(sec, digits = 2) {
   return `${m}:${s.toFixed(digits).padStart(digits ? digits + 3 : 2, '0')}`;
 }
 
+/** Where Chromium-family browsers install on each system, most preferred first. */
+export function chromeCandidates(platform = process.platform, env = process.env) {
+  if (platform === 'darwin') {
+    return ['Google Chrome', 'Chromium', 'Microsoft Edge', 'Brave Browser', 'Google Chrome Canary'].map((n) => `/Applications/${n}.app/Contents/MacOS/${n}`);
+  }
+  if (platform === 'win32') {
+    // Chrome installs machine-wide (Program Files) or per user (LocalAppData); Edge ships with Windows 10 and 11
+    const roots = [env.PROGRAMFILES || 'C:\\Program Files', env['PROGRAMFILES(X86)'] || 'C:\\Program Files (x86)', env.LOCALAPPDATA].filter(Boolean);
+    const apps = ['Google\\Chrome\\Application\\chrome.exe', 'Chromium\\Application\\chrome.exe', 'Microsoft\\Edge\\Application\\msedge.exe', 'BraveSoftware\\Brave-Browser\\Application\\brave.exe'];
+    return apps.flatMap((a) => roots.map((r) => path.win32.join(r, a)));
+  }
+  return ['/usr/bin/google-chrome', '/usr/bin/google-chrome-stable', '/usr/bin/chromium', '/usr/bin/chromium-browser', '/snap/bin/chromium', '/usr/bin/microsoft-edge', '/usr/bin/microsoft-edge-stable', '/usr/bin/brave-browser'];
+}
+
 /** Find a Chromium-family browser to drive headless. */
 export function findChrome() {
   const env = process.env.MOTUS_CHROME;
   if (env && fss.existsSync(env)) return env;
-  const mac = ['Google Chrome', 'Chromium', 'Microsoft Edge', 'Brave Browser', 'Google Chrome Canary']
-    .map((n) => `/Applications/${n}.app/Contents/MacOS/${n}`);
-  const linux = ['/usr/bin/google-chrome', '/usr/bin/google-chrome-stable', '/usr/bin/chromium', '/usr/bin/chromium-browser', '/snap/bin/chromium', '/usr/bin/microsoft-edge'];
-  const win = [
-    `${process.env['PROGRAMFILES'] || 'C:\\Program Files'}\\Google\\Chrome\\Application\\chrome.exe`,
-    `${process.env['PROGRAMFILES(X86)'] || 'C:\\Program Files (x86)'}\\Google\\Chrome\\Application\\chrome.exe`,
-    `${process.env['PROGRAMFILES(X86)'] || 'C:\\Program Files (x86)'}\\Microsoft\\Edge\\Application\\msedge.exe`,
-  ];
-  for (const p of [...mac, ...linux, ...win]) if (fss.existsSync(p)) return p;
+  for (const p of chromeCandidates()) if (fss.existsSync(p)) return p;
   return null;
+}
+
+/** Minor versions tried by name after the default Python: faster-whisper's packages lag new Python releases. */
+const PY_MINORS = ['3.13', '3.12', '3.11', '3.10'];
+
+/**
+ * The commands that may start Python 3, in the order tried. On Windows `python3` is usually the Microsoft
+ * Store placeholder, so the `py` launcher (python.org installs) comes first, then `python`.
+ * MOTUS_PYTHON is one program path and is used as it is (no splitting: it may contain spaces).
+ */
+export function pythonCandidates(platform = process.platform, env = process.env) {
+  if (env.MOTUS_PYTHON) return [{ cmd: env.MOTUS_PYTHON, args: [] }];
+  return platform === 'win32'
+    ? [{ cmd: 'py', args: ['-3'] }, ...PY_MINORS.map((v) => ({ cmd: 'py', args: [`-${v}`] })), { cmd: 'python', args: [] }, { cmd: 'python3', args: [] }]
+    : [{ cmd: 'python3', args: [] }, ...PY_MINORS.map((v) => ({ cmd: `python${v}`, args: [] })), { cmd: 'python', args: [] }];
+}
+
+const pyLabel = (c) => [c.cmd.includes(' ') ? JSON.stringify(c.cmd) : c.cmd, ...c.args].join(' ');
+let pythonFound;
+/**
+ * The Python 3 to transcribe with: { cmd, args, label, version, whisper } where `label` is how to type it in
+ * a shell (for fix messages). The first candidate that has faster-whisper wins; else the first that runs
+ * (`whisper: false`); else the first candidate with `version: null`, so error messages still name it.
+ * A machine with a brand-new default Python and an older one holding faster-whisper uses the older one.
+ */
+export function findPython() {
+  pythonFound ||= (async () => {
+    const list = pythonCandidates();
+    const probe = 'import sys, importlib.util; print(".".join(map(str, sys.version_info[:3]))); print(importlib.util.find_spec("faster_whisper") is not None)';
+    let first = null;
+    for (const c of list) {
+      try {
+        const [version, whisper] = (await run(c.cmd, [...c.args, '-c', probe])).stdout.trim().split(/\r?\n/).slice(-2);
+        if (!/^3\./.test(version)) continue;
+        const found = { ...c, label: pyLabel(c), version, whisper: whisper === 'True' };
+        if (found.whisper) return found;
+        first ||= found;
+      } catch { /* not this one */ }
+    }
+    return first || { ...list[0], label: pyLabel(list[0]), version: null, whisper: false };
+  })();
+  return pythonFound;
 }
 
 /**

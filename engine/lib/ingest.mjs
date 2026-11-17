@@ -1,12 +1,14 @@
 // Ingest: everything the agent needs to understand a video, computed on the source timeline.
 import path from 'node:path';
 import fs from 'node:fs/promises';
-import { run, readJson, writeJson, exists, mkdirp, ENGINE, MotusError, fpsOf } from './util.mjs';
+import { run, readJson, writeJson, exists, mkdirp, ENGINE, MotusError, fpsOf, findPython } from './util.mjs';
 import { faceTrack } from './vision.mjs';
 
-const LABEL_FONT = path.join(ENGINE, 'assets', 'fonts', 'Inter.ttf');
-/** ffmpeg filter-graph escaping for a path used as an option value. */
-const fesc = (p) => p.replace(/\\/g, '\\\\').replace(/:/g, '\\:').replace(/'/g, "\\'").replace(/,/g, '\\,');
+// The label font is named relative to its folder, which is ffmpeg's working directory for that run: an
+// absolute path inside a filter graph needs escaping (a Windows drive letter's ":" splits the option, and a
+// quote in a user name ends the value). Every other path is an ordinary argument and stays absolute.
+const FONT_DIR = path.join(ENGINE, 'assets', 'fonts');
+const LABEL_FONT = 'Inter.ttf';
 
 export async function extractAudio(project) {
   const out = project.path('analysis', 'audio.wav');
@@ -82,8 +84,9 @@ export async function transcribe(project, { transcript, language, model, prompt,
   if (language) args.push('--language', language);
   if (model) args.push('--model', model);
   if (prompt) args.push('--prompt', prompt);
-  const py = process.env.MOTUS_PYTHON || 'python3';
-  const { stdout } = await run(py, args, {
+  const py = await findPython();
+  if (!py.version) throw new MotusError('Python 3 was not found, so the speech cannot be transcribed.', 'Run: motus doctor (it says how to install Python and faster-whisper here), or pass --transcript <words.json> with word timings. MOTUS_PYTHON can point at a Python 3 interpreter.');
+  const { stdout } = await run(py.cmd, [...py.args, ...args], {
     onLine: (line, stream) => { if (stream === 'stderr' && line.startsWith('{')) { try { const j = JSON.parse(line); if (j.progress !== undefined) onProgress?.(j.progress); } catch { /* not ours */ } } },
     ok: [0, 2],
     fix: 'Transcription failed. Run: motus doctor (python, faster-whisper; the first run downloads the model), or pass --transcript <words.json> with word timings.',
@@ -114,10 +117,10 @@ export async function contactSheets(project, { from = 0, to, fps, cols = 6, rows
     `fps=${fps}`,
     crop ? `crop=${crop.w}:${crop.h}:${crop.x}:${crop.y}` : null,
     `scale=${cellW}:${cellH}:force_original_aspect_ratio=increase`, `crop=${cellW}:${cellH}`,
-    `drawtext=fontfile='${fesc(LABEL_FONT)}':text='%{eif\\:floor(t+${from})\\:d}.%{eif\\:mod(floor((t+${from})*10)\\,10)\\:d}s':x=8:y=8:fontsize=26:fontcolor=white:box=1:boxcolor=black@0.72:boxborderw=6`,
+    `drawtext=fontfile=${LABEL_FONT}:text='%{eif\\:floor(t+${from})\\:d}.%{eif\\:mod(floor((t+${from})*10)\\,10)\\:d}s':x=8:y=8:fontsize=26:fontcolor=white:box=1:boxcolor=black@0.72:boxborderw=6`,
     `tile=${cols}x${rows}:padding=4:margin=4:color=0x101010`,
   ].filter(Boolean).join(',');
-  await run('ffmpeg', ['-v', 'error', '-y', '-ss', String(from), '-t', String(span), '-i', src.path, '-vf', chain, '-q:v', '3', '-fps_mode', 'passthrough', path.join(outDir, `${prefix}-%02d.jpg`)]);
+  await run('ffmpeg', ['-v', 'error', '-y', '-ss', String(from), '-t', String(span), '-i', path.resolve(src.path), '-vf', chain, '-q:v', '3', '-fps_mode', 'passthrough', path.resolve(outDir, `${prefix}-%02d.jpg`)], { cwd: FONT_DIR });
   const files = (await fs.readdir(outDir)).filter((f) => f.startsWith(`${prefix}-`)).sort();
   const per = cols * rows;
   return files.map((f, k) => {

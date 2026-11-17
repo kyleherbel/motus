@@ -13,6 +13,9 @@ import { createBoard } from './board.js';
 const OVERALL_NOTE_MAX = 8000;        // the server keeps this many characters of the overall note
 const LOST_AFTER_MS = 6000;           // how long the event stream may be down before Studio says so
 const FLASH_MS = 6000;
+// the file manager's name on this system, for the button that shows the finished video in it
+const OS = String(navigator.userAgentData?.platform || navigator.platform || '');
+const SHOW_FILE = /^win/i.test(OS) ? 'Show in File Explorer' : /mac/i.test(OS) ? 'Show in Finder' : 'Show in folder';
 
 const app = {
   model: null,
@@ -551,7 +554,8 @@ function paintFinal() {
     build = () => finalVideo(r.url, r.file, r.info, r.seconds, !!r.draft);
   } else if (r.status !== 'running' && m?.final) {
     key = `file:${m.final}`;
-    build = () => finalVideo(m.final, `${m.project.dir}/renders/final.mp4`, null, null, false, true);
+    const sep = m.project.dir.includes('\\') ? '\\' : '/';      // a Windows project folder uses backslashes
+    build = () => finalVideo(m.final, [m.project.dir, 'renders', 'final.mp4'].join(sep), null, null, false, true);
   }
   if (key === finalKey) return;
   finalKey = key;
@@ -561,7 +565,7 @@ function paintFinal() {
 
 function finalVideo(url, file, info, seconds, draft, earlier = false) {
   const video = h('video', { controls: true, playsinline: true, preload: 'metadata', src: `${url}?v=${Date.now()}` });
-  const finder = h('button', { class: 'btn sm', type: 'button' }, 'Show in Finder');
+  const finder = h('button', { class: 'btn sm', type: 'button' }, SHOW_FILE);
   finder.addEventListener('click', () => { fetch('/api/reveal', { method: 'POST', headers: { 'content-type': 'application/json' }, body: '{}' }).catch(() => {}); });
   const copy = h('button', { class: 'btn sm', type: 'button' }, 'Copy path');
   copy.addEventListener('click', async () => {

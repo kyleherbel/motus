@@ -13,6 +13,8 @@ Run `node "${CLAUDE_PLUGIN_ROOT}/engine/bin/motus.mjs" doctor` (outside Claude C
 
 Requirements: ffmpeg and ffprobe (with libx264, drawtext, loudnorm), Node 22 or newer, Google Chrome or another Chromium-based browser, Python 3.9 or newer with `faster-whisper`. The first transcription downloads a speech model of about 1.6 GB.
 
-Environment overrides: `MOTUS_CHROME` (browser binary), `MOTUS_PYTHON` (interpreter), `MOTUS_WHISPER_MODEL` (for example `small` or `medium` on slower machines), `MOTUS_CACHE` (where the compiled helper is kept).
+On Windows the `fix:` lines use `winget` (`winget install Gyan.FFmpeg`, `winget install Python.Python.3.12`) and `py -3 -m pip install faster-whisper`. After a `winget` install the user must open a new terminal, and you must start a new shell, before the program is on PATH. Microsoft Edge ships with Windows and is found when Chrome is not installed. The person matte is macOS only: on Windows it is a `warn`, never a `FAIL`. If `pip install faster-whisper` fails while compiling a package, the default Python is too new for it: install Python 3.12 beside it and install faster-whisper there (`py -3.12 -m pip install faster-whisper`). Motus picks the Python that has faster-whisper.
+
+Environment overrides: `MOTUS_CHROME` (browser binary), `MOTUS_PYTHON` (interpreter: one program path; without it Motus tries `python3`, `python3.13` to `python3.10`, then `python`, or on Windows `py -3`, `py -3.13` to `py -3.10`, `python`, then `python3`, and uses the first that has faster-whisper), `MOTUS_WHISPER_MODEL` (for example `small` or `medium` on slower machines), `MOTUS_CACHE` (where the compiled helper is kept).
 
 For problems after setup, read `../edit/references/troubleshooting.md`.

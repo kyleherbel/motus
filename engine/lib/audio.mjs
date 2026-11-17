@@ -11,7 +11,7 @@ export const CH = 2;
 export function decode(file, { start, duration } = {}) {
   return new Promise((resolve, reject) => {
     const args = ['-v', 'error', ...(start ? ['-ss', String(start)] : []), ...(duration ? ['-t', String(duration)] : []), '-i', file, '-f', 'f32le', '-ac', String(CH), '-ar', String(RATE), '-'];
-    const p = spawn('ffmpeg', args, { stdio: ['ignore', 'pipe', 'pipe'] });
+    const p = spawn('ffmpeg', args, { stdio: ['ignore', 'pipe', 'pipe'], windowsHide: true });   // no console window under the detached Studio server
     const chunks = []; let err = '';
     p.stdout.on('data', (c) => chunks.push(c));
     p.stderr.on('data', (c) => { err += c; });

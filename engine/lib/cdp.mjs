@@ -1,6 +1,6 @@
 // A minimal Chrome DevTools Protocol client: launch headless Chrome, open pages,
 // evaluate, screenshot. Uses Node's built-in WebSocket; no dependencies.
-import { spawn } from 'node:child_process';
+import { spawn, spawnSync } from 'node:child_process';
 import fs from 'node:fs/promises';
 import fss from 'node:fs';
 import os from 'node:os';
@@ -12,13 +12,24 @@ const POSIX = process.platform !== 'win32';
  * Kill Chrome and every helper it started. Chrome runs in its own process group (spawned detached), so one
  * signal to the group reaches the GPU, network and renderer helpers too: killing only the main process let
  * the network helper keep writing into the profile after it was removed.
+ * Windows has no process groups: `taskkill /T` ends the tree. It runs only while the main process is alive
+ * (its helpers quit on their own once it is gone), so a reused process id is never killed. Synchronous,
+ * because it also runs from the exit hook.
  */
 function killTree(proc) {
   if (!proc?.pid) return;
-  try { process.kill(POSIX ? -proc.pid : proc.pid, 'SIGKILL'); } catch { try { proc.kill('SIGKILL'); } catch { /* gone */ } }
+  if (!POSIX) {
+    if (proc.exitCode !== null || proc.signalCode !== null) return;
+    try { spawnSync('taskkill', ['/pid', String(proc.pid), '/T', '/F'], { stdio: 'ignore', windowsHide: true, timeout: 5000 }); } catch { /* fall through */ }
+    try { proc.kill('SIGKILL'); } catch { /* gone */ }
+    return;
+  }
+  try { process.kill(-proc.pid, 'SIGKILL'); } catch { try { proc.kill('SIGKILL'); } catch { /* gone */ } }
 }
 const sleepSync = (ms) => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
-const rmProfileSync = (dir) => { try { fss.rmSync(dir, { recursive: true, force: true, maxRetries: 3, retryDelay: 50 }); } catch { /* best effort */ } };
+// Windows keeps a dead process's files locked a little longer: more retries there
+const RM_RETRIES = POSIX ? 3 : 10;
+const rmProfileSync = (dir) => { try { fss.rmSync(dir, { recursive: true, force: true, maxRetries: RM_RETRIES, retryDelay: 50 }); } catch { /* best effort */ } };
 
 export class Browser {
   static async launch({ width = 1080, height = 1920, extraArgs = [] } = {}) {
@@ -40,7 +51,7 @@ export class Browser {
       killTree(handle.proc);
       handle.off();
       await new Promise((r) => setTimeout(r, handle.proc ? 150 : 0));
-      await fs.rm(profile, { recursive: true, force: true, maxRetries: 3 }).catch(() => {});
+      await fs.rm(profile, { recursive: true, force: true, maxRetries: RM_RETRIES }).catch(() => {});
       throw e;
     }
   }
@@ -57,7 +68,7 @@ export class Browser {
       '--run-all-compositor-stages-before-draw',
       `--window-size=${width},${height}`, ...extraArgs, 'about:blank',
     ];
-    const proc = spawn(bin, args, { stdio: ['ignore', 'ignore', 'pipe'], detached: POSIX });   // own process group: see killTree
+    const proc = spawn(bin, args, { stdio: ['ignore', 'ignore', 'pipe'], detached: POSIX, windowsHide: true });   // own process group: see killTree
     handle.proc = proc;
     const wsUrl = await new Promise((resolve, reject) => {
       let buf = '', found = false;
@@ -132,7 +143,7 @@ export class Browser {
     try { this.ws?.close(); } catch { /* closed */ }
     this.proc = null;
     this.handle?.off();
-    await fs.rm(this.profile, { recursive: true, force: true, maxRetries: 3 }).catch(() => {});
+    await fs.rm(this.profile, { recursive: true, force: true, maxRetries: RM_RETRIES }).catch(() => {});
   }
 }
 
