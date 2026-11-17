@@ -155,6 +155,15 @@ export async function buildComposition(doc, env, root) {
     if (it.slot === 'card' && it.mode === 'white' && it.tIn > 0 && it.modeCut === false && it.sceneSlots.heading) it.enter = 'white';
   }
 
+  // ---- a new card replacing another inside one dark or light run slide-pushes it out (motion.md M16,
+  // re-seen in mid and newer reels by research/explain.md): one rigid strip, 22 f, horizontal blur
+  for (const it of instances) {
+    if (it.slot !== 'card' || it.tIn <= 0 || it.modeCut || it.enter !== 'none' || it.mode === 'white' || it.sceneSlots.title) continue;
+    const pv = instances.find((x) => x !== it && x.slot === 'card' && x.run === it.run && Math.abs(x.tOut - it.tIn) < 1e-6);
+    if (!pv || pv.sceneSlots.title || pv.morphAt !== undefined) continue;
+    it.enter = 'push'; pv.pushOut = it.tIn;
+  }
+
   // ---- sound, following the reference's placement rules (research/audio.md)
   S.sfx(F(0.75), 'open');
   const sentenceEnd = (t) => { const w = [...doc.words].reverse().find((x) => x.end <= t + 0.25); return !!w && /[.!?]$/.test(w.w) && t - w.end < 0.5; };
@@ -167,7 +176,7 @@ export async function buildComposition(doc, env, root) {
   });
   for (const it of instances) {
     if (it.slot !== 'card' || it.tIn <= 0) continue;
-    if (it.enter === 'slide') S.sfx(it.tIn, 'cardSlide');
+    if (it.enter === 'slide' || it.enter === 'push') S.sfx(it.tIn, 'cardSlide');
     else if (it.enter === 'white' || (it.run.settle && it.tIn === it.run.start)) S.sfx(it.tIn, 'cardIn');
   }
   S.sfx(doc.duration - 0.55, 'end');
@@ -183,7 +192,14 @@ export async function buildComposition(doc, env, root) {
     return (g.start >= off && g.start < c.tOut) || (t >= off && t < c.tOut);
   });
 
-  root.append(grounds.el, presenter.el, graphics, captions.el);
+  const ns = 'http://www.w3.org/2000/svg';
+  const pushFx = document.createElementNS(ns, 'svg');
+  pushFx.setAttribute('width', '0'); pushFx.setAttribute('height', '0');
+  Object.assign(pushFx.style, { position: 'absolute', left: '0', top: '0' });
+  pushFx.innerHTML = '<filter id="ep-push-blur" x="-20%" y="-5%" width="140%" height="110%" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="0 0"/></filter>';
+  const pushBlur = pushFx.querySelector('feGaussianBlur');
+  const pushEase = kit.cubicBezier(...motion.push.curve);
+  root.append(pushFx, grounds.el, presenter.el, graphics, captions.el);
 
   // the dark backdrop echoes whichever card is up
   const echoOf = (t) => { const it = instances.find((x) => x.slot === 'card' && t >= x.tIn && t < x.tOut && (x.mode === 'dark-focus' || x.morphAt !== undefined)); return it ? { tone: it.built.tone || it.def.tone || 'light' } : null; };
@@ -202,8 +218,10 @@ export async function buildComposition(doc, env, root) {
         r.group.style.transform = sc === 1 ? 'none' : `scale(${sc.toFixed(5)})`;
       }
     }
+    let pushSpeed = 0;
     for (const it of instances) {
-      const on = t >= it.tIn && t < it.tOut;
+      const leaving = it.pushOut !== undefined && t >= it.tOut && t < it.tOut + motion.push.dur;
+      const on = (t >= it.tIn && t < it.tOut) || leaving;
       if (it.on !== on) { it.wrap.style.display = on ? '' : 'none'; it.on = on; }
       if (!on) continue;
       const age = t - it.tIn;
@@ -214,10 +232,19 @@ export async function buildComposition(doc, env, root) {
         it.wrap.style.transform = `translate(${((a.x - b.x) * (1 - p)).toFixed(2)}px, ${((a.y - b.y) * (1 - p)).toFixed(2)}px) scale(${sc.toFixed(5)})`;
         const fade = kit.prog(t, it.tIn + motion.whiteCard.delay, motion.whiteCard.fade, kit.ease.outCubic);
         it.wrap.style.opacity = String(it.tIn > 0 ? fade : 1);
-      } else if (it.enter === 'slide') {
+      } else if (it.enter === 'slide' && !leaving) {
         const dy = motion.lightCard.dy * Math.exp(-age / motion.lightCard.tau);
         it.wrap.style.transform = Math.abs(dy) < 0.05 ? 'none' : `translateY(${dy.toFixed(2)}px)`;
         it.wrap.style.opacity = String(0.2 + 0.8 * kit.prog(t, it.tIn, motion.lightCard.fade, kit.ease.outCubic));
+      } else if (it.enter === 'push' || leaving) {
+        const t0 = leaving ? it.pushOut : it.tIn;
+        const p = pushEase(kit.clamp((t - t0) / motion.push.dur));
+        const p1 = pushEase(kit.clamp((t - F(1) - t0) / motion.push.dur));
+        pushSpeed = Math.max(pushSpeed, (p - p1) * motion.push.travel);
+        const x = leaving ? -motion.push.travel * p : motion.push.travel * (1 - p);
+        it.wrap.style.transform = Math.abs(x) < 0.05 ? 'none' : `translateX(${x.toFixed(1)}px)`;
+        it.wrap.style.filter = p > 0 && p < 1 ? 'url(#ep-push-blur)' : 'none';
+        it.wrap.style.opacity = '';
       } else if (it.enter === 'white') {
         const p = kit.prog(t, it.tIn + motion.whiteCard.delay, motion.whiteCard.fade, kit.ease.linear);
         const grow = 1 - (1 - motion.whiteCard.fromScale) * Math.pow(0.77, Math.max(0, (age - motion.whiteCard.delay) * 30));
@@ -227,6 +254,10 @@ export async function buildComposition(doc, env, root) {
       }
       it.built.seek(t);
     }
+    pushBlur.setAttribute('stdDeviation', `${(Math.min(60, pushSpeed * motion.push.blur)).toFixed(2)} 0`);
+    // the dark backdrop echoes the card in focus, as drawn at this frame
+    if (run.mode === 'dark-focus') grounds.echoLive(t, instances.find((x) => x.slot === 'card' && t >= x.tIn && t < x.tOut && (x.mode === 'dark-focus' || x.morphAt !== undefined)));
+    else grounds.echoLive(t, null);
     captions.seek(t, sceneAt, suppressed);
   };
 

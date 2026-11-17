@@ -106,6 +106,8 @@ Part of the Editorial Proof study; read `README.md` first for the corpus, the me
 - Numbers: Travel 1145 px, constant gap 258 px between cards, cubic-bezier(0.3,0,0,1), 22 f (733 ms), RMSE 0.0013. Progress: 0.009, 0.045, 0.135, 0.303, 0.472, 0.590, 0.676, 0.742, 0.795, 0.837, 0.871, 0.900, 0.923, 0.942, 0.958, 0.970, 0.980, 0.988, 0.994, 0.997, 1.0. Peak 193 px/frame (5,790 px/s). Caption does not move.
 - Evidence: 3 tracked, identical to 3 decimals: clip21@322 and @366, clip23@198; 9 detected in 6 reels (also clip18@565,@609, clip22@805, clip08@273, clip15@353). Absent from the 15 newest reels.
 
+- Update (second study, research/explain.md): slide-push swaps were also seen in mid and newer reels (21 in 9 of clip07-clip18, at least 9 in clip19-clip29, one at clip36@614). Hard swaps still dominate D>D changes; the build keeps the hard swap.
+
 ### M17 - White interstitial reuses the hook title component; the stage is either static or runs the 1.15 settle.
 
 - Confidence: medium

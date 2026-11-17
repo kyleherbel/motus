@@ -28,8 +28,11 @@ export function buildGrounds(S) {
   // ---- dark focus backdrop: the card's own light, enlarged and blurred until it is one even field at 0.43
   // gain (a white card gives mid-grey, a dark terminal gives near-black), then darkened toward every edge
   const echo = h('div', { style: { ...full, background: 'rgb(110,110,110)' } });
+  // the live echo (colour C19-C20): a copy of the card as it is at this frame, 2x about the frame centre,
+  // blurred (sigma 85 px) and multiplied by 0.43, so the backdrop carries the card's own shapes and colours
+  const live = h('div.ep-echo', { style: { ...full, filter: 'blur(85px) brightness(0.43)', display: 'none' } });
   const dark = h('div.ep-ground-dark', { style: { ...full, background: '#050506', overflow: 'hidden' } },
-    echo,
+    echo, live,
     h('div', { style: { ...full, background: 'linear-gradient(180deg, rgba(0,0,0,0.34) 3%, rgba(0,0,0,0) 34%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.52) 98%)' } }),
     h('div', { style: { ...full, background: 'linear-gradient(90deg, rgba(0,0,0,0.31) 0%, rgba(0,0,0,0) 28%, rgba(0,0,0,0) 72%, rgba(0,0,0,0.31) 100%)' } }));
 
@@ -39,6 +42,7 @@ export function buildGrounds(S) {
   const el = h('div.ep-grounds', { style: { ...full, isolation: 'isolate', overflow: 'hidden' } }, black, light, dark, white);
   const byMode = { 'light-split': light, 'dark-focus': dark, white, 'presenter-full': black };
   let lastEcho = '';
+  let liveFrom = null;
 
   return {
     el,
@@ -65,6 +69,27 @@ export function buildGrounds(S) {
         const colour = `rgb(${rgb.map((v) => Math.round(v * 0.43)).join(',')})`;
         if (colour !== lastEcho) { lastEcho = colour; echo.style.background = colour; }
       }
+    },
+    /** After the elements have been seeked: copy the card in dark focus into the backdrop, as it is now. */
+    echoLive(t, inst) {
+      if (!inst || !inst.wrap) { live.style.display = 'none'; liveFrom = null; return; }
+      live.style.display = '';
+      echo.style.background = 'rgb(48,48,50)';   // a floor under the echo so the frame never falls to black between shapes
+      lastEcho = '';
+      // place the copy so the card's centre lands where the measured backdrop peaks (y 1000-1100, colour C19)
+      // at 2.2x: the glow then reaches the caption band and the bottom edge as on the reference
+      const r = inst.rect || { x: 0, y: 0, w: W, h: H };
+      const ccx = r.x + r.w / 2, ccy = r.y + r.h / 2;
+      live.style.transformOrigin = `${ccx}px ${ccy}px`;
+      live.style.transform = `translate(${(540 - ccx).toFixed(1)}px, ${(1040 - ccy).toFixed(1)}px) scale(2.2)`;
+      const copy = inst.wrap.cloneNode(true);
+      copy.style.display = '';
+      // canvases (video frames) do not clone their pixels: copy them across
+      const src = inst.wrap.querySelectorAll('canvas'), dst = copy.querySelectorAll('canvas');
+      src.forEach((c, i) => { try { dst[i].getContext('2d').drawImage(c, 0, 0); } catch { /* tainted or empty */ } });
+      copy.querySelectorAll('video').forEach((v) => v.remove());
+      live.replaceChildren(copy);
+      liveFrom = inst;
     },
   };
 }

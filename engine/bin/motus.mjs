@@ -9,7 +9,7 @@ import { parseArgs, MotusError, readJson, writeJson, exists, mkdirp, clock, cliP
 
 const [cmd, ...rest] = process.argv.slice(2);
 // flags that never take a value: `motus validate --json ./project` must keep ./project as the positional
-const BOOLEANS = ['json', 'quiet', 'force', 'draft', 'open', 'stop', 'posters', 'loops', 'sheet', 'dark', 'full', 'all', 'global', 'matte'];
+const BOOLEANS = ['json', 'quiet', 'force', 'draft', 'open', 'stop', 'posters', 'loops', 'sheet', 'dark', 'full', 'all', 'global', 'matte', 'mono'];
 const { pos, flags } = parseArgs(rest, { booleans: BOOLEANS });
 const asJson = !!flags.json;
 const SELF = fileURLToPath(import.meta.url);
@@ -35,6 +35,7 @@ The engine, step by step:
   motus sheet <project> [--from s --to s --fps n] | [--at t1,t2,...]
   motus conform <project> [--no-matte]
   motus capture <url> --out <project>/assets/name.png [--find "text"] [--width 1200] [--scale 2] [--selector css] [--dark] [--clip x,y,w,h] [--full]
+  motus logo <brand> --out <project>/assets/logos/name.png [--domain site.com] [--mono] [--icon simple-icons-name] [--colour #hex]   a brand's mark for a graphic
   motus validate <project>
   motus stills <project> [--posters] [--loops] [--force] [--scene id --option id] [--at t1,t2] [--sheet] [--every s]
   motus studio <project> [--port n] [--open] [--stop]
@@ -96,6 +97,12 @@ const commands = {
     const { capture } = await import('../lib/capture.mjs');
     const r = await capture({ url: need(pos[0], 'the URL', 'capture <url> --out file'), out: need(flags.out, '--out', 'capture <url> --out file'), find: flags.find, width: num(flags.width, 1200), height: num(flags.height, 0), dark: !!flags.dark, clip: flags.clip, full: !!flags.full, selector: flags.selector, wait: num(flags.wait, 800), scale: num(flags.scale, 2) });
     print(r);
+  },
+
+  async logo() {
+    const { fetchLogo } = await import('../lib/logo.mjs');
+    const r = await fetchLogo({ brand: pos[0], domain: flags.domain, out: flags.out, mono: !!flags.mono, icon: flags.icon, colour: flags.colour });
+    print(r, (x) => `${x.file}\n${x.source}${x.domain ? ` (${x.domain})` : ''}${x.w ? `, ${x.w}x${x.h}` : ''}${x.hex ? `, ${x.hex}` : ''}`);
   },
 
   async validate() {

@@ -122,7 +122,7 @@ You choose only the sequence of layouts; the engine performs every transition [M
 | `white` | hard cut to flat white; heading builds, card fades up from 94.6 % after 5 f [M17] |
 | `dark-focus` from `white`, same card `key` and type | no cut: the ground cross-fades over 14 f and the card travels and grows [M15] |
 | `presenter-full`, or out of it | hard cut, nothing moves [M14] |
-| same layout, new card | hard swap [M12] |
+| same layout, new card | slide-push: the old card leaves left and the new one enters from the right as one strip, 22 f, horizontal motion blur [M16, explain.md] |
 
 Sequences (counts of 269 observed transitions) [S06]:
 
@@ -256,8 +256,12 @@ Apply the first row that matches. The order is the graphics study's priority, an
 | 11 | "then it'll... and it'll..." | process rows appearing or checked, one per verb | `steps-card` with `check` beats | 21/34 [G26, R9] |
 | 12 | show what the tool made | the output; several outputs as 2-3 stacked strips with label pills | `media-card` | 35 segments [G20, R13] |
 | 13 | list parallel capabilities ("one..., another...") | a row lit or checked per item, or a spotlight stepping down a page | `steps-card` `activate`/`check`; `spotlight` beats | 16 segments [G08, R10] |
-| 14 | rank one thing over others | a rank list where it climbs, the others struck | `rank-list` | 2 [G23, R15] |
-| 15 | contrast two sides or roles | two panels side by side | `compare-panels` | 1 [G23, R16] |
+| 14 | rank one thing over others, say one beats another | a face-off: both sides fly in and meet, the winner grows, glows and takes a check on its word, the other greys | `duel-card` (`win`); `rank-list` only for a real list of three or more | [G23, R15, explain X08-X10] |
+| 15 | contrast two sides or roles | a face-off of the two (`duel-card`), or two panels that converge and dock (`compare-panels`) | `duel-card`, `compare-panels` | 1 [G23, R16] |
+| 15a | people, money or attention moving from one thing to another ("everybody is using this over Google", "switching to") | a stream of people (or coins) pouring from one hub into the other, the receiver swelling, the sender greying | `duel-card` (`flow`) | [explain X10, X13] |
+| 15d | "X instead of Y", old way and new way, before and after | the old side fills the card, then the new one wipes over it behind a divider; the old side greys on its word | `wipe-card` | part C DV23 [explain] |
+| 15b | say what people search, ask or type into an AI, or what an AI answers ("people look up X", "they get served ads") | an invented assistant: the query types on with the spoken words, thinking dots, the answer rows land; a sponsored or lit row on its word | `ask-card` (rows without the speaker's words stay grey placeholder lines) | 41 typed-prompt units in 20 reels [explain X04, X05, X11] |
+| 15c | chain causes and effects ("which leads to", "so you rank"), two routes to one result, one thing feeding several | steps waiting greyed, each lighting on its word, connectors drawing on, a dot running along them | `flow-card` (`chain`, `merge`, `split`) | tree and packet-flow devices [explain X03, X08, X13] |
 | 16 | filler, opinion with nothing to show, the payoff tail, the CTA | no graphic: the presenter full frame (as a punch-in, section 4.6) | `presenter-full` | 59 segments [G08, R20] |
 
 Phone chats (R17) and charts (R18) have no element of their own: capture the real chart or conversation into a `source-card`, or fall back to the nearest designed card. When nothing above matches, keep the previous card and add a mark on the words now being said, or go to section 6.6.
@@ -302,10 +306,13 @@ A personal take, a lesson or a story often names no page. The grammar does not c
 
 | The speaker... | Show | With |
 |---|---|---|
-| contrasts two things (before / after, old way / new way, them / me, myth / fact) | two panels | `compare-panels` (bare on `white`, inside the card on light and dark) |
+| contrasts two things (before / after, old way / new way, them / me, myth / fact) | the new side wiping over the old, or the two facing off | `wipe-card`, `duel-card` (`compare-panels` bare on `white`) |
+| says people, money or attention move from one thing to another | a stream pouring from one hub into the other | `duel-card` with `flow` |
 | says a number (hours, years, followers, percent, "tripled") | the number with a 1-3 word label, landing on its word | `big-number` (`"3x"` for "tripled" is a restatement, not an invention) |
 | lists costs, subscriptions, prices | a price list, struck as each is dropped, with a total | `price-list` |
-| walks through steps, a routine, "first I..., then...", causes and effects | rows that land on their words, checked, lit or struck as they are said | `steps-card` |
+| walks through steps, a routine, "first I..., then..." | rows that land on their words, checked, lit or struck as they are said | `steps-card` |
+| chains causes and effects, or two routes to one result | steps waiting greyed that light on their words while connectors draw and carry a dot | `flow-card` |
+| says what people search for, ask or are shown by an AI | the query typed on with the words, the answer arriving, the sponsored or chosen row lit | `ask-card` |
 | states the thesis, a rule, a quotable line | the line set as a document card, its carrying words highlighted on the spoken words | `text-card` |
 | ranks options, or says one thing beats the others | a rank list that reorders | `rank-list` |
 | names apps, tools, platforms, people's products | one chip per name on its word; a grid for four or more | `logo-chips`, `logo-grid` (logos from the user or captured from the official site; without a logo file the name alone) |
@@ -313,6 +320,8 @@ A personal take, a lesson or a story often names no page. The grammar does not c
 | types a command or a prompt | a terminal with the typed line | `terminal` |
 | lands a payoff, a feeling, an aside | the presenter full frame, 1 s | `presenter-full` (at most two) |
 | opens a new section of a long take | a white focus scene with the next idea's card (no heading) | `white` without `heading` |
+
+**Show the idea happening, do not re-print the caption.** The captions already carry the words. A `text-card` that repeats the sentence under the captions is the weakest card the style has: use it at most twice a video, only for a quotable line, and always with marks on its words. Before reaching for it, ask what the sentence describes happening (someone searching, a thing climbing, one step leading to the next, a list being worked through) and pick the element that acts that out (section 6.8).
 
 Ask the user once, early, for anything they can supply: screenshots, photos, clips, logos of what they name, the page behind a claim. Keep at least two element types and never put the same type in more than about half the scenes [G21].
 
@@ -324,6 +333,27 @@ Ask the user once, early, for anything they can supply: screenshots, photos, cli
 - Blur only what does not matter or what the hook deliberately teases [G28].
 
 ---
+
+### 6.8 Act it out: events inside designed cards
+
+Watched in motion, the reference's designed cards are small animations that act the sentence out (research/explain.md, 255 units, 739 events). Plan them that way:
+
+| Rule | Target | Source |
+|---|---|---|
+| Something changes inside a designed card on every spoken beat | a new event at least every 20-30 f; never a designed card still for more than about 50 f | X01 |
+| Each change lands on the word it acts out | set `at` on rows, nodes, prompts and beats to the word that names them; one visible change per spoken item | X02 |
+| Lists wait greyed and light on their names | `flow-card` steps are on screen from the start and light one by one; `ask-card` rows light, check or turn sponsored on their words | X08 |
+| Typing lands with the voice | give an `ask-card` prompt the index of the first spoken word of the query: the words type as they are said | X04 |
+| Every process ends in a verdict | finish a list or chain on a check, a lit last step or a sponsored row | X15 |
+| Keep a card across a sentence that continues its idea | the same `key` over consecutive scenes in one layout keeps the card and lets its events accumulate | M12 |
+
+A designed card with one event and a 3 s hold is a still picture: add the beats the words give you, or split the scene and swap the card.
+
+**Motion graphics are the default.** When there is no page to capture, reach first for the elements that are animations in their own right: `duel-card` (face-offs, winners, flows from one thing to another), `wipe-card` (instead of, before and after), `flow-card` (causes, routes, pipelines), `ask-card` (searching, asking, answers), `logo-card` with a `glyph` (naming: a hero tile lands), `big-number` (counts), `media-card` (any real clip of the thing: launch videos, demos, the user's own footage). Lists (`rank-list`, `steps-card`, `price-list`) are for content that really is a list of three or more, and even then their rows light, climb or check on their words. Never make a list with a strike the main picture of a comparison, and never fill a scene with a card that only re-prints the caption.
+
+**Use the real marks.** Whenever a card shows a product, a platform or a company by name (a duel side, a flow step, a chip, a naming card, a wipe side), fetch its mark into the project and pass it as `logo`: `motus logo <brand> --out <project>/assets/logos/<name>.png`. It takes the site's own full-colour icon, or the brand's vector mark from Simple Icons; `--mono` forces the vector (sharper for single-colour marks such as Meta or X), `--icon` names the entry a product is filed under (ChatGPT: `--icon openai`), `--colour` recolours the vector (white on a dark card). An initial in a brand colour is the fallback only when no mark can be found.
+
+**Look for real footage first.** Launch videos, product demos and official clips show the thing itself and beat any designed card: ask the user for them, or find the official one and ask before downloading. Cut them to the moment that matches the words (`start`), crop to what matters, and never put the source's name on them.
 
 ## 7. Captions
 
@@ -489,6 +519,7 @@ Compute these from your plan and `conform/words.json` before validating (scene t
 | 23 | Options | 2-4 per scene, different ideas; singles only as section 9 allows | near-duplicates | |
 | 24 | Raw cuts | first word within 0.05 s of the start, no pause over 300 ms, tail 0.1-0.5 s, at most one uncovered jump cut per 10 s of presenter time | otherwise | [S22, S23, P18] |
 | 25 | Stills | nothing over the face, text inside the frame, captions legible, the card readable at phone size | any | [L21, G07] |
+| 26 | Designed cards act it out | every designed card has an event at least every 30 f and one per spoken item; `text-card` at most twice and never a bare copy of the caption | a designed card still for 60 f or more; a text-card restating the caption | [explain X01, X02, X08] |
 
 ---
 
@@ -511,8 +542,12 @@ Parameters, limits and beats: see `style.json`. This table says what each elemen
 | `steps-card` | card | a designed process list: 2-7 rows landing on their words, lit (`activate`), checked (`check`) or struck (`strike`) as they are said | processes, "then it'll...", parallel capabilities, routines, causes and effects | the reference's mock app lists: 51 segments in 21 videos [G08, G26] |
 | `text-card` | card | a designed document card: one paragraph (optional heading) at reading size, with highlight, outline and number beats on its own words | a quotable claim, a rule or a thesis when no page can be captured; the speaker's own words, never a fake quote | [G07, G10] |
 | `big-number` | card | a number as the card's subject, appearing on its `at` word and rolling up over 16 f, with a 1-5 word label and an optional source line; skins dark, white, bare | a spoken number with no page behind it | start its scene on the number's word or the one before (4.3); 24 number segments, bare on dark in 7 [G16-G18, M24] |
-| `logo-card` | card | the product's logo, or its name set large, alone on the card as it is named | the naming beat on dark, or as the interstitial card | 10 segments in 10 videos [S20, G21] |
+| `logo-card` | card | the product's logo, or its name set large, alone on the card as it is named; with `glyph` and no logo file, an accent app tile lands as a hero (oversize, blurred, settling) with the name fading up under it | the naming beat on dark, or as the interstitial card | 10 segments in 10 videos [S20, G21, explain X09] |
 | `rank-list` | card | a ranked list where one row climbs (`climb`) and the rows it passes are struck (`strike-others`) | "beats X and Y", "number one for..." | 2 segments [G23, M22] |
 | `logo-grid` | card | names arriving one by one into a grid of up to 6 tiles | four or more equal names said in a row | 4 segments [G08, M23] |
+| `duel-card` | card | two hubs (initial in a brand colour, a glyph, or a supplied logo) fly in from the edges and meet; `win` grows, glows and checks one side while the other greys; `flow` streams people (or dots, coins, messages) from one to the other, the receiver swelling with ripples; `focus` traces a ring round one | face-offs, "more effective than", "everybody is leaving X for Y" | never a brand's logo unless the user supplies the file [explain X08-X10, X13] |
+| `wipe-card` | card | the old side fills the card; on `at` a divider with a handle wipes the new side in to the middle while the old side makes room; `dim` greys the old side with a cross; `full` hands the whole card to the new side | "instead of", old way / new way, before / after | [part C DV23, explain X08] |
+| `ask-card` | card | an invented assistant: header, prompt field typing the query with the voice, thinking dots, then answer rows streaming in; rows can be sponsored (tinted, chip popping), lit (traced outline), checked or struck on their words; a second prompt scrolls the first answer away | searches, questions people ask an AI, what it answers, ads served inside answers | never brand it as a real product; rows without the speaker's words are grey placeholder lines, never invented results [explain X04, X05, X11, X12] |
+| `flow-card` | card | steps joined by connectors: waiting greyed, lighting on their words, connectors drawing on and carrying a looping dot; `chain`, `merge` (several into one), `split` (one into several) | causes and effects, two routes to one result, a pipeline | labels in the speaker's words; `build: true` brings steps in one by one instead [explain X03, X08, X13] |
 
 `look.accent`: `emerald` unless section 11 says otherwise.

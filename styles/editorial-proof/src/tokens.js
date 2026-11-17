@@ -168,9 +168,10 @@ export const motion = {
   lightCard: { dy: -61, tau: F(6.54), fade: F(12) },  // cut into the light split: the card eases down into place
   whiteCard: { delay: F(5), fade: F(5), fromScale: 0.946 },
   morph: { dur: F(14) },                              // white interstitial -> dark focus: ground cross-fades, card travels
+  push: { dur: F(22), travel: 1145, curve: [0.3, 0, 0, 1], blur: 0.16 },   // card swap inside a run: one rigid strip slides left, horizontal blur at speed [M16, explain.md]
   glint: { lap: 8.0, tailFrac: 0.18, headFrac: 0.022, thickness: 12, delay: F(5), phaseFrame: 118 },
   highlight: { tau: F(2.0), cap: F(14) },
-  outline: { dur: F(8) },
+  outline: { dur: F(8) },                            // unused since the outline is traced on (anim.js X.draw, research/explain.md X03)
   strike: { tau: F(1.13), cap: F(6), rowStagger: F(5) },
   number: { count: F(16), plateAt: F(8), plateFade: F(4), tint: F(6), hold: F(34), out: F(6) },
   chip: { from: 0.957, peak: 1.031, grow: F(9), hold: F(4), relax: F(7) },

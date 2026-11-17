@@ -89,7 +89,11 @@
           "logo-card",
           "big-number",
           "rank-list",
-          "logo-grid"
+          "logo-grid",
+          "ask-card",
+          "flow-card",
+          "duel-card",
+          "wipe-card"
         ],
         "chips": [
           "logo-chips"
@@ -111,7 +115,11 @@
           "logo-card",
           "big-number",
           "rank-list",
-          "logo-grid"
+          "logo-grid",
+          "ask-card",
+          "flow-card",
+          "duel-card",
+          "wipe-card"
         ],
         "chips": [
           "logo-chips"
@@ -136,7 +144,11 @@
           "logo-card",
           "big-number",
           "rank-list",
-          "logo-grid"
+          "logo-grid",
+          "ask-card",
+          "flow-card",
+          "duel-card",
+          "wipe-card"
         ],
         "name": [
           "name-label"
@@ -670,6 +682,7 @@
           "maxWords": 4
         },
         "logo": "asset?",
+        "glyph": "enum?:search|chat|spark|bolt|globe|user|users|cart|chart|trend|star|doc|code|gear|mail|lock|check|cross|megaphone|target|dollar|store|phone|eye|clock|upload|heart|link|agent",
         "tagline": {
           "type": "string",
           "optional": true,
@@ -775,6 +788,258 @@
         "build": "enum?:slots|grow"
       },
       "beats": {}
+    },
+    "ask-card": {
+      "label": "AI answer",
+      "slots": [
+        "card"
+      ],
+      "params": {
+        "app": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 18,
+          "maxWords": 3
+        },
+        "skin": "enum?:light|dark",
+        "prompts": {
+          "type": "array",
+          "min": 1,
+          "max": 3,
+          "of": {
+            "text": {
+              "type": "string",
+              "maxChars": 48
+            },
+            "at": "word?"
+          }
+        },
+        "rows": {
+          "type": "array",
+          "optional": true,
+          "max": 6,
+          "of": {
+            "text": {
+              "type": "string",
+              "optional": true,
+              "maxChars": 30
+            },
+            "sub": {
+              "type": "string",
+              "optional": true,
+              "maxChars": 40
+            },
+            "glyph": "enum?:search|chat|spark|bolt|globe|user|users|cart|chart|trend|star|doc|code|gear|mail|lock|check|cross|megaphone|target|dollar|store|phone|eye|clock|upload|heart|link|agent",
+            "prompt": {
+              "type": "number",
+              "optional": true,
+              "min": 1,
+              "max": 3
+            },
+            "ad": "boolean?",
+            "at": "word?"
+          }
+        },
+        "adLabel": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 12,
+          "maxWords": 2
+        }
+      },
+      "beats": {
+        "ad": {
+          "row": {
+            "type": "number",
+            "min": 1,
+            "max": 6
+          }
+        },
+        "light": {
+          "row": {
+            "type": "number",
+            "min": 1,
+            "max": 6
+          }
+        },
+        "check": {
+          "row": {
+            "type": "number",
+            "min": 1,
+            "max": 6
+          }
+        },
+        "strike": {
+          "row": {
+            "type": "number",
+            "min": 1,
+            "max": 6
+          }
+        }
+      }
+    },
+    "flow-card": {
+      "label": "Flow",
+      "slots": [
+        "card"
+      ],
+      "params": {
+        "title": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 32,
+          "maxWords": 5
+        },
+        "layout": "enum?:chain|merge|split",
+        "nodes": {
+          "type": "array",
+          "min": 2,
+          "max": 5,
+          "of": {
+            "label": {
+              "type": "string",
+              "maxChars": 22
+            },
+            "sub": {
+              "type": "string",
+              "optional": true,
+              "maxChars": 30
+            },
+            "glyph": "enum?:search|chat|spark|bolt|globe|user|users|cart|chart|trend|star|doc|code|gear|mail|lock|check|cross|megaphone|target|dollar|store|phone|eye|clock|upload|heart|link|agent",
+            "logo": "asset?",
+            "at": "word?"
+          }
+        },
+        "build": "boolean?"
+      },
+      "beats": {
+        "light": {
+          "node": {
+            "type": "number",
+            "min": 1,
+            "max": 5
+          }
+        },
+        "check": {
+          "node": {
+            "type": "number",
+            "min": 1,
+            "max": 5
+          }
+        }
+      }
+    },
+    "duel-card": {
+      "label": "Duel",
+      "slots": [
+        "card"
+      ],
+      "params": {
+        "title": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 32,
+          "maxWords": 5
+        },
+        "sides": {
+          "type": "array",
+          "min": 2,
+          "max": 2,
+          "of": {
+            "name": {
+              "type": "string",
+              "maxChars": 18
+            },
+            "sub": {
+              "type": "string",
+              "optional": true,
+              "maxChars": 28
+            },
+            "glyph": "enum?:search|chat|spark|bolt|globe|user|users|cart|chart|trend|star|doc|code|gear|mail|lock|check|cross|megaphone|target|dollar|store|phone|eye|clock|upload|heart|link|agent",
+            "initial": {
+              "type": "string",
+              "optional": true,
+              "maxChars": 2
+            },
+            "colour": {
+              "type": "string",
+              "optional": true,
+              "maxChars": 9
+            },
+            "logo": "asset?"
+          }
+        },
+        "token": "enum?:user|dot|dollar|chat",
+        "skin": "enum?:light|dark"
+      },
+      "beats": {
+        "flow": {
+          "from": {
+            "type": "number",
+            "min": 1,
+            "max": 2
+          }
+        },
+        "win": {
+          "side": {
+            "type": "number",
+            "min": 1,
+            "max": 2
+          }
+        },
+        "focus": {
+          "side": {
+            "type": "number",
+            "min": 1,
+            "max": 2
+          }
+        }
+      }
+    },
+    "wipe-card": {
+      "label": "Before / after",
+      "slots": [
+        "card"
+      ],
+      "params": {
+        "title": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 32,
+          "maxWords": 5
+        },
+        "before": {
+          "label": {
+            "type": "string",
+            "maxChars": 20
+          },
+          "sub": {
+            "type": "string",
+            "optional": true,
+            "maxChars": 28
+          },
+          "glyph": "enum?:search|chat|spark|bolt|globe|user|users|cart|chart|trend|star|doc|code|gear|mail|lock|check|cross|megaphone|target|dollar|store|phone|eye|clock|upload|heart|link|agent",
+          "logo": "asset?"
+        },
+        "after": {
+          "label": {
+            "type": "string",
+            "maxChars": 20
+          },
+          "sub": {
+            "type": "string",
+            "optional": true,
+            "maxChars": 28
+          },
+          "glyph": "enum?:search|chat|spark|bolt|globe|user|users|cart|chart|trend|star|doc|code|gear|mail|lock|check|cross|megaphone|target|dollar|store|phone|eye|clock|upload|heart|link|agent",
+          "logo": "asset?"
+        },
+        "at": "word?"
+      },
+      "beats": {
+        "dim": {},
+        "full": {}
+      }
     }
   }
 }

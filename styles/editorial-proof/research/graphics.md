@@ -83,6 +83,8 @@ Part of the Editorial Proof study; read `README.md` first for the corpus, the me
 - Numbers: Stroke 5 px median (4-6), #0885F5 (range #017FF9-#0F89F4), radius 16 px median (12-20), 8-12 px clear of the target. Orange #F59F1F for a second callout in the same card; red #E5484D boxes in critique sets. 51 segments in 26 reels.
 - Evidence: 13 boxes in 12 reels: clip08@312, clip12@159, clip14@276, clip34@294, clip10@996, clip38@375, clip21@534; orange clip30@249, clip36@978
 
+- Update (research/explain.md X03): the box is traced on from its top-left corner, clockwise, about half on its first frame and closed by frame 5; it does not pop or shrink.
+
 ### G13 - To isolate one block of a busy page, dim the page and lift the block on a white plate.
 
 - Confidence: medium

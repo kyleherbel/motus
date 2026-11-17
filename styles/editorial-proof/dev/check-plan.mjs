@@ -42,7 +42,17 @@ const covered = sentenceStarts.filter((i) => i < edit.scenes[edit.scenes.length 
 const before = sentenceStarts.filter((i) => i < edit.scenes[edit.scenes.length - 1].words[0]);
 const punchIns = scenes.filter((s, k) => s.layout === 'presenter-full' && k < scenes.length - 1);
 const cards = scenes.filter((s) => s.layout !== 'presenter-full');
-const marked = cards.filter((s) => (s.card?.beats || []).length || (s.card?.rows || s.card?.items || []).some((r) => r.at !== undefined) || s.card?.left?.at !== undefined || s.card?.at !== undefined || s.card?.commands?.some((c) => c.at !== undefined));
+// a card "has a beat" when something in it is timed to a word, or it moves by itself: a playing clip,
+// a rank list's own row switching on (research/explain.md X02, X08, X13)
+const anchored = (list) => (list || []).some((r) => r && r.at !== undefined);
+const marked = cards.filter((s) => {
+  const c = s.card || {};
+  return (c.beats || []).length || anchored(c.rows) || anchored(c.items) || anchored(c.nodes) || anchored(c.prompts) || anchored(c.commands)
+    || c.left?.at !== undefined || c.right?.at !== undefined || c.at !== undefined || anchored(s.slots?.chips?.items)
+    || (c.type === 'media-card' && (c.items || []).some((it) => /\.(mp4|mov|webm|m4v)$/i.test(it.src || '')))
+    || (c.type === 'rank-list' && (c.rows || []).some((r) => r.mine))
+    || c.type === 'duel-card';   // its two sides fly in and meet on their own (explain.md X10)
+});
 const types = new Map(); for (const s of cards) if (s.card) types.set(s.card.type, (types.get(s.card.type) || 0) + 1);
 const emph = Object.keys(edit.captions?.emphasis || {}).length;
 const whiteToFull = runs.some((r, k) => k > 0 && r.layout === 'presenter-full' && runs[k - 1].layout === 'white');

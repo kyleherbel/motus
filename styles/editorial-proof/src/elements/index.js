@@ -7,6 +7,7 @@
 const NAMES = [
   'hook-title', 'source-card', 'price-list', 'logo-chips', 'section-heading', 'name-label', 'comment-cta',
   'compare-panels', 'terminal', 'steps-card', 'text-card', 'media-card', 'logo-card', 'big-number', 'rank-list', 'logo-grid',
+  'ask-card', 'flow-card', 'duel-card', 'wipe-card',
 ];
 
 const loaded = await Promise.all(NAMES.map(async (name) => {

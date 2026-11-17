@@ -130,6 +130,8 @@ Part of the Editorial Proof study; read `README.md` first for the corpus, the me
 - Numbers: scale 1.8-2.4; blur sigma 70-100 px; fit correlation 0.64-0.89 on 3 frames, 0.3-0.4 on 2; vertical overlay alpha 0.34 at 3% to 0 at 34%, 0 at 60% to 0.52 at 98%; horizontal 0.31 at edges to 0 at 28%; outlier clip35@600 luma 20 to 170 top to bottom
 - Evidence: clip29@630 (0.89), clip34@750, clip28@570; poor fits clip36@270, clip18@600
 
+- Update: the build now draws this as specified: a live copy of the card at each frame, 2.2x about its own centre placed so it peaks at y 1040 (the measured profile peaks at y 1000-1100), blurred 85 px and multiplied by 0.43, over a #303032 floor (src/canvas.js echoLive). The first build used a flat field.
+
 ### C21 - There is no separate dark band behind the dark-mode caption; the darkening is the text's own downward soft shadow.
 
 - Confidence: medium

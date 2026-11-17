@@ -2,6 +2,7 @@
 // big-number tile, spotlight. Each returns { el, seek(t) } and is positioned in the
 // coordinate space of the element it is appended to.
 import { motion, fonts, type, expo } from './tokens.js';
+import { roundRectPath, drawOnPath } from './anim.js';
 
 /** An exponential approach normalised to land exactly on 1 at `cap`. */
 const approach = (t, t0, tau, cap) => Math.min(1, expo(t, t0, tau) / (1 - Math.exp(-cap / tau)));
@@ -34,18 +35,24 @@ export function highlight(S, { rects, t0, tone = 'accent', surface = 'light', pa
   };
 }
 
-/** A bright rounded outline around a control or a single token. rect is the target; the box sits `gap` px clear of it. */
-export function outlineBox(S, { rect, t0, tone = 'accent', gap = 10 }) {
+/**
+ * A bright rounded outline around a control or a single token. rect is the target; the box sits `gap` px clear of it.
+ * It is traced, not popped: the stroke starts at the top-left corner and runs clockwise on the highlight's
+ * curve, about half the perimeter on its first frame and closed by frame 5 (research/explain.md X03).
+ */
+export function outlineBox(S, { rect, t0, tone = 'accent', gap = 10, width = 5, radius = 16 }) {
   const { kit, C } = S; const { h } = kit;
   const colour = tone === 'red' ? '#E5484D' : tone === 'orange' ? '#F59F1F' : C.callout;
-  const el = h('div.ep-outline', { style: { position: 'absolute', left: `${rect.x - gap}px`, top: `${rect.y - gap}px`, width: `${rect.w + gap * 2}px`, height: `${rect.h + gap * 2}px`, boxSizing: 'border-box', border: `5px solid ${colour}`, borderRadius: '16px', pointerEvents: 'none', boxShadow: `0 0 0 0 ${colour}` } });
+  const W = rect.w + gap * 2, H = rect.h + gap * 2;
+  const el = h('div.ep-outline', { style: { position: 'absolute', left: `${rect.x - gap}px`, top: `${rect.y - gap}px`, width: `${W}px`, height: `${H}px`, pointerEvents: 'none' } });
+  const { d, len } = roundRectPath(width / 2, width / 2, W - width, H - width, radius);
+  const stroke = drawOnPath(S, { d, len, w: W, h: H, t0, colour, width });
+  el.append(stroke.el);
   return {
     el, t0,
     seek(t) {
-      const p = kit.prog(t, t0, motion.outline.dur, kit.ease.outQuart);
       el.style.display = t >= t0 ? '' : 'none';
-      el.style.opacity = String(kit.clamp(p * 2.5));
-      el.style.transform = `scale(${1.12 - 0.12 * p})`;
+      stroke.seek(t);
     },
   };
 }

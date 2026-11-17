@@ -13,6 +13,8 @@
 // The card itself arrives with the layout (the dark stage settles from 115 %, research/motion.md).
 import { cardFrame } from '../card.js';
 import { fonts, type, F } from '../tokens.js';
+import { glyphSvg, GLYPHS, SOLID } from '../glyphs.js';
+import { approach } from '../anim.js';
 
 // Where the baseline sits in a line-height-1 box of Motus Inter (hhea ascender 969, descender 242 per 1000).
 const ASC = type.ascent.sans;
@@ -44,6 +46,7 @@ export default {
   params: {
     name: { type: 'string', maxChars: 22, maxWords: 4 },                 // the product's name as written: "PentAGI"
     logo: 'asset?',                                                     // its logo; a square icon gets the name under it, a wide wordmark stands alone
+    glyph: `enum?:${GLYPHS.join('|')}`,                                 // no logo file: an original glyph on an accent app tile takes the icon's place
     tagline: { type: 'string', optional: true, maxChars: 40, maxWords: 7 },   // one short line under the name
     skin: 'enum?:white|dark',                                           // card fill: white (default) or near-black navy for light logos
     reveal: 'enum?:type|wipe|fade',                                     // how the name lands (default: type when alone, wipe for a wordmark, fade under an icon)
@@ -52,6 +55,7 @@ export default {
   beats: {},
 
   async prepare(params, S) {
+    if (!params.logo && params.glyph) return { logo: { glyph: params.glyph, w: 1, h: 1 } };
     if (!params.logo) return { logo: null };
     const img = new Image(); img.src = S.env.projectUrl(params.logo);
     try { await img.decode(); } catch { S.warn(`logo-card: could not load ${params.logo}`); return { logo: null }; }
@@ -91,13 +95,16 @@ export default {
     let logoEl = null, logoBottom = H / 2;
     if (logo) {
       let bw, bh, top;
-      if (form === 'icon') { bw = G.icon.w * k; bh = G.icon.h * k; top = G.icon.top * k; }
+      if (form === 'icon') { const f = Math.min(1, H / (G.icon.cardH * k)); bw = G.icon.w * k * f; bh = G.icon.h * k * f; top = G.icon.top * k * f; }   // a short slot (the hook) scales the icon with it
       else { bw = rect.w * G.wide.maxW; bh = H * G.wide.maxH; top = null; }
       const s = Math.min(bw / logo.w, bh / logo.h);
       const lw = logo.w * s, lh = logo.h * s;
       const y = top !== null ? top + (bh - lh) / 2 : (H - lh) / 2;
       logoBottom = y + lh;
-      logoEl = h('img', { src: logo.src, style: { position: 'absolute', left: `${(rect.w - lw) / 2}px`, top: `${y}px`, width: `${lw}px`, height: `${lh}px`, display: 'block' } });
+      logoEl = logo.glyph
+        // an app tile: the accent, a soft top light, the glyph in white; it lands as a hero (explain.md X09: oversize, settles, no bounce)
+        ? h('div', { html: glyphSvg(logo.glyph, Math.round(lw * 0.56), '#FFFFFF', { solid: SOLID.has(logo.glyph), weight: 1.8 }), style: { position: 'absolute', left: `${(rect.w - lw) / 2}px`, top: `${y}px`, width: `${lw}px`, height: `${lh}px`, borderRadius: `${Math.round(lw * 0.24)}px`, background: `linear-gradient(160deg, ${S.C.panel[0]} 0%, ${S.C.accent} 45%, ${S.C.panel[2]} 100%)`, boxShadow: `0 30px 60px -24px ${S.C.outlineGlow}, inset 0 2px 0 rgba(255,255,255,0.25)`, display: 'flex', alignItems: 'center', justifyContent: 'center', transformOrigin: '50% 60%' } })
+        : h('img', { src: logo.src, style: { position: 'absolute', left: `${(rect.w - lw) / 2}px`, top: `${y}px`, width: `${lw}px`, height: `${lh}px`, display: 'block' } });
       body.append(logoEl);
       parts.push({ el: logoEl, kind: 'logo', x: (rect.w - lw) / 2, w: lw });
     }
@@ -182,6 +189,10 @@ export default {
           const b = M.sharpen.blur * (1 - kit.ease.outCubic(p));
           logoEl.style.filter = b > 0.2 ? `blur(${b.toFixed(2)}px)` : 'none';
           logoEl.style.opacity = String(0.35 + 0.65 * kit.ease.outCubic(p));
+          if (form === 'icon') {
+            const s = 1 + 0.22 * (1 - approach(t, tIn + F(1), F(2.2), F(9)));
+            logoEl.style.transform = s > 1.0005 ? `scale(${s.toFixed(4)})` : 'none';
+          }
         }
         if (reveal === 'wipe') {
           // left to right, hard edge, across the logo (and the name if there is one)
