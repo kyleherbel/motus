@@ -1,0 +1,74 @@
+{
+  "id": "seamline",
+  "name": "Seamline",
+  "version": "0.1.0",
+  "status": "beta",
+  "summary": "Tech news on a split screen: the product's real launch footage and demos in the top half, the speaker at the desk in the bottom half, two pixel-type caption words riding the seam between them. Hard cuts about every 1.3 s, short full-frame face inserts that push in slowly, a heavy sliding headline to open, a dark bed under the voice.",
+  "bestFor": [
+    "launch and release news with the maker's own footage",
+    "\"X just shipped Y\" takes in 45 to 90 seconds",
+    "product demos with the speaker reacting"
+  ],
+  "aspect": "9:16",
+  "look": {
+    "caption": {
+      "label": "Caption",
+      "choices": [
+        "shadow",
+        "plate"
+      ],
+      "default": "shadow"
+    },
+    "grade": {
+      "label": "Speaker grade",
+      "choices": [
+        "graded",
+        "natural"
+      ],
+      "default": "graded"
+    },
+    "opening": {
+      "label": "Opening sound",
+      "choices": [
+        "none",
+        "swell"
+      ],
+      "default": "none"
+    }
+  },
+  "emphasis": [],
+  "roles": [
+    "hook",
+    "name",
+    "what",
+    "show",
+    "how",
+    "list",
+    "why",
+    "cta"
+  ],
+  "footage": {
+    "wide": true
+  },
+  "sfx": {
+    "swell": "assets/sfx/swell.wav"
+  },
+  "beds": {
+    "a": {
+      "label": "Dark pulse, 105 BPM",
+      "src": "assets/music/bed-a.m4a",
+      "gainDb": -12,
+      "fadeOut": 1.1
+    },
+    "b": {
+      "label": "Dark pad, no beat",
+      "src": "assets/music/bed-b.m4a",
+      "gainDb": -12,
+      "fadeOut": 1.1
+    }
+  },
+  "preview": {
+    "video": "preview.webm",
+    "poster": "preview.webp"
+  }
+}

@@ -1,0 +1,687 @@
+{
+ "motus": 1,
+ "style": "seamline",
+ "look": {
+  "caption": "plate",
+  "grade": "graded"
+ },
+ "captions": {
+  "fixes": {
+   "194": "ChatGPT,"
+  }
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "words": [
+    0,
+    7
+   ],
+   "role": "hook",
+   "options": [
+    {
+     "id": "a",
+     "label": "Headline over OpenAI",
+     "why": "OpenAI's own ads podcast under the headline, dark enough for white type; the OpenAI mark on \"ChatGPT\"",
+     "layout": "split",
+     "slots": {
+      "title": {
+       "type": "headline",
+       "key": "h",
+       "lead": "THE FUTURE",
+       "connector": "of",
+       "lines": [
+        "ADVERTISING"
+       ],
+       "exit": "slide"
+      },
+      "top": {
+       "type": "footage",
+       "src": "assets/launch/pod-guest.mp4",
+       "beats": [
+        {
+         "at": 3,
+         "do": "cut",
+         "src": "assets/launch/pod-two.mp4"
+        },
+        {
+         "at": 6,
+         "do": "cut",
+         "src": "assets/launch/pod-two-b.mp4"
+        }
+       ]
+      },
+      "seam": {
+       "type": "brand-mark",
+       "src": "assets/logos/openai-mark.svg",
+       "beats": [
+        {
+         "at": 0,
+         "do": "show"
+        }
+       ]
+      }
+     }
+    },
+    {
+     "id": "b",
+     "label": "Launch film, no headline",
+     "why": "OpenAI's \"Your business, now in ChatGPT\" film, plain",
+     "layout": "split",
+     "slots": {
+      "top": {
+       "type": "footage",
+       "src": "assets/launch/biz-now-in-chatgpt.mp4",
+       "beats": [
+        {
+         "at": 3,
+         "do": "cut",
+         "src": "assets/launch/biz-claim.mp4"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s02",
+   "words": [
+    8,
+    15
+   ],
+   "role": "what",
+   "options": [
+    {
+     "id": "a",
+     "label": "$50, big",
+     "why": "Cut to his face and put the amount on screen as he says it",
+     "layout": "face",
+     "slots": {
+      "word": {
+       "type": "big-word",
+       "lines": [
+        "$50"
+       ],
+       "beats": [
+        {
+         "at": 12,
+         "do": "show"
+        }
+       ]
+      }
+     }
+    },
+    {
+     "id": "b",
+     "label": "Claim flow",
+     "why": "The claim-your-business flow while he names the credits",
+     "layout": "split",
+     "slots": {
+      "top": {
+       "type": "footage",
+       "src": "assets/launch/biz-claim.mp4"
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s03",
+   "words": [
+    16,
+    21
+   ],
+   "role": "what",
+   "options": [
+    {
+     "id": "a",
+     "label": "Getting started",
+     "why": "A business claiming its page and adding products, on \"get started\"",
+     "layout": "split",
+     "slots": {
+      "top": {
+       "type": "footage",
+       "src": "assets/launch/biz-claim.mp4",
+       "beats": [
+        {
+         "at": 18,
+         "do": "cut",
+         "src": "assets/launch/biz-products.mp4",
+         "start": 1.0
+        }
+       ]
+      }
+     }
+    },
+    {
+     "id": "b",
+     "label": "Launch film",
+     "why": "The launch film's title card",
+     "layout": "split",
+     "slots": {
+      "top": {
+       "type": "footage",
+       "src": "assets/launch/biz-now-in-chatgpt.mp4"
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s04",
+   "words": [
+    22,
+    28
+   ],
+   "role": "why",
+   "options": [
+    {
+     "id": "a",
+     "label": "Face",
+     "why": "\"I have a feeling that this is\": his opinion, to camera",
+     "layout": "face",
+     "slots": {}
+    },
+    {
+     "id": "b",
+     "label": "OpenAI podcast",
+     "why": "OpenAI's own people talking about ads",
+     "layout": "split",
+     "slots": {
+      "top": {
+       "type": "footage",
+       "src": "assets/launch/pod-two.mp4"
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s05",
+   "words": [
+    29,
+    45
+   ],
+   "role": "why",
+   "options": [
+    {
+     "id": "a",
+     "label": "Podcast, then Meta",
+     "why": "OpenAI's ads team on screen, then Meta's mark on \"Meta\"",
+     "layout": "split",
+     "slots": {
+      "top": {
+       "type": "footage",
+       "src": "assets/launch/pod-title.mp4",
+       "beats": [
+        {
+         "at": 34,
+         "do": "cut",
+         "src": "assets/launch/pod-guest.mp4"
+        },
+        {
+         "at": 41,
+         "do": "cut",
+         "src": "assets/logos/meta-mark.svg",
+         "fit": "contain",
+         "zoom": 0.45
+        }
+       ]
+      }
+     }
+    },
+    {
+     "id": "b",
+     "label": "Discovery stats",
+     "why": "OpenAI's discovery numbers under \"most effective\"",
+     "layout": "split",
+     "slots": {
+      "top": {
+       "type": "footage",
+       "src": "assets/launch/biz-stats.mp4",
+       "beats": [
+        {
+         "at": 41,
+         "do": "cut",
+         "src": "assets/logos/meta-mark.svg",
+         "fit": "contain",
+         "zoom": 0.45
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s06",
+   "words": [
+    46,
+    60
+   ],
+   "role": "why",
+   "options": [
+    {
+     "id": "a",
+     "label": "Chat, then Google",
+     "why": "People asking ChatGPT, then Google's mark on \"Google\"",
+     "layout": "split",
+     "slots": {
+      "top": {
+       "type": "footage",
+       "src": "assets/launch/biz-chat.mp4",
+       "fx": 0.5,
+       "fy": 0.5,
+       "beats": [
+        {
+         "at": 54,
+         "do": "cut",
+         "src": "assets/logos/google-mark.svg",
+         "fit": "contain",
+         "zoom": 0.45
+        }
+       ]
+      }
+     }
+    },
+    {
+     "id": "b",
+     "label": "Face",
+     "why": "He states it to camera",
+     "layout": "face",
+     "slots": {}
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s07",
+   "words": [
+    61,
+    63
+   ],
+   "role": "why",
+   "options": [
+    {
+     "id": "a",
+     "label": "Face",
+     "why": "\"Which is important\": a short insert",
+     "layout": "face",
+     "slots": {}
+    },
+    {
+     "id": "b",
+     "label": "Stays on split",
+     "why": "Keep the products film running",
+     "layout": "split",
+     "slots": {
+      "top": {
+       "type": "footage",
+       "src": "assets/launch/biz-products.mp4"
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s08",
+   "words": [
+    64,
+    73
+   ],
+   "role": "what",
+   "options": [
+    {
+     "id": "a",
+     "label": "Products in ChatGPT",
+     "why": "A shop adds its products to ChatGPT while he says \"selling any type of product\"",
+     "layout": "split",
+     "slots": {
+      "top": {
+       "type": "footage",
+       "src": "assets/launch/biz-products.mp4",
+       "start": 1.0
+      }
+     }
+    },
+    {
+     "id": "b",
+     "label": "Claim a business",
+     "why": "The claim flow instead",
+     "layout": "split",
+     "slots": {
+      "top": {
+       "type": "footage",
+       "src": "assets/launch/biz-claim.mp4"
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s09",
+   "words": [
+    74,
+    94
+   ],
+   "role": "show",
+   "options": [
+    {
+     "id": "a",
+     "label": "Phone chat, full frame",
+     "why": "The phone chat where ChatGPT recommends a shop's product: what asking AI for the best espresso machine looks like",
+     "layout": "full",
+     "slots": {
+      "picture": {
+       "type": "footage",
+       "src": "assets/launch/biz-chat.mp4",
+       "fx": 0.5,
+       "fy": 0.5,
+       "beats": []
+      }
+     }
+    },
+    {
+     "id": "b",
+     "label": "Phone chat in the split",
+     "why": "The same chat over the speaker",
+     "layout": "split",
+     "slots": {
+      "top": {
+       "type": "footage",
+       "src": "assets/launch/biz-chat.mp4",
+       "zoom": 1.2
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s10",
+   "words": [
+    95,
+    106
+   ],
+   "role": "why",
+   "options": [
+    {
+     "id": "a",
+     "label": "Discovery topics",
+     "why": "Where a business shows up in ChatGPT, on \"use AI instead of the traditional googling method\"",
+     "layout": "split",
+     "slots": {
+      "top": {
+       "type": "footage",
+       "src": "assets/launch/biz-topics.mp4",
+       "beats": [
+        {
+         "at": 103,
+         "do": "cut",
+         "src": "assets/logos/google-mark.svg",
+         "fit": "contain",
+         "zoom": 0.45
+        }
+       ]
+      }
+     }
+    },
+    {
+     "id": "b",
+     "label": "Face",
+     "why": "He makes the point to camera",
+     "layout": "face",
+     "slots": {}
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s11",
+   "words": [
+    107,
+    123
+   ],
+   "role": "why",
+   "options": [
+    {
+     "id": "a",
+     "label": "Discovery stats",
+     "why": "OpenAI's mentions and discovery topics under \"AI search engine optimization\"",
+     "layout": "split",
+     "slots": {
+      "top": {
+       "type": "footage",
+       "src": "assets/launch/biz-stats.mp4",
+       "beats": [
+        {
+         "at": 118,
+         "do": "cut",
+         "src": "assets/launch/biz-topics.mp4"
+        }
+       ]
+      }
+     }
+    },
+    {
+     "id": "b",
+     "label": "Face",
+     "why": "He explains it to camera",
+     "layout": "face",
+     "slots": {}
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s12",
+   "words": [
+    124,
+    131
+   ],
+   "role": "why",
+   "options": [
+    {
+     "id": "a",
+     "label": "Big word AI ADS",
+     "why": "Cut to his face with the words he stresses",
+     "layout": "face",
+     "slots": {
+      "word": {
+       "type": "big-word",
+       "lines": [
+        "AI ADS"
+       ],
+       "beats": [
+        {
+         "at": 130,
+         "do": "show"
+        }
+       ]
+      }
+     }
+    },
+    {
+     "id": "b",
+     "label": "Face",
+     "why": "Plain face insert",
+     "layout": "face",
+     "slots": {}
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s13",
+   "words": [
+    132,
+    152
+   ],
+   "role": "why",
+   "options": [
+    {
+     "id": "a",
+     "label": "Podcast, then topics",
+     "why": "OpenAI's team, then where a business ranks",
+     "layout": "split",
+     "slots": {
+      "top": {
+       "type": "footage",
+       "src": "assets/launch/pod-two-b.mp4",
+       "beats": [
+        {
+         "at": 146,
+         "do": "cut",
+         "src": "assets/launch/biz-topics.mp4"
+        }
+       ]
+      }
+     }
+    },
+    {
+     "id": "b",
+     "label": "Chat again",
+     "why": "The phone chat that serves a shop's product",
+     "layout": "split",
+     "slots": {
+      "top": {
+       "type": "footage",
+       "src": "assets/launch/biz-chat.mp4",
+       "start": 2
+      }
+     }
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s14",
+   "words": [
+    153,
+    174
+   ],
+   "role": "why",
+   "options": [
+    {
+     "id": "a",
+     "label": "Claim, then stats",
+     "why": "\"Claim your business\" then the numbers on \"acquiring customers\"",
+     "layout": "split",
+     "slots": {
+      "top": {
+       "type": "footage",
+       "src": "assets/launch/biz-claim-end.mp4",
+       "beats": [
+        {
+         "at": 168,
+         "do": "cut",
+         "src": "assets/launch/biz-stats.mp4"
+        }
+       ]
+      }
+     }
+    },
+    {
+     "id": "b",
+     "label": "Face",
+     "why": "He lands the point to camera",
+     "layout": "face",
+     "slots": {}
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s15",
+   "words": [
+    175,
+    202
+   ],
+   "role": "cta",
+   "options": [
+    {
+     "id": "a",
+     "label": "Set-up flow",
+     "why": "The claim and products flow under \"how to get set up\"",
+     "layout": "split",
+     "slots": {
+      "top": {
+       "type": "footage",
+       "src": "assets/launch/biz-claim.mp4",
+       "beats": [
+        {
+         "at": 186,
+         "do": "cut",
+         "src": "assets/launch/biz-products.mp4"
+        },
+        {
+         "at": 195,
+         "do": "cut",
+         "src": "assets/launch/biz-now-in-chatgpt.mp4"
+        }
+       ]
+      }
+     }
+    },
+    {
+     "id": "b",
+     "label": "Face",
+     "why": "The offer to camera",
+     "layout": "face",
+     "slots": {}
+    }
+   ],
+   "pick": "a"
+  },
+  {
+   "id": "s16",
+   "words": [
+    203,
+    214
+   ],
+   "role": "cta",
+   "options": [
+    {
+     "id": "a",
+     "label": "COMMENT \"ADS\"",
+     "why": "The ask in the heavy face over his face",
+     "layout": "face",
+     "slots": {
+      "word": {
+       "type": "big-word",
+       "lines": [
+        "COMMENT",
+        "\"ADS\""
+       ],
+       "beats": [
+        {
+         "at": 204,
+         "do": "show"
+        }
+       ]
+      }
+     }
+    },
+    {
+     "id": "b",
+     "label": "Face only",
+     "why": "Plain face, captions running",
+     "layout": "face",
+     "slots": {}
+    }
+   ],
+   "pick": "a"
+  }
+ ],
+ "audio": {
+  "sfx": true
+ }
+}

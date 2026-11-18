@@ -1,0 +1,272 @@
+{
+  "id": "seamline",
+  "name": "Seamline",
+  "version": "0.1.0",
+  "status": "beta",
+  "summary": "Tech news on a split screen: the product's real launch footage and demos in the top half, the speaker at the desk in the bottom half, two pixel-type caption words riding the seam between them. Hard cuts about every 1.3 s, short full-frame face inserts that push in slowly, a heavy sliding headline to open, a dark bed under the voice.",
+  "bestFor": [
+    "launch and release news with the maker's own footage",
+    "\"X just shipped Y\" takes in 45 to 90 seconds",
+    "product demos with the speaker reacting"
+  ],
+  "aspect": "9:16",
+  "look": {
+    "caption": {
+      "label": "Caption",
+      "choices": [
+        "shadow",
+        "plate"
+      ],
+      "default": "shadow"
+    },
+    "grade": {
+      "label": "Speaker grade",
+      "choices": [
+        "graded",
+        "natural"
+      ],
+      "default": "graded"
+    },
+    "opening": {
+      "label": "Opening sound",
+      "choices": [
+        "none",
+        "swell"
+      ],
+      "default": "none"
+    }
+  },
+  "emphasis": [],
+  "roles": [
+    "hook",
+    "name",
+    "what",
+    "show",
+    "how",
+    "list",
+    "why",
+    "cta"
+  ],
+  "footage": {
+    "wide": true
+  },
+  "sfx": {
+    "swell": "assets/sfx/swell.wav"
+  },
+  "beds": {
+    "a": {
+      "label": "Dark pulse, 105 BPM",
+      "src": "assets/music/bed-a.m4a",
+      "gainDb": -12,
+      "fadeOut": 1.1
+    },
+    "b": {
+      "label": "Dark pad, no beat",
+      "src": "assets/music/bed-b.m4a",
+      "gainDb": -12,
+      "fadeOut": 1.1
+    }
+  },
+  "preview": {
+    "video": "preview.webm",
+    "poster": "preview.webp"
+  },
+  "timing": {
+    "sceneLead": 0.04170833333333333
+  },
+  "layouts": {
+    "split": {
+      "label": "Split",
+      "presenter": "split",
+      "slots": {
+        "top": [
+          "footage"
+        ],
+        "title": [
+          "headline"
+        ],
+        "seam": [
+          "brand-mark"
+        ]
+      }
+    },
+    "face": {
+      "label": "Face",
+      "presenter": "face",
+      "slots": {
+        "word": [
+          "big-word"
+        ],
+        "seam": [
+          "brand-mark"
+        ]
+      }
+    },
+    "full": {
+      "label": "Full footage",
+      "presenter": "none",
+      "slots": {
+        "picture": [
+          "footage"
+        ],
+        "title": [
+          "headline"
+        ],
+        "seam": [
+          "brand-mark"
+        ]
+      }
+    },
+    "stack": {
+      "label": "Stacked footage",
+      "presenter": "none",
+      "slots": {
+        "top": [
+          "footage"
+        ],
+        "bottom": [
+          "footage"
+        ],
+        "seam": [
+          "brand-mark"
+        ]
+      }
+    }
+  },
+  "elements": {
+    "footage": {
+      "label": "Real footage",
+      "slots": [
+        "top",
+        "picture",
+        "bottom"
+      ],
+      "params": {
+        "src": "asset",
+        "start": {
+          "type": "number",
+          "optional": true,
+          "min": 0
+        },
+        "fx": {
+          "type": "number",
+          "optional": true,
+          "min": 0,
+          "max": 1
+        },
+        "fy": {
+          "type": "number",
+          "optional": true,
+          "min": 0,
+          "max": 1
+        },
+        "zoom": {
+          "type": "number",
+          "optional": true,
+          "min": 0.25,
+          "max": 4
+        },
+        "fit": "enum:cover|contain?",
+        "push": "enum:none|ease|drift?"
+      },
+      "beats": {
+        "cut": {
+          "src": "asset",
+          "start": {
+            "type": "number",
+            "optional": true,
+            "min": 0
+          },
+          "fx": {
+            "type": "number",
+            "optional": true,
+            "min": 0,
+            "max": 1
+          },
+          "fy": {
+            "type": "number",
+            "optional": true,
+            "min": 0,
+            "max": 1
+          },
+          "zoom": {
+            "type": "number",
+            "optional": true,
+            "min": 0.25,
+            "max": 4
+          },
+          "fit": "enum:cover|contain?",
+          "push": "enum:none|ease|drift?"
+        }
+      }
+    },
+    "headline": {
+      "label": "Opening headline",
+      "slots": [
+        "title"
+      ],
+      "params": {
+        "lines": {
+          "type": "array",
+          "min": 1,
+          "max": 3,
+          "of": {
+            "type": "string",
+            "maxChars": 18
+          }
+        },
+        "lead": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 20
+        },
+        "connector": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 8
+        },
+        "kicker": {
+          "type": "string",
+          "optional": true,
+          "maxChars": 24
+        },
+        "exit": "enum:slide|cut?"
+      },
+      "beats": {}
+    },
+    "big-word": {
+      "label": "Big word",
+      "slots": [
+        "word"
+      ],
+      "params": {
+        "lines": {
+          "type": "array",
+          "min": 1,
+          "max": 2,
+          "of": {
+            "type": "string",
+            "maxChars": 14
+          }
+        },
+        "look": "enum:heavy|serif|lime|yellow?"
+      },
+      "beats": {
+        "show": {}
+      }
+    },
+    "brand-mark": {
+      "label": "Brand mark on the seam",
+      "slots": [
+        "seam"
+      ],
+      "params": {
+        "src": "asset",
+        "size": "enum:small|large?"
+      },
+      "beats": {
+        "show": {}
+      }
+    }
+  }
+}

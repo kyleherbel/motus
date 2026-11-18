@@ -8,8 +8,8 @@
 </p>
 
 <p align="center">
-  <a href="CHANGELOG.md"><img alt="Version 0.4.0" src="https://img.shields.io/badge/version-0.4.0-f2a33a?style=flat-square&labelColor=18181b"></a>
-  <a href="#six-styles"><img alt="Six styles" src="https://img.shields.io/badge/styles-6-f2a33a?style=flat-square&labelColor=18181b"></a>
+  <a href="CHANGELOG.md"><img alt="Version 0.5.0" src="https://img.shields.io/badge/version-0.5.0-f2a33a?style=flat-square&labelColor=18181b"></a>
+  <a href="#seven-styles"><img alt="Seven styles" src="https://img.shields.io/badge/styles-7-f2a33a?style=flat-square&labelColor=18181b"></a>
   <a href="#install"><img alt="Claude Code plugin" src="https://img.shields.io/badge/Claude_Code-plugin-d97757?style=flat-square&labelColor=18181b"></a>
   <a href="#codex-experimental"><img alt="Codex: experimental" src="https://img.shields.io/badge/Codex-experimental-8b8f97?style=flat-square&labelColor=18181b"></a>
   <a href="#status-and-known-limits"><img alt="Tested on macOS and Windows" src="https://img.shields.io/badge/tested_on-macOS_%7C_Windows-8b8f97?style=flat-square&labelColor=18181b"></a>
@@ -21,7 +21,7 @@
 <p align="center">
   <a href="#start-here"><b>Start here</b></a> ·
   <a href="#update">Update</a> ·
-  <a href="#six-styles">Styles</a> ·
+  <a href="#seven-styles">Styles</a> ·
   <a href="#how-it-works">How it works</a> ·
   <a href="#studio">Studio</a> ·
   <a href="#how-styles-are-made">How styles are made</a> ·
@@ -46,7 +46,7 @@ You give Motus a raw take or a picture-locked cut and pick a style. You choose b
 
 The app asks how to cut the video and which look to use. Each style card plays a few seconds of a real edit in that style.
 
-Version 0.4.0. Six style packs, all in beta. Runs on macOS and Windows 10 or 11. Claude Code is the first target. OpenAI Codex support is experimental.
+Version 0.5.0. Seven style packs, all in beta. Runs on macOS and Windows 10 or 11. Claude Code is the first target. OpenAI Codex support is experimental.
 
 ### Update
 
@@ -61,11 +61,11 @@ Stop the app before you pull. A running app server keeps serving the code it sta
 
 Your videos live outside the Motus folder, so an update never touches them.
 
-## Six styles
+## Seven styles
 
-A style is a pack of rules, layouts and elements studied from reference videos. Pick one per video. All six are in beta: Ribbon Depth, Editorial Proof and Ember Brief are version 0.2.0; Night Class, Prop Room and Open Canvas are 0.1.0. Ribbon Depth combines measured public examples with documented original extensions. Open Canvas is measured from a single clip.
+A style is a pack of rules, layouts and elements studied from reference videos. Pick one per video. All seven are in beta: Ribbon Depth, Editorial Proof and Ember Brief are version 0.2.0; Night Class, Prop Room, Open Canvas and Seamline are 0.1.0. Ribbon Depth combines measured public examples with documented original extensions. Open Canvas is measured from a single clip.
 
-The frames below come from real renders. The Ribbon Depth, Open Canvas, Editorial Proof and Ember Brief strips are all from one take, the same take the hero shows in all six styles.
+The frames below come from real renders. The Ribbon Depth, Open Canvas, Editorial Proof and Ember Brief strips are all from one take, the same take the hero shows in six of the styles.
 
 Ribbon Depth, Editorial Proof, Ember Brief and Prop Room draw cards that act the sentence out instead of repeating the caption: a count runs up to the number just said, a step lights up on its word, a pointer clicks the setting being named. When the speaker names a real product, the agent looks for the maker's own launch or demo video and cuts short clips of it into the edit, and `motus logo` fetches the brand's real mark for styles that show one.
 
@@ -117,19 +117,25 @@ A bright speaker in their own darkened room, a turning 3D glass ribbon behind th
 
 **Best for** solo tool, skill and workflow explainers of 30 to 47 seconds, where each step can become a picture. 20 elements and 3 layouts. See [the style guide](styles/prop-room/STYLE.md), [the prop library](styles/prop-room/props/README.md) and [what was measured](styles/prop-room/research/README.md).
 
+### Seamline &nbsp;<sub><code>seamline</code></sub>
+
+**Tech news over the real thing.** The top half of the frame plays real footage of what the speaker is talking about: the maker's launch film, its demo, the product doing the job, the output it made. The speaker sits at the desk in the bottom half. One or two caption words in white pixel capitals ride the hard seam between them. Everything is a hard cut: the footage changes about every 1.4 s on the word that names it, and short full-frame face inserts push in slowly on opinions and asides. A heavy extended headline slides in to open, a big word over the chest stresses the one word that carries a sentence, and a dark music bed sits under the voice.
+
+**Best for** launch and release news with the maker's own footage, "X just shipped Y" takes and product demos of 45 to 90 seconds. 4 elements and 4 layouts. The edit is only as good as its footage: the agent pulls the maker's launch and demo videos for every product named, about five sources a video. See [the style guide](styles/seamline/STYLE.md) and [what was measured](styles/seamline/research/README.md).
+
 ### Side by side
 
-| | Ribbon Depth | Editorial Proof | Ember Brief | Night Class | Open Canvas | Prop Room |
-|---|---|---|---|---|---|---|
-| Frame | Full-frame speaker with graphics behind the head, a speaker window over a panel, and abstract glass scenes | Speaker panel at the bottom, evidence above, white grid | Dotted field over the speaker, half and half | Small presenter panel under a black dot-grid field | Speaker cut-out over their footage rectangle on a drafting grid, captures in selection frames | Pale panel over the speaker, cut every 2 s to full-frame scenes and short full-height speaker beats |
-| Captions | Words land one by one; capsule plus sans/heavy-italic hero | Word by word, accent keywords | Two words, the spoken word in magenta | One word | Word by word, one brush-script word a sentence | One to three words, white on a dark plate across the seam |
-| Signature move | A turning glass ribbon used as an accent, a scene library for any niche, shakes on landings | Designed cards that act the claim out, dark focus shots for close reading | A new graphic about every 3 s; composites that fill the field and keep moving | A hard cut to the full-height speaker about every 10 s | A cursor that drags windows into place and pointers that land on the spoken word | Code-drawn props and rebuilt app windows that act each sentence out on its words |
-| Sound | Three optional original effects; no bundled bed | Sound effects and two music beds | No sound effects, one music bed | A sound kit and a music bed | Voice only | Original effects and three beds: two drum-led, one pad |
-| Look choices | Orange, Violet or Light Lime; motion intensity; ribbon strength; captions | Accent: emerald or violet | None | Sound kit, music bed, field texture | Palette: mono (default), cobalt, ember, moss, ink | None: the plate is chosen per scene |
-| Best source | Clear 9:16 take and a good matte; explicit no-matte fallback | Any take, cropped to 9:16 around the speaker | A shot wider than 9:16 (the horizontal recording) | A shot wider than 9:16 (the horizontal recording) | A 9:16 take with a good matte | A shot wider than 9:16 (the horizontal recording) |
-| Elements, layouts | 17, 6 | 20, 4 | 21, 2 | 17, 3 | 5, 6 | 20, 3 |
-| Measured from | Two Violet examples in one public promo; static bright-family boards | 33 short videos | 11 reels | 32 teaching reels | 1 reel | 19 reels |
-| Version | 0.2.0 | 0.2.0 | 0.2.0 | 0.1.0 | 0.1.0 | 0.1.0 |
+| | Ribbon Depth | Editorial Proof | Ember Brief | Night Class | Open Canvas | Prop Room | Seamline |
+|---|---|---|---|---|---|---|---|
+| Frame | Full-frame speaker with graphics behind the head, a speaker window over a panel, and abstract glass scenes | Speaker panel at the bottom, evidence above, white grid | Dotted field over the speaker, half and half | Small presenter panel under a black dot-grid field | Speaker cut-out over their footage rectangle on a drafting grid, captures in selection frames | Pale panel over the speaker, cut every 2 s to full-frame scenes and short full-height speaker beats | Real footage over the speaker, split at the middle, with full-frame face and footage cuts |
+| Captions | Words land one by one; capsule plus sans/heavy-italic hero | Word by word, accent keywords | Two words, the spoken word in magenta | One word | Word by word, one brush-script word a sentence | One to three words, white on a dark plate across the seam | Two words in white pixel capitals on the seam, shadow or plate |
+| Signature move | A turning glass ribbon used as an accent, a scene library for any niche, shakes on landings | Designed cards that act the claim out, dark focus shots for close reading | A new graphic about every 3 s; composites that fill the field and keep moving | A hard cut to the full-height speaker about every 10 s | A cursor that drags windows into place and pointers that land on the spoken word | Code-drawn props and rebuilt app windows that act each sentence out on its words | The maker's own footage, cut on the word that names it, about 28 times a minute |
+| Sound | Three optional original effects; no bundled bed | Sound effects and two music beds | No sound effects, one music bed | A sound kit and a music bed | Voice only | Original effects and three beds: two drum-led, one pad | Two dark beds (a 105 BPM pulse, a pad) and an optional opening swell |
+| Look choices | Orange, Violet or Light Lime; motion intensity; ribbon strength; captions | Accent: emerald or violet | None | Sound kit, music bed, field texture | Palette: mono (default), cobalt, ember, moss, ink | None: the plate is chosen per scene | Caption shadow or plate, speaker grade, opening sound |
+| Best source | Clear 9:16 take and a good matte; explicit no-matte fallback | Any take, cropped to 9:16 around the speaker | A shot wider than 9:16 (the horizontal recording) | A shot wider than 9:16 (the horizontal recording) | A 9:16 take with a good matte | A shot wider than 9:16 (the horizontal recording) | A shot wider than 9:16 (the horizontal recording), ideally 4K |
+| Elements, layouts | 17, 6 | 20, 4 | 21, 2 | 17, 3 | 5, 6 | 20, 3 | 4, 4 |
+| Measured from | Two Violet examples in one public promo; static bright-family boards | 33 short videos | 11 reels | 32 teaching reels | 1 reel | 19 reels | 30 reels |
+| Version | 0.2.0 | 0.2.0 | 0.2.0 | 0.1.0 | 0.1.0 | 0.1.0 | 0.1.0 |
 
 Each style's layouts, elements and their parameters are listed in `styles/<id>/style.json`. Run `/motus:styles` or `node engine/bin/motus.mjs styles` to see what is installed.
 
@@ -195,13 +201,13 @@ Your decisions are saved in `review/state.json` inside the project, so nothing i
 
 ## How styles are made
 
-Five packs are measured from reference videos: four from a corpus of 11 to 33 reels by one creator each, and Open Canvas from a single clip. Ribbon Depth studies a smaller set of public examples and clearly separates observed geometry and timing from reconstructed materials and original extensions.
+Six packs are measured from reference videos: five from a corpus of 11 to 33 reels by one creator each, and Open Canvas from a single clip. Ribbon Depth studies a smaller set of public examples and clearly separates observed geometry and timing from reconstructed materials and original extensions.
 
 <table>
   <tr>
-    <td align="center" width="25%"><h3>96</h3>reference videos measured</td>
+    <td align="center" width="25%"><h3>126</h3>reference videos measured</td>
     <td align="center" width="25%"><h3>9</h3>dimensions per study</td>
-    <td align="center" width="25%"><h3>210</h3>numbers re-measured in a second pass</td>
+    <td align="center" width="25%"><h3>229</h3>numbers re-measured in a second pass</td>
     <td align="center" width="25%"><h3>0</h3>reference frames shipped</td>
   </tr>
 </table>
@@ -211,6 +217,7 @@ Five packs are measured from reference videos: four from a corpus of 11 to 33 re
 - **Ember Brief** was built from 11 reels by a third creator, published between 2 and 7 November 2026. Its second pass re-measured 107 quantities and corrected 11 (`styles/ember-brief/research/verification.md`). A second study measured how its illustrations and diagrams explain what is being said (`styles/ember-brief/research/explain.md`), and a third found that most of them are composites that fill the field and keep moving (`explain-composites.md`).
 - **Prop Room** was built from 19 reels by one creator, published between 29 October and 12 November 2026, with an explanation pass over all 279 graphic units. Its verifier re-measured 29 quantities (`styles/prop-room/research/verification.md`).
 - **Open Canvas** was measured from one public reel of 28.9 s, read at every frame. One clip cannot separate a habit of the style from a habit of one video, so every rule is medium or low confidence, and the pack stays in beta until a corpus of 15 or more clips is studied.
+- **Seamline** was built from 30 reels by one creator, published between 11 March and 15 November 2026: the split-screen posts only, chosen from the creator's 40 newest (the other 10 use other formats). Analysts coded 1,207 cuts and 1,262 spoken clauses against the footage on screen, and the verifier re-measured 19 quantities on every frame of all 30 (`styles/seamline/research/verification.md`).
 - **Ribbon Depth** studies one public 20-second promo that contains two Violet edits, and six public scene boards (`styles/ribbon-depth/research/README.md`).
 
 For a corpus, nine analysts each measured one dimension: layout, type, hook, graphics, motion, structure, colour, audio, presenter. Every rule is a number with evidence: a count, a frame range, a fit error. A second pass re-measured the disputed and critical numbers. The numbers then became one tokens file, the elements were built against it, and each was compared side by side with reference frames.
@@ -389,7 +396,7 @@ Your source video is treated as read-only. Everything Motus writes goes into the
 
 - **Windows works without the person matte.** The person matte and face tracking use Apple Vision through a small Swift helper, so they are macOS only. On Windows (and on a Mac without the Swift toolchain) the engine falls back to un-matted framing: no head rising above the presenter panel, and a centre crop for sources that are not 9:16. Everything else (the app, transcription, Studio, rendering) runs the same. Windows is checked on a Windows runner: `motus doctor`, transcription with faster-whisper, the app and Studio servers, the unit tests and an end-to-end render. Linux has code paths but has not been run.
 - **Transcription on an NVIDIA GPU** needs the CUDA libraries (cuBLAS, cuDNN). Without them it falls back to the CPU on its own, which is slower.
-- **Six style packs, all in beta.** Expect their elements and rules to change before 1.0. Open Canvas is measured from a single clip, so its rules are provisional.
+- **Seven style packs, all in beta.** Expect their elements and rules to change before 1.0. Open Canvas is measured from a single clip, so its rules are provisional.
 - **Output** is always 1080×1920 at the source frame rate. Draft renders are 540×960. A style can also ask conform to keep the whole source frame as a wide view (Night Class, Ember Brief and Prop Room do); then the preview proxy is about 3870 px wide.
 - **The source must contain the speech.** A file with no audio stream cannot be planned.
 - **Transcription is automatic** and makes mistakes, mostly on names. The agent repairs captions from context. Pass names up front to help it.

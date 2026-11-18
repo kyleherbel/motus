@@ -2,6 +2,17 @@
 
 All notable changes to Motus are recorded here. The plugin version is the `version` field in `.claude-plugin/plugin.json` and `.codex-plugin/plugin.json`. Each style pack has its own version in `styles/<id>/style.json`.
 
+## 0.5.0
+
+Seven styles. Both plugin manifests now use 0.5.0, so installed plugins see Seamline.
+
+Seamline 0.1.0 (beta): a new style, `styles/seamline/`. Tech news told over the real thing: the maker's launch and demo footage in the top half, the speaker at the desk in the bottom half, two caption words in white pixel capitals on the hard seam between them. Hard cuts everywhere, about 32 a minute; short full-frame face inserts that push in from 1.00 to 1.066; a heavy extended headline that slides in from alternating sides to open; a big word over the chest; the brand's own mark on the seam when it is named.
+
+- 4 layouts (`split`, `face`, `full`, `stack`) and 4 elements (`footage` with `cut` beats, focus, zoom, contain and push; `headline` with lead, connector and kicker; `big-word`; `brand-mark`). The split's speaker panel is framed from the wide view, so start from the horizontal recording.
+- Look: `caption` (`shadow` or `plate`), `grade` (`graded` or `natural`, on the speaker only), `opening` (`none` or `swell`). Two original beds synthesised by `dev/make-audio.mjs`: a dark 105 BPM pulse and a dark pad. No emphasis kinds: the big word is the emphasis.
+- Measured from 30 split-screen reels by one creator (2,198 s), chosen by format from the creator's 40 newest: nine dimensions, an explanation pass over 241 footage units and 117 built units, and a verifier that re-measured 19 quantities on every frame. Fonts: Monocraft, Archivo, Instrument Serif (SIL OFL 1.1).
+- STYLE.md makes footage the plan's first job: about five sources a video, cut on the first word of the clause, with the in-point chosen so the clip's event lands on the key word.
+
 ## 0.4.0
 
 Six styles. Both plugin manifests now use 0.4.0, so installed plugins see Open Canvas and the Editorial Proof and Ember Brief changes below. Editorial Proof and Ember Brief are now version 0.2.0.
