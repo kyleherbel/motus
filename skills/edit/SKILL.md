@@ -66,6 +66,13 @@ Then tell the user, in three to five lines, what the video is about and what you
 - Raw: read `analysis/cuts.suggested.json` (pauses tightened, cut points inside real silence) and `analysis/retakes.json` (candidates only: many are false alarms, such as deliberate repetition). Decide what goes. Write the kept source ranges to `plan/cuts.json` as `[{"in": seconds, "out": seconds}]`. Cut on silence, never inside a word; when you drop a retake, cut from the silence before the false start to the silence before the good take. Follow the style guide's rule for the longest pause that may survive.
 - Locked: skip straight to conform.
 
+**Verify a raw cut on the audio, not on the transcript.** The recogniser merges a restart into one stretched word ("There's, there's now" becomes one long "There's"; "and a host of other, and a host of other red flags" becomes one long "red"), so a cut list built from its word gaps keeps false starts, keeps fillers and breaths as gaps, and can cut through a word. Before you plan:
+1. Re-transcribe `analysis/audio.wav` with `faster-whisper` using a disfluency prompt (`initial_prompt` such as "Umm, uh, I-I mean, it's, it's like, uh, basically") and no VAD, then re-transcribe on its own every stretch where a word lasts longer than about 0.5 s. Where the takes differ, keep the last good one, and if two takes of the opening say the same thing two ways, keep the stronger one only.
+2. Place every in and out point in a measured energy trough (10 ms RMS of the audio, at least 20 dB under speech level). An unvoiced consonant ("s", "f") dips too: a dip inside a word is never a cut point.
+3. Inside each kept range, shorten every breath or silence longer than the style allows (as a rule about 0.18 s) to about 0.12 s, cutting only in its quietest part. Start the first range in the trough before the first word and end the last about 0.25 s after the last word.
+4. After `motus conform`, transcribe `conform/voice.wav` in a 5-second window centred on every join and list every non-speech stretch (more than 15 dB under speech) over 0.12 s. Fix anything that reads as a repeat, a clipped word or a hole, and conform again.
+5. Splice the corrected words into `analysis/transcript.json` (keep a copy of the original) so the captions show what is said.
+
 `motus conform <project>`. This builds the output timeline, the person matte and the preview proxy, and writes `conform/words.json`: the words you will plan against, renumbered from 0 on the output timeline. **From here on, every word index and every time refers to `conform/words.json`.** If you change `plan/cuts.json` later, conform again and re-check your plan.
 
 ### 6. Plan the edit

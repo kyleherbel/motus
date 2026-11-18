@@ -2,8 +2,7 @@
  "motus": 1,
  "style": "seamline",
  "look": {
-  "caption": "plate",
-  "grade": "graded"
+  "caption": "plate"
  },
  "captions": {
   "fixes": {

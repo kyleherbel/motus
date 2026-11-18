@@ -37,25 +37,16 @@ export const colour = {
   plate: 'rgba(0,0,0,0.71)',             // the caption plate: black at 0.70-0.71 on the clips that set the pattern; later clips run 0.86 [T06, C03, verified]
   bigWordShadow: 'none',                 // titles and big words carry no measurable shadow [C09, C10]
 };
-// The presenter is the only graded layer; inserted footage is left as found [C14, C15]. The reference grade is low
-// key (median luma 36, black floor 5, ceiling 250), warm in mids and highlights over slightly cool shadows, with
-// saturation 0.31 [C15-C19]. A fixed curve cannot match another camera's percentiles exactly; this is a static
-// approximation applied with an SVG filter on the presenter layers only (by eye against the recipe).
-export const grade = {
-  graded: {
-    // per channel: a gamma-like transfer via a table of 9 points on 0..1 (darker mids, rolled-off highlights)
-    r: [0.00, 0.035, 0.085, 0.165, 0.275, 0.42, 0.59, 0.77, 0.955],
-    g: [0.00, 0.030, 0.075, 0.150, 0.255, 0.39, 0.56, 0.75, 0.945],
-    b: [0.00, 0.040, 0.080, 0.145, 0.235, 0.36, 0.52, 0.71, 0.920],
-    saturate: 0.82,
-  },
-  natural: null,
-};
+// No colour grade on any layer: the speaker and the inserted footage are shown as recorded (owner, 2026-11-18).
+// The reference grades its speaker low key and warm [C15-C19]; the measurement stays in research/colour.md.
 
 // ------------------------------------------------------------------ layout (research/layout.md)
 export const layout = {
   seam: 960,                             // first presenter row; the top visual covers rows 0..959 [L03, P03, verified]
-  caption: { cx: 540, cy: 960, baseline: 974, capTop: 945 },   // centred on the seam in every layout [L15, T02]
+  caption: { cx: 540, cy: 960, baseline: 974, capTop: 945,     // centred on the seam [L15, T02]
+    // over the full-frame face the reference keeps the seam line too [L15], which puts the words on the speaker's
+    // mouth; the owner moved them down to the chest (2026-11-18)
+    faceCy: 1440 },
   captionMinSide: 199,                   // no caption ink closer to a side [L17]
   headline: { bottom: 880, width: 814 },                      // block bottom 880, 79 px above the seam; lines 505-932 px wide, median 814 [H15, T15, verified]
   brand: { small: { w: 460, h: 100 }, large: { w: 660, h: 124 } },  // marks centred on the seam, 360-660 px wide, 49-124 px tall [H19, verified]
@@ -63,7 +54,9 @@ export const layout = {
 
 // ------------------------------------------------------------------ presenter (research/presenter.md)
 export const presenter = {
-  split: { faceW: 172, eyeY: 1213, eyeX: 519, maxScale: 1.5 },   // [P03-P06]; enlargement limit [P25]
+  // the owner's framing (2026-11-18): tighter than the reference's (face 172 px, eyes 1213, x 519 [P03-P06]), so less of
+  // the room shows; the enlargement of the wide view stays inside the softness limit [P25]
+  split: { faceW: 330, eyeY: 1290, eyeX: 540, maxScale: 1.5 },
   face: { faceW: 343, eyeY: 527, eyeX: 487, maxScale: 1.5 },      // the same take enlarged about 1.95x [P07-P10]
   push: { to: 1.066, ease: [0.42, 0, 0.58, 1], origin: [501, 960] },   // 75 % of full-face shots: 1.00 to 1.066 over the whole shot, in-out; the end scale is constant, not the rate [P11, M16, verified]
 };

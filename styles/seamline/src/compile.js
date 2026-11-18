@@ -104,7 +104,7 @@ export async function buildComposition(doc, env, root) {
       if (it.on !== on) { setStyle(it.wrap, 'display', on ? '' : 'none'); if (!on) it.built.seek(t, false); it.on = on; }
       if (on) it.built.seek(t, true);
     }
-    captions.seek(t);
+    captions.seek(t, run.layout);
   };
 
   return {

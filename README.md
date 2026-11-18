@@ -8,7 +8,7 @@
 </p>
 
 <p align="center">
-  <a href="CHANGELOG.md"><img alt="Version 0.5.0" src="https://img.shields.io/badge/version-0.5.0-f2a33a?style=flat-square&labelColor=18181b"></a>
+  <a href="CHANGELOG.md"><img alt="Version 0.5.1" src="https://img.shields.io/badge/version-0.5.1-f2a33a?style=flat-square&labelColor=18181b"></a>
   <a href="#seven-styles"><img alt="Seven styles" src="https://img.shields.io/badge/styles-7-f2a33a?style=flat-square&labelColor=18181b"></a>
   <a href="#install"><img alt="Claude Code plugin" src="https://img.shields.io/badge/Claude_Code-plugin-d97757?style=flat-square&labelColor=18181b"></a>
   <a href="#codex-experimental"><img alt="Codex: experimental" src="https://img.shields.io/badge/Codex-experimental-8b8f97?style=flat-square&labelColor=18181b"></a>
@@ -46,7 +46,7 @@ You give Motus a raw take or a picture-locked cut and pick a style. You choose b
 
 The app asks how to cut the video and which look to use. Each style card plays a few seconds of a real edit in that style.
 
-Version 0.5.0. Seven style packs, all in beta. Runs on macOS and Windows 10 or 11. Claude Code is the first target. OpenAI Codex support is experimental.
+Version 0.5.1. Seven style packs, all in beta. Runs on macOS and Windows 10 or 11. Claude Code is the first target. OpenAI Codex support is experimental.
 
 ### Update
 
@@ -63,7 +63,7 @@ Your videos live outside the Motus folder, so an update never touches them.
 
 ## Seven styles
 
-A style is a pack of rules, layouts and elements studied from reference videos. Pick one per video. All seven are in beta: Ribbon Depth, Editorial Proof and Ember Brief are version 0.2.0; Night Class, Prop Room, Open Canvas and Seamline are 0.1.0. Ribbon Depth combines measured public examples with documented original extensions. Open Canvas is measured from a single clip.
+A style is a pack of rules, layouts and elements studied from reference videos. Pick one per video. All seven are in beta: Ribbon Depth, Editorial Proof and Ember Brief are version 0.2.0; Night Class, Prop Room and Open Canvas are 0.1.0; Seamline is 0.1.1. Ribbon Depth combines measured public examples with documented original extensions. Open Canvas is measured from a single clip.
 
 The frames below come from real renders. The Ribbon Depth, Open Canvas, Editorial Proof and Ember Brief strips are all from one take, the same take the hero shows in six of the styles.
 
@@ -131,11 +131,11 @@ A bright speaker in their own darkened room, a turning 3D glass ribbon behind th
 | Captions | Words land one by one; capsule plus sans/heavy-italic hero | Word by word, accent keywords | Two words, the spoken word in magenta | One word | Word by word, one brush-script word a sentence | One to three words, white on a dark plate across the seam | Two words in white pixel capitals on the seam, shadow or plate |
 | Signature move | A turning glass ribbon used as an accent, a scene library for any niche, shakes on landings | Designed cards that act the claim out, dark focus shots for close reading | A new graphic about every 3 s; composites that fill the field and keep moving | A hard cut to the full-height speaker about every 10 s | A cursor that drags windows into place and pointers that land on the spoken word | Code-drawn props and rebuilt app windows that act each sentence out on its words | The maker's own footage, cut on the word that names it, about 28 times a minute |
 | Sound | Three optional original effects; no bundled bed | Sound effects and two music beds | No sound effects, one music bed | A sound kit and a music bed | Voice only | Original effects and three beds: two drum-led, one pad | Two dark beds (a 105 BPM pulse, a pad) and an optional opening swell |
-| Look choices | Orange, Violet or Light Lime; motion intensity; ribbon strength; captions | Accent: emerald or violet | None | Sound kit, music bed, field texture | Palette: mono (default), cobalt, ember, moss, ink | None: the plate is chosen per scene | Caption shadow or plate, speaker grade, opening sound |
+| Look choices | Orange, Violet or Light Lime; motion intensity; ribbon strength; captions | Accent: emerald or violet | None | Sound kit, music bed, field texture | Palette: mono (default), cobalt, ember, moss, ink | None: the plate is chosen per scene | Caption shadow or plate, opening sound; no colour grade |
 | Best source | Clear 9:16 take and a good matte; explicit no-matte fallback | Any take, cropped to 9:16 around the speaker | A shot wider than 9:16 (the horizontal recording) | A shot wider than 9:16 (the horizontal recording) | A 9:16 take with a good matte | A shot wider than 9:16 (the horizontal recording) | A shot wider than 9:16 (the horizontal recording), ideally 4K |
 | Elements, layouts | 17, 6 | 20, 4 | 21, 2 | 17, 3 | 5, 6 | 20, 3 | 4, 4 |
 | Measured from | Two Violet examples in one public promo; static bright-family boards | 33 short videos | 11 reels | 32 teaching reels | 1 reel | 19 reels | 30 reels |
-| Version | 0.2.0 | 0.2.0 | 0.2.0 | 0.1.0 | 0.1.0 | 0.1.0 | 0.1.0 |
+| Version | 0.2.0 | 0.2.0 | 0.2.0 | 0.1.0 | 0.1.0 | 0.1.0 | 0.1.1 |
 
 Each style's layouts, elements and their parameters are listed in `styles/<id>/style.json`. Run `/motus:styles` or `node engine/bin/motus.mjs styles` to see what is installed.
 

@@ -1,5 +1,6 @@
 // The running caption (research/type.md T01-T11; layout.md L15-L17; motion.md M04, M05).
-//   one line of pixel capitals, white, centred on the seam: cap top y 945, baseline y 974, in every layout [T02, L15]
+//   one line of pixel capitals, white, centred on the seam: cap top y 945, baseline y 974 [T02, L15]; over the
+//   full-frame face it drops to y 1440, below the chin (owner, 2026-11-18)
 //   a group is about 2 words and at most 16 characters; it ends after . , ! ? : ; [T08]
 //   it cuts in complete on the frame its first word starts and is replaced by the next group on the next word;
 //   no fade, scale or word-by-word reveal [T09, T10, M04]
@@ -83,7 +84,10 @@ export function buildCaptions(S, blocks = []) {
     el, groups,
     /** set the vertical position of the line's baseline once the font is known to sit where expected */
     nodes,
-    seek(t) {
+    /** layout: the run's layout; over the full-frame face the line sits lower, on the chest (owner) */
+    seek(t, layout) {
+      const dy = layout === 'face' ? cap.faceCy - cap.cy : 0;
+      setStyle(el, 'transform', dy ? `translateY(${dy}px)` : '');
       const off = blocked(t);
       for (const n of nodes) {
         const on = !off && t >= n.g.show && t < n.g.hide;

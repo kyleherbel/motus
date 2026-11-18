@@ -2,6 +2,23 @@
 
 All notable changes to Motus are recorded here. The plugin version is the `version` field in `.claude-plugin/plugin.json` and `.codex-plugin/plugin.json`. Each style pack has its own version in `styles/<id>/style.json`.
 
+## 0.5.1
+
+Seamline 0.1.1, from the first real edits in the style, and two procedure fixes. Both plugin manifests now use 0.5.1.
+
+Seamline 0.1.1:
+
+- No colour grade on any layer: the speaker and the footage are shown as recorded. The reference's low-key warm grade stays measured in `research/colour.md`; the `grade` look option is gone.
+- The split frames the speaker tighter: face about 330 px wide, eyes a third of the way down the lower half (the reference shows more room, face 172 px), enlarging the wide view at most 1.5x.
+- Over the full-frame face the caption drops to the chest, y 1440, instead of sitting on the seam line across the mouth.
+
+Studio: the scene grid's loops are redrawn when the project's style pack changes on disk, not only when the plan changes, so a style edit shows up on refresh.
+
+Skills:
+
+- `edit`, step 5: verify a raw cut on the audio, not on the transcript. Re-transcribe with a disfluency prompt to find restarts the recogniser merged, place every cut in a measured energy trough, shorten breaths and long pauses, and transcribe every join of the conformed voice before planning.
+- `new-style`: analysts keep intermediate files in their own folders (a shared scratch folder cost two re-runs), and a pack does not build in the reference's colour grade.
+
 ## 0.5.0
 
 Seven styles. Both plugin manifests now use 0.5.0, so installed plugins see Seamline.

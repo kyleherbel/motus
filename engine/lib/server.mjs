@@ -249,6 +249,19 @@ export async function createStudioServer(projectDir, { port = 0, host = '127.0.0
       }));
     } catch { /* watching is a nicety */ }
   }
+  // A style edited while Studio is open changes the pixels of every loop without touching the plan: watch the
+  // project's style pack too, so the grid redraws (its research notes and dev tools do not draw anything).
+  const styleId = project.json.style;
+  if (drawLoops && styleId && /^[a-z0-9-]+$/.test(styleId)) {
+    try {
+      watchers.push(fss.watch(path.join(STYLES, styleId), { recursive: true }, (_ev, file) => {
+        const top = String(file || '').split(/[\\/]/)[0];
+        if (top === 'research' || top === 'dev' || top.startsWith('.')) return;
+        clearTimeout(debounce); debounce = setTimeout(() => emit('plan'), 250);
+        loopsSoon();
+      }));
+    } catch { /* recursive watching is not available everywhere; the grid then redraws on the next plan change */ }
+  }
   if (drawLoops) loopsSoon();
 
   const server = http.createServer(async (req, res) => {

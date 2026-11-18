@@ -1,7 +1,7 @@
 {
   "id": "seamline",
   "name": "Seamline",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "beta",
   "summary": "Tech news on a split screen: the product's real launch footage and demos in the top half, the speaker at the desk in the bottom half, two pixel-type caption words riding the seam between them. Hard cuts about every 1.3 s, short full-frame face inserts that push in slowly, a heavy sliding headline to open, a dark bed under the voice.",
   "bestFor": [
@@ -18,14 +18,6 @@
         "plate"
       ],
       "default": "shadow"
-    },
-    "grade": {
-      "label": "Speaker grade",
-      "choices": [
-        "graded",
-        "natural"
-      ],
-      "default": "graded"
     },
     "opening": {
       "label": "Opening sound",

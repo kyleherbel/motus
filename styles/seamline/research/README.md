@@ -31,8 +31,9 @@ Nine analysts, one per dimension, each working without reading the others, then 
 - **Target**: the split format only (owner, 2026-11-18), and its current treatment (2026-03 to 2026-11): pixel captions on the seam, a heavy extended headline. Within the corpus the later half cuts a little faster and uses more full-frame footage (S26); the pack follows the whole corpus, with the later numbers where they differ.
 - **Left out**: the presenter-in-a-circle layout and the moving seam (mostly March to May, rare since June: G28, L19-L22), info cards and comparison cards (2 % of runtime, 1 to 3 clips each: X18-X20), coloured caption plates and coloured emphasis words (early clips), the sub whooshes (17 on 1,207 cuts: A23). Each could be added as its own element later.
 - **Substitutions**: the reference caption face is an unidentified pixel monospace; Monocraft SemiBold (OFL) has the same 5 x 7 grid and 6-unit advance (T01; overlay IoU 0.44 against 0.26 for Departure Mono). The headline face is an unidentified heavy extended grotesque; Archivo at width 125, weight 900 (OFL) matches with +0.05 em tracking (verification). The serif is Instrument Serif Italic, a low-confidence stand-in (T16).
-- **Presenter framing**: the reference speaker's face is 172 px wide in the split. The style frames the split from the engine's wide view and never shrinks it below cover, so a speaker closer to the camera stays larger (P05, presenter.js).
-- **Grade**: the reference grade is matched by a fixed transfer curve on the presenter only, judged by eye against the measured percentiles (C15-C19); `natural` turns it off.
+- **Presenter framing**: the reference speaker's face is 172 px wide in the split with the room around them (P05). The owner asked for a tighter split (2026-11-18): the pack frames the face about 330 px wide, eyes 330 px under the seam, from the engine's wide view enlarged at most 1.5x (P25).
+- **Captions over the face**: the reference keeps the caption on the seam line even over the full-frame face (L15), on the speaker's mouth. The owner moved it to the chest, y 1440 (2026-11-18).
+- **No grade**: the reference grades its speaker low key and warm (C15-C19). The pack applies no grade to any layer (owner, 2026-11-18): every video shows the speaker as recorded.
 
 ## Where each token comes from
 
@@ -42,4 +43,3 @@ Nine analysts, one per dimension, each working without reading the others, then 
 
 - Listen to both beds and the swell in a full render on headphones and a phone (audio.md, "For a person to check").
 - Watch the headline slide and the face push-in at speed against the reference.
-- The grade on a different room and camera.

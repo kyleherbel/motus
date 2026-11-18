@@ -151,19 +151,19 @@ A logo as a shot: `{ "src": "assets/logos/x-mark.svg", "fit": "contain", "zoom":
 
 The engine groups and times them; you only fix words.
 
-- One line of pixel capitals on the seam, about 2 words and 10 characters (never over 16), cut in complete on the first word and replaced by the next group; no word-by-word reveal [T02, T08-T10, M04].
+- One line of pixel capitals on the seam (over the full-frame face it drops to the chest, y 1440, so it never sits on the mouth), about 2 words and 10 characters (never over 16), cut in complete on the first word and replaced by the next group; no word-by-word reveal [T02, T08-T10, M04].
 - Fix every ASR error in `captions.fixes`, including names ("JGBT" → "ChatGPT"). Write numbers as digits ("$50", "10x") [T11]. Punctuation stays.
 - `captions.breaks` to start a group on a word; `captions.hide` for words a `big-word` or a logo already shows (the style also hides the caption under them by itself).
 - No emphasis kinds: the big word is the emphasis.
 
 ## 9. Framing
 
-The speaker's half is framed from the whole camera frame (the style asks conform for the wide view): start the project from the **horizontal recording**, ideally 3840 x 2160 [P22-P25]. The face is about 172 px wide in the split and 343 px full frame in the reference; a closer camera gives a larger face, which is fine. With a 9:16 source there is no wide view: the split then shows a tighter crop (Studio warns).
+The speaker's half is framed from the whole camera frame (the style asks conform for the wide view): start the project from the **horizontal recording**, ideally 3840 x 2160 [P22-P25]. The split frames the face about 330 px wide with the eyes a third of the way down the panel (tighter than the reference's 172 px, by the owner's choice), enlarging the wide view up to 1.5x; the full-frame face is the 9:16 crop, face about 343 px or larger. With a 9:16 source there is no wide view: the split then shows a tighter crop (Studio warns).
 
 ## 10. Look
 
 - `caption`: `shadow` (a hard 3 px drop shadow; 20 of 30 videos) or `plate` (a black plate at 0.7 behind each caption; 10 of 30). **Choose `plate` when much of the footage is white or light UI**, where a white caption with only a shadow is hard to read [T05-T07].
-- `grade`: `graded` (the reference's low-key warm look on the speaker only; footage is never graded) or `natural` [C14-C19]. Keep `graded` unless the speaker's room is already dark.
+- No colour grade: the speaker and the footage are shown as recorded. The reference grades its speaker low key and warm; this pack does not (owner, 2026-11-18).
 - `opening`: `swell` (a low noise swell under the first second; about a third of the reference videos) or `none` [A22].
 
 ## 11. Sound
