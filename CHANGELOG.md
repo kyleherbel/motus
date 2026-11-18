@@ -2,7 +2,26 @@
 
 All notable changes to Motus are recorded here. The plugin version is the `version` field in `.claude-plugin/plugin.json` and `.codex-plugin/plugin.json`. Each style pack has its own version in `styles/<id>/style.json`.
 
-## Unreleased
+## 0.4.0
+
+Six styles. Both plugin manifests now use 0.4.0, so installed plugins see Open Canvas and the Editorial Proof and Ember Brief changes below. Editorial Proof and Ember Brief are now version 0.2.0.
+
+README and media:
+
+- New hero: the same 6 s of one take in all six styles, side by side and in sync (`docs/media/hero.webp`, animated WebP, 6.0 MB).
+- New strips for Ribbon Depth and Open Canvas; the Editorial Proof and Ember Brief strips now show their new cards. All four come from that same take.
+- `docs/media/app.webp`: the app's "Pick a look" step, with each style card playing its preview.
+- An Update section: stop the app, `git pull`, start it again. A running app server keeps serving the code it started with. Also how to move a ZIP download to a clone, and how to update the plugin.
+- Styles in the app's order, a side-by-side table with all six, element and layout counts and versions. "How styles are made" covers all six packs (96 reference videos, 210 numbers re-measured). Privacy lists `motus logo`'s requests and the agent's product-video downloads. Requirements list `yt-dlp` as optional. Licence lists PT Serif and Caveat Brush.
+
+Editorial Proof 0.2.0: motion graphics by default and real brand marks, from a second study of the reference (255 designed graphics, 739 timed events, `styles/editorial-proof/research/explain.md`).
+
+- New elements: `ask-card` (a question typed with the voice, the answer streaming in, sponsored and lit rows), `flow-card` (steps waiting greyed, lighting on their words, connectors drawing on with a travelling dot), `duel-card` (two sides converge, one wins, or a stream of people flows from one to the other) and `wipe-card` (before and after behind a sliding divider).
+- Shared motion in `src/anim.js`: traced outlines, word-synced typing, weighted arrivals, fly paths with blur, selection hand-off, packets.
+- The dark backdrop is a live blurred copy of the card, as measured (C19-C20). Card swaps inside a run slide-push with blur (M16).
+- `logo-card` lands its mark as a hero and accepts an original glyph.
+- `motus logo <brand>`: fetches a brand's full-colour site icon, or its Simple Icons vector mark, into the project for any card to use.
+- STYLE.md: motion graphics, real footage and real marks first; lists only for real lists; no caption reprints; checklist row 26.
 
 Open Canvas 0.1.0 (beta): a new style, `styles/open-canvas/`. The video staged as an open design file: the speaker cut out over their own footage rectangle on a drifting drafting grid, real captures in selection frames, a cursor that drags things into place, pointers on the spoken word, word-by-word captions with a brush-script word, a bare-face comment ask. Voice only.
 
@@ -11,7 +30,7 @@ Open Canvas 0.1.0 (beta): a new style, `styles/open-canvas/`. The video staged a
 - Measured from one clip read at every frame, not a corpus: every rule is medium or low confidence and the research notes say so. No sounds shipped. Fonts: Outfit, Caveat Brush, JetBrains Mono (SIL OFL 1.1).
 - End-to-end test on a Daily Update take: 12 scenes, 54.4 s, 1080x1920 at 29.97 fps, -14 LUFS.
 
-Ember Brief: composite pictures that fill the field, from a third pass over the reference (`styles/ember-brief/research/explain-composites.md`, K01-K12).
+Ember Brief 0.2.0: composite pictures that fill the field, from a third pass over the reference (`styles/ember-brief/research/explain-composites.md`, K01-K12).
 
 - `hub`: a card fed by a row of app tiles, grey lines curving into it, accent dots flowing down them (or out, with `dir: "out"`), and a figure or one-word state that lands counting on its word.
 - `task-card`: a task at work. Steps tick off one by one (every 15 frames, or spread up to a word), a Working bar fills, an optional person row goes from Online to Away, and the status reads the done text at the end.

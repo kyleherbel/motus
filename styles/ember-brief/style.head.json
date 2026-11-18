@@ -1,7 +1,7 @@
 {
   "id": "ember-brief",
   "name": "Ember Brief",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "status": "beta",
   "summary": "A fast tool briefing: a dark dotted field over the speaker in the bottom half, an illustrated title, graphics that act each idea out on its words (a link that connects, a race, a figure that fills) beside real page captures, two-word captions with the spoken word in magenta, and a comment call to action.",
   "bestFor": [
